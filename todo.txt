@@ -12,6 +12,7 @@ tech:
 - new DRS file creator program/script
 - per-user settings?
 - replace DRS files with something else/more standard (?) - zip?
+- antialiasing
 - test/fix for wide screens
 - test on integrated/intel cards - suspect starmap and fonts display
 - improve graphics performance (?) - slow on integrated video cards (frustum culling?)
