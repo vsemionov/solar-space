@@ -1,0 +1,30 @@
+tech:
+- port to MinGW and remove GLAUX dependency
+- division by zero in CSettings::RandomizeDataFile()
+- datadir defaults to current dir
+- unnecessary CSettings::WriteConfigRegistry() in WinMain()
+- check cpu and memory usage
+- check debugging capabilities, error handling and reporting
+- full code review
+- check all compiler warnings, especially an assignment in an if condition
+- fix CLoader::LoadImage() - looks like hGlobal is not released/freed, could leak memory
+- rewrite/simplify some parts (error logging?)
+- new DRS file creator program/script
+- per-user settings?
+- replace DRS files with something else/more standard (?) - zip?
+- test/fix for wide screens
+- test on integrated/intel cards - suspect starmap and fonts display
+- improve graphics performance (?) - slow on integrated video cards (frustum culling?)
+- update settings dialog - update or remove video mode selection, add website link?
+- trial version
+- update installer to latest InnoSetup version
+- installer asks before setting solar space as the default screen saver
+- longevity testing (24h)
+
+non-tech:
+- new splash screen
+- better polar coord textures - moon sucks
+- adjust body parameters so that planets rotate slower
+- replace monitor and wrench icons
+- new license (commercial)
+- company name
