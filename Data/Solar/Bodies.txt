@@ -1,0 +1,102 @@
+
+// Format:
+// distance multiplier (for orbit radius, more is further)
+// size multiplier (for body radius,  more is bigger)
+// orbit period multiplier (for siderial orbit period, more is slower)
+// rotation period multiplier (for siderial rotation period, more is slower)
+// line 1: body 1
+// line 2: body 2
+// line 3: body 3
+// ...........
+
+//Body line format: (separator == '|')
+// name (in planet info, underscore converted to spaces)
+// SEPARATOR
+// type - 0=star, 1=planet(oid), 2=rings, 3=asteroid
+// SEPARATOR
+// distance from parent body (relative units)
+// radius (relative units)
+// SEPARATOR
+// shape (polar/equatorial radius ratio)
+// SEPARATOR
+// siderial orbit period (length of year, in seconds, if 0 its calculated from the orbit radius with Kepler's law 3)
+// siderial rotation period (length of day, in seconds, infinity or sync with orbit if 0)
+// SEPARATOR
+// orbit rotation start (degrees at t0, random if 0)
+// siderial rotation start (degrees at t0, random if 0)
+// SEPARATOR
+// orbital inclination to ecliptic (to equator of parent, in degrees)
+// equatorial inclination to orbit (in degrees)
+// SEPARATOR
+// direction of orbit inclination (in degrees, how to incline, random if 0)
+// direction of equator inclination (in degrees, how to incline, random if 0)
+// SEPARATOR
+// clouds rotation period (relative to planet surface)
+// clouds rotation start angle
+// SEPARATOR
+// number of subbodies (subbody data on subsequent lines)
+// SEPARATOR
+// name of texture file (use "." for none)
+// name of texture alpha map file (only for rings, use "." for none)
+// SEPARATOR
+// name of bump map file (use "." for none) (not supported!)
+// SEPARATOR
+// name of specular alpha map file (use "." for none)
+// SEPARATOR
+// name of cloud map file (use "." for none)
+// name of cloud alpha map file (use "." for none)
+// SEPARATOR
+// name of 3d object file for asteroid (use "." for none)
+// SEPARATOR
+// name of .nfo file for body info (use "." for none)
+
+//NOTES:
+//-there should always be only one star - the main body
+//  and it should have distance 0 (center),
+//  otherwise lighting and lens flares will not be correct
+//-objects should have total distance from center no more than 250 units,
+//  otherwise they may get clipped off behind the far clipping plane
+//-roughly about 0.20 units is the minimum radius of objects,
+//  otherwise in chase orientation mode, they'll jump around the center of
+//  the screen (angle of camera rotation, floating point precision)
+
+
+//current:
+
+//dist&rad
+00.50
+00.25
+//times orb&own
+00.10
+01.00
+
+//========================================================================================
+
+Sun             | 0 | 0 10      | 1    | 0 25.38     | 0 0 | 0 0           | 0 0  | 0 0   | 9 | SUN.JPG .                 | . | .            | . .                      | .          | sun.nfo
+
+//inner planets
+Mercury         | 1 | 18 2.44   | 1    | 0 5.8646    | 0 0 | 7 0           | 0 0  | 0 0   | 0 | MERCURY.JPG .             | . | .            | . .                      | .          | mercury.nfo
+Venus           | 1 | 36 6.05   | 1    | 0 -24.3     | 0 0 | 3.39 -2.7     | 0 0  | -15 0 | 0 | VENUS.JPG .               | . | .            | VENUS_C.JPG VENUS_CA.JPG | .          | venus.nfo
+Earth           | 1 | 65 6.38   | 1    | 0 12        | 0 0 | 0.00005 23.45 | 0 0  | 18 0  | 1 | EARTH.JPG .               | . | EARTH_SA.JPG | EARTH_C.JPG EARTH_CA.JPG | .          | earth.nfo
+ Moon           | 1 | 10 1.74   | 1    | 136.6 0     | 0 0 | 5.145 6.68    | 0 0  | 0 0   | 0 | MOON.JPG .                | . | .            | . .                      | .          | moon.nfo
+Mars            | 1 | 100 3     | 1    | 0 5.1159951 | 0 0 | 1.8 25.19     | 0 0  | 0 0   | 2 | MARS.JPG .                | . | .            | . .                      | .          | mars.nfo
+ Phobos         | 3 | 4 1       | 1    | 66 0        | 0 0 | 1 0           | 0 0  | 0 0   | 0 | PHOBOS.JPG .              | . | .            | . .                      | PHOBOS.OBJ | phobos.nfo
+ Deimos         | 3 | 10 0.76   | 1    | 150 0       | 0 0 | 1.8 0         | 0 0  | 0 0   | 0 | DEIMOS.JPG .              | . | .            | . .                      | DEIMOS.OBJ | deimos.nfo
+
+//outer planets
+Jupiter         | 1 | 165 14.30 | 1    | 0 9.925     | 0 0 | 1.305 3.12    | 0 0  | 0 0   | 4 | JUPITER.JPG .             | . | .            | . .                      | .          | jupiter.nfo
+ Ganymede       | 1 | 25 2.634  | 1    | 0 0         | 0 0 | 10 0          | 0 0  | 0 0   | 0 | GANYMEDE.JPG .            | . | .            | . .                      | .          | ganymede.nfo
+ Callisto       | 1 | 35 2.403  | 1    | 0 0         | 0 0 | -5 0          | 0 0  | 0 0   | 0 | CALLISTO.JPG .            | . | .            | . .                      | .          | callisto.nfo
+ Io             | 1 | 10 1.830  | 1    | 0 0         | 0 0 | 0 0           | 0 0  | 0 0   | 0 | IO.JPG .                  | . | .            | . .                      | .          | io.nfo
+ Europa         | 1 | 17 1.565  | 1    | 0 0         | 0 0 | 7 0           | 0 0  | 0 0   | 0 | EUROPA.JPG .              | . | .            | . .                      | .          | europa.nfo
+Saturn          | 1 | 225 12.05 | 0.90 | 0 10.656    | 0 0 | 2.484 26.73   | 0 0  | 0 0   | 1 | SATURN.JPG .              | . | .            | . .                      | .          | saturn.nfo
+ Saturn's_Rings | 2 | 16 11     | 1    | 0 0         | 0 0 | 0 0           | 0 0  | 0 0   | 0 | SATRINGS.JPG SATRINGS.GIF | . | .            | . .                      | .          | satrings.nfo
+Uranus          | 1 | 290 7.67  | 0.95 | 0 -17.24    | 0 0 | 0.770 7.86    | 0 0  | 0 0   | 1 | URANUS.JPG .              | . | .            | . .                      | .          | uranus.nfo
+ Uranian_Rings  | 2 | 11.4 3.95 | 1    | 0 0         | 0 0 | 0 0           | 0 0  | 0 0   | 0 | URRINGS.JPG URRINGS.GIF   | . | .            | . .                      | .          | urrings.nfo
+Neptune         | 1 | 360 7.43  | 1    | 0 16.11     | 0 0 | 1.769 29.58   | 0 0  | 0 0   | 0 | NEPTUNE.JPG .             | . | .            | . .                      | .          | neptune.nfo
+
+//kuiper belt
+Pluto           | 1 | 485 4.64  | 1    | 0 -6.387    | 0 0 | 17.14 -60.39  | 0 0  | 0 0   | 1 | PLUTO.JPG .               | . | PLUTO_SA.JPG | . .                      | .          | pluto.nfo
+ Charon         | 1 | 12 2      | 1    | -63.87 0    | 0 0 | 40.59 0       | 0 0  | 0 0   | 0 | CHARON.JPG .              | . | .            | . .                      | .          | charon.nfo
+
+//========================================================================================

@@ -1,0 +1,36 @@
+// Lens flares specs file
+
+// file format:
+
+// line: number of flares
+//
+// line: flare 1 data
+// line: flare 2 data
+// ..................
+// line: flare N data
+
+// flare data line format (items are separated with a "|"):
+//
+// lens flare size unit multiplier
+//
+// position (along the flare vector)
+// size (if sun-flare (pos==+1.00), size is in percent of sun's radius; else in relative units, multiplied by planet size multiplier)
+// color (reg,green,blue)
+// image file name
+
+14
++1.00
++1.00 | 1500.0 | 1.000 1.000 1.000 | SUNFLARE.JPG
++1.26 |   18.0 | 0.159 0.155 0.002 | CIRCLE2.JPG
++0.56 |   26.0 | 0.021 0.021 0.110 | CIRCLE2.JPG
++0.61 |   10.0 | 0.063 0.001 0.104 | CIRCLE1.JPG
++0.52 |   14.0 | 0.021 0.013 0.140 | CIRCLE1.JPG
++0.28 |   12.0 | 0.150 0.089 0.011 | CIRCLE1.JPG
++0.13 |    6.0 | 0.175 0.430 0.175 | CIRCLE3.JPG
+-0.29 |   32.0 | 0.133 0.104 0.081 | CIRCLE2.JPG
+-0.21 |   13.0 | 0.040 0.031 0.024 | CIRCLE1.JPG
+-0.24 |    9.0 | 0.100 0.067 0.031 | CIRCLE1.JPG
+-0.39 |   16.0 | 0.112 0.150 0.119 | CIRCLE1.JPG
+-0.41 |   10.0 | 0.030 0.030 0.200 | CIRCLE3.JPG
+-0.80 |   18.0 | 0.113 0.109 0.053 | CIRCLE2.JPG
+-1.05 |  108.0 | 0.030 0.030 0.030 | RING1.JPG

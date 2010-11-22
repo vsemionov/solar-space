@@ -1,0 +1,6 @@
+// info template
+// every line in these files will appear in the body's info
+//
+<parent> dist: <num> km
+radius: <num> km
+mass: <num> x Earth

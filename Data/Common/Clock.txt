@@ -1,0 +1,41 @@
+// Clock color&digits specs file
+
+// file format:
+
+// digit texture image dimensions (only one value for both width and height)
+// digit width and height in image (less or equal to above value)
+//
+// digit color (red, green, blue, alpha). range of each component [0.0;1.0]
+//
+// digit "0" image file name
+// digit "1" image file name
+// digit "2" image file name
+// digit "3" image file name
+// digit "4" image file name
+// digit "5" image file name
+// digit "6" image file name
+// digit "7" image file name
+// digit "8" image file name
+// digit "9" image file name
+// digit hour/minute separator ":" image file name
+//
+
+// dimensions:
+64
+32 48
+
+// color:
+0.00 1.00 0.75 1.00
+
+// image files:
+CLOCK_0.GIF
+CLOCK_1.GIF
+CLOCK_2.GIF
+CLOCK_3.GIF
+CLOCK_4.GIF
+CLOCK_5.GIF
+CLOCK_6.GIF
+CLOCK_7.GIF
+CLOCK_8.GIF
+CLOCK_9.GIF
+CLOCK_PT.GIF

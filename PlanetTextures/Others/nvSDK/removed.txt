@@ -1,0 +1,5 @@
+The files in this directory were removed, because their license was not known.
+The files were not needed anyway.
+The files were:
+ * earth.png
+ * earth_bump.png
