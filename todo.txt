@@ -10,7 +10,7 @@ tech:
 - full code review
 - check all compiler warnings, especially an assignment in an if condition
 - fix CLoader::LoadImage() - looks like hGlobal is not released/freed, could leak memory
-- find memory leaks (see http://msdn.microsoft.com/en-us/library/x98tx3cf%28VS.80%29.aspx)
+- find memory leaks (see http://msdn.microsoft.com/en-us/library/x98tx3cf%28VS.80%29.aspx) - reported allocations in CNameTree::NewNode() and bodycache allocation in CBody::Load()
 - profile to improve startup time (and in-game performance)
 - run through a heap corruption detector
 - rewrite/simplify some parts (error logging?)
