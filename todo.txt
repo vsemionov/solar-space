@@ -11,6 +11,7 @@ tech:
 - check all compiler warnings, especially an assignment in an if condition
 - fix CLoader::LoadImage() - looks like hGlobal is not released/freed, could leak memory
 - profile to improve startup time (and in-game performance)
+- run through a heap corruption detector
 - rewrite/simplify some parts (error logging?)
 - new DRS file creator program/script
 - per-user settings?
