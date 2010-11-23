@@ -2,6 +2,7 @@ tech:
 - port to MinGW and remove GLAUX dependency
 - division by zero in CSettings::RandomizeDataFile()
 - correct "if (b=false)" in CLoader::LoadTexture()
+- buffer overflow: in CBody::Load(), numbodies is used before being calculated; the allocated buffer is of zero length, and is overflown in CBody::Reload()
 - datadir defaults to current dir
 - unnecessary CSettings::WriteConfigRegistry() in WinMain()
 - check cpu and memory usage
