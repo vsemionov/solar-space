@@ -31,6 +31,7 @@ non-tech:
 - new splash screen
 - better polar coord textures - moon sucks
 - adjust body parameters so that planets rotate slower
+- adjust ambient reflection (e.g. to 0.1?)
 - replace monitor and wrench icons
 - new license (commercial)
 - company name
