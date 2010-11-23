@@ -1,6 +1,7 @@
 tech:
 - port to MinGW and remove GLAUX dependency
 - division by zero in CSettings::RandomizeDataFile()
+- correct "if (b=false)" in CLoader::LoadTexture()
 - datadir defaults to current dir
 - unnecessary CSettings::WriteConfigRegistry() in WinMain()
 - check cpu and memory usage
