@@ -11,6 +11,7 @@ tech:
 - check font rendering - vertical lines visible between characters (left side of '1'); characters like 'M' and 'd' seem sharp on the far right vertical line
 - check info display list recording - glEndList() is called in CInfo::Start() instead of in CInfo::MakeInfo() and in CInfo::MakeName(), and is called only after CInfo::MakeInfo()
 - stars are drawn one by one, instead of calling a display list
+- sort stars by size to reduce glBegin/glEnd blocks
 - check mipmapping
 - generate equally-spaced sphere vertexes
 - full code review
