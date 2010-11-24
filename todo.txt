@@ -9,6 +9,7 @@ tech:
 - check debugging capabilities, error handling and reporting
 - check font scaling - makes smaller fonts worse (info lines)
 - check font rendering - vertical lines visible between characters (left side of '1'); characters like 'M' and 'd' seem sharp on the far right vertical line
+- check info display list recording - glEndList() is called in CInfo::Start() instead of in CInfo::MakeInfo() and in CInfo::MakeName(), and is called only after CInfo::MakeInfo()
 - check mipmapping
 - generate equally-spaced sphere vertexes
 - full code review
