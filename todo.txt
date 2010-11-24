@@ -10,6 +10,7 @@ tech:
 - check font scaling - makes smaller fonts worse (info lines)
 - check font rendering - vertical lines visible between characters (left side of '1'); characters like 'M' and 'd' seem sharp on the far right vertical line
 - check mipmapping
+- generate equally-spaced sphere vertexes
 - full code review
 - check all compiler warnings, especially an assignment in an if condition
 - fix CLoader::LoadImage() - looks like hGlobal is not released/freed, could leak memory
