@@ -33,6 +33,7 @@ tech:
 - update settings dialog - update or remove video mode selection, add website link?
 - trial version
 - update installer to latest InnoSetup version
+- check/redistribute MSVC C runtime library
 - installer asks before setting solar space as the default screen saver
 - longevity testing (24h)
 
