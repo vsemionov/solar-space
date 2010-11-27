@@ -139,6 +139,7 @@ int CLoader::LoadImage(const char *entryname, int *width, int *height, void **bu
 	}
 	if (CResource::ReadEntry(pData,entrynum)!=true)
 	{
+		GlobalUnlock(hGlobal);
 		GlobalFree(hGlobal);
 		return -1;
 	}
@@ -171,6 +172,7 @@ int CLoader::LoadImage(const char *entryname, int *width, int *height, void **bu
 	long hmHeight;
 	if (pPicture->get_Width(&hmWidth)!=S_OK || pPicture->get_Height(&hmHeight)!=S_OK)
 	{
+		DeleteDC(hdcMem);
 		ReleaseDC(hwndDesktop,hdcDesktop);
 		pPicture->Release();
 		return -1;

@@ -1,5 +1,4 @@
 tech:
-- fix CLoader::LoadImage() - looks like hGlobal is not released/freed, could leak memory
 - full code review
 - find memory leaks (see http://msdn.microsoft.com/en-us/library/x98tx3cf%28VS.80%29.aspx) - reported allocations in CNameTree::NewNode() and bodycache allocation in CBody::Load()
 - profile to improve startup time (and in-game performance); startup time is 71% in CLoader::LoadImage() and 24% in CLoader::LoadTexture(); in-game time is spent mostly in CStarMap::DrawStars() and performance is greatly improved by fixing the starmap displaylist
