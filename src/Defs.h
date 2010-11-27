@@ -36,5 +36,9 @@ typedef enum{false,true} bool;
 #pragma comment(lib,"zlog.lib")
 #endif
 
+#ifdef _MSC_VER
+#pragma warning(disable: 4996)
+#endif
+
 
 #endif
