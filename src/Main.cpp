@@ -505,7 +505,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	CSettings::Init();
 	if (ScrMode==smNone)
 	{
-		CError::LogError(ERROR_CODE, "Invalid argument.");
+		CError::LogError(ERROR_CODE, "Invalid command-line argument.");
 	}
 	else if (ScrMode==smPassword)
 	{
