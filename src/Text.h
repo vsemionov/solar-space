@@ -20,12 +20,12 @@ class CText
 public:
 	CText();
 	virtual ~CText();
-	bool BuildOutlineFont(char *name, int size, bool bold, bool italic, bool underline, bool strikeout, float thickness);
+	bool BuildOutlineFont(const char *name, int size, bool bold, bool italic, bool underline, bool strikeout, float thickness);
 	bool Init(bool FreeType=false);
 	void Free();
-	bool BuildFTFont(char *name, int size);
+	bool BuildFTFont(const char *name, int size);
 	void Print(const char *fmt, ...);
-	bool GetTextSize(char *text, float *width, float *height);
+	bool GetTextSize(const char *text, float *width, float *height);
 private:
 	void Construct();
 	static bool MakeFTChar(FT_Face face, char ch, int list_base, int textures[NUM_CHARS], float charsizes[NUM_CHARS][2], bool mipmaps);

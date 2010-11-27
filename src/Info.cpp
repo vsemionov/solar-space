@@ -174,7 +174,7 @@ void CInfo::MakeWindow(int list)
 
 
 
-void CInfo::GetNameCoords(char *text, float *x, float *y)
+void CInfo::GetNameCoords(const char *text, float *x, float *y)
 {
 	float tw,th;
 	nametext.GetTextSize(text,&tw,&th);

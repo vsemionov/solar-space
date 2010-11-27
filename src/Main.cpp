@@ -197,7 +197,7 @@ static void SaveLog()
 	{
 		char error[ERROR_MAXLEN];
 		int code;
-		char *type;
+		const char *type;
 		CError::Rewind();
 		int c=CError::GetCount();
 		int i;
@@ -332,7 +332,7 @@ static void UpdateRes(HWND hwnd)
 
 
 
-static int AddItem(HWND hwnd, char *string)
+static int AddItem(HWND hwnd, const char *string)
 {
 	return SendMessage(GetDlgItem(hwnd,IDC_CMBSYSTEMS),CB_ADDSTRING,0,(LPARAM)string);
 }

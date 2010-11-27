@@ -20,9 +20,9 @@ class CResource
 public:
 	CResource();
 	virtual ~CResource();
-	bool OpenResource(char *filename);
+	bool OpenResource(const char *filename);
 	void CloseResource();
-	int FindEntry(char *entryname);
+	int FindEntry(const char *entryname);
 	bool ReadEntry(void *buffer, int entrynum);
 	bool ReadEntryEx(void *buffer, int entrynum, int offset, int size);
 	char *GetEntryName(int entrynum);

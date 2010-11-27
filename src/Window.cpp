@@ -135,7 +135,7 @@ LRESULT CALLBACK CWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 	{
 	case WM_CREATE:
 		if (ScrMode==smSaver && !DEBUG)
-			SystemParametersInfo(SPI_SCREENSAVERRUNNING,1,NULL,0);
+			SystemParametersInfo(SPI_SETSCREENSAVERRUNNING,1,NULL,0);
 		CSettings::hwnd=hWnd;
 		GetCursorPos(&(CSettings::InitCursorPos));
 		CSettings::InitTime=GetTickCount();
@@ -193,7 +193,7 @@ LRESULT CALLBACK CWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 		else
 			PostQuitMessage(0);
 		if (ScrMode==smSaver && !DEBUG)
-			SystemParametersInfo(SPI_SCREENSAVERRUNNING,0,NULL,0);
+			SystemParametersInfo(SPI_SETSCREENSAVERRUNNING,0,NULL,0);
 		break;
 	}
 	return DefWindowProc(hWnd,uMsg,wParam,lParam);

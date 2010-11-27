@@ -136,7 +136,7 @@ int CResource::FindEntryBrutal(char *entryname)
 
 
 
-bool CResource::OpenResource(char *filename)
+bool CResource::OpenResource(const char *filename)
 {
 	int i;
 	dword size,drssize;
@@ -203,7 +203,7 @@ void CResource::CloseResource()
 
 
 
-int CResource::FindEntry(char *entryname)
+int CResource::FindEntry(const char *entryname)
 {
 	char uprname[16];
 	if (entryname==NULL)

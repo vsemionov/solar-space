@@ -55,10 +55,10 @@ void CLoader::ShutDown()
 
 
 
-bool CLoader::WithResource(char *filename)
+bool CLoader::WithResource(const char *filename)
 {
 	char filepath[MAX_PATH];
-	char *ext=".DRS";
+	const char *ext=".DRS";
 	if (filename==NULL)
 		filename=DEFAULT_RESOURCE;
 	strcpy(filepath,CSettings::DataDir);
@@ -77,7 +77,7 @@ bool CLoader::WithResource(char *filename)
 
 
 
-int CLoader::LoadRaw(char *entryname, void **buffer)
+int CLoader::LoadRaw(const char *entryname, void **buffer)
 {
 	int entrynum;
 	int size;
@@ -113,7 +113,7 @@ int CLoader::LoadRaw(char *entryname, void **buffer)
 
 
 
-int CLoader::LoadImage(char *entryname, int *width, int *height, void **buffer, bool convert_bgr_rgb)
+int CLoader::LoadImage(const char *entryname, int *width, int *height, void **buffer, bool convert_bgr_rgb)
 {
 	int i;
 	int entrynum;
@@ -177,7 +177,8 @@ int CLoader::LoadImage(char *entryname, int *width, int *height, void **buffer, 
 	}
 	int nWidth=MulDiv(hmWidth,GetDeviceCaps(hdcDesktop,LOGPIXELSX),2540);
 	int nHeight=MulDiv(hmHeight,GetDeviceCaps(hdcDesktop,LOGPIXELSY),2540);
-	BITMAPINFO bi={0};
+	BITMAPINFO bi;
+	ZeroMemory(&bi, sizeof(bi));
 	bi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
 	bi.bmiHeader.biBitCount=32;
 	bi.bmiHeader.biWidth=nWidth;
@@ -273,7 +274,7 @@ bool CLoader::ResizeImage(void **pImage, int *width, int *height)
 
 
 
-int CLoader::LoadTexture(char *imagemap, char *alphamap, bool mipmaps)
+int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmaps)
 {
 	bool b;
 	int tex_width[2], tex_height[2], tex_size[2];
@@ -343,7 +344,7 @@ int CLoader::LoadTexture(char *imagemap, char *alphamap, bool mipmaps)
 
 
 
-bool CLoader::ExtractFile(char *resfile, char *destfile)
+bool CLoader::ExtractFile(const char *resfile, const char *destfile)
 {
 	void *buffer;
 	int readsize, writesize;
@@ -374,7 +375,7 @@ bool CLoader::ExtractFile(char *resfile, char *destfile)
 
 
 
-bool CLoader::LoadText(char *entryname, char ***lines, int *numlines)
+bool CLoader::LoadText(const char *entryname, char ***lines, int *numlines)
 {
 	bool b=false;
 	if (entryname!=NULL && numlines!=NULL && lines!=NULL)
@@ -413,7 +414,7 @@ bool CLoader::LoadText(char *entryname, char ***lines, int *numlines)
 
 
 
-CLoader::object_t *CLoader::LoadObject(char *entryname)
+CLoader::object_t *CLoader::LoadObject(const char *entryname)
 {
 	object_t *obj=NULL;
 	char **lines;

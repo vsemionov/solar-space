@@ -378,7 +378,7 @@ void CGamePlay::Restore3D()
 
 
 
-void CGamePlay::UpdateSplash(char *subtext)
+void CGamePlay::UpdateSplash(const char *subtext)
 {
 	char text[256];
 	strcpy(text,load_text);
@@ -390,7 +390,7 @@ void CGamePlay::UpdateSplash(char *subtext)
 
 
 
-void CGamePlay::RenderSplashInner(char *text)
+void CGamePlay::RenderSplashInner(const char *text)
 {
 	float w=800.0f;
 	float h=600.0f;
@@ -427,7 +427,7 @@ void CGamePlay::RenderSplashInner(char *text)
 
 
 
-void CGamePlay::DrawSplash(char *text)
+void CGamePlay::DrawSplash(const char *text)
 {
 	Prepare2D(800,600);
 	glPushAttrib(GL_POLYGON_BIT);
@@ -443,7 +443,7 @@ void CGamePlay::DrawSplash(char *text)
 
 
 
-void CGamePlay::SetSplashText(char *text)
+void CGamePlay::SetSplashText(const char *text)
 {
 	strcpy(load_text,text);
 	DrawSplash(text);

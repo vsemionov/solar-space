@@ -20,15 +20,15 @@ public:
 	static bool Init();
 	static void ShutDown();
 	static void Frame();
-	static void UpdateSplash(char *subtext);
+	static void UpdateSplash(const char *subtext);
 	static bool UserAbortedLoad();
 	static void OnUserAbortLoad();
 private:
 	static bool LoadSplash();
 	static void FreeSplash();
-	static void RenderSplashInner(char *text);
-	static void DrawSplash(char *text);
-	static void SetSplashText(char *text);
+	static void RenderSplashInner(const char *text);
+	static void DrawSplash(const char *text);
+	static void SetSplashText(const char *text);
 	static bool FadeOutSplash();
 	static void InitLight();
 	static bool InitScene();

@@ -24,16 +24,16 @@
 	var->R_I
 /////////////////////
 
-typedef struct
+struct stardata_s
 	{
 		double Dec, RA;
 		float Mag;
 		float U_B, B_V, R_I;
 		struct stardata_s *prev;
 		struct stardata_s *next;
-	} stardata_s;
+	};
 
-stardata_s starchain;
+struct stardata_s starchain;
 
 
 
@@ -71,9 +71,9 @@ void writedesc(FILE *fout)
 
 
 
-void sortstar(stardata_s *star)
+void sortstar(struct stardata_s *star)
 {
-	stardata_s *cur=starchain.next;
+	struct stardata_s *cur=starchain.next;
 	while (cur!=&starchain && star->Mag<cur->Mag)
 	{
 		cur=cur->next;
@@ -81,7 +81,7 @@ void sortstar(stardata_s *star)
 	star->prev=cur->prev;
 	star->next=cur;
 	cur->prev=star;
-	((stardata_s*)(star->prev))->next=star;
+	((struct stardata_s*)(star->prev))->next=star;
 }
 
 
@@ -93,8 +93,8 @@ int lineconv(char *in_line)
 {
 	char buffer[32];
 	double hold;
-	stardata_s data;
-	stardata_s *star;
+	struct stardata_s data;
+	struct stardata_s *star;
 	if (!in_line)
 		return -1;
 	{ //Mag
@@ -128,7 +128,7 @@ int lineconv(char *in_line)
 		GET_VALUE(in_line,buffer,hold,121,5);
 		data.R_I=(float)hold;
 	}
-	star=(stardata_s*)malloc(sizeof(stardata_s));
+	star=(struct stardata_s*)malloc(sizeof(struct stardata_s));
 	if (!star) return -1;
 	memcpy(star,&data,sizeof(data));
 	sortstar(star);
@@ -150,7 +150,7 @@ int fileconv(char *infile, char *outfile)
 	char line_in[256];
 	int numread=0;
 	int i, res;
-	stardata_s *star;
+	struct stardata_s *star;
 	fin=fopen(infile,"rt");
 	if (!fin)
 	{

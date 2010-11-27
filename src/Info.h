@@ -22,7 +22,7 @@ public:
 private:
 	void Init();
 	void MakeWindow(int list);
-	void GetNameCoords(char *text, float *x, float *y);
+	void GetNameCoords(const char *text, float *x, float *y);
 	void GetInfoCoords(int linenum, float *x, float *y);
 	void MakeInfoLine(int linenum, char *line);
 	void MakeName(int list, char *targetname);

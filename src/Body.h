@@ -6,6 +6,7 @@
 #include "defs.h"
 
 #include "Loader.h"
+#include "LensFlare.h"
 
 
 #define SYSTEM_NAME_SIZE 32

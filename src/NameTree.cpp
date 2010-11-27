@@ -3,7 +3,9 @@
 
 #include "NameTree.h"
 
+#ifdef _MSC_VER
 #define NULL 0
+#endif
 
 
 

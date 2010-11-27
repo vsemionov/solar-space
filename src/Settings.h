@@ -43,7 +43,7 @@ public:
 	static void BuildFileList();
 	static void RandomizeDataFile();
 	//////
-	typedef struct stardrs_s
+	struct stardrs_s
 	{
 		char filename[MAX_PATH];
 		char systemname[SYSTEM_NAME_SIZE];

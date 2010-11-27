@@ -37,13 +37,13 @@ public:
 	virtual ~CLoader();
 	bool Init();
 	void ShutDown();
-	bool WithResource(char *filename);
-	int LoadRaw(char *entryname, void **buffer);
-	int LoadImage(char *entryname, int *width, int *height, void **buffer, bool convert_bgr_rgb=true);
-	int LoadTexture(char *imagemap, char *alphamap, bool mipmaps);
-	bool ExtractFile(char *resfile, char *destfile);
-	bool LoadText(char *entryname, char ***lines, int *numlines);
-	object_t *LoadObject(char *entryname);
+	bool WithResource(const char *filename);
+	int LoadRaw(const char *entryname, void **buffer);
+	int LoadImage(const char *entryname, int *width, int *height, void **buffer, bool convert_bgr_rgb=true);
+	int LoadTexture(const char *imagemap, const char *alphamap, bool mipmaps);
+	bool ExtractFile(const char *resfile, const char *destfile);
+	bool LoadText(const char *entryname, char ***lines, int *numlines);
+	object_t *LoadObject(const char *entryname);
 private:
 	static bool ResizeImage(void **pImage, int *width, int *height);
 };

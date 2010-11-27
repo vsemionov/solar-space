@@ -19,7 +19,7 @@ public:
 private:
 	void Init();
 
-	typedef struct node_s
+	struct node_s
 	{
 		char ch;
 		int id;

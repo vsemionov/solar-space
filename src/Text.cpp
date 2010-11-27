@@ -104,7 +104,7 @@ void CText::Free()
 
 
 
-bool CText::BuildOutlineFont(char *name, int size, bool bold, bool italic, bool underline, bool strikeout, float thickness)
+bool CText::BuildOutlineFont(const char *name, int size, bool bold, bool italic, bool underline, bool strikeout, float thickness)
 {
 	if (loaded)
 	{
@@ -167,7 +167,7 @@ bool CText::BuildOutlineFont(char *name, int size, bool bold, bool italic, bool 
 
 
 
-bool CText::BuildFTFont(char *name, int size)
+bool CText::BuildFTFont(const char *name, int size)
 {
 	if (loaded)
 	{
@@ -240,7 +240,9 @@ int CText::next_p2 (int a)
 
 bool CText::MakeFTChar(FT_Face face, char ch, int list_base, int textures[NUM_CHARS], float charsizes[NUM_CHARS][2], bool mipmaps)
 {
-	if(FT_Load_Glyph(face,FT_Get_Char_Index(face,ch),FT_LOAD_DEFAULT))
+	const int ich = ch;
+
+	if(FT_Load_Glyph(face,FT_Get_Char_Index(face,ich),FT_LOAD_DEFAULT))
 		return false;
 
 	FT_Glyph glyph;
@@ -273,7 +275,7 @@ bool CText::MakeFTChar(FT_Face face, char ch, int list_base, int textures[NUM_CH
 			}
 		}
 
-		glBindTexture(GL_TEXTURE_2D, textures[ch]);
+		glBindTexture(GL_TEXTURE_2D, textures[ich]);
 		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 		if (mipmaps)
 		{
@@ -301,11 +303,11 @@ bool CText::MakeFTChar(FT_Face face, char ch, int list_base, int textures[NUM_CH
 		free(expanded_data);
 	}
 
-	glNewList(list_base+ch,GL_COMPILE);
+	glNewList(list_base+ich,GL_COMPILE);
 	{
 		if (!empty)
 		{
-			glBindTexture(GL_TEXTURE_2D,textures[ch]);
+			glBindTexture(GL_TEXTURE_2D,textures[ich]);
 			glPushMatrix();
 
 			glTranslatef((float)bitmap_glyph->left, (float)(bitmap_glyph->top-bitmap.rows),0);
@@ -330,8 +332,8 @@ bool CText::MakeFTChar(FT_Face face, char ch, int list_base, int textures[NUM_CH
 	}
 	glEndList();
 
-	charsizes[ch][0]=((float)face->glyph->advance.x/64.0f);
-	charsizes[ch][1]=((float)face->size->metrics.height/64.0f);
+	charsizes[ich][0]=((float)face->glyph->advance.x/64.0f);
+	charsizes[ich][1]=((float)face->size->metrics.height/64.0f);
 
 	return true;
 }
@@ -366,15 +368,15 @@ void CText::Print(const char *fmt, ...)					// Custom GL "Print" Routine
 
 
 
-bool CText::GetTextSize(char *text, float *width, float *height)
+bool CText::GetTextSize(const char *text, float *width, float *height)
 {
 	if (!loaded || !text || (!width && !height))
 		return false;
 
 	float w=0.0f;
-	for (char *c=text; *c; c++)
+	for (const char *c=text; *c; c++)
 	{
-		w+=charsize[*c][0];
+		w+=charsize[(int)*c][0];
 	}
 
 	if (width) *width=w*sizescale;

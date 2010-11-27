@@ -81,18 +81,16 @@ void CVideoBase::ShutDown()
 
 
 
-bool CVideoBase::IsInString(char *string, char *search)
+bool CVideoBase::IsInString(const char *string, const char *search)
 {
 	int i;
 	int pos=0;
 	int maxpos=strlen(search)-1;
 	int len=strlen(string);	
-	char *other;
 	for (i=0; i<len; i++)
 	{
 		if ((i==0) || ((i>1) && string[i-1]=='\n'))
 		{				// New Extension Begins Here!
-			other=&string[i];			
 			pos=0;													// Begin New Search
 			while (string[i]!='\n')
 			{								// Search Whole Extension-String

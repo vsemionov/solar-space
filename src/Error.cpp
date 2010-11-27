@@ -61,7 +61,7 @@ void CError::Clear()
 
 
 
-void CError::LogError(int code, char *string)
+void CError::LogError(int code, const char *string)
 {
 	if (errorchain.code!=SUCCESS_CODE)
 		return;
@@ -122,7 +122,7 @@ bool CError::GetNextError(int *code, char *string, int maxlen)
 
 
 
-void CError::CopyString(char *dest, char *src, int maxlen)
+void CError::CopyString(char *dest, const char *src, int maxlen)
 {
 	strncpy(dest,src,maxlen);
 	dest[maxlen-1]=0;

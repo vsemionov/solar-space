@@ -536,7 +536,7 @@ bool CBody::LoadPhys()
 #define VA_FMT "%s | %d | %f %f | %f | %f %f | %f %f | %f %f | %f %f | %f %f | %d | %s %s | %s | %s | %s %s | %s | %s"
 #define VA_ARGS				\
 	name,					\
-	&type,					\
+	(int *)&type,			\
 	&distance,				\
 	&radius,				\
 	&shape,					\

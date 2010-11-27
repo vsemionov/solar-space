@@ -20,14 +20,14 @@ public:
 	virtual ~CError();
 	static void Init();
 	static void Clear();
-	static void LogError(int code, char *string);
+	static void LogError(int code, const char *string);
 	static int GetCount() { return numerrors; }
 	static bool ErrorsOccured() { return (GetCount()>1); }
 	static void Rewind();
 	static bool GetNextError(int *code, char *string, int maxlen=ERROR_MAXLEN);
 private:
-	static void CopyString(char *dest, char *src, int maxlen=ERROR_MAXLEN);
-	typedef struct error_s
+	static void CopyString(char *dest, const char *src, int maxlen=ERROR_MAXLEN);
+	struct error_s
 	{
 		int code;
 		char string[256];
