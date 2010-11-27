@@ -156,7 +156,7 @@ LRESULT CALLBACK CWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 	case WM_MBUTTONDOWN:
 	case WM_RBUTTONDOWN:
 	case WM_KEYDOWN:
-		if (ScrMode==smSaver && !CSettings::IsDialogActive)
+		if (ScrMode==smSaver && !CSettings::IsDialogActive && !DEBUG)
 			CSettings::CloseSaverWindow();
 		break;
 	case WM_MOUSEMOVE:
@@ -179,7 +179,7 @@ LRESULT CALLBACK CWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 	case WM_CLOSE:
 		if (ScrMode==smSaver)
 		{
-			if (CSettings::ReallyClose && !CSettings::IsDialogActive)
+			if ((CSettings::ReallyClose || DEBUG) && !CSettings::IsDialogActive)
 			{
 				DWORD thID;
 				CreateThread(NULL,0,PasswordThread,(LPVOID)hWnd,0,&thID);
