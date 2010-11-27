@@ -111,12 +111,22 @@
     <ClInclude Include="src\Main.h" />
     <ClInclude Include="src\NameTree.h" />
     <ClInclude Include="src\Resource.h" />
+    <ClInclude Include="src\res\resource.h" />
     <ClInclude Include="src\Settings.h" />
     <ClInclude Include="src\StarMap.h" />
     <ClInclude Include="src\Tensor.h" />
     <ClInclude Include="src\Text.h" />
     <ClInclude Include="src\VideoBase.h" />
     <ClInclude Include="src\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\res\Solar Space.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\res\manifest.xml" />
+    <None Include="src\res\Preview.bmp" />
+    <None Include="src\res\Solar Space.ico" />
+    <None Include="src\res\WRENCH.ICO" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

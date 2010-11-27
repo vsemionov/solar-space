@@ -122,5 +122,27 @@
     <ClInclude Include="src\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\res\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\res\Solar Space.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\res\manifest.xml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="src\res\Preview.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="src\res\Solar Space.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="src\res\WRENCH.ICO">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
