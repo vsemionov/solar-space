@@ -74,6 +74,43 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Body.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Clock.cpp" />
+    <ClCompile Include="src\Error.cpp" />
+    <ClCompile Include="src\GamePlay.cpp" />
+    <ClCompile Include="src\Info.cpp" />
+    <ClCompile Include="src\LensFlare.cpp" />
+    <ClCompile Include="src\Loader.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\NameTree.cpp" />
+    <ClCompile Include="src\Resource.cpp" />
+    <ClCompile Include="src\Settings.cpp" />
+    <ClCompile Include="src\StarMap.cpp" />
+    <ClCompile Include="src\Tensor.cpp" />
+    <ClCompile Include="src\Text.cpp" />
+    <ClCompile Include="src\VideoBase.cpp" />
+    <ClCompile Include="src\Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Body.h" />
+    <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\Clock.h" />
+    <ClInclude Include="src\Defs.h" />
+    <ClInclude Include="src\Error.h" />
+    <ClInclude Include="src\GamePlay.h" />
+    <ClInclude Include="src\Info.h" />
+    <ClInclude Include="src\LensFlare.h" />
+    <ClInclude Include="src\Loader.h" />
+    <ClInclude Include="src\Main.h" />
+    <ClInclude Include="src\NameTree.h" />
+    <ClInclude Include="src\Resource.h" />
+    <ClInclude Include="src\Settings.h" />
+    <ClInclude Include="src\StarMap.h" />
+    <ClInclude Include="src\Tensor.h" />
+    <ClInclude Include="src\Text.h" />
+    <ClInclude Include="src\VideoBase.h" />
+    <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
