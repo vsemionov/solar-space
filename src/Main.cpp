@@ -15,7 +15,7 @@
 #include "Main.h"
 
 
-#include "..\res\resource.h"
+#include "res\resource.h"
 
 
 #define LOG_TIMEOUT 15

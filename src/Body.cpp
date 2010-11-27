@@ -3,6 +3,9 @@
 #include <gl\glu.h>
 #include <gl\gl.h>
 
+#ifdef _MSC_VER
+#define _USE_MATH_DEFINES
+#endif
 #include <math.h>
 
 #include "Settings.h"
@@ -996,7 +999,8 @@ void CBody::Predict(int bodyid, float seconds, float *x, float *y, float *z)
 		return;
 	}
 	// note: no error checking for incorrect results or protection faults
-	for (int i=0; i<numsubbodies;i++)
+	int i;
+	for (i=0; i<numsubbodies;i++)
 		if (subbodies[i].id>bodyid)
 			break;
 	subbodies[--i].Predict(bodyid,seconds,x,y,z);
