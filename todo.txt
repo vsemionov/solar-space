@@ -24,7 +24,7 @@ tech:
 - run through a heap corruption detector
 - rewrite/simplify some parts (error logging?)
 - new DRS file creator program/script
-- per-user settings?
+- per-user settings? and assume data dir is working dir
 - replace DRS files with something else/more standard (?) - zip?
 - antialiasing
 - test/fix for wide screens
