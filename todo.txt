@@ -2,6 +2,7 @@ tech:
 - division by zero in CSettings::RandomizeDataFile()
 - buffer overflow: in CBody::Load(), numbodies is used before being calculated; the allocated buffer is of zero length, and is overflown in CBody::Reload()
 - datadir defaults to current dir
+- missing checks malloc() NULL return
 - check cpu and memory usage
 - check debugging capabilities, error handling and reporting
 - check font scaling - makes smaller fonts worse (info lines)
