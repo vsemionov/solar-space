@@ -506,7 +506,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	CSettings::Init();
 	CSettings::ReadGeneralRegistry();
 	CSettings::ReadConfigRegistry();
-	CSettings::WriteConfigRegistry();
 	CSettings::BuildFileList();
 	if (CSettings::RandomDataFile && (ScrMode==smSaver || ScrMode==smPreview))
 		CSettings::RandomizeDataFile();
