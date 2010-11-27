@@ -312,8 +312,6 @@ static void DoSaver(HWND hwnd)
 		}
 	}
 	CWindow::Destroy();
-	if (CError::ErrorsOccured())
-		ErrorLogDialog();
 }
 
 
@@ -502,17 +500,46 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 	if (DEBUG)
 		ScrMode=smSaver;
+	InitCommonControls();
 	CError::Init();
 	CSettings::Init();
-	CSettings::ReadGeneralRegistry();
-	CSettings::ReadConfigRegistry();
-	CSettings::BuildFileList();
-	if (CSettings::RandomDataFile && (ScrMode==smSaver || ScrMode==smPreview))
-		CSettings::RandomizeDataFile();
-	InitCommonControls();
-	if (ScrMode==smPassword) ChangePassword(hwnd);
-	if (ScrMode==smConfig) Ret=DialogBox(hInstance,MAKEINTRESOURCE(IDD_CONFIG),hwnd,ConfigDialogProc);
-	if (ScrMode==smSaver || ScrMode==smPreview) DoSaver(hwnd);
+	if (ScrMode==smNone)
+	{
+		CError::LogError(ERROR_CODE, "Invalid argument.");
+	}
+	else if (ScrMode==smPassword)
+	{
+		ChangePassword(hwnd);
+	}
+	else
+	{
+		CSettings::ReadGeneralRegistry();
+		CSettings::ReadConfigRegistry();
+		CSettings::BuildFileList();
+		if (CSettings::numfiles > 1)
+		{
+			if (CSettings::RandomDataFile)
+				CSettings::RandomizeDataFile();
+			if (ScrMode==smConfig)
+			{
+				Ret=DialogBox(hInstance,MAKEINTRESOURCE(IDD_CONFIG),hwnd,ConfigDialogProc);
+			}
+			else if (ScrMode==smSaver || ScrMode==smPreview)
+			{
+				DoSaver(hwnd);
+			}
+			else
+			{
+				// should not happen
+			}
+		}
+		else
+		{
+			CError::LogError(ERROR_CODE, "No data files found.");
+		}
+	}
+	if (CError::ErrorsOccured())
+		ErrorLogDialog();
 	CSettings::Free();
 	CError::Clear();
 	LogOut();

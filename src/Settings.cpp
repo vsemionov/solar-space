@@ -239,6 +239,8 @@ void CSettings::RandomizeDataFile()
 {
 	int i;
 	stardrs_s *file;
+	if (!numfiles)
+		return;
 	srand((unsigned int)timeGetTime());
 	int num=rand()%numfiles;
 	for (i=0, file=filechain.next; i<num; i++)

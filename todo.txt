@@ -1,5 +1,4 @@
 tech:
-- division by zero in CSettings::RandomizeDataFile()
 - buffer overflow: in CBody::Load(), numbodies is used before being calculated; the allocated buffer is of zero length, and is overflown in CBody::Reload()
 - missing checks malloc() NULL return
 - check cpu and memory usage
