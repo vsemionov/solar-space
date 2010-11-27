@@ -516,7 +516,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		CSettings::ReadGeneralRegistry();
 		CSettings::ReadConfigRegistry();
 		CSettings::BuildFileList();
-		if (CSettings::numfiles > 1)
+		if (CSettings::numfiles > 0)
 		{
 			if (CSettings::RandomDataFile)
 				CSettings::RandomizeDataFile();
