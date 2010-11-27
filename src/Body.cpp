@@ -185,12 +185,6 @@ bool CBody::Load()
 			CError::LogError(ERROR_CODE,"Star system load failed - aborting.");
 			return false;
 		}
-		bodycache=(CBody**)malloc(numbodies*sizeof(CBody*));
-		if (!bodycache)
-		{
-			CError::LogError(WARNING_CODE,"Unable to load bodies - memory allocation failed.");
-			return false;
-		}
 		if (!loader.WithResource(BODY_DATA_RESOURCE))
 		{
 			CError::LogError(ERROR_CODE,"Unable to open bodies - missing or invalid resource.");
@@ -211,6 +205,12 @@ bool CBody::Load()
 			CError::LogError(ERROR_CODE,"Unable to open bodies - empty data file.");
 			return false;
 		}
+		bodycache=(CBody**)malloc(numlines*sizeof(CBody*));
+		if (!bodycache)
+		{
+			CError::LogError(WARNING_CODE,"Unable to load bodies - memory allocation failed.");
+			return false;
+		}
 		lineindex=0;
 		b=LoadMultipliers();
 		if (b)
@@ -224,6 +224,12 @@ bool CBody::Load()
 			return false;
 		}
 		CalcMaxChildDist();
+		bodycache=(CBody**)realloc(bodycache,numbodies*sizeof(CBody*));
+		if (!bodycache)
+		{
+			CError::LogError(WARNING_CODE,"Unable to load bodies - memory allocation failed.");
+			return false;
+		}
 		return Reload();
 	}
 	else
