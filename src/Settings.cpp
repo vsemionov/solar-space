@@ -120,7 +120,7 @@ void CSettings::ReadConfigRegistry()
 	DefaultRes=TRUE;
 	ClockOn=TRUE;
 	PlanetInfo=TRUE;
-	strcpy(DataDir,"C:\\" APPNAME);
+	strcpy(DataDir,".");
 	strcpy(DataFile,"");
 	RandomDataFile=TRUE;
 	LONG res; HKEY skey; DWORD valtype, valsize, val;
