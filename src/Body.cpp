@@ -108,20 +108,16 @@ void CBody::Init()
 
 bool CBody::LoadSystemName(char *resource, char *buffer,bool quiet)
 {
-	CLoader lloader;
-	CLoader *ploader = &lloader;
 	if (!resource)
-	{
 		resource=SYSTEM_NAME_RESOURCE;
-		ploader=&CBody::loader;
-	}
-	if (!ploader->WithResource(resource))
+	CLoader loader;
+	if (!loader.WithResource(resource))
 	{
 		if (!quiet)
 			CError::LogError(ERROR_CODE,"Unable to open star system - missing or invalid resource.");
 		return false;
 	}
-	if (!ploader->LoadText(SYSTEM_NAME_FILE,&textlines,&numlines))
+	if (!loader.LoadText(SYSTEM_NAME_FILE,&textlines,&numlines))
 	{
 		if (!quiet)
 			CError::LogError(ERROR_CODE,"Unable to open star system - file missing from resource or internal loader subsystem error.");
@@ -184,14 +180,14 @@ bool CBody::Load()
 		glMaterialfv(GL_BACK,GL_DIFFUSE,ZeroReflection);
 		glMaterialfv(GL_BACK,GL_SPECULAR,ZeroReflection);
 		glMaterialf(GL_BACK,GL_SHININESS,Shininess);
-		if (!loader.WithResource(BODY_DATA_RESOURCE))
-		{
-			CError::LogError(ERROR_CODE,"Unable to open bodies - missing or invalid resource.");
-			return false;
-		}
 		if (!LoadSystemName())
 		{
 			CError::LogError(ERROR_CODE,"Star system load failed - aborting.");
+			return false;
+		}
+		if (!loader.WithResource(BODY_DATA_RESOURCE))
+		{
+			CError::LogError(ERROR_CODE,"Unable to open bodies - missing or invalid resource.");
 			return false;
 		}
 		if (!loader.LoadText(BODY_DATA_FILE,&textlines,&numlines))
