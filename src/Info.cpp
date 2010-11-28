@@ -219,6 +219,7 @@ void CInfo::MakeName(int list, char *targetname)
 		glTranslatef(x,y,0);
 		nametext.Print(targetname);
 	}
+	glEndList();
 }
 
 
@@ -262,6 +263,7 @@ void CInfo::MakeInfo(int list, CBody *targetbody)
 			MakeInfoLine(n,targetbody->info.textlines[i]);
 		}
 	}
+	glEndList();
 }
 
 
@@ -283,7 +285,6 @@ void CInfo::Start(float seconds, float duration, char *targetname, CBody *target
 	fadetime=FADE_TIME(duration);
 	MakeName(namelist,name);
 	MakeInfo(infolist,targetbody);
-	glEndList();
 }
 
 
