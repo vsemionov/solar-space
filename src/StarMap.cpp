@@ -112,6 +112,7 @@ bool CStarMap::Load()
 
 	if (!twinkle)
 	{
+		object = glGenLists(1);
 		glNewList(object,GL_COMPILE);
 		{
 			DrawStars();
@@ -148,7 +149,7 @@ void CStarMap::Free()
 
 void CStarMap::Draw()
 {
-	if (twinkle)
+	if (!twinkle)
 	{
 		glCallList(object);
 	}
@@ -177,7 +178,7 @@ void CStarMap::Init()
 
 bool CStarMap::Check()
 {
-	return (glIsList(object)==TRUE || twinkle==false);
+	return (glIsList(object)==TRUE || twinkle==true);
 }
 
 
