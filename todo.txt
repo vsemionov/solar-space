@@ -1,9 +1,7 @@
 tech:
-- remove malloc debugging from nametree.cpp
 - use only one loader in body.cpp
 - cresource::open does nothing if the specified file is already open
 - missing checks malloc() NULL return
-- deallocate resources explicitly
 - consider removing the reallyclose flag and relying on wm_close
 - test on a remote machine (remote desktop)
 - full code review (note: watch resource deallocation on error)

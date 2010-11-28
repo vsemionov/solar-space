@@ -230,7 +230,9 @@ bool CBody::Load()
 			CError::LogError(WARNING_CODE,"Unable to load bodies - memory allocation failed.");
 			return false;
 		}
-		return Reload();
+		b=Reload();
+		loader.End();
+		return b;
 	}
 	else
 	{

@@ -38,6 +38,7 @@ public:
 	bool Init();
 	void ShutDown();
 	bool WithResource(const char *filename);
+	void End();
 	int LoadRaw(const char *entryname, void **buffer);
 	int LoadImage(const char *entryname, int *width, int *height, void **buffer, bool convert_bgr_rgb=true);
 	int LoadTexture(const char *imagemap, const char *alphamap, bool mipmaps);

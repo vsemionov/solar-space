@@ -49,6 +49,7 @@ bool CLoader::Init()
 
 void CLoader::ShutDown()
 {
+	End();
 }
 
 
@@ -71,6 +72,15 @@ bool CLoader::WithResource(const char *filename)
 			return false;
 	}
 	return true;
+}
+
+
+
+
+
+void CLoader::End()
+{
+	CResource::CloseResource();
 }
 
 
