@@ -18,7 +18,7 @@
 #define FONT_STRIKEOUT false
 #define FONT_THICKNESS 0.1f
 
-#define ALLOW_FONT_SCALING true
+#define ALLOW_FONT_SCALING false
 #define FT_FONT_SIZE_THRESHOLD 32
 
 
