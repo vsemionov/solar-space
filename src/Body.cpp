@@ -338,7 +338,6 @@ void CBody::Destroy()
 		}
 		free(info.textlines);
 	}
-	Init();
 	numbodies--;
 	if (mainbody)
 	{
@@ -346,6 +345,7 @@ void CBody::Destroy()
 		bodycache=NULL;
 		numbodies=0;
 	}
+	Init();
 }
 
 
