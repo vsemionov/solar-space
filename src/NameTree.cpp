@@ -183,10 +183,25 @@ int CNameTree::SearchBranch(node_s *chain, char *string)
 
 
 
-void CNameTree::FreeNode(node_s *node)
+void CNameTree::RemoveNode(node_s *node)
 {
 	node->prev->next=node->next;
 	node->next->prev=node->prev;
+}
+
+
+
+
+
+void CNameTree::FreeNode(node_s *node)
+{
+	RemoveNode(node);
+	if (node->sub)
+	{
+		FreeList(node->sub);
+		free(node->sub);
+		node->sub=NULL;
+	}
 	free(node);
 }
 
@@ -196,16 +211,8 @@ void CNameTree::FreeNode(node_s *node)
 
 void CNameTree::FreeList(node_s *chain)
 {
-	node_s *node;
-	if (chain->sub)
+	while (chain->prev!=chain)
 	{
-		FreeList(chain->sub);
-		FreeNode(chain->sub);
-	}
-	node=chain->next;
-	while (node!=chain)
-	{
-		node=node->next;
-		FreeNode(node->prev);
+		FreeNode(chain->prev);
 	}
 }

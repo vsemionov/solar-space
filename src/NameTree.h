@@ -33,6 +33,7 @@ private:
 	void InsertNode(node_s *node, node_s *before);
 	node_s *NewNode(char ch, int id);
 	node_s *FindNode(node_s *chain, char ch);
+	void RemoveNode(node_s *node);
 	void FreeNode(node_s *node);
 	void FreeList(node_s *chain);
 
