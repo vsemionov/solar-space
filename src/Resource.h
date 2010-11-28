@@ -1,6 +1,8 @@
 #ifndef RESOURCE_H
 #define RESOURCE_H
 
+#include <windows.h>
+
 #include "defs.h"
 
 #include <stdio.h>
@@ -43,6 +45,7 @@ private:
 
 	drstable_t drstable;
 	CNameTree nametree;
+	char path[MAX_PATH];
 	static void PascalStringToCString(char *str);
 	static void DecodeTableEntry(drstableentry_t *entry);
 	void DestroyNameTree();

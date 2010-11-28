@@ -142,6 +142,10 @@ bool CResource::OpenResource(const char *filename)
 	dword size,drssize;
 	char *cmpstr;
 	const char *idstr="vsALL Resource Phile.";
+	if (filename[0]==0)
+		return false;
+	if (strcmp(filename, path)==0)
+		return true;
 	CloseResource();
 	drs=fopen((const char *)filename, "rb");
 	if (drs==NULL)
@@ -173,6 +177,8 @@ bool CResource::OpenResource(const char *filename)
 				if (BuildNameTree())
 #endif
 				{
+					strncpy(path, filename, sizeof(path));
+					path[sizeof(path)-1]=0;
 					return true;
 				}
 			}
@@ -194,6 +200,7 @@ void CResource::CloseResource()
 	}
 	drs=NULL;
 	memset(drstable,0,sizeof(drstable));
+	path[0]=0;
 #ifdef USE_NAMETREES
 	DestroyNameTree();
 #endif

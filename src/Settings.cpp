@@ -209,6 +209,7 @@ void CSettings::BuildFileList()
 	while (b)
 	{
 		strcpy(filename,wfd.cFileName);
+		*strrchr(filename,'.')=0;
 		if (CBody::LoadSystemName(filename,systemname,true))
 		{
 			newsystem=(stardrs_s*)malloc(sizeof(stardrs_s));
@@ -217,7 +218,6 @@ void CSettings::BuildFileList()
 				CError::LogError(ERROR_CODE,"Failed to list star systems - memory allocation error.");
 				break;
 			}
-			*strrchr(filename,'.')=0;
 			strcpy(newsystem->filename,filename);
 			strcpy(newsystem->systemname,systemname);
 			newsystem->prev=filechain.prev;

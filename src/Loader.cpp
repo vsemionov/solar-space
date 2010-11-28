@@ -65,13 +65,8 @@ bool CLoader::WithResource(const char *filename)
 	strcpy(filepath,CSettings::DataDir);
 	strcat(filepath,"\\");
 	strcat(filepath,filename);
-	if (!CResource::OpenResource(filepath))
-	{
-		strcat(filepath,ext);
-		if (!CResource::OpenResource(filepath))
-			return false;
-	}
-	return true;
+	strcat(filepath,ext);
+	return CResource::OpenResource(filepath);
 }
 
 
