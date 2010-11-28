@@ -6,6 +6,7 @@ tech:
 - check cpu and memory usage
 - check debugging capabilities, error handling and reporting
 - check info display list recording - glEndList() is called in CInfo::Start() instead of in CInfo::MakeInfo() and in CInfo::MakeName(), and is called only after CInfo::MakeInfo()
+- check font rendering - vertical lines visible between characters (left side of '1' on first line of info)
 - compiler optimization switches (sse/sse2 ?)
 - export some lighting parameters into files - reflectivities,etc.
 - asteroid darkening seems to be hard-coded in Body.cpp as ASTEROID_REFLECTION
