@@ -1,10 +1,13 @@
 tech:
-- consider removing the reallyclose flag and relying on wm_close
+- consider removing the reallyclose flag and relying on wm_close (also remove other unnecessary logic in the window proc, remove pre-NT manual handling - passwords, etc)
+- change object type load order (splash, bodies, lensflares, starmap, clock)
+- check for user abort after loading objects instead of/as well as before loading them
 - test on a remote machine (remote desktop)
 - full code review (note: watch resource deallocation on error)
 - profile to improve startup time (and in-game performance); startup time is 71% in CLoader::LoadImage() and 24% in CLoader::LoadTexture(); in-game time is spent mostly in CStarMap::DrawStars() and performance is greatly improved by fixing the starmap displaylist
 - check cpu and memory usage
 - check debugging capabilities, error handling and reporting
+- write the log to a temp file, not to the data dir
 - check if work machine renders info correctly if it is not implemented with (recursive) display lists
 - check font rendering - vertical lines visible between characters (left side of '1' on first line of info)
 - compiler optimization switches (sse/sse2 ?)
@@ -12,20 +15,16 @@ tech:
 - asteroid darkening seems to be hard-coded in Body.cpp as ASTEROID_REFLECTION
 - check mipmapping
 - improve splash status font (non-italic, use antialiasing instead of outline)
-- generate equally-spaced sphere vertexes
-- run through a heap corruption detector
-- rewrite/simplify some parts (error logging?)
-- new DRS file creator program/script
-- per-user settings? and assume data dir is working dir
-- replace DRS files with something else/more standard (?) - zip?
+- new DRS file creator program/script; also change header string in the DRS format
+- per-user settings? only data dir is in global registry?
 - antialiasing
 - test/fix for wide screens
 - test on integrated/intel cards - suspect starmap and fonts display
 - improve graphics performance (?) - slow on integrated video cards (frustum culling?)
-- update settings dialog - update or remove video mode selection, add website link?
+- update settings dialog - update or remove video mode selection, add website link?, antialiasing option?
 - trial version
-- update installer to latest InnoSetup version
-- check/redistribute MSVC C runtime library
+- update installer to latest InnoSetup version, check installer script logic (registry changes, etc?)
+- check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker)
 - installer asks before setting solar space as the default screen saver
 - longevity testing (24h)
 
