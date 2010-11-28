@@ -1,7 +1,10 @@
 tech:
+- missing checks malloc() NULL return
+- deallocate resources explicitly
+- consider removing the reallyclose flag and relying on wm_close
+- test on a remote machine (remote desktop)
 - full code review (note: watch resource deallocation on error)
 - profile to improve startup time (and in-game performance); startup time is 71% in CLoader::LoadImage() and 24% in CLoader::LoadTexture(); in-game time is spent mostly in CStarMap::DrawStars() and performance is greatly improved by fixing the starmap displaylist
-- missing checks malloc() NULL return
 - check cpu and memory usage
 - check debugging capabilities, error handling and reporting
 - check if work machine renders info correctly if it is not implemented with (recursive) display lists
