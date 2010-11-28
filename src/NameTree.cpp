@@ -1,3 +1,6 @@
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 
 #include <malloc.h>
 
@@ -85,8 +88,6 @@ bool CNameTree::AddBranch(node_s *chain, char *string, int id)
 		if (!newnode)
 			return false;
 		InsertNode(newnode,node);
-		if (!NewBranch(newnode))
-			return false;
 		node=newnode;
 	}
 
@@ -96,6 +97,8 @@ bool CNameTree::AddBranch(node_s *chain, char *string, int id)
 		return true;
 	}
 
+	if (node->sub==NULL)
+		NewBranch(node);
 	return AddBranch(node->sub,string+1,id);
 }
 
@@ -199,8 +202,7 @@ void CNameTree::FreeNode(node_s *node)
 	if (node->sub)
 	{
 		FreeList(node->sub);
-		free(node->sub);
-		node->sub=NULL;
+		FreeNode(node->sub);
 	}
 	free(node);
 }
