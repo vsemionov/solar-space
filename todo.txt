@@ -12,6 +12,7 @@ tech:
 - export some lighting parameters into files - reflectivities,etc.
 - asteroid darkening seems to be hard-coded in Body.cpp as ASTEROID_REFLECTION
 - check mipmapping
+- improve splash status font (non-italic, use antialiasing instead of outline)
 - generate equally-spaced sphere vertexes
 - run through a heap corruption detector
 - rewrite/simplify some parts (error logging?)
