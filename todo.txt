@@ -1,5 +1,4 @@
 tech:
-- use only one loader in body.cpp
 - cresource::open does nothing if the specified file is already open
 - missing checks malloc() NULL return
 - consider removing the reallyclose flag and relying on wm_close
