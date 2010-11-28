@@ -29,6 +29,7 @@ tech:
 - longevity testing (24h)
 
 non-tech:
+- check graphics licenses
 - new splash screen
 - better polar coord textures - moon sucks
 - adjust body parameters so that planets rotate slower
