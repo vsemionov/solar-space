@@ -515,8 +515,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	{
 		CSettings::ReadGeneralRegistry();
 		CSettings::ReadConfigRegistry();
-		CSettings::BuildFileList();
-		if (CSettings::numfiles > 0)
+		if (!CSettings::BuildFileList())
+		{
+			CError::LogError(ERROR_CODE, "Error enumerating available star systems.");
+		}
+		else if (CSettings::numfiles > 0)
 		{
 			if (CSettings::RandomDataFile)
 				CSettings::RandomizeDataFile();

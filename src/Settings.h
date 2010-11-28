@@ -40,7 +40,7 @@ public:
 	static void CloseSaverWindow();
 	static void StartDialog();
 	static void EndDialog();
-	static void BuildFileList();
+	static bool BuildFileList();
 	static void RandomizeDataFile();
 	//////
 	struct stardrs_s

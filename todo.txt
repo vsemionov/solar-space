@@ -1,5 +1,4 @@
 tech:
-- missing checks malloc() NULL return
 - consider removing the reallyclose flag and relying on wm_close
 - test on a remote machine (remote desktop)
 - full code review (note: watch resource deallocation on error)

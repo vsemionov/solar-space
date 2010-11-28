@@ -66,7 +66,11 @@ bool CLensFlare::Load(CBody *star)
 		return false;	\
 	}
 ////////////////
-	ComputePoints(star);
+	if (!ComputePoints(star))
+	{
+		CError::LogError(WARNING_CODE,"Unable to compute lens flare alpha points.");
+		AbortLoad();
+	}
 	viewport[0]=viewport[1]=0;
 	viewport[2]=CWindow::GetWidth();
 	viewport[3]=CWindow::GetHeight();
@@ -297,11 +301,16 @@ void CLensFlare::Init()
 
 
 
-void CLensFlare::ComputePoints(CBody *star)
+bool CLensFlare::ComputePoints(CBody *star)
 {
 	glGetIntegerv(GL_VIEWPORT,viewport);
 	int blocksize=NUM_POINTS*sizeof(Vector); //compiler bug-fix
 	points=(Vector*)malloc(blocksize);
+	if (!points)
+	{
+		CError::LogError(WARNING_CODE,"Unable to compute lens flare alpha points - memory allocation failed.");
+		return false;
+	}
 	int i,j;
 	float radius=star->radius;
 	float shape=star->shape;
@@ -331,6 +340,7 @@ void CLensFlare::ComputePoints(CBody *star)
 			}
 		}
 	}
+	return true;
 }
 
 

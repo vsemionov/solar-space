@@ -22,7 +22,7 @@ public:
 	void Restart();
 private:
 	void Init();
-	void ComputePoints(CBody *star);
+	bool ComputePoints(CBody *star);
 	bool IsPointVisible(Vector p);
 	bool ParseSpecsFile(CLoader *loader);
 	int FindPrevTex(int current);

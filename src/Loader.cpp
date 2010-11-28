@@ -402,6 +402,11 @@ bool CLoader::LoadText(const char *entryname, char ***lines, int *numlines)
 				while (token!=NULL)
 				{
 					linesptr[linesfound]=(char*)malloc(strlen(token)+1);
+					if (linesptr[linesfound]==NULL)
+					{
+						free(buffer);
+						return false;
+					}
 					strcpy(linesptr[linesfound],token);
 					linesfound++;
 					token=strtok(NULL,del);
@@ -429,102 +434,105 @@ CLoader::object_t *CLoader::LoadObject(const char *entryname)
 	if (LoadText(entryname,&lines,&numlines))
 	{
 		obj=(object_t*)malloc(sizeof(object_t));
-		obj->numvertices=0;
-		obj->numfaces=0;
-		obj->vertices=(vertex_t*)malloc(numlines*sizeof(vertex_t));
-		obj->faces=(face_t*)malloc(numlines*sizeof(face_t));
-		int i,j,k;
-		if (obj->vertices!=NULL && obj->faces!=NULL)
+		if (obj!=NULL)
 		{
-			for (i=0;i<numlines;i++)
+			obj->numvertices=0;
+			obj->numfaces=0;
+			obj->vertices=(vertex_t*)malloc(numlines*sizeof(vertex_t));
+			obj->faces=(face_t*)malloc(numlines*sizeof(face_t));
+			int i,j,k;
+			if (obj->vertices!=NULL && obj->faces!=NULL)
 			{
-				if (lines[i][0]=='g')
-					break;
-			}
-			int startline=i+1;
-			for (i=startline;i<numlines;i++)
-			{
-				if (lines[i][0]=='g')
-					break;
-			}
-			int endline=i-1;
-			for (i=startline;i<=endline;i++)
-			{
-				if (lines[i][0]=='v' && lines[i][1]==' ')
+				for (i=0;i<numlines;i++)
 				{
-					vertex_t *pv=&obj->vertices[obj->numvertices];
-					sscanf(lines[i]+2,"%f %f %f",&pv->point[0],&pv->point[1],&pv->point[2]);
-					obj->numvertices++;
+					if (lines[i][0]=='g')
+						break;
 				}
-			}
-			for (i=startline;i<=endline;i++)
-			{
-				if (lines[i][0]=='f' && lines[i][1]==' ')
+				int startline=i+1;
+				for (i=startline;i<numlines;i++)
 				{
-					int vn[4]; vn[3]=0;
-					face_t *pf;
-					sscanf(lines[i]+2,"%d %d %d %d",&vn[2],&vn[1],&vn[0],&vn[3]);
-					if (vn[3]!=0)
+					if (lines[i][0]=='g')
+						break;
+				}
+				int endline=i-1;
+				for (i=startline;i<=endline;i++)
+				{
+					if (lines[i][0]=='v' && lines[i][1]==' ')
 					{
+						vertex_t *pv=&obj->vertices[obj->numvertices];
+						sscanf(lines[i]+2,"%f %f %f",&pv->point[0],&pv->point[1],&pv->point[2]);
+						obj->numvertices++;
+					}
+				}
+				for (i=startline;i<=endline;i++)
+				{
+					if (lines[i][0]=='f' && lines[i][1]==' ')
+					{
+						int vn[4]; vn[3]=0;
+						face_t *pf;
+						sscanf(lines[i]+2,"%d %d %d %d",&vn[2],&vn[1],&vn[0],&vn[3]);
+						if (vn[3]!=0)
+						{
+							pf=&obj->faces[obj->numfaces];
+							pf->vertexnum[0]=vn[3]-1; pf->vertexnum[1]=vn[0]-1; pf->vertexnum[2]=vn[2]-1;
+							obj->numfaces++;
+						}
 						pf=&obj->faces[obj->numfaces];
-						pf->vertexnum[0]=vn[3]-1; pf->vertexnum[1]=vn[0]-1; pf->vertexnum[2]=vn[2]-1;
+						for (j=0;j<=2;j++)
+							pf->vertexnum[j]=vn[j]-1;
 						obj->numfaces++;
 					}
-					pf=&obj->faces[obj->numfaces];
-					for (j=0;j<=2;j++)
-						pf->vertexnum[j]=vn[j]-1;
-					obj->numfaces++;
 				}
 			}
-		}
-		for (i=0;i<numlines;i++) free(lines[i]);
-		free(lines); lines=NULL;
-		obj->vertices=(vertex_t*)realloc(obj->vertices,obj->numvertices*sizeof(vertex_t));
-		obj->faces=(face_t*)realloc(obj->faces,obj->numfaces*sizeof(face_t));
-		for (i=0;i<obj->numfaces;i++)
-		{
-			face_t *pf=&obj->faces[i];
-			float vecs[3][3];
-			for (j=0;j<=2;j++)
-				for (k=0;k<=2;k++)
-					vecs[j][k]=obj->vertices[pf->vertexnum[j]].point[k];
-			obj->faces[i].normal[0]=
-				(((vecs[1][1]-vecs[0][1])*(vecs[0][2]-vecs[2][2]))-
-				((vecs[1][2]-vecs[0][2])*(vecs[0][1]-vecs[2][1])));
-			obj->faces[i].normal[1]=
-				(((vecs[1][2]-vecs[0][2])*(vecs[0][0]-vecs[2][0]))-
-				((vecs[1][0]-vecs[0][0])*(vecs[0][2]-vecs[2][2])));
-			obj->faces[i].normal[2]=
-				(((vecs[1][0]-vecs[0][0])*(vecs[0][1]-vecs[2][1]))-
-				((vecs[1][1]-vecs[0][1])*(vecs[0][0]-vecs[2][0])));
-			for (j=0;j<3;j++)
-				obj->faces[i].normal[j]*=-1.0f;
-		}
-		for (i=0;i<obj->numvertices;i++)
-		{
-			vertex_t *pv=&obj->vertices[i];
-			for (j=0;j<=2;j++)
-				pv->normal[j]=0.0f;
-			int c=0;
-			for (j=0;j<obj->numfaces;j++)
+			for (i=0;i<numlines;i++) free(lines[i]);
+			free(lines); lines=NULL;
+			obj->vertices=(vertex_t*)realloc(obj->vertices,obj->numvertices*sizeof(vertex_t));
+			obj->faces=(face_t*)realloc(obj->faces,obj->numfaces*sizeof(face_t));
+			for (i=0;i<obj->numfaces;i++)
 			{
-				if (obj->faces[j].vertexnum[0]==i || obj->faces[j].vertexnum[1]==i || obj->faces[j].vertexnum[2]==i)
-				{
-					for (k=0;k<=2;k++)
-						pv->normal[k]+=obj->faces[j].normal[k];
-					c++;
-				}
-			}
-			if (c!=0)
-			{
+				face_t *pf=&obj->faces[i];
+				float vecs[3][3];
 				for (j=0;j<=2;j++)
-					pv->normal[j]/=c;
+					for (k=0;k<=2;k++)
+						vecs[j][k]=obj->vertices[pf->vertexnum[j]].point[k];
+				obj->faces[i].normal[0]=
+					(((vecs[1][1]-vecs[0][1])*(vecs[0][2]-vecs[2][2]))-
+					((vecs[1][2]-vecs[0][2])*(vecs[0][1]-vecs[2][1])));
+				obj->faces[i].normal[1]=
+					(((vecs[1][2]-vecs[0][2])*(vecs[0][0]-vecs[2][0]))-
+					((vecs[1][0]-vecs[0][0])*(vecs[0][2]-vecs[2][2])));
+				obj->faces[i].normal[2]=
+					(((vecs[1][0]-vecs[0][0])*(vecs[0][1]-vecs[2][1]))-
+					((vecs[1][1]-vecs[0][1])*(vecs[0][0]-vecs[2][0])));
+				for (j=0;j<3;j++)
+					obj->faces[i].normal[j]*=-1.0f;
 			}
-			double r=sqrt((pv->point[0]*pv->point[0])+(pv->point[1]*pv->point[1])+(pv->point[2]*pv->point[2]));
-//			pv->tex_coords[1]=(float)(asin(pv->point[2]/r)/M_PI)+0.5f;
-//			pv->tex_coords[0]=(float)(atan2(pv->point[1],pv->point[0])/(M_PI*2.0))+0.5f;
-			pv->tex_coords[1]=(float)(asin(pv->point[1]/r)/M_PI)+0.5f;
-			pv->tex_coords[0]=(float)(atan2(-pv->point[2],pv->point[0])/(M_PI*2.0))+0.5f;
+			for (i=0;i<obj->numvertices;i++)
+			{
+				vertex_t *pv=&obj->vertices[i];
+				for (j=0;j<=2;j++)
+					pv->normal[j]=0.0f;
+				int c=0;
+				for (j=0;j<obj->numfaces;j++)
+				{
+					if (obj->faces[j].vertexnum[0]==i || obj->faces[j].vertexnum[1]==i || obj->faces[j].vertexnum[2]==i)
+					{
+						for (k=0;k<=2;k++)
+							pv->normal[k]+=obj->faces[j].normal[k];
+						c++;
+					}
+				}
+				if (c!=0)
+				{
+					for (j=0;j<=2;j++)
+						pv->normal[j]/=c;
+				}
+				double r=sqrt((pv->point[0]*pv->point[0])+(pv->point[1]*pv->point[1])+(pv->point[2]*pv->point[2]));
+//				pv->tex_coords[1]=(float)(asin(pv->point[2]/r)/M_PI)+0.5f;
+//				pv->tex_coords[0]=(float)(atan2(pv->point[1],pv->point[0])/(M_PI*2.0))+0.5f;
+				pv->tex_coords[1]=(float)(asin(pv->point[1]/r)/M_PI)+0.5f;
+				pv->tex_coords[0]=(float)(atan2(-pv->point[2],pv->point[0])/(M_PI*2.0))+0.5f;
+			}
 		}
 	}
 	return obj;

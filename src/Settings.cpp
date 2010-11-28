@@ -195,8 +195,9 @@ void CSettings::EndDialog()
 
 
 
-void CSettings::BuildFileList()
+bool CSettings::BuildFileList()
 {
+	bool res=true;
 	stardrs_s *newsystem;
 	char srchstr[MAX_PATH];
 	char systemname[SYSTEM_NAME_SIZE];
@@ -216,6 +217,7 @@ void CSettings::BuildFileList()
 			if (!newsystem)
 			{
 				CError::LogError(ERROR_CODE,"Failed to list star systems - memory allocation error.");
+				res=false;
 				break;
 			}
 			strcpy(newsystem->filename,filename);
@@ -229,6 +231,7 @@ void CSettings::BuildFileList()
 		b=FindNextFile(h,&wfd);
 	}
 	FindClose(h);
+	return res;
 }
 
 

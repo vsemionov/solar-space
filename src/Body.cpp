@@ -208,7 +208,7 @@ bool CBody::Load()
 		bodycache=(CBody**)malloc(numlines*sizeof(CBody*));
 		if (!bodycache)
 		{
-			CError::LogError(WARNING_CODE,"Unable to load bodies - memory allocation failed.");
+			CError::LogError(ERROR_CODE,"Unable to load bodies - memory allocation failed.");
 			return false;
 		}
 		lineindex=0;
@@ -227,7 +227,7 @@ bool CBody::Load()
 		bodycache=(CBody**)realloc(bodycache,numbodies*sizeof(CBody*));
 		if (!bodycache)
 		{
-			CError::LogError(WARNING_CODE,"Unable to load bodies - memory allocation failed.");
+			CError::LogError(ERROR_CODE,"Unable to load bodies - memory allocation failed.");
 			return false;
 		}
 		b=Reload();
@@ -516,7 +516,7 @@ bool CBody::Reload()
 	FreeGFX();
 	if (!LoadGFX())
 	{
-		CError::LogError(ERROR_CODE,"Failed to load body GFX - skipping.");
+		CError::LogError(ERROR_CODE,"Failed to load body GFX - aborting.");
 		return false;
 	}
 	bodycache[id]=this;
@@ -526,7 +526,7 @@ bool CBody::Reload()
 		{
 			if (!subbodies[i].Reload())
 			{
-				CError::LogError(ERROR_CODE,"Failed to load subbody GFX - skipping.");
+				CError::LogError(ERROR_CODE,"Failed to load subbody GFX - aborting.");
 				return false;
 			}
 		}
@@ -638,22 +638,22 @@ bool CBody::LoadInfo()
 {
 	if (!loader.WithResource(BODY_DATA_RESOURCE))
 	{
-		CError::LogError(ERROR_CODE,"Unable to open body info - missing or invalid resource.");
+		CError::LogError(WARNING_CODE,"Unable to open body info - missing or invalid resource.");
 		return false;
 	}
 	if (!loader.LoadText(info_name,&info.textlines,&info.numlines))
 	{
-		CError::LogError(ERROR_CODE,"Unable to open body info - file missing from resource or internal loader subsystem error.");
+		CError::LogError(WARNING_CODE,"Unable to open body info - file missing from resource or internal loader subsystem error.");
 		return false;
 	}
 	if (info.textlines==NULL)
 	{
-		CError::LogError(ERROR_CODE,"Unable to open body info - internal loader subsystem error.");
+		CError::LogError(WARNING_CODE,"Unable to open body info - internal loader subsystem error.");
 		return false;
 	}
 	if (info.numlines==0)
 	{
-		CError::LogError(ERROR_CODE,"Unable to body info - empty data file.");
+		CError::LogError(WARNING_CODE,"Unable to body info - empty data file.");
 		return false;
 	}
 	return true;
@@ -792,7 +792,10 @@ void CBody::MakeAsteroid()
 	CLoader::object_t *object;
 	object=loader.LoadObject(obj_name);
 	if (object==NULL)
+	{
+		CError::LogError(ERROR_CODE,"Unable to load asteroid - file missing from resource or internal loader subsystem error while loading object.");
 		return;
+	}
 	for (i=0;i<object->numvertices;i++)
 	{
 		float x=object->vertices[i].point[0];
