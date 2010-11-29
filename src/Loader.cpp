@@ -49,7 +49,6 @@ bool CLoader::Init()
 
 void CLoader::ShutDown()
 {
-	End();
 }
 
 
