@@ -14,7 +14,7 @@ non-visual:
 
 visual:
 - check if work machine renders info correctly if it is not implemented with (recursive) display lists
-- check why stars render with different size in point parameter and point size modes
+- check why stars render with different size in point parameter and point size modes (see http://www.opengl.org/registry/specs/ARB/point_parameters.txt)
 - fix for wide screens
 - check font rendering - vertical lines visible between characters (left side of '1' on first line of info)
 - check mipmapping (too many mipmaps?)
