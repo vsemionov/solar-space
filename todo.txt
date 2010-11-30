@@ -1,6 +1,5 @@
 TECH:
 non-visual:
-- check if starmap display list is possible without point params extension, and correct code if not
 - consider removing the reallyclose flag and relying on wm_close (also remove other unnecessary logic in the window proc, remove pre-NT manual handling - passwords, etc)
 - change object type load order (splash, bodies, lensflares, starmap, clock)
 - check for user abort after loading objects instead of/as well as before loading them
