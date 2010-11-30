@@ -10,7 +10,6 @@ non-visual:
 - full code review (note: watch resource deallocation on error)
 - new DRS file creator program/script; also change header string in the DRS format
 - export some lighting parameters into files - reflectivities,etc.
-- export other parameters into files - info window parameters, etc.
 - asteroid darkening seems to be hard-coded in Body.cpp as ASTEROID_REFLECTION
 
 visual:
@@ -42,7 +41,6 @@ NON-TECH:
 - check graphics licenses - done, legal
 - adjust ambient reflection (e.g. to 0.1?)
 - adjust body parameters so that planets rotate slower
-- adjust info window and font parameters
 - better polar coord textures
 - replace monitor and wrench icons
 - new splash screen
