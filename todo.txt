@@ -10,17 +10,18 @@ non-visual:
 - full code review (note: watch resource deallocation on error)
 - new DRS file creator program/script; also change header string in the DRS format
 - export some lighting parameters into files - reflectivities,etc.
+- export other parameters into files - info window parameters, etc.
 - asteroid darkening seems to be hard-coded in Body.cpp as ASTEROID_REFLECTION
 
 visual:
 - check if work machine renders info correctly if it is not implemented with (recursive) display lists
+- fix for wide screens
 - check font rendering - vertical lines visible between characters (left side of '1' on first line of info)
 - check mipmapping (too many mipmaps?)
 - improve splash status font (non-italic, use antialiasing instead of outline)
 - antialiasing
 
 performance/testing:
-- test/fix for wide screens
 - test on integrated/intel cards - suspect starmap and fonts display
 - improve graphics performance (?) - slow on integrated video cards (frustum culling?), may be ok after fixing starmap
 - compiler optimization switches (sse/sse2 ?)
@@ -41,6 +42,7 @@ NON-TECH:
 - check graphics licenses - done, legal
 - adjust ambient reflection (e.g. to 0.1?)
 - adjust body parameters so that planets rotate slower
+- adjust info window and font parameters
 - better polar coord textures
 - replace monitor and wrench icons
 - new splash screen
