@@ -36,6 +36,8 @@ user:
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker)
 - update settings dialog - update or remove video mode selection, add website link?, antialiasing option?
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?)
+- installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html)
+- update all files to match new version (defs.h, installer script, manifest, splash, etc)
 - installer asks before setting solar space as the default screen saver
 - trial version
 
