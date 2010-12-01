@@ -1,6 +1,6 @@
 TECH:
 non-visual:
--race condition associated with the second thread?
+- race condition associated with the second thread?
 - consider removing the reallyclose flag and relying on wm_close (also remove other unnecessary logic in the window proc, remove pre-NT manual handling - passwords, etc)
 - static preview has hard-coded dimensions in StaticPreview()
 - change object type load order (splash, bodies, lensflares, starmap, clock)
