@@ -1,6 +1,7 @@
 TECH:
 non-visual:
 - race condition associated with the second thread? set the dialog active flag before creating the thread
+- reallyclose is never reset
 - use PostQuieMessage() in WM_DESTROY, and check for WM_QUIT in MessagePump()
 - redefine QUIT_MESSAGE to APP_QUIT_MESSAGE and send that from PasswordThread(), instead of WM_DESTROY; also process it by calling DestroyWindow()
 - static preview has hard-coded dimensions in StaticPreview()
