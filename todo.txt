@@ -1,7 +1,6 @@
 TECH:
 non-visual:
 - clock::load logs a warning on failure, but aborts
-- check for user abort after loading objects instead of/as well as before loading them
 - check debugging capabilities, error handling and reporting
 - write the log to a temp file, not to the data dir
 - per-user settings? only data dir is in global registry?
@@ -42,6 +41,7 @@ user:
 
 
 NON-TECH:
+- correct all spelling ("Solar system"=>"Solar System")
 - check graphics licenses - done, legal
 - adjust ambient reflection (e.g. to 0.1?)
 - adjust body parameters so that planets rotate slower
