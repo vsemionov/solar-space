@@ -1,7 +1,7 @@
 TECH:
 non-visual:
-- check debugging capabilities, error handling and reporting
 - write the log to a temp file, not to the data dir
+- check debugging capabilities, error handling and reporting
 - per-user settings? only data dir is in global registry?
 - full code review (note: watch resource deallocation on error)
 - new DRS file creator program/script; also change header string in the DRS format
