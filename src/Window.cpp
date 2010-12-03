@@ -181,6 +181,7 @@ LRESULT CALLBACK CWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 		{
 			if ((CSettings::ReallyClose || DEBUG) && !CSettings::IsDialogActive)
 			{
+				CSettings::ReallyClose=FALSE;
 				DWORD thID;
 				CreateThread(NULL,0,PasswordThread,(LPVOID)hWnd,0,&thID);
 			}
