@@ -181,9 +181,11 @@ bool CGamePlay::UserAbortedLoad()
 
 bool CGamePlay::InitScene()
 {
-	SetSplashText("Loading splash screen... ");
-	if (!LoadSplash())
-		CError::LogError(WARNING_CODE,"Failed to load the splash screen - ignoring.");
+	{
+		SetSplashText("Loading splash screen... ");
+		if (!LoadSplash())
+			CError::LogError(WARNING_CODE,"Failed to load the splash screen - ignoring.");
+	}
 
 	{
 		SetSplashText("Loading bodies... ");
