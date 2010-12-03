@@ -184,27 +184,7 @@ bool CGamePlay::InitScene()
 	SetSplashText("Loading splash screen... ");
 	if (!LoadSplash())
 		CError::LogError(WARNING_CODE,"Failed to load the splash screen - ignoring.");
-	{
-		SetSplashText("Loading starmap... ");
-		if (UserAbortedLoad())
-		{
-			OnUserAbortLoad();
-			return false;
-		}
-		if (!starmap.Load())
-			CError::LogError(WARNING_CODE,"Failed to load the starmap - ignoring.");
-	}
-	if (CSettings::ClockOn)
-	{
-		SetSplashText("Loading clock... ");
-		if (UserAbortedLoad())
-		{
-			OnUserAbortLoad();
-			return false;
-		}
-		if (!clock.Load())
-			CError::LogError(WARNING_CODE,"Failed to load the clock - ignoring.");
-	}
+
 	{
 		SetSplashText("Loading bodies... ");
 		if (UserAbortedLoad())
@@ -218,21 +198,7 @@ bool CGamePlay::InitScene()
 			return false;
 		}
 	}
-	planetinfo=(CSettings::PlanetInfo==TRUE);
-	if (planetinfo)
-	{
-		SetSplashText("Loading play text font... ");
-		if (UserAbortedLoad())
-		{
-			OnUserAbortLoad();
-			return false;
-		}
-		if (!info.Load())
-		{
-			CError::LogError(WARNING_CODE,"Failed to load the planet info - ignoring.");
-			planetinfo=false;
-		}
-	}
+
 	flares=CVideoBase::GetOptLensFlares();
 	if (flares)
 	{
@@ -248,7 +214,48 @@ bool CGamePlay::InitScene()
 			flares=false;
 		}
 	}
+
+	planetinfo=(CSettings::PlanetInfo==TRUE);
+	if (planetinfo)
+	{
+		SetSplashText("Loading info text font... ");
+		if (UserAbortedLoad())
+		{
+			OnUserAbortLoad();
+			return false;
+		}
+		if (!info.Load())
+		{
+			CError::LogError(WARNING_CODE,"Failed to load the planet info - ignoring.");
+			planetinfo=false;
+		}
+	}
+
+	{
+		SetSplashText("Loading starmap... ");
+		if (UserAbortedLoad())
+		{
+			OnUserAbortLoad();
+			return false;
+		}
+		if (!starmap.Load())
+			CError::LogError(WARNING_CODE,"Failed to load the starmap - ignoring.");
+	}
+
+	if (CSettings::ClockOn)
+	{
+		SetSplashText("Loading clock... ");
+		if (UserAbortedLoad())
+		{
+			OnUserAbortLoad();
+			return false;
+		}
+		if (!clock.Load())
+			CError::LogError(WARNING_CODE,"Failed to load the clock - ignoring.");
+	}
+
 	SetSplashText("Finished.");
+
 	srand((unsigned int)timeGetTime());
 	InitLight();
 	camera.Init(&mainbody,(planetinfo?&info:NULL));
