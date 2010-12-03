@@ -888,7 +888,7 @@ bool CBody::LoadGFX()
 	}
 	if (!LoadTextures())
 	{
-		CError::LogError(ERROR_CODE,"Failed to load body textures - user abort.");
+		CError::LogError(ERROR_CODE,"Failed to load body textures.");
 		FreeGFX();
 		return false;
 	}
