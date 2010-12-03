@@ -1,6 +1,5 @@
 TECH:
 non-visual:
-- clock::load logs a warning on failure, but aborts
 - check debugging capabilities, error handling and reporting
 - write the log to a temp file, not to the data dir
 - per-user settings? only data dir is in global registry?
