@@ -1,6 +1,5 @@
 TECH:
 non-visual:
-- no error checking on CreateThread()
 - change object type load order (splash, bodies, lensflares, starmap, clock)
 - check for user abort after loading objects instead of/as well as before loading them
 - check debugging capabilities, error handling and reporting
