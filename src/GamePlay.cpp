@@ -254,7 +254,7 @@ bool CGamePlay::InitScene()
 			CError::LogError(WARNING_CODE,"Failed to load the clock - ignoring.");
 	}
 
-	SetSplashText("Finished.");
+	SetSplashText("Done.");
 
 	srand((unsigned int)timeGetTime());
 	InitLight();
