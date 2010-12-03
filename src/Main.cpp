@@ -63,7 +63,7 @@ bool MessagePump()
 	while (PeekMessage(&msg,NULL,0,0,PM_REMOVE))
 	{
 		DispatchMessage(&msg);
-		if (msg.message==QUIT_MESSAGE)
+		if (msg.message==WM_QUIT)
 			return false;
 	}
 	return true;

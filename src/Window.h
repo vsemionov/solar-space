@@ -3,8 +3,6 @@
 
 #include "defs.h"
 
-#define QUIT_MESSAGE (WM_USER+1)
-
 
 
 

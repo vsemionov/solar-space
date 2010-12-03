@@ -22,6 +22,7 @@ public:
 	static DWORD InitTime;
 	static BOOL  IsDialogActive;
 	static BOOL  ReallyClose;
+	static BOOL  PasswordOK;
 	//user settings:
 	static int VideoMode;
 	static int DetailLevel;

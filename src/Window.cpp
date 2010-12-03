@@ -121,7 +121,10 @@ DWORD WINAPI CWindow::PasswordThread(LPVOID lpParameter)
 		CSettings::EndDialog();
 	}
 	if (CanClose)
-		PostMessage(hWnd,WM_DESTROY,0,0);
+	{
+		CSettings::PasswordOK=TRUE;
+		CSettings::CloseSaverWindow();
+	}
 	return 0;
 }
 
@@ -182,19 +185,23 @@ LRESULT CALLBACK CWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 			if ((CSettings::ReallyClose || DEBUG) && !CSettings::IsDialogActive)
 			{
 				CSettings::ReallyClose=FALSE;
-				DWORD thID;
-				CreateThread(NULL,0,PasswordThread,(LPVOID)hWnd,0,&thID);
+				if (CSettings::PasswordOK)
+				{
+					DestroyWindow(hWnd);
+				}
+				else
+				{
+					DWORD thID;
+					CreateThread(NULL,0,PasswordThread,(LPVOID)hWnd,0,&thID);
+				}
 			}
 			return FALSE;
 		}
 		break;
 	case WM_DESTROY:
-		if (ScrMode==smSaver)
-			PostMessage(hWnd,QUIT_MESSAGE,0,0);
-		else
-			PostQuitMessage(0);
 		if (ScrMode==smSaver && !DEBUG)
 			SystemParametersInfo(SPI_SETSCREENSAVERRUNNING,0,NULL,0);
+		PostQuitMessage(0);
 		break;
 	}
 	return DefWindowProc(hWnd,uMsg,wParam,lParam);
@@ -386,7 +393,5 @@ void CWindow::Destroy()
 	}
 	hRC=NULL;
 	hDC=NULL;
-	if (hwnd)
-		DestroyWindow(hwnd);
 	hwnd=NULL;
 }

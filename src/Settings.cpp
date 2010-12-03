@@ -21,6 +21,7 @@ POINT CSettings::InitCursorPos;
 DWORD CSettings::InitTime;
 BOOL  CSettings::IsDialogActive;
 BOOL  CSettings::ReallyClose;
+BOOL  CSettings::PasswordOK;
 //user settings:
 int CSettings::VideoMode;
 int CSettings::DetailLevel;
@@ -61,6 +62,7 @@ void CSettings::Init()
 	InitTime=0;
 	IsDialogActive=FALSE;
 	ReallyClose=FALSE;
+	PasswordOK=FALSE;
 	/////
 	VideoMode=0;
 	DetailLevel=0;

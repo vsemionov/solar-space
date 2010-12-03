@@ -1,8 +1,5 @@
 TECH:
 non-visual:
-- use PostQuieMessage() in WM_DESTROY, and check for WM_QUIT in MessagePump()
-- redefine QUIT_MESSAGE to APP_QUIT_MESSAGE and send that from PasswordThread(), instead of WM_DESTROY; also process it by calling DestroyWindow()
-- static preview has hard-coded dimensions in StaticPreview()
 - change object type load order (splash, bodies, lensflares, starmap, clock)
 - check for user abort after loading objects instead of/as well as before loading them
 - check debugging capabilities, error handling and reporting
@@ -36,6 +33,7 @@ performance/testing:
 user:
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker)
 - update settings dialog - update or remove video mode selection, add website link?, antialiasing option?
+- static preview has hard-coded dimensions in StaticPreview()
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?)
 - installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html)
 - update all files to match new company name and version (defs.h, , registry paths, installer script, manifest, splash, etc)
