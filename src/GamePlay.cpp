@@ -188,12 +188,12 @@ bool CGamePlay::InitScene()
 	}
 
 	{
-		SetSplashText("Loading bodies... ");
 		if (UserAbortedLoad())
 		{
 			OnUserAbortLoad();
 			return false;
 		}
+		SetSplashText("Loading bodies... ");
 		if (!mainbody.Load())
 		{
 			CError::LogError(ERROR_CODE,"Failed to load the bodies - aborting.");
@@ -204,12 +204,12 @@ bool CGamePlay::InitScene()
 	flares=CVideoBase::GetOptLensFlares();
 	if (flares)
 	{
-		SetSplashText("Loading lens flares... ");
 		if (UserAbortedLoad())
 		{
 			OnUserAbortLoad();
 			return false;
 		}
+		SetSplashText("Loading lens flares... ");
 		if (!lensflare.Load(&mainbody))
 		{
 			CError::LogError(WARNING_CODE,"Failed to load the lens flares - ignoring.");
@@ -220,12 +220,12 @@ bool CGamePlay::InitScene()
 	planetinfo=(CSettings::PlanetInfo==TRUE);
 	if (planetinfo)
 	{
-		SetSplashText("Loading info text font... ");
 		if (UserAbortedLoad())
 		{
 			OnUserAbortLoad();
 			return false;
 		}
+		SetSplashText("Loading info text font... ");
 		if (!info.Load())
 		{
 			CError::LogError(WARNING_CODE,"Failed to load the planet info - ignoring.");
@@ -234,28 +234,33 @@ bool CGamePlay::InitScene()
 	}
 
 	{
-		SetSplashText("Loading starmap... ");
 		if (UserAbortedLoad())
 		{
 			OnUserAbortLoad();
 			return false;
 		}
+		SetSplashText("Loading starmap... ");
 		if (!starmap.Load())
 			CError::LogError(WARNING_CODE,"Failed to load the starmap - ignoring.");
 	}
 
 	if (CSettings::ClockOn)
 	{
-		SetSplashText("Loading clock... ");
 		if (UserAbortedLoad())
 		{
 			OnUserAbortLoad();
 			return false;
 		}
+		SetSplashText("Loading clock... ");
 		if (!clock.Load())
 			CError::LogError(WARNING_CODE,"Failed to load the clock - ignoring.");
 	}
 
+	if (UserAbortedLoad())
+	{
+		OnUserAbortLoad();
+		return false;
+	}
 	SetSplashText("Done.");
 
 	srand((unsigned int)timeGetTime());

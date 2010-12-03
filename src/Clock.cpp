@@ -83,12 +83,12 @@ bool CClock::Load()
 	for (i=0;i<11;i++)
 	{
 		ds[0]=(i==10?':':'0'+i);
-		CGamePlay::UpdateSplash(ds);
 		if (CGamePlay::UserAbortedLoad())
 		{
 			CError::LogError(ERROR_CODE,"Clock load aborted by user.");
 			AbortLoad();
 		}
+		CGamePlay::UpdateSplash(ds);
 		char *entry=tex_names[i];
 		textures[i]=loader.LoadTexture(entry,entry,false);
 		if (textures[i]==0)

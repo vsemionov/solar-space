@@ -867,6 +867,11 @@ void CBody::MakeAsteroid()
 
 bool CBody::LoadGFX()
 {
+	if (CGamePlay::UserAbortedLoad())
+	{
+		CError::LogError(ERROR_CODE,"Body load aborted by user.");
+		return false;
+	}
 	CGamePlay::UpdateSplash(name);
 	GLUquadricObj *quadric=NULL;
 	quadric=gluNewQuadric();

@@ -90,9 +90,14 @@ bool CStarMap::Load()
 	}
 	else
 	{
-		CGamePlay::UpdateSplash("generating... ");
 		CError::LogError(WARNING_CODE,"Failed to load stars, trying to generate randomly.");
 		Free();
+		if (CGamePlay::UserAbortedLoad())
+		{
+			CError::LogError(ERROR_CODE,"Starmap load aborted by user.");
+			return false;
+		}
+		CGamePlay::UpdateSplash("generating... ");
 		if (!GenStars())
 		{
 			CError::LogError(WARNING_CODE,"Failed to generate random stars.");

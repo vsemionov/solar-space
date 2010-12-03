@@ -92,12 +92,12 @@ bool CLensFlare::Load(CBody *star)
 	for (i=0;i<num_flares;i++)
 	{
 		itoa(i+1,fs,10);
-		CGamePlay::UpdateSplash(fs);
 		if (CGamePlay::UserAbortedLoad())
 		{
 			CError::LogError(ERROR_CODE,"Lens flare load aborted by user.");
 			AbortLoad();
 		}
+		CGamePlay::UpdateSplash(fs);
 		int prevtex=FindPrevTex(i);
 		if (prevtex<i && prevtex>=0)
 		{
