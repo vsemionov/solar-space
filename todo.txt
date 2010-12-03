@@ -1,5 +1,6 @@
 TECH:
 non-visual:
+- clock::load logs a warning on failure, but aborts
 - check for user abort after loading objects instead of/as well as before loading them
 - check debugging capabilities, error handling and reporting
 - write the log to a temp file, not to the data dir
