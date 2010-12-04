@@ -1,9 +1,9 @@
 TECH:
 non-visual:
-- full code review (note: watch resource deallocation on error)
 - new DRS file creator program/script; also change header string in the DRS format
 - export some lighting parameters into files - reflectivities,etc.
 - asteroid darkening seems to be hard-coded in Body.cpp as ASTEROID_REFLECTION
+- full code review (note: watch behavior dependence on time between frames)
 
 visual:
 - check if work machine renders info correctly if it is not implemented with (recursive) display lists
