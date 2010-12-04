@@ -579,7 +579,6 @@ bool CBody::LoadPhys()
 		if (lineindex>=numlines)
 		{
 			CError::LogError(ERROR_CODE,"Unable to load body - unexpected end of file.");
-			Init();
 			return false;
 		}
 	}
