@@ -188,6 +188,7 @@ LRESULT CALLBACK CWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 				if (CSettings::PasswordOK)
 				{
 					DestroyWindow(hWnd);
+					CSettings::hwnd=NULL;
 				}
 				else
 				{
@@ -393,5 +394,7 @@ void CWindow::Destroy()
 	}
 	hRC=NULL;
 	hDC=NULL;
+	if (hwnd)
+		DestroyWindow(hwnd);
 	hwnd=NULL;
 }
