@@ -58,7 +58,7 @@ void CLoader::ShutDown()
 bool CLoader::WithResource(const char *filename)
 {
 	char filepath[MAX_PATH];
-	const char *ext=".DRS";
+	const char *ext=".d2";
 	if (filename==NULL)
 		filename=DEFAULT_RESOURCE;
 	strcpy(filepath,CSettings::DataDir);

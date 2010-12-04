@@ -216,7 +216,7 @@ bool CSettings::BuildFileList()
 	char srchstr[MAX_PATH];
 	char systemname[SYSTEM_NAME_SIZE];
 	strcpy(srchstr,DataDir);
-	strcat(srchstr,"\\*.DRS");
+	strcat(srchstr,"\\*.d2");
 	char filename[MAX_PATH];
 	WIN32_FIND_DATA wfd;
 	HANDLE h=FindFirstFile(srchstr,&wfd);
