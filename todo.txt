@@ -1,6 +1,5 @@
 TECH:
 non-visual:
-- FindFirstFile() returns INVALID_HANDLE_VALUE on error, but FindNextFile() returns 0 on error; see CSettings::BuildFileList()
 - new DRS file creator program/script; also change header string in the DRS format
 - export some lighting parameters into files - reflectivities,etc.
 - asteroid darkening seems to be hard-coded in Body.cpp as ASTEROID_REFLECTION
