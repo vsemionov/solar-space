@@ -395,6 +395,9 @@ void CWindow::Destroy()
 	hRC=NULL;
 	hDC=NULL;
 	if (hwnd)
+	{
 		DestroyWindow(hwnd);
+		MessagePump();
+	}
 	hwnd=NULL;
 }
