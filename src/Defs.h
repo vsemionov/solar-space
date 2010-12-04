@@ -6,17 +6,6 @@
 typedef enum{false,true} bool;
 #endif
 
-#define byte unsigned char
-#define sbyte signed char
-#define word unsigned short
-#define sword signed short
-#define dword unsigned long
-#define sdword signed long
-#define qword unsigned _int64
-#define sqword signed _int64
-#define bbool unsigned char
-#define dwbool unsigned long
-
 
 #define CLAMP(val,valmin,valmax) { val=max(min(val,valmax),valmin); }
 

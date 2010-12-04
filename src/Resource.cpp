@@ -52,33 +52,6 @@ void CResource::ShutDown()
 
 
 
-void CResource::PascalStringToCString(char *str)
-{
-	int len;
-	len=(int)str[0];
-	memmove((void*)str,(const void*)(str+1),len);
-	str[len]=0;
-}
-
-
-
-
-
-void CResource::DecodeTableEntry(drstableentry_t *entry)
-{
-	int j;
-	for (j=1;j<13;j++)
-	{
-		entry->fname[j]+=75; //-=181;
-	}
-	entry->foffset-=2430;
-	entry->fsize-=2430;
-}
-
-
-
-
-
 void CResource::DestroyNameTree()
 {
 	nametree.Destroy();
@@ -139,39 +112,36 @@ int CResource::FindEntryBrutal(char *entryname)
 bool CResource::OpenResource(const char *filename)
 {
 	int i;
-	dword size,drssize;
-	char *cmpstr;
-	const char *idstr="vsALL Resource Phile.";
+	uint32_t size,drssize;
+	const int hdrlen=8;
+	char cmphdr[hdrlen];
+	char idhdr[hdrlen]={'v','s',' ','d','2',0,0,0};
 	if (filename==NULL || filename[0]==0)
 		return false;
 	if (strcmp(filename, path)==0)
 		return true;
+	memset(cmphdr, 0, sizeof(cmphdr));
 	CloseResource();
 	drs=fopen((const char *)filename, "rb");
 	if (drs==NULL)
 		return false;
-	cmpstr=(char*)malloc(strlen(idstr)+1);
-	if (cmpstr!=NULL)
+	size=fread(cmphdr,1,hdrlen,drs);
+	if (size==hdrlen)
 	{
-		size=fread((void*)(cmpstr+1),1,strlen(idstr),drs);
-		cmpstr[0]=(char)size;
-		PascalStringToCString(cmpstr);
-		size=strcmp(cmpstr,idstr);
-		free(cmpstr);
+		size=memcmp(cmphdr,idhdr, hdrlen);
 		if (size==0)
 		{
 			for (i=0,size=0,drssize=0;i<NUM_RES_ENTRIES;i++)
 			{
-				size+=(dword)fread(&drstable[i].fname,1,sizeof(drstable[i].fname),drs);
-				size+=(dword)fread(&drstable[i].foffset,1,sizeof(drstable[i].foffset),drs);
-				size+=(dword)fread(&drstable[i].fsize,1,sizeof(drstable[i].fsize),drs);
-				DecodeTableEntry(&drstable[i]);
-				PascalStringToCString(drstable[i].fname);
+				memset(drstable[i].fname,0,sizeof(drstable[i].fname));
+				size+=fread(&drstable[i].fname,1,sizeof(drstable[i].fname),drs);
+				size+=fread(&drstable[i].foffset,1,sizeof(drstable[i].foffset),drs);
+				size+=fread(&drstable[i].fsize,1,sizeof(drstable[i].fname)-1,drs);
 				strupr(drstable[i].fname);
 				drssize+=drstable[i].fsize;
 			}
-			drssize+=size+strlen(idstr);
-			if (drssize==(dword)filesize(drs) && size==NUM_RES_ENTRIES*(sizeof(drstable[0].fname)+sizeof(drstable[0].fsize)+sizeof(drstable[0].foffset)))
+			drssize+=size+hdrlen;
+			if (drssize==filesize(drs) && size==NUM_RES_ENTRIES*((sizeof(drstable[0].fname)-1)+sizeof(drstable[0].fsize)+sizeof(drstable[0].foffset)))
 			{
 #ifdef USE_NAMETREES
 				if (BuildNameTree())

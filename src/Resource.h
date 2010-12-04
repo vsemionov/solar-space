@@ -6,6 +6,7 @@
 #include "defs.h"
 
 #include <stdio.h>
+#include <stdint.h>
 
 #include "NameTree.h"
 
@@ -38,16 +39,14 @@ private:
 	typedef struct
 	{
 		char fname[13];
-		dword foffset;
-		dword fsize;
+		uint32_t foffset;
+		uint32_t fsize;
 	} drstableentry_t;
 	typedef drstableentry_t drstable_t[NUM_RES_ENTRIES];
 
 	drstable_t drstable;
 	CNameTree nametree;
 	char path[MAX_PATH];
-	static void PascalStringToCString(char *str);
-	static void DecodeTableEntry(drstableentry_t *entry);
 	void DestroyNameTree();
 	bool BuildNameTree();
 	int SearchNameTree(char *name);
