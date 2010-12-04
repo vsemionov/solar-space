@@ -1,5 +1,6 @@
 TECH:
 non-visual:
+- the error log window is closed immediately
 - check debugging capabilities, error handling and reporting
 - per-user settings? only data dir is in global registry?
 - write the log to a temp file, not to the data dir
