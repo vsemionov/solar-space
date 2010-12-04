@@ -142,7 +142,7 @@ bool CResource::OpenResource(const char *filename)
 	dword size,drssize;
 	char *cmpstr;
 	const char *idstr="vsALL Resource Phile.";
-	if (filename[0]==0)
+	if (filename==NULL || filename[0]==0)
 		return false;
 	if (strcmp(filename, path)==0)
 		return true;
