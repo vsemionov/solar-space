@@ -36,6 +36,7 @@ public:
 	static void Init();
 	static void Free();
 	static void ReadGeneralRegistry();
+	static void ReadCommonRegistry();
 	static void ReadConfigRegistry();
 	static void WriteConfigRegistry();
 	static void CloseSaverWindow();

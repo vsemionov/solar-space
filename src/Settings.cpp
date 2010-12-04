@@ -103,11 +103,26 @@ void CSettings::ReadGeneralRegistry()
 	MouseThreshold=64;
 	IsDialogActive=FALSE;
 	LONG res; HKEY skey; DWORD valtype, valsize, val;
-	res=RegOpenKeyEx(HKEY_CURRENT_USER,REGSTR_PATH_PLUSSCR,0,KEY_ALL_ACCESS,&skey);
+	res=RegOpenKeyEx(HKEY_CURRENT_USER,REGSTR_PATH_PLUSSCR,0,KEY_QUERY_VALUE,&skey);
 	if (res!=ERROR_SUCCESS) return;
 	valsize=sizeof(val); res=RegQueryValueEx(skey,"Password Delay",0,&valtype,(LPBYTE)&val,&valsize); if (res==ERROR_SUCCESS) PasswordDelay=val;
 	valsize=sizeof(val); res=RegQueryValueEx(skey,"Mouse Threshold",0,&valtype,(LPBYTE)&val,&valsize);if (res==ERROR_SUCCESS) MouseThreshold=val;
 	valsize=sizeof(val); res=RegQueryValueEx(skey,"Mute Sound",0,&valtype,(LPBYTE)&val,&valsize);     if (res==ERROR_SUCCESS) MuteSound=val;
+	RegCloseKey(skey);
+}
+
+
+
+
+
+void CSettings::ReadCommonRegistry()
+{
+	strcpy(DataDir,".");
+	LONG res; HKEY skey; DWORD valtype, valsize;
+	char strval[sizeof(DataDir)];
+	res=RegOpenKeyEx(HKEY_LOCAL_MACHINE,REGSTR_PATH_CONFIG,0,KEY_QUERY_VALUE,&skey);
+	if (res!=ERROR_SUCCESS) return;
+	valsize=sizeof(strval); res=RegQueryValueEx(skey,"Data Directory",0,&valtype,(LPBYTE)strval,&valsize);   if (res==ERROR_SUCCESS) strcpy(DataDir,strval);
 	RegCloseKey(skey);
 }
 
@@ -122,19 +137,17 @@ void CSettings::ReadConfigRegistry()
 	DefaultRes=TRUE;
 	ClockOn=TRUE;
 	PlanetInfo=TRUE;
-	strcpy(DataDir,".");
 	strcpy(DataFile,"");
 	RandomDataFile=TRUE;
 	LONG res; HKEY skey; DWORD valtype, valsize, val;
-	char strval[sizeof(DataDir)];
-	res=RegOpenKeyEx(HKEY_LOCAL_MACHINE,REGSTR_PATH_CONFIG,0,KEY_ALL_ACCESS,&skey);
+	char strval[sizeof(DataFile)];
+	res=RegOpenKeyEx(HKEY_CURRENT_USER,REGSTR_PATH_CONFIG,0,KEY_QUERY_VALUE,&skey);
 	if (res!=ERROR_SUCCESS) return;
 	valsize=sizeof(val); res=RegQueryValueEx(skey,"Video Mode",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) VideoMode=val;
 	valsize=sizeof(val); res=RegQueryValueEx(skey,"Detail Level",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) DetailLevel=val;
 	valsize=sizeof(val); res=RegQueryValueEx(skey,"Clock On",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) ClockOn=val;
 	valsize=sizeof(val); res=RegQueryValueEx(skey,"Planet Info",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) PlanetInfo=val;
 	valsize=sizeof(val); res=RegQueryValueEx(skey,"Default Resolution",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) DefaultRes=val;
-	valsize=sizeof(strval); res=RegQueryValueEx(skey,"Data Directory",0,&valtype,(LPBYTE)strval,&valsize);   if (res==ERROR_SUCCESS) strcpy(DataDir,strval);
 	valsize=sizeof(strval); res=RegQueryValueEx(skey,"Data File",0,&valtype,(LPBYTE)strval,&valsize);   if (res==ERROR_SUCCESS) strcpy(DataFile,strval);
 	RegCloseKey(skey);
 	RandomDataFile=(DataFile[0]==0);
@@ -149,16 +162,15 @@ void CSettings::WriteConfigRegistry()
 	if (RandomDataFile)
 		DataFile[0]=0;
 	LONG res; HKEY skey; DWORD val, disp;
-	char strval[sizeof(DataDir)];
-	res=RegCreateKeyEx(HKEY_LOCAL_MACHINE,REGSTR_PATH_CONFIG,0,NULL,REG_OPTION_NON_VOLATILE,KEY_ALL_ACCESS,NULL,&skey,&disp);
+	char strval[sizeof(DataFile)];
+	res=RegCreateKeyEx(HKEY_CURRENT_USER,REGSTR_PATH_CONFIG,0,NULL,REG_OPTION_NON_VOLATILE,KEY_SET_VALUE,NULL,&skey,&disp);
 	if (res!=ERROR_SUCCESS) return;
 	val=VideoMode; RegSetValueEx(skey,"Video Mode",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
 	val=DetailLevel; RegSetValueEx(skey,"Detail Level",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
 	val=ClockOn; RegSetValueEx(skey,"Clock On",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
 	val=PlanetInfo; RegSetValueEx(skey,"Planet Info",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
 	val=DefaultRes; RegSetValueEx(skey,"Default Resolution",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
-	strcpy(strval,DataDir); RegSetValueEx(skey,"Data Directory",0,REG_SZ,(CONST BYTE*)strval,sizeof(strval));
-	strcpy(strval,DataFile); RegSetValueEx(skey,"Data File",0,REG_SZ,(CONST BYTE*)strval,sizeof(strval));
+	strcpy(strval,DataFile); RegSetValueEx(skey,"Data File",0,REG_SZ,(CONST BYTE*)strval,strlen(strval)+1);
 	RegCloseKey(skey);
 }
 

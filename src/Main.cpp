@@ -514,6 +514,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	else
 	{
 		CSettings::ReadGeneralRegistry();
+		CSettings::ReadCommonRegistry();
 		CSettings::ReadConfigRegistry();
 		if (!CSettings::BuildFileList())
 		{
