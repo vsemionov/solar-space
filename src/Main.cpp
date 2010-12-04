@@ -181,18 +181,13 @@ static BOOL CALLBACK QuestionLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
 
 
 
-static void SaveLog()
+static bool SaveLog()
 {
 	char filename[MAX_PATH];
-	strcpy(filename,CSettings::DataDir);
-	strcat(filename,"\\" LOG_NAME);
-	FILE *fp=fopen(filename,"wt");
-	if (!fp)
-	{
-		GetTempPath(sizeof(filename),filename);
-		strcat(filename,"\\" LOG_NAME);
-		fp=fopen(filename,"wt");
-	}
+	FILE *fp;
+	GetTempPath(sizeof(filename)-strlen(LOG_NAME),filename);
+	strcat(filename,LOG_NAME);
+	fp=fopen(filename,"wt");
 	if (fp)
 	{
 		char error[ERROR_MAXLEN];
@@ -225,38 +220,33 @@ static void SaveLog()
 		fclose(fp);
 		if (i==c)
 		{
-			return; //success
+			return true;
 		}
 	}
-	MessageBox(NULL,"Error saving log.",(APPNAME " error"),MB_OK|MB_ICONEXCLAMATION);
+	return false;
 }
 
 
 
 
 
-static void ViewLog()
+static bool ViewLog()
 {
 	char filename[MAX_PATH];
-	strcpy(filename,CSettings::DataDir);
-	strcat(filename,"\\" LOG_NAME);
-	FILE *fp=fopen(filename,"rb");
-	if (!fp)
-	{
-		GetTempPath(sizeof(filename),filename);
-		strcat(filename,"\\" LOG_NAME);
-		fp=fopen(filename,"rb");
-	}
+	FILE *fp;
+	GetTempPath(sizeof(filename)-strlen(LOG_NAME),filename);
+	strcat(filename,LOG_NAME);
+	fp=fopen(filename,"rb");
 	if (fp)
 	{
 		fclose(fp);
 		HINSTANCE hInst=ShellExecute(NULL,"open",filename,NULL,NULL,SW_SHOWNORMAL);
 		if ((int)hInst>32)
 		{
-			return; //success
+			return true;
 		}
 	}
-	MessageBox(NULL,"Error opening log.",(APPNAME " error"),MB_OK|MB_ICONEXCLAMATION);
+	return false;
 }
 
 
@@ -268,8 +258,16 @@ static void ErrorLogDialog()
 	int res;
 	res=DialogBox(GetModuleHandle(NULL),MAKEINTRESOURCE(IDD_SHOWLOG),NULL,QuestionLogProc);
 	if (res!=IDC_BLOG) return;
-	SaveLog();
-	ViewLog();
+	if (!SaveLog())
+	{
+		MessageBox(NULL,"Error saving log.",(APPNAME " error"),MB_OK|MB_ICONERROR);
+		return;
+	}
+	if (!ViewLog())
+	{
+		MessageBox(NULL,"Error opening log.",(APPNAME " error"),MB_OK|MB_ICONERROR);
+		return;
+	}
 }
 
 

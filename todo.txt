@@ -1,6 +1,5 @@
 TECH:
 non-visual:
-- write the log to a temp file, not to the data dir
 - full code review (note: watch resource deallocation on error)
 - new DRS file creator program/script; also change header string in the DRS format
 - export some lighting parameters into files - reflectivities,etc.
