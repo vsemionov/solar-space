@@ -117,7 +117,7 @@ void CSettings::ReadGeneralRegistry()
 
 void CSettings::ReadConfigRegistry()
 {
-	VideoMode=1;
+	VideoMode=2;
 	DetailLevel=1;
 	DefaultRes=TRUE;
 	ClockOn=TRUE;
