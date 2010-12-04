@@ -3,6 +3,7 @@ non-visual:
 - new DRS file creator program/script; also change header string in the DRS format
 - export some lighting parameters into files - reflectivities,etc.
 - asteroid darkening seems to be hard-coded in Body.cpp as ASTEROID_REFLECTION
+- check dependence on win32 project inherited libraries, and change project type if necessary
 - full code review (note: watch behavior dependence on time between frames)
 
 visual:
