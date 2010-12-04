@@ -1,6 +1,5 @@
 TECH:
 non-visual:
-- call OnUserAbortLoad() only in CGamePlay::Init(); remove other calls - they are unnecessary
 - write the log to a temp file, not to the data dir
 - check debugging capabilities, error handling and reporting
 - per-user settings? only data dir is in global registry?

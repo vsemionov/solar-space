@@ -190,7 +190,6 @@ bool CGamePlay::InitScene()
 	{
 		if (UserAbortedLoad())
 		{
-			OnUserAbortLoad();
 			return false;
 		}
 		SetSplashText("Loading bodies... ");
@@ -206,7 +205,6 @@ bool CGamePlay::InitScene()
 	{
 		if (UserAbortedLoad())
 		{
-			OnUserAbortLoad();
 			return false;
 		}
 		SetSplashText("Loading lens flares... ");
@@ -222,7 +220,6 @@ bool CGamePlay::InitScene()
 	{
 		if (UserAbortedLoad())
 		{
-			OnUserAbortLoad();
 			return false;
 		}
 		SetSplashText("Loading info text font... ");
@@ -236,7 +233,6 @@ bool CGamePlay::InitScene()
 	{
 		if (UserAbortedLoad())
 		{
-			OnUserAbortLoad();
 			return false;
 		}
 		SetSplashText("Loading starmap... ");
@@ -248,7 +244,6 @@ bool CGamePlay::InitScene()
 	{
 		if (UserAbortedLoad())
 		{
-			OnUserAbortLoad();
 			return false;
 		}
 		SetSplashText("Loading clock... ");
@@ -258,7 +253,6 @@ bool CGamePlay::InitScene()
 
 	if (UserAbortedLoad())
 	{
-		OnUserAbortLoad();
 		return false;
 	}
 	SetSplashText("Done.");
@@ -475,7 +469,6 @@ bool CGamePlay::FadeOutSplash()
 	{
 		if (UserAbortedLoad())
 		{
-			OnUserAbortLoad();
 			return false;
 		}
 		seconds=(float)(timeGetTime()-starttime)*0.001f;
