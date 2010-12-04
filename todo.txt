@@ -27,6 +27,7 @@ performance/testing:
 - longevity testing (24h)
 
 user:
+- common controls are not looking good in release builds
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker)
 - update settings dialog - update or remove video mode selection, add website link?, antialiasing option?
 - static preview has hard-coded dimensions in StaticPreview()
