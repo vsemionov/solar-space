@@ -37,8 +37,6 @@ user:
 
 
 NON-TECH:
-- correct all spelling ("Solar system"=>"Solar System")
-- check graphics licenses - done, legal
 - adjust ambient reflection (e.g. to 0.1?)
 - adjust body parameters so that planets rotate slower
 - better texture for charon (and for moon?)
