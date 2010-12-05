@@ -41,7 +41,7 @@ NON-TECH:
 - check graphics licenses - done, legal
 - adjust ambient reflection (e.g. to 0.1?)
 - adjust body parameters so that planets rotate slower
-- better polar coord textures
+- better texture for charon (and for moon?)
 - replace monitor and wrench icons
 - new splash screen
 - company
