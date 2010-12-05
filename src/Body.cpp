@@ -810,6 +810,7 @@ void CBody::MakeAsteroid()
 	rot[1]=(float)(rand()%1001)*0.001f;
 	rot[2]=(float)(rand()%1001)*0.001f;
 	rot[3]=(float)(rand()%(360*4))*0.250f;
+	// these are used only if no texture is present for the asteroid
 	float ma[4]={AMBIENT_REFLECTION*ASTEROID_REFLECTION,AMBIENT_REFLECTION*ASTEROID_REFLECTION,AMBIENT_REFLECTION*ASTEROID_REFLECTION,1.0f};
 	float md[4]={DIFFUSE_REFLECTION*ASTEROID_REFLECTION,DIFFUSE_REFLECTION*ASTEROID_REFLECTION,DIFFUSE_REFLECTION*ASTEROID_REFLECTION,1.0f};
 	if (!textures[0])
