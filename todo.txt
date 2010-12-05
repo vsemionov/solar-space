@@ -5,29 +5,21 @@ non-visual:
 - full code review (note: watch behavior dependence on time between frames)
 
 visual:
-- check if work machine renders info correctly if it is not implemented with (recursive) display lists
-- check point params correctness (why do stars render with different size in point parameter and point size modes; see http://www.opengl.org/registry/specs/ARB/point_parameters.txt)
 - fix for wide screens
-- try dynamic 3-level LOD for planets (num_vertices ~ relative_linear_onscreen_size(radius, distance, FOV))
-- 3 configurable detail levels - low = low detail + DLOD, med = high detail + DLOD, high = high detail (no DLOD)
 - check font rendering - vertical lines visible between characters (left side of '1' on first line of info)
 - check mipmapping (too many mipmaps?)
 - improve splash status font (non-italic, use antialiasing instead of outline)
 - antialiasing
 
 performance/testing:
-- test on integrated/intel cards - suspect starmap and fonts display
-- improve graphics performance (?) - slow on integrated video cards (frustum culling?), may be ok after fixing starmap
 - compiler optimization switches (sse/sse2 ?)
-- check cpu and memory usage
-- profile to improve startup time (and in-game performance); startup time is 71% in CLoader::LoadImage() and 24% in CLoader::LoadTexture(); in-game time is spent mostly in CStarMap::DrawStars() and performance is greatly improved by fixing the starmap displaylist
 - test on a remote machine (remote desktop)
 - longevity testing (24h)
 
 user:
 - common controls are not looking good in release builds
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker)
-- update settings dialog - update or remove video mode selection, add website link?, antialiasing option?
+- update settings dialog - update or remove video mode selection, add website link?, antialiasing option (or 3rd detail level w/ implied antialiasing)?
 - static preview has hard-coded dimensions in StaticPreview()
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?)
 - installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html)
