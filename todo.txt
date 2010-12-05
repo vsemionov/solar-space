@@ -6,7 +6,7 @@ non-visual:
 
 visual:
 - check if work machine renders info correctly if it is not implemented with (recursive) display lists
-- check why stars render with different size in point parameter and point size modes (see http://www.opengl.org/registry/specs/ARB/point_parameters.txt)
+- check point params correctness (why do stars render with different size in point parameter and point size modes; see http://www.opengl.org/registry/specs/ARB/point_parameters.txt)
 - fix for wide screens
 - try dynamic 3-level LOD for planets (num_vertices ~ relative_linear_onscreen_size(radius, distance, FOV))
 - 3 configurable detail levels - low = low detail + DLOD, med = high detail + DLOD, high = high detail (no DLOD)
