@@ -1,4 +1,4 @@
 // this file contains the name of the star system
 // the name is in the first uncommented non-empty line:
 
-Solar system
+Solar System
