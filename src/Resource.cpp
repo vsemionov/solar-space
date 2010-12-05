@@ -134,9 +134,9 @@ bool CResource::OpenResource(const char *filename)
 			for (i=0,size=0,drssize=0;i<NUM_RES_ENTRIES;i++)
 			{
 				memset(drstable[i].fname,0,sizeof(drstable[i].fname));
-				size+=fread(&drstable[i].fname,1,sizeof(drstable[i].fname),drs);
+				size+=fread(&drstable[i].fname,1,sizeof(drstable[i].fname)-1,drs);
 				size+=fread(&drstable[i].foffset,1,sizeof(drstable[i].foffset),drs);
-				size+=fread(&drstable[i].fsize,1,sizeof(drstable[i].fname)-1,drs);
+				size+=fread(&drstable[i].fsize,1,sizeof(drstable[i].fsize),drs);
 				strupr(drstable[i].fname);
 				drssize+=drstable[i].fsize;
 			}
