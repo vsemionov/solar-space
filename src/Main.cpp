@@ -181,7 +181,7 @@ static BOOL CALLBACK QuestionLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
 
 
 
-static bool SaveLog()
+static bool SaveLog(int level=WARNING_CODE)
 {
 	char filename[MAX_PATH];
 	FILE *fp;
@@ -199,6 +199,8 @@ static bool SaveLog()
 		for (i=0;i<c;i++)
 		{
 			CError::GetNextError(&code,error);
+			if (code<level)
+				continue;
 			switch (code)
 			{
 			case SUCCESS_CODE:
