@@ -518,26 +518,29 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		{
 			CError::LogError(ERROR_CODE, "Error enumerating available star systems.");
 		}
-		else if (CSettings::numfiles > 0)
+		else
 		{
-			if (CSettings::RandomDataFile)
-				CSettings::RandomizeDataFile();
 			if (ScrMode==smConfig)
 			{
 				Ret=DialogBox(hInstance,MAKEINTRESOURCE(IDD_CONFIG),hwnd,ConfigDialogProc);
 			}
 			else if (ScrMode==smSaver || ScrMode==smPreview)
 			{
-				DoSaver(hwnd);
+				if (CSettings::numfiles > 0)
+				{
+					if (CSettings::RandomDataFile)
+						CSettings::RandomizeDataFile();
+					DoSaver(hwnd);
+				}
+				else
+				{
+					CError::LogError(ERROR_CODE, "No data files found.");
+				}
 			}
 			else
 			{
 				// should not happen
 			}
-		}
-		else
-		{
-			CError::LogError(ERROR_CODE, "No data files found.");
 		}
 	}
 	if (CError::ErrorsOccured())
