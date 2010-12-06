@@ -30,7 +30,7 @@ public:
 	bool Reload();
 	void Predict(int bodyid, float seconds, float *x, float *y, float *z);
 	float GetRadius(int bodyid, bool withchildren);
-	static bool LoadSystemName(char *resource=NULL, char *buffer=CBody::systemname,bool quiet=false);
+	static bool LoadSystemData(char *resource=NULL, int *format_version=&CBody::system_format_version, char *buffer=CBody::systemname,bool quiet=false);
 private:
 	static int numbodies;
 	void Init();
@@ -59,8 +59,10 @@ private:
 	static int lineindex;
 	bool mainbody;
 	int id;
-	//body phys data:
+	//system data:
+	static int system_format_version;
 	static char systemname[SYSTEM_NAME_SIZE];
+	//body phys data:
 	char name[32];
 	char tex_names[4][2][16];
 	char obj_name[16];

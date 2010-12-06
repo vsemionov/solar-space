@@ -1,4 +1,6 @@
 // this file contains the name of the star system
-// the name is in the first uncommented non-empty line:
+// the first non-blank uncommented line specifies the data file format version (of all data files for this system)
+// the system name is in the second non-blank uncommented line
 
+1
 Solar System

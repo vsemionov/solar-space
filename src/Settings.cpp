@@ -225,7 +225,7 @@ bool CSettings::BuildFileList()
 	{
 		strcpy(filename,wfd.cFileName);
 		*strrchr(filename,'.')=0;
-		if (CBody::LoadSystemName(filename,systemname,true))
+		if (CBody::LoadSystemData(filename,NULL,systemname,true))
 		{
 			newsystem=(stardrs_s*)malloc(sizeof(stardrs_s));
 			if (!newsystem)

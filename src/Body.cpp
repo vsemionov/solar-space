@@ -47,6 +47,7 @@
 
 CLoader CBody::loader;
 
+int CBody::system_format_version=0;
 char CBody::systemname[SYSTEM_NAME_SIZE];
 char **CBody::textlines=NULL;
 int CBody::numlines=0;
@@ -106,7 +107,7 @@ void CBody::Init()
 
 
 
-bool CBody::LoadSystemName(char *resource, char *buffer,bool quiet)
+bool CBody::LoadSystemData(char *resource, int *format_version, char *buffer,bool quiet)
 {
 	if (!resource)
 		resource=SYSTEM_NAME_RESOURCE;
@@ -135,25 +136,51 @@ bool CBody::LoadSystemName(char *resource, char *buffer,bool quiet)
 			CError::LogError(ERROR_CODE,"Unable to open system - empty data file.");
 		return false;
 	}
-	lineindex=0;
+	lineindex=-1;
+
+	int nfield=0;
+	while (nfield<2)
 	{
-		while (strlen(textlines[lineindex])==0 || textlines[lineindex][0]=='/')
+		do
 		{
 			lineindex++;
 			if (lineindex>=numlines)
 			{
 				if (!quiet)
 					CError::LogError(ERROR_CODE,"Unable to load star system - unexpected end of file.");
+				for (int i=0;i<numlines;i++) free(textlines[i]);
+				free(textlines); textlines=NULL;
+				lineindex=0;
+				numlines=0;
 				return false;
 			}
+		} while (strlen(textlines[lineindex])==0 || textlines[lineindex][0]=='/');
+
+		switch (nfield)
+		{
+		case 0:
+			if (!format_version)
+				break;
+			*format_version=atoi(textlines[lineindex]);
+			break;
+		case 1:
+			if (!buffer)
+				break;
+			strncpy(buffer,textlines[lineindex],SYSTEM_NAME_SIZE);
+			buffer[SYSTEM_NAME_SIZE-1]=0;
+			break;
+		default:
+			break;
 		}
-		strncpy(buffer,textlines[lineindex],SYSTEM_NAME_SIZE);
-		buffer[SYSTEM_NAME_SIZE-1]=0;
-		for (int i=0;i<numlines;i++) free(textlines[i]);
-		free(textlines); textlines=NULL;
-		lineindex=0;
-		numlines=0;
+
+		nfield++;
 	}
+
+	for (int i=0;i<numlines;i++) free(textlines[i]);
+	free(textlines); textlines=NULL;
+	lineindex=0;
+	numlines=0;
+
 	return true;
 }
 
@@ -180,7 +207,7 @@ bool CBody::Load()
 		glMaterialfv(GL_BACK,GL_DIFFUSE,ZeroReflection);
 		glMaterialfv(GL_BACK,GL_SPECULAR,ZeroReflection);
 		glMaterialf(GL_BACK,GL_SHININESS,Shininess);
-		if (!LoadSystemName())
+		if (!LoadSystemData())
 		{
 			CError::LogError(ERROR_CODE,"Star system load failed - aborting.");
 			return false;

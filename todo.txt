@@ -1,6 +1,5 @@
 TECH:
 non-visual:
-- add a format version field to the solar system description data
 - test threshold with password
 - ensure chase cam has a maximum FOV value
 - check chase cam behavior when target is located at camera location (division by zero?)
