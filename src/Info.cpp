@@ -2,6 +2,11 @@
 
 #include <gl\gl.h>
 
+#ifdef _MSC_VER
+#define _USE_MATH_DEFINES
+#endif
+#include <math.h>
+
 #include "Window.h"
 #include "Body.h"
 #include "Error.h"
@@ -47,8 +52,9 @@
 #define WINDOW_MARGIN_LEFT 0.075f
 
 
+#define MAX_FADE_TIME 3.0f
 #define FADE_TIME_RATIO 0.10f
-#define FADE_TIME(totaltime) (totaltime*FADE_TIME_RATIO)
+#define FADE_TIME(totaltime) min(MAX_FADE_TIME, (totaltime)*FADE_TIME_RATIO)
 
 #define WINDOW_POS_X (WINDOW_RECT_LEFT*scrwidth)
 #define WINDOW_POS_Y (WINDOW_RECT_TOP*scrheight)
