@@ -1,9 +1,8 @@
 TECH:
 non-visual:
-- ensure chase cam has a maximum FOV value
 - check chase cam behavior when target is located at camera location (division by zero?)
 - choose compiler (MSVC/MinGW)
-- full code review (note: watch behavior dependence on time between frames)
+- full code review (note: watch behavior dependence on time between frames) - only camera code is left
 
 visual:
 - fix for wide screens
