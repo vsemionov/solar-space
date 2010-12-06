@@ -7,7 +7,7 @@ non-visual:
 
 visual:
 - fix for wide screens
-- check font rendering - vertical lines visible between characters (left side of '1' on first line of info) - caused by new freetype version
+- check font rendering - vertical lines visible between characters (left side of '1' on first line of info) - different in new freetype version
 - review starmap point parameters (first parameter is 0, but it's 1 by default)
 - check mipmapping (too many mipmaps?)
 - improve splash status font (non-italic, use antialiasing instead of outline)
