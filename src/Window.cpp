@@ -12,6 +12,8 @@
 
 #define Z_BUFFER_BITS 32
 
+#define USE_PASSWORD_THREAD false
+
 
 
 
@@ -192,8 +194,15 @@ LRESULT CALLBACK CWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 				}
 				else
 				{
-					DWORD thID;
-					CreateThread(NULL,0,PasswordThread,(LPVOID)hWnd,0,&thID);
+					if (USE_PASSWORD_THREAD)
+					{
+						DWORD thID;
+						CreateThread(NULL,0,PasswordThread,(LPVOID)hWnd,0,&thID);
+					}
+					else
+					{
+						PasswordThread((LPVOID)hWnd);
+					}
 				}
 			}
 			return FALSE;
