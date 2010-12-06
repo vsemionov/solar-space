@@ -7,7 +7,8 @@ non-visual:
 
 visual:
 - fix for wide screens
-- check font rendering - vertical lines visible between characters (left side of '1' on first line of info)
+- check font rendering - vertical lines visible between characters (left side of '1' on first line of info) - caused by new freetype version
+- review starmap point parameters (first parameter is 0, but it's 1 by default)
 - check mipmapping (too many mipmaps?)
 - improve splash status font (non-italic, use antialiasing instead of outline)
 - antialiasing
@@ -18,6 +19,7 @@ performance/testing:
 - longevity testing (24h)
 
 user:
+- center the config dialog
 - common controls are not looking good in release builds
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker)
 - update settings dialog - update or remove video mode selection, add website link?, antialiasing option (or 3rd detail level w/ implied antialiasing)?
