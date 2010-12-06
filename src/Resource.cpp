@@ -112,7 +112,7 @@ int CResource::FindEntryBrutal(char *entryname)
 bool CResource::OpenResource(const char *filename)
 {
 	int i;
-	uint32_t size,drssize;
+	int size,drssize;
 	const int hdrlen=8;
 	char cmphdr[hdrlen];
 	char idhdr[hdrlen]={'v','s',' ','d','2',0,0,0};
