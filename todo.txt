@@ -19,7 +19,6 @@ performance/testing:
 - longevity testing (24h)
 
 user:
-- vsync option (on by default)
 - center the config dialog
 - common controls are not looking good in release builds
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker)
