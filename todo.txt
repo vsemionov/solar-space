@@ -20,7 +20,7 @@ performance/testing:
 user:
 - rename the "Show planet info" option (to e.g. "Information window")
 - center the config dialog
-- common controls are not looking good in release builds
+- common controls are not looking good in release builds - disable "generate manifest" in VS
 - resources tagged as bulgarian in VS 2010
 - final exe contains a string that is an absolute path to a pdb file on the build machine filesystem
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker)
