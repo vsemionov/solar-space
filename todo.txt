@@ -21,6 +21,7 @@ performance/testing:
 user:
 - center the config dialog
 - common controls are not looking good in release builds
+- resources tagged as bulgarian in VS 2010
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker)
 - update settings dialog - update or remove video mode selection, add website link?, antialiasing option (or 3rd detail level w/ implied antialiasing)?
 - static preview has hard-coded dimensions in StaticPreview()
