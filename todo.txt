@@ -18,6 +18,7 @@ performance/testing:
 - longevity testing (24h)
 
 user:
+- rename the "Show planet info" option (to e.g. "Information window")
 - center the config dialog
 - common controls are not looking good in release builds
 - resources tagged as bulgarian in VS 2010
