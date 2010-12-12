@@ -1,7 +1,7 @@
 TECH:
 non-visual:
 - check chase cam behavior when target is located at camera location (division by zero?)
-- choose compiler (MSVC/MinGW)
+- window not positioned properly in debug mode (non-client area is outside the viewport)
 - full code review (note: watch behavior dependence on time between frames) - only camera code is left
 
 visual:
