@@ -1,44 +1,44 @@
 TECH:
 non-visual:
-- check chase cam behavior when target is located at camera location (division by zero?)
-- window not positioned properly in debug mode (non-client area is outside the viewport)
-- full code review (note: watch behavior dependence on time between frames) - only camera code is left
+- check chase cam behavior when target is located at camera location (division by zero?) (med)
+- window not positioned properly in debug mode (non-client area is outside the viewport) (low)
+- full code review (note: watch behavior dependence on time between frames) - only camera code is left (med)
 
 visual:
-- fix for wide screens
-- small horizontal line at bottom of splash
-- check font rendering - vertical lines visible between characters (left side of '1' on first line of info) - different in new freetype version
-- review starmap point parameters (first parameter is 0, but it's 1 by default)
-- check mipmapping (too many mipmaps?)
-- improve splash status font (non-italic, use antialiasing instead of outline)
-- antialiasing
+- fix for wide screens (high)
+- small horizontal line at bottom of splash - caused by lower part of splash (med)
+- check font rendering - vertical lines visible between characters (left side of '1' on first line of info) - different in new freetype version (high)
+- review starmap point parameters (first parameter is 0, but it's 1 by default) (med)
+- check mipmapping (too many mipmaps?) (med)
+- improve splash status font (non-italic, use antialiasing instead of outline) (high)
+- antialiasing (high)
 
 performance/testing:
-- test on a remote machine (remote desktop)
-- longevity testing (24h)
+- test on a remote machine (remote desktop) (low)
+- longevity testing (24h) (low)
 
 user:
-- rename the "Show planet info" option (to e.g. "Information window")
-- center the config dialog
-- common controls are not looking good in release builds - disable "generate manifest" in VS
-- resources tagged as bulgarian in VS 2010
-- final exe contains a string that is an absolute path to a pdb file on the build machine filesystem
-- check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker)
-- update settings dialog - update or remove video mode selection, add website link?, antialiasing option (or 3rd detail level w/ implied antialiasing)?
-- static preview has hard-coded dimensions in StaticPreview()
-- update installer to latest InnoSetup version, check installer script logic (registry changes, etc?)
-- installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html)
-- update all files to match new company name and version (defs.h, , registry paths, installer script, manifest, splash, etc)
-- installer asks before setting solar space as the default screen saver
-- trial version
+- rename the "Show planet info" option (to e.g. "Information window") (med)
+- center the config dialog (med)
+- common controls are not looking good in release builds - disable "generate manifest" in VS (high)
+- resources tagged as bulgarian in VS 2010 (high)
+- final exe contains a string that is an absolute path to a pdb file on the build machine filesystem (high)
+- check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker) (med)
+- update settings dialog - update or remove video mode selection, add website link?, antialiasing option (or 3rd detail level w/ implied antialiasing)? (med)
+- static preview has hard-coded dimensions in StaticPreview() (high)
+- update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
+- installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
+- update all files to match new company name and version (defs.h, , registry paths, installer script, manifest, splash, etc) (med)
+- installer asks before setting solar space as the default screen saver (med)
+- trial version (med)
 
 
 NON-TECH:
-- adjust ambient reflection (e.g. to 0.1?)
-- adjust body parameters so that planets rotate slower
-- better texture for charon (and for moon?)
-- replace monitor and wrench icons
-- new splash screen
-- company
-- website
-- new license (commercial)
+- adjust ambient reflection (e.g. to 0.1?) (med)
+- adjust body parameters so that planets rotate slower (med)
+- better texture for charon (and for moon?) (med)
+- replace monitor and wrench icons (med)
+- new splash screen (med)
+- company (med)
+- website (med)
+- new license (commercial) (med)
