@@ -1,6 +1,6 @@
 TECH:
 non-visual:
-- fix dialog window message control flow (high)
+- return correct values after processing window messages and call default window/dlg procs if necessary (high)
 - check chase cam behavior when target is located at camera location (division by zero?) (med)
 - window not positioned properly in debug mode (non-client area is outside the viewport) (low)
 - full code review (note: watch behavior dependence on time between frames) - only camera code is left (med)
