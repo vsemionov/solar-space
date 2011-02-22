@@ -484,7 +484,7 @@ static void ChangePassword(HWND hwnd)
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	int Ret=IDOK;
+	int Ret=0;
 	LogIn();
 	char *c=GetCommandLine();
 	if (*c=='\"') {c++; while (*c!=0 && *c!='\"') c++;} else {while (*c!=0 && *c!=' ') c++;}
@@ -511,6 +511,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	if (ScrMode==smNone)
 	{
 		CError::LogError(ERROR_CODE, "Invalid command-line argument.");
+		Ret=1;
 	}
 	else if (ScrMode==smPassword)
 	{
@@ -524,12 +525,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		if (!CSettings::BuildFileList())
 		{
 			CError::LogError(ERROR_CODE, "Error enumerating available star systems.");
+			Ret=2;
 		}
 		else
 		{
 			if (ScrMode==smConfig)
 			{
-				Ret=DialogBox(hInstance,MAKEINTRESOURCE(IDD_CONFIG),hwnd,ConfigDialogProc);
+				DialogBox(hInstance,MAKEINTRESOURCE(IDD_CONFIG),hwnd,ConfigDialogProc);
 			}
 			else if (ScrMode==smSaver || ScrMode==smPreview)
 			{
@@ -542,16 +544,22 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				else
 				{
 					CError::LogError(ERROR_CODE, "No data files found.");
+					Ret=3;
 				}
 			}
 			else
 			{
 				// should not happen
+				Ret=4;
 			}
 		}
 	}
 	if (CError::ErrorsOccured())
+	{
 		ErrorLogDialog();
+		if (Ret==0)
+			Ret=5;
+	}
 	CSettings::Free();
 	CError::Clear();
 	LogOut();
