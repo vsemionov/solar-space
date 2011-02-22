@@ -42,7 +42,7 @@ NON-TECH:
 - better texture for charon (and for moon?) (med)
 - replace monitor and wrench icons (med)
 - new splash screen (med)
-- new preview image (could be a logo, screenshot, or other) (maybe) (med)
+- new preview image (could be a logo, screenshot, or other; but preferably a logo) (maybe) (med)
 - company (med)
 - website (med)
 - new license (commercial) (med)
