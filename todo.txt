@@ -24,8 +24,6 @@ user:
 - center the config dialog (med)
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker) (med)
 - update settings dialog - update or remove video mode selection, add website link?, antialiasing option (or 3rd detail level w/ implied antialiasing)? (med)
-- static preview has hard-coded dimensions in StaticPreview() - keep size but set window position to center of parent window (maybe) (high)
-- check initial visibility of static preview window (should be initially invisible and become visible after repositioning & resizing); check necessity to call UpdateWindow() (high)
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
 - installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
 - update all files to match new company name and version (defs.h, , registry paths, installer script, manifest, splash, etc) (med)

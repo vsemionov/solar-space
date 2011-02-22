@@ -18,6 +18,9 @@
 #include "res\resource.h"
 
 
+#define THUMBNAIL_WIDTH 152
+#define THUMBNAIL_HEIGHT 112
+
 #define LOG_TIMEOUT 15
 #define LOG_NAME APPNAME " Log.txt"
 
@@ -81,11 +84,13 @@ static void CenterWindow(HWND hwnd)
 	if (!hParent)
 		hParent=GetDesktopWindow();
 	GetClientRect(hParent,&rect);
-	x=rect.right/2;
-	y=rect.bottom/2;
+	x=rect.right;
+	y=rect.bottom;
 	GetClientRect(hwnd,&rect);
-	x-=rect.right/2;
-	y-=rect.bottom/2;
+	x-=rect.right;
+	y-=rect.bottom;
+	x/=2;
+	y/=2;
 	SetWindowPos(hwnd,NULL,x,y,0,0,SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOSIZE|SWP_NOZORDER);
 }
 
@@ -98,6 +103,8 @@ static BOOL CALLBACK PreviewProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 	switch (msg)
 	{
 	case WM_INITDIALOG:
+		SetWindowPos(hwnd,NULL,0,0,THUMBNAIL_WIDTH,THUMBNAIL_HEIGHT,SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOMOVE|SWP_NOZORDER);
+		CenterWindow(hwnd);
 		return TRUE;
 	}
 	return FALSE;
@@ -111,8 +118,6 @@ static void StaticPreview(HWND hwndParent)
 {
 	MSG msg;
 	HWND hwnd=CreateDialog(GetModuleHandle(NULL),MAKEINTRESOURCE(IDD_PREVIEW),hwndParent,PreviewProc);
-	SetWindowPos(hwnd,NULL,0,0,152,112,SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOMOVE|SWP_NOZORDER);
-	UpdateWindow(hwnd);
 	while (GetMessage(&msg,NULL,0,0))
 	{
 		DispatchMessage(&msg);
