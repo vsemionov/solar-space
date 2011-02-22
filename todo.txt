@@ -30,6 +30,9 @@ user:
 - installer asks before setting solar space as the default screen saver (med)
 - trial version (med)
 
+misc:
+- map D:\Documents\work to Z:\ and update absolute directory paths in the project (high)
+
 
 NON-TECH:
 - adjust ambient reflection (e.g. to 0.1?) (med)
