@@ -105,7 +105,6 @@ static BOOL CALLBACK PreviewProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 	case WM_INITDIALOG:
 		SetWindowPos(hwnd,NULL,0,0,THUMBNAIL_WIDTH,THUMBNAIL_HEIGHT,SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOMOVE|SWP_NOZORDER);
 		CenterWindow(hwnd);
-		return TRUE;
 	}
 	return FALSE;
 }
@@ -122,7 +121,7 @@ static void StaticPreview(HWND hwndParent)
 	{
 		DispatchMessage(&msg);
 	}
-	EndDialog(hwnd,0);
+	DestroyWindow(hwnd);
 }
 
 
@@ -166,13 +165,11 @@ static BOOL CALLBACK QuestionLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
 		{
 			int id=LOWORD(wParam);
 			EndDialog(hwnd,id);
-			return TRUE;
 		}
 		break;
 	case WM_CLOSE:
 		{
 			EndDialog(hwnd,IDCANCEL);
-			return TRUE;
 		}
 		break;
 	case WM_DESTROY:
