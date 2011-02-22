@@ -105,6 +105,7 @@ static BOOL CALLBACK PreviewProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 	case WM_INITDIALOG:
 		SetWindowPos(hwnd,NULL,0,0,THUMBNAIL_WIDTH,THUMBNAIL_HEIGHT,SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOMOVE|SWP_NOZORDER);
 		CenterWindow(hwnd);
+		return FALSE;
 	}
 	return FALSE;
 }
@@ -145,36 +146,28 @@ static BOOL PrintCloseTime(HWND hwDlg)
 
 static BOOL CALLBACK QuestionLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	int id;
 	switch (msg)
 	{
 	case WM_INITDIALOG:
-		{
-			CenterWindow(hwnd);
-			SetTimer(hwnd,0,1000,NULL);
-			PrintCloseTime(hwnd);
-			return TRUE;
-		}
-		break;
+		CenterWindow(hwnd);
+		SetTimer(hwnd,0,1000,NULL);
+		PrintCloseTime(hwnd);
+		return TRUE;
 	case WM_TIMER:
-		{
-			if (!PrintCloseTime(hwnd))
-				EndDialog(hwnd,IDCANCEL);
-		}
-		break;
-	case WM_COMMAND:
-		{
-			int id=LOWORD(wParam);
-			EndDialog(hwnd,id);
-		}
-		break;
-	case WM_CLOSE:
-		{
+		if (!PrintCloseTime(hwnd))
 			EndDialog(hwnd,IDCANCEL);
-		}
-		break;
+		return TRUE;
+	case WM_COMMAND:
+		id=LOWORD(wParam);
+		EndDialog(hwnd,id);
+		return TRUE;
+	case WM_CLOSE:
+		EndDialog(hwnd,IDCANCEL);
+		return TRUE;
 	case WM_DESTROY:
 		KillTimer(hwnd,0);
-		break;
+		return TRUE;
 	}
 	return FALSE;
 }
@@ -449,7 +442,7 @@ static BOOL CALLBACK ConfigDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 			CSettings::WriteConfigRegistry();
 		}
 		if (id==IDOK || id==IDCANCEL) EndDialog(hwnd,id);
-		break;
+		return TRUE;
 	}
 	return FALSE;
 }
