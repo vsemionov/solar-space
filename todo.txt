@@ -20,7 +20,6 @@ performance/testing:
 user:
 - rename the "Show planet info" option (to e.g. "Information window") (med)
 - center the config dialog (med)
-- final exe contains a string that is an absolute path to a pdb file on the build machine filesystem (high)
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker) (med)
 - update settings dialog - update or remove video mode selection, add website link?, antialiasing option (or 3rd detail level w/ implied antialiasing)? (med)
 - static preview has hard-coded dimensions in StaticPreview() (high)
