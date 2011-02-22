@@ -139,8 +139,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,2,0,1
- PRODUCTVERSION 1,2,0,1
+ FILEVERSION 1,2,0,0
+ PRODUCTVERSION 1,2,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -157,12 +157,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Victor Semionov"
             VALUE "FileDescription", "Screen Saver"
-            VALUE "FileVersion", "1.2.0.1"
+            VALUE "FileVersion", "1.2.0.0"
             VALUE "InternalName", "Solar Space"
-            VALUE "LegalCopyright", "Copyright (C) 2011"
+            VALUE "LegalCopyright", "Copyright (C) 2003-2011 Victor Semionov"
             VALUE "OriginalFilename", "Solar Space.scr"
             VALUE "ProductName", "Solar Space"
-            VALUE "ProductVersion", "1.2.0.1"
+            VALUE "ProductVersion", "1.2.0.0"
         END
     END
     BLOCK "VarFileInfo"
