@@ -1,8 +1,9 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by Solar Space.rc
 //
 #define IDS_DESC                        1
+#define VS_VERSION_INFO                 1
 #define IDD_CONFIG                      101
 #define IDI_ICON1                       102
 #define IDB_PREVIEW                     107
