@@ -20,7 +20,6 @@ performance/testing:
 
 user:
 - rename the "Show planet info" option (to e.g. "Information window") (med)
-- center the config dialog (med)
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker) (med)
 - update settings dialog - update or remove video mode selection, add website link?, antialiasing option (or 3rd detail level w/ implied antialiasing)? (med)
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
