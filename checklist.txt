@@ -1,4 +1,5 @@
 Release Checklist:
 - replace the headers and binaries of all dependencies before building, just in case
 - build the project from location Z:\solar-space or some other pretty path that contains no user-specific components (this absolute path is contained in the final .exe as the path to the PDB)
+- create 2-3 builds and verify that only a few bytes differ in the .exe file (probably some timestamp)
 - save the generated PDB files and import them in version control, alongside the .exe file (but do not distribude them)
