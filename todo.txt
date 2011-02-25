@@ -6,6 +6,7 @@ non-visual:
 
 visual:
 - fix for wide screens (high)
+- update screen height to planet disc diameter ratio - meybe planets should be closer/zoomed in more, but only if texture detail is high enough (med)
 - small horizontal line at bottom of splash - caused by lower part of splash (med)
 - check font rendering - vertical lines visible between characters (left side of '1' on first line of info) - different in new freetype version (high)
 - review starmap point parameters (first parameter is 0, but it's 1 by default) (med)
