@@ -5,7 +5,7 @@ non-visual:
 - full code review (note: watch behavior dependence on time between frames) - only camera code is left (med)
 
 visual:
-- calculate info window width & height from max or current text width & height (decide for max or current) (high)
+- calculate info window width & height from max or current text width & height (decide for max or current: decided CURRENT) (high)
 - fix for wide screens (high)
 - update screen height to planet disc diameter ratio - meybe planets should be closer/zoomed in more, but only if texture detail is high enough (med)
 - small horizontal line at bottom of splash - caused by lower part of splash (med)
