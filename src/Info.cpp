@@ -17,7 +17,7 @@
 
 #define NAME_FONT_NAME "Arial"
 #define NAME_FONT_SIZE_AT_800_600 24
-#define NAME_FONT_SIZE (NAME_FONT_SIZE_AT_800_600*CWindow::GetWidth()/800)
+#define NAME_FONT_SIZE (NAME_FONT_SIZE_AT_800_600*scrwidth/800)
 
 #define NAME_TEXT_COLOR_R 1.00f
 #define NAME_TEXT_COLOR_G 1.00f
@@ -26,7 +26,7 @@
 
 #define INFO_FONT_NAME "Arial"
 #define INFO_FONT_SIZE_AT_800_600 16
-#define INFO_FONT_SIZE (INFO_FONT_SIZE_AT_800_600*CWindow::GetWidth()/800)
+#define INFO_FONT_SIZE (INFO_FONT_SIZE_AT_800_600*scrwidth/800)
 
 #define INFO_TEXT_COLOR_R 1.00f
 #define INFO_TEXT_COLOR_G 1.00f
