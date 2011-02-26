@@ -13,7 +13,6 @@
 #include "Info.h"
 #include "Camera.h"
 #include "VideoBase.h"
-#include "Window.h"
 
 
 
@@ -75,6 +74,8 @@ CCamera::CCamera()
 {
 	cx=cy=cz=0.0f;
 	cyaw=cpitch=0.0f;
+	aspect=4.0/3.0;
+	fov=MAX_FOV;
 }
 
 
@@ -169,11 +170,11 @@ void CCamera::Get(float *x, float *y, float *z, float *yaw, float *pitch)
 
 
 
-void CCamera::SetFOV(double fov_y)
+void CCamera::ApplyFOV()
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(fov_y,((GLdouble)CWindow::GetWidth()/(GLdouble)CWindow::GetHeight()),DIST_CLIP_NEAR,DIST_CLIP_FAR);
+	gluPerspective(fov,aspect,DIST_CLIP_NEAR,DIST_CLIP_FAR);
 	glMatrixMode(GL_MODELVIEW);
 }
 
@@ -181,15 +182,16 @@ void CCamera::SetFOV(double fov_y)
 
 
 
-void CCamera::Init(CBody *refbody, CInfo *info)
+void CCamera::Init(CBody *refbody, CInfo *info, int scrwidth, int scrheight)
 {
 	mainbody=refbody;
 	planetinfo=info;
+	aspect=(double)scrwidth/(double)scrheight;
 	float rc=mainbody->GetRadius(0,true)*0.5f;
 	Set(-rc,-rc,rc,45.0f,-45.0f);
 	fov=MAX_FOV;
 	CLAMP(fov,MIN_FOV,MAX_FOV);
-	SetFOV(fov);
+	ApplyFOV();
 	target=0;
 	action=shooting;
 	type.chaseor=false;
@@ -330,7 +332,7 @@ void CCamera::Update(float seconds)
 			{
 				fov=ANGLE(targetsize,LEN(x,y,z));
 				CLAMP(fov,MIN_FOV,MAX_FOV);
-				SetFOV(fov);
+				ApplyFOV();
 			}
 		}
 		else
@@ -346,7 +348,7 @@ void CCamera::Update(float seconds)
 		{
 			fov=startfov*exp(ZOOM_SPEED*(seconds-starttime));
 			CLAMP(fov,MIN_FOV,MAX_FOV);
-			SetFOV(fov);
+			ApplyFOV();
 		}
 		else
 		{
@@ -484,7 +486,7 @@ void CCamera::Update(float seconds)
 		Angles(x,y,z,&cyaw,&cpitch);
 		fov=startfov*exp(-ZOOM_SPEED*(seconds-starttime));
 		CLAMP(fov,MIN_FOV,MAX_FOV);
-		SetFOV(fov);
+		ApplyFOV();
 		if (fov<=ANGLE(targetsize,LEN(x,y,z)) || fov<=MIN_FOV)
 		{
 			action=shooting;

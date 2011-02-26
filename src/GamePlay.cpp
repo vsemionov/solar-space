@@ -261,7 +261,7 @@ bool CGamePlay::InitScene()
 
 	srand((unsigned int)timeGetTime());
 	InitLight();
-	camera.Init(&mainbody,(planetinfo?&info:NULL));
+	camera.Init(&mainbody,(planetinfo?&info:NULL),CWindow::GetWidth(),CWindow::GetHeight());
 	return FadeOutSplash();
 }
 

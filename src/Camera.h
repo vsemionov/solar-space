@@ -16,7 +16,7 @@ class CCamera
 public:
 	CCamera();
 	virtual ~CCamera();
-	void Init(CBody *refbody, CInfo *info);
+	void Init(CBody *refbody, CInfo *info, int scrwidth, int scrheight);
 	void Update(float seconds);
 	void Set(float x, float y, float z, float yaw, float pitch);
 	void Move(float forward, float right, float up, float yaw, float pitch);
@@ -25,7 +25,7 @@ public:
 	void Apply();
 	void DrawFade();
 	void Get(float *x, float *y, float *z, float *yaw, float *pitch);
-	static void SetFOV(double fov_y);
+	void ApplyFOV();
 	double GetFOV() { return fov; };
 	void Restart(float seconds);
 private:
@@ -34,6 +34,7 @@ private:
 	void Angles(float x, float y, float z, float *yaw, float *pitch);
 	CBody *mainbody;
 	CInfo *planetinfo;
+	double aspect;
 	float cx,cy,cz;
 	float cyaw, cpitch;
 	double fov;
