@@ -291,10 +291,10 @@ bool CText::MakeFTChar(FT_Face face, char ch, int list_base, int textures[NUM_CH
 		}
 
 		glBindTexture(GL_TEXTURE_2D, textures[ich]);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
 		if (mipmaps)
 		{
-			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST_MIPMAP_NEAREST);
 			if (gluBuild2DMipmaps(GL_TEXTURE_2D,2,width,height,GL_LUMINANCE_ALPHA,GL_UNSIGNED_BYTE,expanded_data)!=0)
 			{
 				free(expanded_data);
