@@ -41,7 +41,7 @@ public:
 	void End();
 	int LoadRaw(const char *entryname, void **buffer);
 	int LoadImage(const char *entryname, int *width, int *height, void **buffer, bool convert_bgr_rgb=true);
-	int LoadTexture(const char *imagemap, const char *alphamap, bool mipmaps);
+	int LoadTexture(const char *imagemap, const char *alphamap, bool mipmaps, bool linear);
 	bool ExtractFile(const char *resfile, const char *destfile);
 	bool LoadText(const char *entryname, char ***lines, int *numlines);
 	object_t *LoadObject(const char *entryname);

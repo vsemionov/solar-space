@@ -21,6 +21,7 @@
 bool CVideoBase::ext_bgra=false;
 bool CVideoBase::ext_point_params=false;
 float CVideoBase::opt_geodetail=0.5f;
+bool CVideoBase::opt_linear=false;
 bool CVideoBase::opt_mipmaps=false;
 bool CVideoBase::opt_shadows=false;
 bool CVideoBase::opt_bumpmaps=false;
@@ -162,6 +163,7 @@ void CVideoBase::GetExtensions()
 void CVideoBase::GetOptions()
 {
 	opt_geodetail=0.5f;
+	opt_linear=false;
 	opt_mipmaps=false;
 	opt_shadows=false;
 	opt_bumpmaps=false;
@@ -178,6 +180,7 @@ void CVideoBase::GetOptions()
 		opt_mipmaps=true;
 	case 0:
 		opt_lensflares=true;
+		opt_linear=true;
 	default:
 		break;
 	}

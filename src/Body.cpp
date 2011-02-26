@@ -699,7 +699,7 @@ bool CBody::LoadTextures()
 			CError::LogError(ERROR_CODE,"Body load aborted by user.");
 			return false;
 		}
-		textures[i]=loader.LoadTexture(tex_names[i][0],tex_names[i][1],CVideoBase::GetOptMipmaps());
+		textures[i]=loader.LoadTexture(tex_names[i][0],tex_names[i][1],CVideoBase::GetOptMipmaps(),CVideoBase::GetOptLinear());
 		if (textures[i]==0 && (tex_names[i][0][0]!=0 || tex_names[i][1][0]!=0))
 		{
 			CError::LogError(WARNING_CODE,"Failed to load a body texture - ignoring.");

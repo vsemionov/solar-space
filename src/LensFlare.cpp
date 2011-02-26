@@ -22,9 +22,6 @@
 #define FLARE_RESOURCE CSettings::DataFile
 #define FLARE_SPECS_FILE "FLARES.TXT"
 
-#define MIP_MAPS (CVideoBase::GetOptMipmaps())
-
-
 #define SEGMENTS_BASE 4
 #define STACKS ((int)((float)SEGMENTS_BASE*CVideoBase::GetOptGeoDetail()))
 #define SLICES (2*STACKS)
@@ -106,7 +103,7 @@ bool CLensFlare::Load(CBody *star)
 		else
 		{
 			char *entry=tex_names[i];
-			textures[i]=loader.LoadTexture(entry,NULL,MIP_MAPS);
+			textures[i]=loader.LoadTexture(entry,NULL,CVideoBase::GetOptMipmaps(),CVideoBase::GetOptLinear());
 			if (textures[i]==0)
 			{
 				CError::LogError(WARNING_CODE,"Failed to load a lens flare image - ignoring.");

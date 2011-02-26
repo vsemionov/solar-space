@@ -115,7 +115,7 @@ bool CGamePlay::LoadSplash()
 {
 	CLoader loader;
 	loader.WithResource(SPLASH_RESOURCE);
-	splash_tex=loader.LoadTexture(SPLASH_FILE,NULL,false);
+	splash_tex=loader.LoadTexture(SPLASH_FILE,NULL,CVideoBase::GetOptMipmaps(),CVideoBase::GetOptLinear());
 	return (splash_tex>0);
 }
 

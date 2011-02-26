@@ -280,7 +280,7 @@ bool CLoader::ResizeImage(void **pImage, int *width, int *height)
 
 
 
-int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmaps)
+int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmaps, bool linear)
 {
 	bool b;
 	int tex_width[2], tex_height[2], tex_size[2];
@@ -314,17 +314,17 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 			if (texture>0)
 			{
 				glBindTexture(GL_TEXTURE_2D,texture);
-				glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+				glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,(linear?GL_LINEAR:GL_NEAREST));
 				b=true;
 				if (mipmaps)
 				{
-					glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
+					glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,(linear?GL_LINEAR_MIPMAP_LINEAR:GL_NEAREST_MIPMAP_LINEAR));
 					if (gluBuild2DMipmaps(GL_TEXTURE_2D,4,tex_width[0],tex_height[0],GL_RGBA,GL_UNSIGNED_BYTE,pImage[0])!=0)
 						b=false;
 				}
 				else
 				{
-					glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+					glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,(linear?GL_LINEAR:GL_NEAREST));
 					if (ResizeImage((void**)&pImage[0],&tex_width[0],&tex_height[0]))
 					{
 						glGetError();

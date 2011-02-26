@@ -17,6 +17,7 @@ public:
 	static bool GetExtBGRA() { return ext_bgra; }
 	static bool GetExtPointParams() { return ext_point_params; }
 	static float GetOptGeoDetail() { return opt_geodetail; }
+	static bool GetOptLinear() { return opt_linear; }
 	static bool GetOptMipmaps() { return opt_mipmaps; }
 	static bool GetOptShadows() { return opt_shadows; }
 	static bool GetOptBumpMaps() { return opt_bumpmaps; }
@@ -30,6 +31,7 @@ private:
 	static bool ext_bgra;
 	static bool ext_point_params;
 	static float opt_geodetail;
+	static bool opt_linear;
 	static bool opt_mipmaps;
 	static bool opt_shadows;
 	static bool opt_bumpmaps;
