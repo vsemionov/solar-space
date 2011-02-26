@@ -75,6 +75,7 @@ CGamePlay::~CGamePlay()
 
 bool CGamePlay::Init()
 {
+	bool ret=true;
 	if (!splashtext.BuildOutlineFont(	SPLASH_FONT_NAME,
 										SPLASH_FONT_SIZE,
 										SPLASH_FONT_BOLD,
@@ -90,10 +91,11 @@ bool CGamePlay::Init()
 		else
 			CError::LogError(ERROR_CODE,"Unable to load scene critical data - aborting.");
 		DestroyScene();
-		return false;
+		ret=false;
 	}
+	FreeSplash();
 	splashtext.Free();
-	return true;
+	return ret;
 }
 
 
@@ -275,7 +277,6 @@ void CGamePlay::DestroyScene()
 	if (CSettings::ClockOn)
 		clock.Free();
 	mainbody.Destroy();
-	FreeSplash();
 	info.Free();
 	planetinfo=false;
 }

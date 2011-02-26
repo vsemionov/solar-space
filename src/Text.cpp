@@ -89,13 +89,11 @@ bool CText::Init(bool FreeType)
 
 void CText::Free()
 {
-	if (loaded)
-	{
+	if (glIsList(listbase))
 		glDeleteLists(listbase,NUM_CHARS);
-		if (UseFT)
-		{
-			glDeleteTextures(NUM_CHARS,(GLuint*)FT_tex);
-		}
+	if (UseFT)
+	{
+		glDeleteTextures(NUM_CHARS,(GLuint*)FT_tex);
 	}
 	Construct();
 }
@@ -110,6 +108,9 @@ bool CText::BuildOutlineFont(const char *name, int size, bool bold, bool italic,
 	{
 		Free();
 	}
+
+	UseFT=false;
+
 	GLYPHMETRICSFLOAT gmf[NUM_CHARS];
 	HFONT font;
 	listbase=glGenLists(NUM_CHARS);
@@ -160,6 +161,12 @@ bool CText::BuildOutlineFont(const char *name, int size, bool bold, bool italic,
 			ReleaseDC(CSettings::hwnd,hDC);
 		}
 	}
+
+	if (!loaded)
+	{
+		Free();
+	}
+
 	return loaded;
 }
 
@@ -173,6 +180,8 @@ bool CText::BuildFTFont(const char *name, int size)
 	{
 		Free();
 	}
+
+	UseFT=true;
 
 	bool smallfont=(size<FT_FONT_SIZE_THRESHOLD && ALLOW_FONT_SCALING==true);
 	if (smallfont)
@@ -194,7 +203,7 @@ bool CText::BuildFTFont(const char *name, int size)
 	FT_Face face;
 	if (FT_New_Face(library,fontpath,0,&face)) 
 	{
-		FT_Done_Face(face);
+		FT_Done_FreeType(library);
 		return false;
 	}
 	FT_Set_Char_Size(face,size<<6,size<<6,96,96);
@@ -212,13 +221,17 @@ bool CText::BuildFTFont(const char *name, int size)
 		}
 	}
 
+	FT_Done_Face(face);
+	FT_Done_FreeType(library);
+
 	if (loaded)
 	{
 		charheight=(float)size;
 	}
-
-	FT_Done_Face(face);
-	FT_Done_FreeType(library);
+	else
+	{
+		Free();
+	}
 
 	return loaded;
 }
@@ -229,7 +242,7 @@ bool CText::BuildFTFont(const char *name, int size)
 
 int CText::next_p2 (int a)
 {
-	int rval=1;
+	int rval=2;
 	while(rval<a) rval<<=1;
 	return rval;
 }
@@ -256,13 +269,15 @@ bool CText::MakeFTChar(FT_Face face, char ch, int list_base, int textures[NUM_CH
 	int width=1, height=1;
 	if (!empty)
 	{
-
 		width=next_p2(bitmap.width);
 		height=next_p2(bitmap.rows);
 
 		unsigned char *expanded_data=(unsigned char *)malloc(2*width*height);
 		if (!expanded_data)
+		{
+			FT_Done_Glyph(glyph);
 			return false;
+		}
 
 		for(int j=0; j<height; j++)
 		{
@@ -283,6 +298,7 @@ bool CText::MakeFTChar(FT_Face face, char ch, int list_base, int textures[NUM_CH
 			if (gluBuild2DMipmaps(GL_TEXTURE_2D,2,width,height,GL_LUMINANCE_ALPHA,GL_UNSIGNED_BYTE,expanded_data)!=0)
 			{
 				free(expanded_data);
+				FT_Done_Glyph(glyph);
 				return false;
 			}
 		}
@@ -334,6 +350,8 @@ bool CText::MakeFTChar(FT_Face face, char ch, int list_base, int textures[NUM_CH
 
 	charsizes[ich][0]=((float)face->glyph->advance.x/64.0f);
 	charsizes[ich][1]=((float)face->size->metrics.height/64.0f);
+
+	FT_Done_Glyph(glyph);
 
 	return true;
 }

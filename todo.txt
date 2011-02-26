@@ -1,7 +1,5 @@
 TECH:
 non-visual:
-- CText::UseFT is never set to true (high)
-- CText cleanup on errors (high)
 - check chase cam behavior when target is located at camera location (division by zero?) (med)
 - window not positioned properly in debug mode (non-client area is outside the viewport) (low)
 - full code review (note: watch behavior dependence on time between frames) - only camera code is left (med)
