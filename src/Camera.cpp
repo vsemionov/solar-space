@@ -13,6 +13,7 @@
 #include "Info.h"
 #include "Camera.h"
 #include "VideoBase.h"
+#include "Window.h"
 
 
 
@@ -172,7 +173,7 @@ void CCamera::SetFOV(double fov_y)
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(fov_y,((GLdouble)4.0/(GLdouble)3.0),DIST_CLIP_NEAR,DIST_CLIP_FAR);
+	gluPerspective(fov_y,((GLdouble)CWindow::GetWidth()/(GLdouble)CWindow::GetHeight()),DIST_CLIP_NEAR,DIST_CLIP_FAR);
 	glMatrixMode(GL_MODELVIEW);
 }
 
