@@ -20,6 +20,8 @@ using std::endl;
 #endif
 
 
+#define min(a, b) ((a) >= (b)? (a) : (b))
+
 #define HEADER_LEN 8
 #define NUM_ENTRIES 512
 #define ENTRY_SIZE (12 + 4 + 4)
@@ -116,11 +118,11 @@ int make_d2(string dir, string file)
 		}
 
 		char buff[32768];
-		int nleft = it->size;
+		size_t nleft = it->size;
 		while (nleft > 0)
 		{
-			int req = min(nleft, sizeof(buff));
-			int nread = fread(buff, 1, req, fin);
+			size_t req = min(nleft, sizeof(buff));
+			size_t nread = fread(buff, 1, req, fin);
 			if (nread != req)
 			{
 				if (feof(fin))
@@ -133,7 +135,7 @@ int make_d2(string dir, string file)
 				fclose(fout);
 				return 2;
 			}
-			int nwritten = fwrite(buff, 1, nread, fout);
+			size_t nwritten = fwrite(buff, 1, nread, fout);
 			if (nwritten != nread)
 			{
 				cerr << "error writing file: " << file << endl;
