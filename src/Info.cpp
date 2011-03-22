@@ -327,12 +327,9 @@ void CInfo::Draw()
 	if (!alpha || !loaded)
 		return;
 
-	glPushAttrib(GL_ENABLE_BIT);
-
 	glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
-	glDisable(GL_NORMALIZE);
 	glEnable(GL_BLEND);
 
 	glColor4f(WINDOW_COLOR_R,WINDOW_COLOR_G,WINDOW_COLOR_B,WINDOW_COLOR_A*alpha);
@@ -343,6 +340,4 @@ void CInfo::Draw()
 
 	glColor4f(INFO_TEXT_COLOR_R,INFO_TEXT_COLOR_G,INFO_TEXT_COLOR_B,INFO_TEXT_COLOR_A*alpha);
 	glCallList(infolist);
-
-	glPopAttrib();
 }
