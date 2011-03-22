@@ -402,5 +402,5 @@ bool CText::GetTextSize(const char *text, float *width, float *height)
 	if (width) *width=w*sizescale;
 	if (height) *height=h*sizescale;
 
-	return false;
+	return true;
 }
