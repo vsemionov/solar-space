@@ -105,10 +105,20 @@ void CGamePlay::CalcSplashRect()
 {
 	int w=CWindow::GetWidth();
 	int h=CWindow::GetHeight();
-	splash_pos.x1=(w*3<=h*4?0:(w-h*4/3)/2);
-	splash_pos.x2=(w*3<=h*4?w:(w+h*4/3)/2);
-	splash_pos.y1=(w*3>=h*4?0:(h-w*3/4)/2);
-	splash_pos.y2=(w*3>=h*4?h:(h+w*3/4)/2);
+	if (w*3>=h*4)
+	{
+		splash_pos.x1=(w-h*4/3)/2;
+		splash_pos.x2=(w+h*4/3)/2;
+		splash_pos.y1=0;
+		splash_pos.y2=h;
+	}
+	else
+	{
+		splash_pos.x1=0;
+		splash_pos.x2=w;
+		splash_pos.y1=(h-w*3/4)/2;
+		splash_pos.y2=(h+w*3/4)/2;
+	}
 }
 
 
