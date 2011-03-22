@@ -33,7 +33,7 @@
 #define INFO_TEXT_COLOR_A 0.50f
 
 #define SPACING_COEF 1.75f
-#define LINES_AFTER_NAME 1.00f
+#define LINES_AFTER_NAME 0.0f
 
 
 #define WINDOW_COLOR_R 0.50f
@@ -197,7 +197,7 @@ void CInfo::GetInfoCoords(int linenum, float *x, float *y)
 	GetNameCoords("",NULL,&namey);
 	float nameadd;
 	nametext.GetTextSize("",NULL,&nameadd);
-	nameadd*=(SPACING_COEF*LINES_AFTER_NAME);
+	nameadd*=(SPACING_COEF*(LINES_AFTER_NAME+1.0f));
 
 	float th;
 	infotext.GetTextSize("",NULL,&th);
