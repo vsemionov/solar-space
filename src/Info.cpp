@@ -14,7 +14,6 @@
 
 
 
-
 #define NAME_FONT_NAME "Arial"
 #define NAME_FONT_SIZE_AT_H600 24
 #define NAME_FONT_SIZE (NAME_FONT_SIZE_AT_H600*scrheight/600)
@@ -37,32 +36,32 @@
 #define LINES_AFTER_NAME 1.00f
 
 
-
 #define WINDOW_COLOR_R 0.50f
 #define WINDOW_COLOR_G 0.50f
 #define WINDOW_COLOR_B 0.50f
 #define WINDOW_COLOR_A 0.25f
 
-#define WINDOW_RECT_LEFT 0.0125f
-#define WINDOW_RECT_RIGHT 0.32f
-#define WINDOW_RECT_BOTTOM 0.0125f
-#define WINDOW_RECT_TOP 0.27f
-
-#define WINDOW_MARGIN_TOP 0.100f
-#define WINDOW_MARGIN_LEFT 0.075f
-
-
 #define MAX_FADE_TIME 3.0f
 #define FADE_TIME_RATIO 0.10f
 #define FADE_TIME(totaltime) min(MAX_FADE_TIME, (totaltime)*FADE_TIME_RATIO)
 
-#define WINDOW_POS_X (WINDOW_RECT_LEFT*scrwidth)
-#define WINDOW_POS_Y (WINDOW_RECT_TOP*scrheight)
-#define WINDOW_WIDTH ((WINDOW_RECT_RIGHT-WINDOW_RECT_LEFT)*scrwidth)
-#define WINDOW_HEIGHT ((WINDOW_RECT_TOP-WINDOW_RECT_BOTTOM)*scrheight)
-#define MARGIN_WIDTH (WINDOW_WIDTH*WINDOW_MARGIN_LEFT)
-#define MARGIN_HEIGHT (WINDOW_HEIGHT*WINDOW_MARGIN_TOP)
 
+#define WINDOW_BORDER_REL 0.0125f
+#define WINDOW_BORDER (WINDOW_BORDER_REL*scrheight)
+#define WINDOW_WIDTH_REL_Y (0.3075f*4.0f/3.0f)
+#define WINDOW_WIDTH (WINDOW_WIDTH_REL_Y*scrheight)
+#define WINDOW_HEIGHT_REL 0.2575f
+#define WINDOW_HEIGHT (WINDOW_HEIGHT_REL*scrheight)
+
+#define WINDOW_POS_X1 (WINDOW_BORDER)
+#define WINDOW_POS_Y1 (WINDOW_BORDER)
+#define WINDOW_POS_X2 (WINDOW_POS_X1+WINDOW_WIDTH)
+#define WINDOW_POS_Y2 (WINDOW_POS_Y1+WINDOW_HEIGHT)
+
+#define MARGIN_TOP_REL 0.100f
+#define MARGIN_LEFT_REL 0.075f
+#define MARGIN_WIDTH (WINDOW_WIDTH*MARGIN_LEFT_REL)
+#define MARGIN_HEIGHT (WINDOW_HEIGHT*MARGIN_TOP_REL)
 
 
 
@@ -158,10 +157,10 @@ void CInfo::MakeWindow(int list)
 {
 	glNewList(list,GL_COMPILE);
 	{
-		float l=scrwidth*WINDOW_RECT_LEFT;
-		float r=scrwidth*WINDOW_RECT_RIGHT;
-		float b=scrheight*WINDOW_RECT_BOTTOM;
-		float t=scrheight*WINDOW_RECT_TOP;
+		float l=WINDOW_POS_X1;
+		float r=WINDOW_POS_X2;
+		float b=WINDOW_POS_Y1;
+		float t=WINDOW_POS_Y2;
 		glDisable(GL_TEXTURE_2D);
 		glLoadIdentity();
 		glBegin(GL_QUADS);
@@ -184,8 +183,8 @@ void CInfo::GetNameCoords(const char *text, float *x, float *y)
 {
 	float tw,th;
 	nametext.GetTextSize(text,&tw,&th);
-	if (x) *x=WINDOW_POS_X+(WINDOW_WIDTH-tw)*0.5f;
-	if (y) *y=WINDOW_POS_Y-MARGIN_HEIGHT-th;
+	if (x) *x=WINDOW_POS_X1+(WINDOW_WIDTH-tw)*0.5f;
+	if (y) *y=WINDOW_POS_Y2-MARGIN_HEIGHT-th;
 }
 
 
@@ -204,7 +203,7 @@ void CInfo::GetInfoCoords(int linenum, float *x, float *y)
 	infotext.GetTextSize("",NULL,&th);
 	th*=SPACING_COEF*(float)(linenum-1);
 
-	if (x) *x=WINDOW_POS_X+MARGIN_WIDTH;
+	if (x) *x=WINDOW_POS_X1+MARGIN_WIDTH;
 	if (y) *y=namey-nameadd-th;
 }
 
