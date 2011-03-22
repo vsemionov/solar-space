@@ -205,7 +205,7 @@ void CInfo::GetInfoCoords(int linenum, int *x, int *y)
 	th*=SPACING_COEF;
 	int thi=(int)th*(linenum-1);
 
-	if (x) *x=WINDOW_POS_X1+MARGIN_WIDTH;
+	if (x) *x=(int)(WINDOW_POS_X1+MARGIN_WIDTH);
 	if (y) *y=namey-(int)nameadd-thi;
 }
 
