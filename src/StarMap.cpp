@@ -47,7 +47,7 @@
 #define STAR_SIZE(star_mag) (0.75+(7.0-star_mag)/2.5)
 
 //point size macros
-#define POINT_SIZE_AT_800_600 1.25
+#define POINT_SIZE_AT_H600 1.25
 #define SQRT_QUAD_ATTEN_INV (STARMAP_RADIUS)
 #define QUAD_ATTEN_INV (SQRT_QUAD_ATTEN_INV*SQRT_QUAD_ATTEN_INV)
 #define QUAD_ATTEN (1.0/QUAD_ATTEN_INV)
@@ -108,7 +108,7 @@ bool CStarMap::Load()
 
 	PrepData();
 
-	point_size=(float)(POINT_SIZE_AT_800_600*((double)CWindow::GetWidth()/800.0));
+	point_size=(float)(POINT_SIZE_AT_H600*((double)CWindow::GetHeight()/600.0));
 
 //	twinkle=CVideoBase::GetOptStarTwinkle();
 	twinkle=false; //no twinkle effect yet
