@@ -22,16 +22,16 @@ public:
 private:
 	void Init();
 	void MakeWindow(int list);
-	void GetNameCoords(const char *text, float *x, float *y);
-	void GetInfoCoords(int linenum, float *x, float *y);
+	void GetNameCoords(const char *text, int *x, int *y);
+	void GetInfoCoords(int linenum, int *x, int *y);
 	void MakeInfoLine(int linenum, char *line);
 	void MakeName(int list, char *targetname);
 	void MakeInfo(int list, CBody *targetbody);
 	bool loaded;
 	CText nametext;
 	CText infotext;
-	float scrwidth;
-	float scrheight;
+	int scrwidth;
+	int scrheight;
 	int winlist;
 	int namelist;
 	int infolist;

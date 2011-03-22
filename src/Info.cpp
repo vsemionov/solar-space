@@ -50,7 +50,7 @@
 #define WINDOW_BORDER (WINDOW_BORDER_REL*scrheight)
 #define WINDOW_WIDTH_REL_Y (0.3075f*4.0f/3.0f)
 #define WINDOW_WIDTH (WINDOW_WIDTH_REL_Y*scrheight)
-#define WINDOW_HEIGHT_REL 0.2575f
+#define WINDOW_HEIGHT_REL 0.25f
 #define WINDOW_HEIGHT (WINDOW_HEIGHT_REL*scrheight)
 
 #define WINDOW_POS_X1 (WINDOW_BORDER)
@@ -122,8 +122,8 @@ bool CInfo::Load()
 {
 	Free();
 
-	scrwidth=(float)CWindow::GetWidth();
-	scrheight=(float)CWindow::GetHeight();
+	scrwidth=CWindow::GetWidth();
+	scrheight=CWindow::GetHeight();
 
 	winlist=glGenLists(3);
 	if (!winlist)
@@ -179,22 +179,22 @@ void CInfo::MakeWindow(int list)
 
 
 
-void CInfo::GetNameCoords(const char *text, float *x, float *y)
+void CInfo::GetNameCoords(const char *text, int *x, int *y)
 {
 	float tw;
 	nametext.GetTextSize(text,&tw,NULL);
 	int th=(int)NAME_FONT_SIZE;
-	if (x) *x=WINDOW_POS_X1+(WINDOW_WIDTH-tw)*0.5f;
-	if (y) *y=WINDOW_POS_Y2-MARGIN_HEIGHT-(float)th;
+	if (x) *x=(int)(WINDOW_POS_X1+(WINDOW_WIDTH-tw)*0.5f);
+	if (y) *y=(int)(WINDOW_POS_Y2-MARGIN_HEIGHT)-th;
 }
 
 
 
 
 
-void CInfo::GetInfoCoords(int linenum, float *x, float *y)
+void CInfo::GetInfoCoords(int linenum, int *x, int *y)
 {
-	float namey;
+	int namey;
 	GetNameCoords(" ",NULL,&namey);
 	float nameadd;
 	nametext.GetTextSize(" ",NULL,&nameadd);
@@ -202,10 +202,11 @@ void CInfo::GetInfoCoords(int linenum, float *x, float *y)
 
 	float th;
 	infotext.GetTextSize(" ",NULL,&th);
-	th*=SPACING_COEF*(float)(linenum-1);
+	th*=SPACING_COEF;
+	int thi=(int)th*(linenum-1);
 
 	if (x) *x=WINDOW_POS_X1+MARGIN_WIDTH;
-	if (y) *y=namey-nameadd-th;
+	if (y) *y=namey-(int)nameadd-thi;
 }
 
 
@@ -216,14 +217,13 @@ void CInfo::MakeName(int list, char *targetname)
 {
 	if (!targetname) return;
 	if (*targetname==' ') targetname++;
-	float x,y;
+	int x,y;
 	GetNameCoords(targetname,&x,&y);
-	int xi=(int)x,yi=(int)y;
 	glNewList(list,GL_COMPILE);
 	{
 		glEnable(GL_TEXTURE_2D);
 		glLoadIdentity();
-		glTranslatef((float)xi,(float)yi,0);
+		glTranslatef((float)x,(float)y,0);
 		nametext.Print(targetname);
 	}
 	glEndList();
@@ -235,11 +235,10 @@ void CInfo::MakeName(int list, char *targetname)
 
 void CInfo::MakeInfoLine(int linenum, char *line)
 {
-	float x,y;
+	int x,y;
 	GetInfoCoords(linenum,&x,&y);
-	int xi=(int)x,yi=(int)y;
 	glPushMatrix();
-	glTranslatef((float)xi,(float)yi,0);
+	glTranslatef((float)x,(float)y,0);
 	infotext.Print(line);
 	glPopMatrix();
 }
