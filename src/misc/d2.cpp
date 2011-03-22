@@ -20,7 +20,10 @@ using std::endl;
 #endif
 
 
+#ifndef min
 #define min(a, b) ((a) >= (b)? (a) : (b))
+#endif
+
 
 #define HEADER_LEN 8
 #define NUM_ENTRIES 512
