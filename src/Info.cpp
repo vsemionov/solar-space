@@ -157,10 +157,10 @@ void CInfo::MakeWindow(int list)
 {
 	glNewList(list,GL_COMPILE);
 	{
-		float l=WINDOW_POS_X1;
-		float r=WINDOW_POS_X2;
-		float b=WINDOW_POS_Y1;
-		float t=WINDOW_POS_Y2;
+		int l=(int)WINDOW_POS_X1;
+		int r=(int)WINDOW_POS_X2;
+		int b=(int)WINDOW_POS_Y1;
+		int t=(int)WINDOW_POS_Y2;
 		glDisable(GL_TEXTURE_2D);
 		glLoadIdentity();
 		glBegin(GL_QUADS);
@@ -217,11 +217,12 @@ void CInfo::MakeName(int list, char *targetname)
 	if (*targetname==' ') targetname++;
 	float x,y;
 	GetNameCoords(targetname,&x,&y);
+	int xi=(int)x,yi=(int)y;
 	glNewList(list,GL_COMPILE);
 	{
 		glEnable(GL_TEXTURE_2D);
 		glLoadIdentity();
-		glTranslatef(x,y,0);
+		glTranslatef(xi,yi,0);
 		nametext.Print(targetname);
 	}
 	glEndList();
@@ -235,8 +236,9 @@ void CInfo::MakeInfoLine(int linenum, char *line)
 {
 	float x,y;
 	GetInfoCoords(linenum,&x,&y);
+	int xi=(int)x,yi=(int)y;
 	glPushMatrix();
-	glTranslatef(x,y,0);
+	glTranslatef(xi,yi,0);
 	infotext.Print(line);
 	glPopMatrix();
 }
