@@ -18,18 +18,13 @@
 #define SPLASH_FILE "SPLASH.JPG"
 
 #define SPLASH_FONT_NAME "Arial"
-#define SPLASH_FONT_SIZE 24
-#define SPLASH_FONT_BOLD false
-#define SPLASH_FONT_ITALIC true
-#define SPLASH_FONT_UNDERLINE false
-#define SPLASH_FONT_STRIKEOUT false
-#define SPLASH_FONT_THICKNESS 0.1f
+#define SPLASH_FONT_SIZE_AT_H600 12
+#define SPLASH_FONT_SIZE (SPLASH_FONT_SIZE_AT_H600*CWindow::GetHeight()/600)
+#define SPLASH_TEXT_SPACING_COEFF 1.75f
 
-#define SPLASH_TEXT_X 16.0f
-#define SPLASH_TEXT_Y 16.0f
 #define SPLASH_TEXT_COLOR_R 0.75f
 #define SPLASH_TEXT_COLOR_G 0.75f
-#define SPLASH_TEXT_COLOR_B 1.00f
+#define SPLASH_TEXT_COLOR_B 0.75f
 
 #define RESTART_ALLOWED true
 #define RESTART_TIME 10.0f
@@ -77,13 +72,7 @@ CGamePlay::~CGamePlay()
 bool CGamePlay::Init()
 {
 	bool ret=true;
-	if (!splashtext.BuildOutlineFont(	SPLASH_FONT_NAME,
-										SPLASH_FONT_SIZE,
-										SPLASH_FONT_BOLD,
-										SPLASH_FONT_ITALIC,
-										SPLASH_FONT_UNDERLINE,
-										SPLASH_FONT_STRIKEOUT,
-										0.1f))
+	if (!splashtext.BuildFTFont(SPLASH_FONT_NAME,SPLASH_FONT_SIZE))
 		CError::LogError(WARNING_CODE,"Failed to load the splash text font - ignoring.");
 	if (!InitScene())
 	{
@@ -421,28 +410,43 @@ void CGamePlay::RenderSplashInner(const char *text)
 	glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
+	glEnable(GL_TEXTURE_2D);
 	if (splash_tex>0)
 	{
-		glEnable(GL_TEXTURE_2D);
 		glColor4f(1,1,1,1);
 		glBindTexture(GL_TEXTURE_2D,splash_tex);
 		glBegin(GL_QUADS);
 		{
 			glTexCoord2f(0,0.25f);
-			glVertex2f(splash_pos.x1,splash_pos.y1);
+			glVertex2f((float)splash_pos.x1,(float)splash_pos.y1);
 			glTexCoord2f(1,0.25f);
-			glVertex2f(splash_pos.x2,splash_pos.y1);
+			glVertex2f((float)splash_pos.x2,(float)splash_pos.y1);
 			glTexCoord2f(1,1);
-			glVertex2f(splash_pos.x2,splash_pos.y2);
+			glVertex2f((float)splash_pos.x2,(float)splash_pos.y2);
 			glTexCoord2f(0,1);
-			glVertex2f(splash_pos.x1,splash_pos.y2);
+			glVertex2f((float)splash_pos.x1,(float)splash_pos.y2);
 		}
 		glEnd();
 	}
+	int w=CWindow::GetWidth();
+	float th;
+	splashtext.GetTextSize(text,NULL,&th);
+	int text_under_height=(int)(th*(SPLASH_TEXT_SPACING_COEFF-1.0f));
+	int band_height=(int)(th*(2.0*SPLASH_TEXT_SPACING_COEFF-1.0f));
 	glDisable(GL_TEXTURE_2D);
-	glTranslatef(SPLASH_TEXT_X,SPLASH_TEXT_Y,0.0f);
-	glScalef(SPLASH_FONT_SIZE,SPLASH_FONT_SIZE,SPLASH_FONT_SIZE);
-	glColor4f(SPLASH_TEXT_COLOR_R,SPLASH_TEXT_COLOR_G,SPLASH_TEXT_COLOR_B,1);
+	glColor4f(0,0,0,1);
+	glBegin(GL_QUADS);
+	{
+		glVertex2f(0.0f,0.0f);
+		glVertex2f((float)w,0.0f);
+		glVertex2f((float)w,(float)band_height);
+		glVertex2f(0.0f,(float)band_height);
+	}
+	glEnd();
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glTranslatef(0.0f,(float)text_under_height,0.0f);
+	glColor4f(SPLASH_TEXT_COLOR_R,SPLASH_TEXT_COLOR_G,SPLASH_TEXT_COLOR_B,1.0f);
 	splashtext.Print(text);
 }
 
@@ -497,14 +501,15 @@ bool CGamePlay::FadeOutSplash()
 			RenderSplashInner(load_text);
 			glLoadIdentity();
 			glDisable(GL_DEPTH_TEST);
+			glDisable(GL_TEXTURE_2D);
 			glEnable(GL_BLEND);
 			glColor4f(0,0,0,alpha);
 			glBegin(GL_QUADS);
 			{
 				glVertex2f(0,0);
-				glVertex2f(w,0);
-				glVertex2f(w,h);
-				glVertex2f(0,h);
+				glVertex2f((float)w,0);
+				glVertex2f((float)w,(float)h);
+				glVertex2f(0,(float)h);
 			}
 			glEnd();
 			glPopAttrib();
