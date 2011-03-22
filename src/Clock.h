@@ -21,7 +21,7 @@ private:
 	bool ParseSpecsFile(CLoader *loader);
 	int textures[12];
 	int cur_tex[6];
-	float scrwidth,scrheight;
+	int scrwidth,scrheight;
 	int digit_tex_max;
 	int digit_w, digit_h;
 	float digit_s, digit_t;

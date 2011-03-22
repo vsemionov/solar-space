@@ -97,8 +97,8 @@ bool CClock::Load()
 			AbortLoad();
 		}
 	}
-	scrwidth=(float)CWindow::GetWidth();
-	scrheight=(float)CWindow::GetHeight();
+	scrwidth=CWindow::GetWidth();
+	scrheight=CWindow::GetHeight();
 	return true;
 }
 
@@ -144,16 +144,16 @@ void CClock::Draw()
 	{
 		if (cur_tex[i])
 		{
-			float x1=scrwidth-(float)(i*digit_w);
-			float x2=scrwidth-(float)((i+1)*digit_w);
-			float y2=(float)digit_h;
+			int x1=scrwidth-i*digit_w;
+			int x2=scrwidth-(i+1)*digit_w;
+			int y2=digit_h;
 			glBindTexture(GL_TEXTURE_2D,cur_tex[4-i]);
 			glBegin(GL_QUADS);
 			{
-				glTexCoord2f(digit_s,digit_t);	glVertex2f(x1,0.0f);
-				glTexCoord2f(0.0f,digit_t);		glVertex2f(x2,0.0f);
-				glTexCoord2f(0.0f,1.0f);		glVertex2f(x2,y2);
-				glTexCoord2f(digit_s,1.0f);		glVertex2f(x1,y2);
+				glTexCoord2f(digit_s,digit_t);	glVertex2f((float)x1,0.0f);
+				glTexCoord2f(0.0f,digit_t);		glVertex2f((float)x2,0.0f);
+				glTexCoord2f(0.0f,1.0f);		glVertex2f((float)x2,(float)y2);
+				glTexCoord2f(digit_s,1.0f);		glVertex2f((float)x1,(float)y2);
 			}
 			glEnd();
 		}
