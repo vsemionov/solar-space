@@ -183,8 +183,9 @@ void CInfo::GetNameCoords(const char *text, float *x, float *y)
 {
 	float tw;
 	nametext.GetTextSize(text,&tw,NULL);
+	int th=(int)NAME_FONT_SIZE;
 	if (x) *x=WINDOW_POS_X1+(WINDOW_WIDTH-tw)*0.5f;
-	if (y) *y=WINDOW_POS_Y2-MARGIN_HEIGHT-NAME_FONT_SIZE;
+	if (y) *y=WINDOW_POS_Y2-MARGIN_HEIGHT-(float)th;
 }
 
 
