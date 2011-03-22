@@ -97,8 +97,8 @@ bool CClock::Load()
 			AbortLoad();
 		}
 	}
-	scrwidth=CWindow::GetWidth();
-	scrheight=CWindow::GetHeight();
+	scrwidth=(float)CWindow::GetWidth();
+	scrheight=(float)CWindow::GetHeight();
 	return true;
 }
 

@@ -122,8 +122,8 @@ bool CInfo::Load()
 {
 	Free();
 
-	scrwidth=CWindow::GetWidth();
-	scrheight=CWindow::GetHeight();
+	scrwidth=(float)CWindow::GetWidth();
+	scrheight=(float)CWindow::GetHeight();
 
 	winlist=glGenLists(3);
 	if (!winlist)
@@ -138,8 +138,8 @@ bool CInfo::Load()
 	MakeWindow(winlist);
 
 	loaded=true;
-	loaded&=nametext.BuildFTFont(NAME_FONT_NAME,NAME_FONT_SIZE);
-	loaded&=infotext.BuildFTFont(INFO_FONT_NAME,INFO_FONT_SIZE);
+	loaded&=nametext.BuildFTFont(NAME_FONT_NAME,(int)NAME_FONT_SIZE);
+	loaded&=infotext.BuildFTFont(INFO_FONT_NAME,(int)INFO_FONT_SIZE);
 	if (!loaded)
 	{
 		CError::LogError(WARNING_CODE,"Unable to load planet info - failed to load font.");
@@ -165,10 +165,10 @@ void CInfo::MakeWindow(int list)
 		glLoadIdentity();
 		glBegin(GL_QUADS);
 		{
-			glVertex2f(l,b);
-			glVertex2f(r,b);
-			glVertex2f(r,t);
-			glVertex2f(l,t);
+			glVertex2f((float)l,(float)b);
+			glVertex2f((float)r,(float)b);
+			glVertex2f((float)r,(float)t);
+			glVertex2f((float)l,(float)t);
 		}
 		glEnd();
 	}
@@ -222,7 +222,7 @@ void CInfo::MakeName(int list, char *targetname)
 	{
 		glEnable(GL_TEXTURE_2D);
 		glLoadIdentity();
-		glTranslatef(xi,yi,0);
+		glTranslatef((float)xi,(float)yi,0);
 		nametext.Print(targetname);
 	}
 	glEndList();
@@ -238,7 +238,7 @@ void CInfo::MakeInfoLine(int linenum, char *line)
 	GetInfoCoords(linenum,&x,&y);
 	int xi=(int)x,yi=(int)y;
 	glPushMatrix();
-	glTranslatef(xi,yi,0);
+	glTranslatef((float)xi,(float)yi,0);
 	infotext.Print(line);
 	glPopMatrix();
 }
