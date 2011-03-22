@@ -153,7 +153,7 @@ bool CText::BuildOutlineFont(const char *name, int size, bool bold, bool italic,
 						charsize[i][0]=gmf[i].gmfCellIncX;
 						charsize[i][1]=gmf[i].gmfCellIncY;
 					}
-					charheight=1.0f;
+					charheight=(float)size;
 				}
 				SelectObject(hDC,OldObj);
 				DeleteObject(font);
@@ -392,13 +392,15 @@ bool CText::GetTextSize(const char *text, float *width, float *height)
 		return false;
 
 	float w=0.0f;
+	float h=charsize[' '][1];
 	for (const char *c=text; *c; c++)
 	{
 		w+=charsize[(int)*c][0];
+		h=max(h,charsize[(int)*c][1]);
 	}
 
 	if (width) *width=w*sizescale;
-	if (height) *height=charheight*sizescale;
+	if (height) *height=h*sizescale;
 
 	return false;
 }

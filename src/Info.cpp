@@ -32,7 +32,7 @@
 #define INFO_TEXT_COLOR_B 1.00f
 #define INFO_TEXT_COLOR_A 0.50f
 
-#define SPACING_COEF 1.75f
+#define SPACING_COEF 1.15f
 #define LINES_AFTER_NAME 1.00f
 
 
@@ -181,10 +181,10 @@ void CInfo::MakeWindow(int list)
 
 void CInfo::GetNameCoords(const char *text, float *x, float *y)
 {
-	float tw,th;
-	nametext.GetTextSize(text,&tw,&th);
+	float tw;
+	nametext.GetTextSize(text,&tw,NULL);
 	if (x) *x=WINDOW_POS_X1+(WINDOW_WIDTH-tw)*0.5f;
-	if (y) *y=WINDOW_POS_Y2-MARGIN_HEIGHT-th;
+	if (y) *y=WINDOW_POS_Y2-MARGIN_HEIGHT-NAME_FONT_SIZE;
 }
 
 
@@ -194,13 +194,13 @@ void CInfo::GetNameCoords(const char *text, float *x, float *y)
 void CInfo::GetInfoCoords(int linenum, float *x, float *y)
 {
 	float namey;
-	GetNameCoords("",NULL,&namey);
+	GetNameCoords(" ",NULL,&namey);
 	float nameadd;
-	nametext.GetTextSize("",NULL,&nameadd);
+	nametext.GetTextSize(" ",NULL,&nameadd);
 	nameadd*=(SPACING_COEF*LINES_AFTER_NAME);
 
 	float th;
-	infotext.GetTextSize("",NULL,&th);
+	infotext.GetTextSize(" ",NULL,&th);
 	th*=SPACING_COEF*(float)(linenum-1);
 
 	if (x) *x=WINDOW_POS_X1+MARGIN_WIDTH;
