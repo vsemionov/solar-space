@@ -32,7 +32,7 @@
 #define INFO_TEXT_COLOR_B 1.00f
 #define INFO_TEXT_COLOR_A 0.50f
 
-#define SPACING_COEF 1.15f
+#define SPACING_COEF 1.125f
 #define LINES_AFTER_NAME 1.00f
 
 
