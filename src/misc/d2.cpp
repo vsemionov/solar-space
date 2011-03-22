@@ -3,8 +3,8 @@
 #include <list>
 #include <iostream>
 #include <algorithm>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <windows.h>
 #include <stdint.h>
 
@@ -13,15 +13,11 @@ using std::list;
 using std::cout;
 using std::cerr;
 using std::endl;
+using std::min;
 
 
 #ifdef _MSC_VER
 #pragma warning(disable: 4996)
-#endif
-
-
-#ifndef min
-#define min(a, b) ((a) >= (b)? (a) : (b))
 #endif
 
 
