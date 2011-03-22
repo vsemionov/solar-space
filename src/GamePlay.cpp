@@ -447,16 +447,16 @@ void CGamePlay::RenderSplashInner(const char *text)
 	glColor4f(0,0,0,1);
 	glBegin(GL_QUADS);
 	{
-		glVertex2f(0.0f,0.0f);
-		glVertex2f((float)w,0.0f);
+		glVertex2f(0,0);
+		glVertex2f((float)w,0);
 		glVertex2f((float)w,(float)band_height);
-		glVertex2f(0.0f,(float)band_height);
+		glVertex2f(0,(float)band_height);
 	}
 	glEnd();
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-	glTranslatef(0.0f,(float)text_under_height,0.0f);
-	glColor4f(SPLASH_TEXT_COLOR_R,SPLASH_TEXT_COLOR_G,SPLASH_TEXT_COLOR_B,1.0f);
+	glTranslatef(0,(float)text_under_height,0);
+	glColor4f(SPLASH_TEXT_COLOR_R,SPLASH_TEXT_COLOR_G,SPLASH_TEXT_COLOR_B,1);
 	splashtext.Print(text);
 }
 
