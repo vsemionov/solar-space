@@ -39,6 +39,7 @@
 
 int CGamePlay::splash_tex=0;
 char CGamePlay::load_text[256];
+CGamePlay::splash_rect CGamePlay::splash_pos;
 CBody CGamePlay::mainbody;
 CCamera CGamePlay::camera;
 CStarMap CGamePlay::starmap;
@@ -111,8 +112,23 @@ void CGamePlay::ShutDown()
 
 
 
+void CGamePlay::CalcSplashRect()
+{
+	int w=CWindow::GetWidth();
+	int h=CWindow::GetHeight();
+	splash_pos.x1=(w*3<=h*4?0:(w-h*4/3)/2);
+	splash_pos.x2=(w*3<=h*4?w:(w+h*4/3)/2);
+	splash_pos.y1=(w*3>=h*4?0:(h-w*3/4)/2);
+	splash_pos.y2=(w*3>=h*4?h:(h+w*3/4)/2);
+}
+
+
+
+
+
 bool CGamePlay::LoadSplash()
 {
+	CalcSplashRect();
 	CLoader loader;
 	loader.WithResource(SPLASH_RESOURCE);
 	splash_tex=loader.LoadTexture(SPLASH_FILE,NULL,CVideoBase::GetOptMipmaps(),CVideoBase::GetOptLinear());
@@ -401,12 +417,6 @@ void CGamePlay::UpdateSplash(const char *subtext)
 
 void CGamePlay::RenderSplashInner(const char *text)
 {
-	int w=CWindow::GetWidth();
-	int h=CWindow::GetHeight();
-	int x1=(w*3<=h*4?0:(w-h*4/3)/2);
-	int x2=(w*3<=h*4?w:(w+h*4/3)/2);
-	int y1=(w*3>=h*4?0:(h-w*3/4)/2);
-	int y2=(w*3>=h*4?h:(h+w*3/4)/2);
 	glLoadIdentity();
 	glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);
@@ -419,13 +429,13 @@ void CGamePlay::RenderSplashInner(const char *text)
 		glBegin(GL_QUADS);
 		{
 			glTexCoord2f(0,0.25f);
-			glVertex2f(x1,y1);
+			glVertex2f(splash_pos.x1,splash_pos.y1);
 			glTexCoord2f(1,0.25f);
-			glVertex2f(x2,y1);
+			glVertex2f(splash_pos.x2,splash_pos.y1);
 			glTexCoord2f(1,1);
-			glVertex2f(x2,y2);
+			glVertex2f(splash_pos.x2,splash_pos.y2);
 			glTexCoord2f(0,1);
-			glVertex2f(x1,y2);
+			glVertex2f(splash_pos.x1,splash_pos.y2);
 		}
 		glEnd();
 	}

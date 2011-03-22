@@ -24,6 +24,14 @@ public:
 	static bool UserAbortedLoad();
 	static void OnUserAbortLoad();
 private:
+	struct splash_rect
+	{
+		int x1;
+		int x2;
+		int y1;
+		int y2;
+	};
+	static void CalcSplashRect();
 	static bool LoadSplash();
 	static void FreeSplash();
 	static void RenderSplashInner(const char *text);
@@ -39,6 +47,7 @@ private:
 	static void Restore3D();
 	static int splash_tex;
 	static char load_text[256];
+	static splash_rect splash_pos;
 	static CBody mainbody;
 	static CCamera camera;
 	static CStarMap starmap;
