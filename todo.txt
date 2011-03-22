@@ -5,11 +5,10 @@ non-visual:
 - full code review (note: watch behavior dependence on time between frames) - only camera code is left (med)
 
 visual:
-- calculate info window width & height from max or current text width & height (decide for max or current) (high)
+- calculate info window width & height from max or current text width & height (decide for max or current) (maybe) (high)
+- correct text height calculations (CText::GetTextSize() returns the base size for the font, does not include the additional hight under 'g' and 'y' chars; currently compensated with spacing coefficients) (maybe) (high)
 - update screen height to planet disc diameter ratio - meybe planets should be closer/zoomed in more, but only if texture detail is high enough (med)
-- small horizontal line at bottom of splash - caused by lower part of splash (med)
 - review starmap point parameters (first parameter is 0, but it's 1 by default) (med)
-- improve splash status font (non-italic, use antialiasing instead of outline) (high)
 - antialiasing (high)
 
 performance/testing:
