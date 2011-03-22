@@ -71,8 +71,8 @@ bool CLensFlare::Load(CBody *star)
 	viewport[0]=viewport[1]=0;
 	viewport[2]=CWindow::GetWidth();
 	viewport[3]=CWindow::GetHeight();
-	scrwidth=(float)CWindow::GetWidth();
-	scrheight=(float)CWindow::GetHeight();
+	scrwidth=CWindow::GetWidth();
+	scrheight=CWindow::GetHeight();
 	CLoader loader;
 	if (!loader.WithResource(FLARE_RESOURCE))
 	{

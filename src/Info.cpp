@@ -122,8 +122,8 @@ bool CInfo::Load()
 {
 	Free();
 
-	scrwidth=(float)CWindow::GetWidth();
-	scrheight=(float)CWindow::GetHeight();
+	scrwidth=CWindow::GetWidth();
+	scrheight=CWindow::GetHeight();
 
 	winlist=glGenLists(3);
 	if (!winlist)
