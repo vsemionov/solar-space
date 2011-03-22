@@ -363,12 +363,12 @@ void CGamePlay::Frame()
 
 void CGamePlay::Prepare2D(int width, int height)
 {
-	glPushAttrib(GL_ENABLE_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
 	gluOrtho2D(0,width,0,height);
 	glMatrixMode(GL_MODELVIEW);
+	glPushAttrib(GL_ENABLE_BIT);
 }
 
 
@@ -401,8 +401,12 @@ void CGamePlay::UpdateSplash(const char *subtext)
 
 void CGamePlay::RenderSplashInner(const char *text)
 {
-	float w=800.0f;
-	float h=600.0f;
+	int w=CWindow::GetWidth();
+	int h=CWindow::GetHeight();
+	int x1=(w*3<=h*4?0:(w-h*4/3)/2);
+	int x2=(w*3<=h*4?w:(w+h*4/3)/2);
+	int y1=(w*3>=h*4?0:(h-w*3/4)/2);
+	int y2=(w*3>=h*4?h:(h+w*3/4)/2);
 	glLoadIdentity();
 	glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);
@@ -415,13 +419,13 @@ void CGamePlay::RenderSplashInner(const char *text)
 		glBegin(GL_QUADS);
 		{
 			glTexCoord2f(0,0.25f);
-			glVertex2f(0,0);
+			glVertex2f(x1,y1);
 			glTexCoord2f(1,0.25f);
-			glVertex2f(w,0);
+			glVertex2f(x2,y1);
 			glTexCoord2f(1,1);
-			glVertex2f(w,h);
+			glVertex2f(x2,y2);
 			glTexCoord2f(0,1);
-			glVertex2f(0,h);
+			glVertex2f(x1,y2);
 		}
 		glEnd();
 	}
@@ -438,7 +442,7 @@ void CGamePlay::RenderSplashInner(const char *text)
 
 void CGamePlay::DrawSplash(const char *text)
 {
-	Prepare2D(800,600);
+	Prepare2D(CWindow::GetWidth(),CWindow::GetHeight());
 	glPushAttrib(GL_POLYGON_BIT);
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	RenderSplashInner(text);
@@ -464,6 +468,8 @@ void CGamePlay::SetSplashText(const char *text)
 
 bool CGamePlay::FadeOutSplash()
 {
+	int w=CWindow::GetWidth();
+	int h=CWindow::GetHeight();
 	int starttime=timeGetTime();
 	float seconds;
 	do
@@ -475,7 +481,7 @@ bool CGamePlay::FadeOutSplash()
 		seconds=(float)(timeGetTime()-starttime)*0.001f;
 		float alpha=min(seconds/CAMERA_INIT_FADE_TIME,1.0f);
 		{
-			Prepare2D(800,600);
+			Prepare2D(w,h);
 			glPushAttrib(GL_POLYGON_BIT);
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 			RenderSplashInner(load_text);
@@ -486,9 +492,9 @@ bool CGamePlay::FadeOutSplash()
 			glBegin(GL_QUADS);
 			{
 				glVertex2f(0,0);
-				glVertex2f(800,0);
-				glVertex2f(800,600);
-				glVertex2f(0,600);
+				glVertex2f(w,0);
+				glVertex2f(w,h);
+				glVertex2f(0,h);
 			}
 			glEnd();
 			glPopAttrib();
