@@ -5,8 +5,8 @@ non-visual:
 - full code review (note: watch behavior dependence on time between frames) - only camera code is left (med)
 
 visual:
+- adjust info fonts so that the window fits between the corner and a planet; also the fonts should be readable at low resolutions (high)
 - calculate info window width & height from max or current text width & height (decide for max or current) (maybe) (high)
-- correct text height calculations (CText::GetTextSize() returns the base size for the font, does not include the additional hight under 'g' and 'y' chars; currently compensated with spacing coefficients; print() places the text base (not the bottom) at the current modelview; info line coordinates are not offset by  exact integers) (maybe) (high)
 - update screen height to planet disc diameter ratio - maybe planets should be closer/zoomed in more, but only if texture detail is high enough (med)
 - review starmap point parameters (first parameter is 0, but it's 1 by default) (med)
 - antialiasing (high)
