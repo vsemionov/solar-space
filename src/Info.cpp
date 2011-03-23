@@ -16,7 +16,7 @@
 
 #define NAME_FONT_NAME "Arial"
 #define NAME_FONT_SIZE_AT_H600 24
-#define NAME_FONT_SIZE (NAME_FONT_SIZE_AT_H600*scrheight/600)
+#define NAME_FONT_SIZE (int)(NAME_FONT_SIZE_AT_H600*scrheight/600)
 
 #define NAME_TEXT_COLOR_R 1.00f
 #define NAME_TEXT_COLOR_G 1.00f
@@ -25,13 +25,15 @@
 
 #define INFO_FONT_NAME "Arial"
 #define INFO_FONT_SIZE_AT_H600 16
-#define INFO_FONT_SIZE (INFO_FONT_SIZE_AT_H600*scrheight/600)
+#define INFO_FONT_SIZE (int)(INFO_FONT_SIZE_AT_H600*scrheight/600)
 
 #define INFO_TEXT_COLOR_R 1.00f
 #define INFO_TEXT_COLOR_G 1.00f
 #define INFO_TEXT_COLOR_B 1.00f
 #define INFO_TEXT_COLOR_A 0.50f
 
+#define SCREEN_SIZE_RATIO_STD (4.0f/3.0f)
+#define FONT_SIZE_COEFF (4.6f/3.0f) // do not change!
 #define SPACING_COEF 1.15f
 #define LINES_AFTER_NAME 1.00f
 
@@ -47,21 +49,23 @@
 
 
 #define WINDOW_BORDER_REL 0.0125f
-#define WINDOW_BORDER (WINDOW_BORDER_REL*scrheight)
-#define WINDOW_WIDTH_REL_Y (0.3075f*4.0f/3.0f)
-#define WINDOW_WIDTH (WINDOW_WIDTH_REL_Y*scrheight)
-#define WINDOW_HEIGHT_REL 0.25f
-#define WINDOW_HEIGHT (WINDOW_HEIGHT_REL*scrheight)
+#define WINDOW_BORDER (int)(WINDOW_BORDER_REL*scrheight)
+
+#define MARGIN_TOP_REL 0.0250f
+#define MARGIN_BOTTOM_REL 0.0050f
+#define MARGIN_LEFT_REL (0.0200f*SCREEN_SIZE_RATIO_STD)
+#define MARGIN_LEFT_WIDTH (int)(MARGIN_LEFT_REL*scrheight)
+#define MARGIN_TOP_HEIGHT (int)(MARGIN_TOP_REL*scrheight)
+#define MARGIN_BOTTOM_HEIGHT (int)(MARGIN_BOTTOM_REL*scrheight)
+
+#define WINDOW_WIDTH_REL_Y (0.3050f*SCREEN_SIZE_RATIO_STD)
+#define WINDOW_WIDTH (int)(WINDOW_WIDTH_REL_Y*scrheight)
+#define WINDOW_HEIGHT (MARGIN_TOP_HEIGHT+MARGIN_BOTTOM_HEIGHT+(int)(NAME_FONT_SIZE*LINES_AFTER_NAME*SPACING_COEF*FONT_SIZE_COEFF)+3*(int)(INFO_FONT_SIZE*SPACING_COEF*FONT_SIZE_COEFF))
 
 #define WINDOW_POS_X1 (WINDOW_BORDER)
 #define WINDOW_POS_Y1 (WINDOW_BORDER)
 #define WINDOW_POS_X2 (WINDOW_POS_X1+WINDOW_WIDTH)
 #define WINDOW_POS_Y2 (WINDOW_POS_Y1+WINDOW_HEIGHT)
-
-#define MARGIN_TOP_REL 0.100f
-#define MARGIN_LEFT_REL 0.075f
-#define MARGIN_WIDTH (WINDOW_WIDTH*MARGIN_LEFT_REL)
-#define MARGIN_HEIGHT (WINDOW_HEIGHT*MARGIN_TOP_REL)
 
 
 
@@ -138,8 +142,8 @@ bool CInfo::Load()
 	MakeWindow(winlist);
 
 	loaded=true;
-	loaded&=nametext.BuildFTFont(NAME_FONT_NAME,(int)NAME_FONT_SIZE);
-	loaded&=infotext.BuildFTFont(INFO_FONT_NAME,(int)INFO_FONT_SIZE);
+	loaded&=nametext.BuildFTFont(NAME_FONT_NAME,NAME_FONT_SIZE);
+	loaded&=infotext.BuildFTFont(INFO_FONT_NAME,INFO_FONT_SIZE);
 	if (!loaded)
 	{
 		CError::LogError(WARNING_CODE,"Unable to load planet info - failed to load font.");
@@ -157,10 +161,10 @@ void CInfo::MakeWindow(int list)
 {
 	glNewList(list,GL_COMPILE);
 	{
-		int l=(int)WINDOW_POS_X1;
-		int r=(int)WINDOW_POS_X2;
-		int b=(int)WINDOW_POS_Y1;
-		int t=(int)WINDOW_POS_Y2;
+		int l=WINDOW_POS_X1;
+		int r=WINDOW_POS_X2;
+		int b=WINDOW_POS_Y1;
+		int t=WINDOW_POS_Y2;
 		glDisable(GL_TEXTURE_2D);
 		glLoadIdentity();
 		glBegin(GL_QUADS);
@@ -183,10 +187,10 @@ void CInfo::GetNameCoords(const char *text, int *x, int *y)
 {
 	float tw;
 	nametext.GetTextSize(text,&tw,NULL);
-	int th=(int)NAME_FONT_SIZE;
+	int th=NAME_FONT_SIZE;
 
-	if (x) *x=(int)(WINDOW_POS_X1+(WINDOW_WIDTH-tw)*0.5f);
-	if (y) *y=(int)(WINDOW_POS_Y2-MARGIN_HEIGHT)-th;
+	if (x) *x=WINDOW_POS_X1+(WINDOW_WIDTH-(int)tw)/2;
+	if (y) *y=WINDOW_POS_Y2-MARGIN_TOP_HEIGHT-th;
 }
 
 
@@ -195,7 +199,7 @@ void CInfo::GetNameCoords(const char *text, int *x, int *y)
 
 void CInfo::GetInfoCoords(int linenum, int *x, int *y)
 {
-	int ymargin=(int)(WINDOW_POS_Y2-MARGIN_HEIGHT);
+	int ymargin=WINDOW_POS_Y2-MARGIN_TOP_HEIGHT;
 
 	float nameheight;
 	nametext.GetTextSize("",NULL,&nameheight);
@@ -203,14 +207,14 @@ void CInfo::GetInfoCoords(int linenum, int *x, int *y)
 	float nameadd;
 	nameadd=nameheight*SPACING_COEF*LINES_AFTER_NAME;
 
-	int ioffset=(int)INFO_FONT_SIZE;
+	int ioffset=INFO_FONT_SIZE;
 
 	float th;
 	infotext.GetTextSize("",NULL,&th);
 	th*=SPACING_COEF;
 	int thi=(int)th*(linenum-1);
 
-	if (x) *x=(int)(WINDOW_POS_X1+MARGIN_WIDTH);
+	if (x) *x=WINDOW_POS_X1+MARGIN_LEFT_WIDTH;
 	if (y) *y=ymargin-(int)nameadd-ioffset-thi;
 }
 
