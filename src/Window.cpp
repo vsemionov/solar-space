@@ -249,11 +249,11 @@ bool CWindow::Create(HWND hParent)
 	DWORD dwExStyle=0;
 	int width, height;
 	int wadd, hadd;
-	RECT rect;
+	RECT parent_rect;
 	if (ScrMode==smPreview)
 	{
-		GetWindowRect(hParent,&rect);
-		width=rect.right-rect.left; height=rect.bottom-rect.top;
+		GetWindowRect(hParent,&parent_rect);
+		width=parent_rect.right-parent_rect.left; height=parent_rect.bottom-parent_rect.top;
 		dwStyle=WS_CHILD|WS_VISIBLE;
 		dwExStyle=0;
 	}
@@ -278,9 +278,9 @@ bool CWindow::Create(HWND hParent)
 		if (CSettings::DefaultRes)
 		{
 			HWND hwDesktop=GetDesktopWindow();
-			GetWindowRect(hwDesktop,&rect);
-			width=rect.right-rect.left;
-			height=rect.bottom-rect.top;
+			GetWindowRect(hwDesktop,&parent_rect);
+			width=parent_rect.right-parent_rect.left;
+			height=parent_rect.bottom-parent_rect.top;
 		}
 		if (DEBUG)
 		{
@@ -303,12 +303,12 @@ bool CWindow::Create(HWND hParent)
 		}
 	}
 	{
-		RECT rect;
-		rect.top=rect.left=0;
-		rect.right=width; rect.bottom=height;
-		AdjustWindowRectEx(&rect,dwStyle,FALSE,dwExStyle);
-		wadd= (rect.right-rect.left) - width;;
-		hadd= (rect.bottom-rect.top) - height;
+		RECT win_rect;
+		win_rect.top=win_rect.left=0;
+		win_rect.right=width; win_rect.bottom=height;
+		AdjustWindowRectEx(&win_rect,dwStyle,FALSE,dwExStyle);
+		wadd= (win_rect.right-win_rect.left) - width;
+		hadd= (win_rect.bottom-win_rect.top) - height;
 	}
 	if (!(hwnd=CreateWindowEx(	dwExStyle,			// Extended Style For The Window
 								wc.lpszClassName,	// Class Name
