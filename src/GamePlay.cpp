@@ -19,7 +19,7 @@
 
 #define SPLASH_FONT_NAME "Arial"
 #define SPLASH_FONT_SIZE_AT_H600 12
-#define SPLASH_FONT_SIZE (SPLASH_FONT_SIZE_AT_H600*CWindow::GetHeight()/600)
+#define SPLASH_FONT_SIZE (int)(SPLASH_FONT_SIZE_AT_H600*CWindow::GetHeight()/600)
 #define SPLASH_TEXT_BAND_SIZE_FACTOR 1.25f
 
 #define SPLASH_TEXT_COLOR_R 0.75f
@@ -72,7 +72,7 @@ CGamePlay::~CGamePlay()
 bool CGamePlay::Init()
 {
 	bool ret=true;
-	if (!splashtext.BuildFTFont(SPLASH_FONT_NAME,(int)SPLASH_FONT_SIZE))
+	if (!splashtext.BuildFTFont(SPLASH_FONT_NAME,SPLASH_FONT_SIZE))
 		CError::LogError(WARNING_CODE,"Failed to load the splash text font - ignoring.");
 	if (!InitScene())
 	{
@@ -441,7 +441,7 @@ void CGamePlay::RenderSplashInner(const char *text)
 	int w=CWindow::GetWidth();
 	float th;
 	splashtext.GetTextSize(text,NULL,&th);
-	int text_under_height=(int)th-(int)SPLASH_FONT_SIZE;
+	int text_under_height=(int)th-SPLASH_FONT_SIZE;
 	int band_height=(int)(th*SPLASH_TEXT_BAND_SIZE_FACTOR);
 	glDisable(GL_TEXTURE_2D);
 	glColor4f(0,0,0,1);
