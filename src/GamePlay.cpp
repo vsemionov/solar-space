@@ -274,7 +274,6 @@ bool CGamePlay::InitScene()
 	}
 	SetSplashText("Done.");
 
-	srand((unsigned int)timeGetTime());
 	InitLight();
 	camera.Init(&mainbody,(planetinfo?&info:NULL),CWindow::GetWidth(),CWindow::GetHeight());
 	return FadeOutSplash();

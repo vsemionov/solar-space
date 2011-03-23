@@ -295,7 +295,6 @@ bool CStarMap::GenStars()
 	}
 	const float mi=MIN_INTENSITY;
 	const float ri=(1.0f-MIN_INTENSITY);
-	srand((unsigned int)timeGetTime());
 	for (i=0;i<num_stars;i++)
 	{
 		double Z=((double)(rand()%(2*16384+1))/16384.0)-1.0;

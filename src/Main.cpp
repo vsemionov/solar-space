@@ -1,3 +1,7 @@
+
+#include <cstdlib>
+#include <ctime>
+
 #include <windows.h>
 #include <commctrl.h>
 
@@ -496,6 +500,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	if (DEBUG)
 		ScrMode=smSaver;
 	InitCommonControls();
+	srand((unsigned int)time(NULL));
 	CError::Init();
 	CSettings::Init();
 	if (ScrMode==smNone)
