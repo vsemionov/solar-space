@@ -32,7 +32,7 @@
 #define INFO_TEXT_COLOR_B 1.00f
 #define INFO_TEXT_COLOR_A 0.50f
 
-#define SPACING_COEF 1.13f
+#define SPACING_COEF 1.15f
 #define LINES_AFTER_NAME 1.00f
 
 
@@ -184,6 +184,7 @@ void CInfo::GetNameCoords(const char *text, int *x, int *y)
 	float tw;
 	nametext.GetTextSize(text,&tw,NULL);
 	int th=(int)NAME_FONT_SIZE;
+
 	if (x) *x=(int)(WINDOW_POS_X1+(WINDOW_WIDTH-tw)*0.5f);
 	if (y) *y=(int)(WINDOW_POS_Y2-MARGIN_HEIGHT)-th;
 }
@@ -194,19 +195,23 @@ void CInfo::GetNameCoords(const char *text, int *x, int *y)
 
 void CInfo::GetInfoCoords(int linenum, int *x, int *y)
 {
-	int namey;
-	GetNameCoords(" ",NULL,&namey);
+	int ymargin=(int)(WINDOW_POS_Y2-MARGIN_HEIGHT);
+
+	float nameheight;
+	nametext.GetTextSize("",NULL,&nameheight);
+
 	float nameadd;
-	nametext.GetTextSize(" ",NULL,&nameadd);
-	nameadd*=(SPACING_COEF*LINES_AFTER_NAME);
+	nameadd=nameheight*SPACING_COEF*LINES_AFTER_NAME;
+
+	int ioffset=(int)INFO_FONT_SIZE;
 
 	float th;
-	infotext.GetTextSize(" ",NULL,&th);
+	infotext.GetTextSize("",NULL,&th);
 	th*=SPACING_COEF;
 	int thi=(int)th*(linenum-1);
 
 	if (x) *x=(int)(WINDOW_POS_X1+MARGIN_WIDTH);
-	if (y) *y=namey-(int)nameadd-thi;
+	if (y) *y=ymargin-(int)nameadd-ioffset-thi;
 }
 
 
