@@ -35,7 +35,7 @@
 #define SCREEN_SIZE_RATIO_STD (4.0f/3.0f)
 #define FONT_SIZE_COEFF (4.6f/3.0f) // do not change!
 #define SPACING_COEF 1.15f
-#define LINES_AFTER_NAME 1.00f
+#define LINES_AFTER_NAME 1.125f
 
 
 #define WINDOW_COLOR_R 0.50f
