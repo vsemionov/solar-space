@@ -10,7 +10,7 @@
 
 
 
-#define VER(major,minor,mini) ((major<<16)+(minor<<8)+(mini))
+#define VER(major,minor,patch) ((major<<16)+(minor<<8)+(patch))
 
 
 
@@ -108,9 +108,9 @@ bool CVideoBase::IsInString(const char *string, const char *search)
 
 
 
-void CVideoBase::GetVersion(int *major, int *minor, int *mini)
+void CVideoBase::GetVersion(int *major, int *minor, int *patch)
 {
-	*major=*minor=*mini=0;
+	*major=*minor=*patch=0;
 	char *verstr=strdup((const char*)glGetString(GL_VERSION));
 	char *tok=strtok(verstr,".");
 	if (tok!=NULL)
@@ -120,7 +120,7 @@ void CVideoBase::GetVersion(int *major, int *minor, int *mini)
 		*minor=atoi(tok);
 	tok=strtok(NULL,".");
 	if (tok!=NULL)
-		*mini=atoi(tok);
+		*patch=atoi(tok);
 	free(verstr);
 	verstr=tok=NULL;
 }
@@ -131,8 +131,8 @@ void CVideoBase::GetVersion(int *major, int *minor, int *mini)
 
 void CVideoBase::GetExtensions()
 {
-	int major,minor,mini;
-	GetVersion(&major,&minor,&mini);
+	int major,minor,patch;
+	GetVersion(&major,&minor,&patch);
 	char *ext_str=strdup((const char*)glGetString(GL_EXTENSIONS));
 	if (ext_str==NULL)
 		return;
@@ -144,12 +144,12 @@ void CVideoBase::GetExtensions()
 	}
 	{
 		ext_bgra=IsInString(ext_str,"GL_EXT_bgra");
-		if (VER(major,minor,mini)>=VER(1,2,0))
+		if (VER(major,minor,patch)>=VER(1,2,0))
 			ext_bgra=true;
 	}
 	{
 		ext_point_params=IsInString(ext_str,"GL_ARB_point_parameters");
-		if (VER(major,minor,mini)>=VER(1,4,0))
+		if (VER(major,minor,patch)>=VER(1,4,0))
 			ext_point_params=true;
 	}
 	free(ext_str);
