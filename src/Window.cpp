@@ -22,7 +22,6 @@
 HWND CWindow::hwnd=NULL;
 HDC CWindow::hDC=NULL;
 HGLRC CWindow::hRC=NULL;
-DEVMODE CWindow::dmOldScreenSettings;
 int CWindow::winwidth=0;
 int CWindow::winheight=0;
 
@@ -57,8 +56,6 @@ bool CWindow::ChangeVideoMode(int width, int height)
 	dmScreenSettings.dmPelsWidth	= (DWORD)width;
 	dmScreenSettings.dmPelsHeight	= (DWORD)height;
 	dmScreenSettings.dmFields		= DM_PELSWIDTH | DM_PELSHEIGHT;
-	ZeroMemory(&dmOldScreenSettings,sizeof(dmOldScreenSettings));
-	EnumDisplaySettings(NULL,ENUM_CURRENT_SETTINGS,&dmOldScreenSettings);
 	if (ChangeDisplaySettings(&dmScreenSettings,CDS_FULLSCREEN)!=DISP_CHANGE_SUCCESSFUL)
 		return false;
 	return true;
@@ -70,15 +67,6 @@ bool CWindow::ChangeVideoMode(int width, int height)
 
 bool CWindow::RestoreVideoMode()
 {
-	if (ChangeDisplaySettings(NULL,CDS_TEST)!=DISP_CHANGE_SUCCESSFUL)
-	{
-		ChangeDisplaySettings(NULL,CDS_RESET);
-		ChangeDisplaySettings(&dmOldScreenSettings,CDS_RESET);
-	}
-	else
-	{
-		ChangeDisplaySettings(NULL,CDS_RESET);
-	}
 	if (ChangeDisplaySettings(NULL,0)!=DISP_CHANGE_SUCCESSFUL)
 		return false;
 	return true;
@@ -254,7 +242,7 @@ bool CWindow::Create(HWND hParent)
 	{
 		GetWindowRect(hParent,&parent_rect);
 		width=parent_rect.right-parent_rect.left; height=parent_rect.bottom-parent_rect.top;
-		dwStyle=WS_CHILD|WS_VISIBLE;
+		dwStyle=WS_CHILD;
 		dwExStyle=0;
 	}
 	else
@@ -285,13 +273,13 @@ bool CWindow::Create(HWND hParent)
 		if (DEBUG)
 		{
 			width/=2; height/=2;
-			dwStyle=WS_POPUPWINDOW|WS_CAPTION|WS_MINIMIZEBOX|WS_VISIBLE;
+			dwStyle=WS_POPUPWINDOW|WS_CAPTION|WS_MINIMIZEBOX;
 			dwExStyle=0;
 		}
 		else
 		{
 			dwExStyle=WS_EX_TOPMOST;
-			dwStyle=WS_POPUP|WS_VISIBLE;
+			dwStyle=WS_POPUP;
 			if (!CSettings::DefaultRes)
 			{
 				if (!ChangeVideoMode(width,height))
@@ -377,6 +365,7 @@ bool CWindow::Create(HWND hParent)
 	}
 	ReleaseDC(hwnd,hDC);
 	glViewport(0,0,width,height);
+	ShowWindow(hwnd, SW_SHOWNORMAL);
 	winwidth=width;
 	winheight=height;
 	return true;

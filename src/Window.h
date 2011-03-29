@@ -24,7 +24,6 @@ private:
 	static HWND hwnd;
 	static HDC hDC;
 	static HGLRC hRC;
-	static DEVMODE dmOldScreenSettings;
 	static int winwidth;
 	static int winheight;
 };
