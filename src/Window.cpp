@@ -363,7 +363,6 @@ bool CWindow::Create(HWND hParent)
 		CError::LogError(ERROR_CODE,"Unable to select the OpenGL rendering context into the window DC.");
 		return false;
 	}
-	ReleaseDC(hwnd,hDC);
 	glViewport(0,0,width,height);
 	ShowWindow(hwnd, SW_SHOWNORMAL);
 	winwidth=width;
@@ -377,7 +376,24 @@ bool CWindow::Create(HWND hParent)
 
 void CWindow::Destroy()
 {
-	winwidth=winheight=0;
+	if (hRC)
+	{
+		wglMakeCurrent(NULL,NULL);
+		wglDeleteContext(hRC);
+	}
+	if (hwnd)
+	{
+		if (hDC)
+		{
+			ReleaseDC(hwnd,hDC);
+		}
+		DestroyWindow(hwnd);
+		MessagePump();
+	}
+	hRC=NULL;
+	hDC=NULL;
+	hwnd=NULL;
+
 	if (ScrMode==smSaver)
 	{
 		if (!DEBUG && !CSettings::DefaultRes)
@@ -385,17 +401,5 @@ void CWindow::Destroy()
 			RestoreVideoMode();
 		}
 	}
-	if (hRC)
-	{
-		wglMakeCurrent(NULL,NULL);
-		wglDeleteContext(hRC);
-	}
-	hRC=NULL;
-	hDC=NULL;
-	if (hwnd)
-	{
-		DestroyWindow(hwnd);
-		MessagePump();
-	}
-	hwnd=NULL;
+	winwidth=winheight=0;
 }
