@@ -18,7 +18,7 @@ performance/testing:
 user:
 - rename the "Show planet info" option (to e.g. "Information window") (med)
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker) (med)
-- redesign settings dialog - add website link(?), other enhancements, registration info (med)
+- redesign settings dialog - merge desktop resolution option into the video modes group, add website link(?), other enhancements, registration info (med)
 - update the show log dialog - make it wider and possibly add an icon (med)
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
 - installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
