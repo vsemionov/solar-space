@@ -1,5 +1,6 @@
 TECH:
 non-visual:
+- automated code format (med)
 - research current timer resolution (high)
 - fix current timer overflow (high)
 - check chase cam behavior when target is located at camera location (division by zero?) (high)
