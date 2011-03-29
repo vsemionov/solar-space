@@ -213,7 +213,7 @@ bool CWindow::Create(HWND hParent)
 {
 	if (hwnd!=NULL)
 	{
-		CError::LogError(ERROR_CODE,"Window already exists, can''t create new.");
+		CError::LogError(ERROR_CODE,"Window already exists, can not create new.");
 		return false;
 	}
 	WNDCLASS wc;
