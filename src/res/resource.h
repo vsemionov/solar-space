@@ -13,13 +13,14 @@
 #define IDC_R640                        1000
 #define IDC_R800                        1001
 #define IDC_R1024                       1002
-#define IDC_RLOW                        1006
-#define IDC_RHIGH                       1007
-#define IDC_CKCLOCK                     1010
-#define IDC_BLOG                        1011
-#define IDC_CKDEFRES                    1011
-#define IDC_CMBSYSTEMS                  1015
-#define IDC_CKINFO                      1016
+#define IDC_RLOW                        1010
+#define IDC_RHIGH                       1011
+#define IDC_CKDEFRES                    1020
+#define IDC_CKANTIALIAS                 1021
+#define IDC_CKINFO                      1022
+#define IDC_CKCLOCK                     1023
+#define IDC_CMBSYSTEMS                  1030
+#define IDC_BLOG                        1040
 
 // Next default values for new objects
 // 

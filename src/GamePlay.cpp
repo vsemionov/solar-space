@@ -217,6 +217,16 @@ bool CGamePlay::InitScene()
 		}
 	}
 
+	{
+		if (UserAbortedLoad())
+		{
+			return false;
+		}
+		SetSplashText("Loading starmap... ");
+		if (!starmap.Load())
+			CError::LogError(WARNING_CODE,"Failed to load the starmap - ignoring.");
+	}
+
 	flares=CVideoBase::GetOptLensFlares();
 	if (flares)
 	{
@@ -247,16 +257,6 @@ bool CGamePlay::InitScene()
 		}
 	}
 
-	{
-		if (UserAbortedLoad())
-		{
-			return false;
-		}
-		SetSplashText("Loading starmap... ");
-		if (!starmap.Load())
-			CError::LogError(WARNING_CODE,"Failed to load the starmap - ignoring.");
-	}
-
 	if (CSettings::ClockOn)
 	{
 		if (UserAbortedLoad())
@@ -285,14 +285,14 @@ bool CGamePlay::InitScene()
 
 void CGamePlay::DestroyScene()
 {
-	starmap.Free();
-	lensflare.Free();
-	flares=false;
 	if (CSettings::ClockOn)
 		clock.Free();
-	mainbody.Destroy();
 	info.Free();
 	planetinfo=false;
+	lensflare.Free();
+	flares=false;
+	starmap.Free();
+	mainbody.Destroy();
 }
 
 
