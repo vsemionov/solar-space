@@ -130,7 +130,7 @@ void CVideoBase::GetExtensions()
 {
 	int major,minor,patch;
 	GetVersion(&major,&minor,&patch);
-	char *ext_str=(const char*)glGetString(GL_EXTENSIONS);
+	const char *ext_str=(const char*)glGetString(GL_EXTENSIONS);
 	if (ext_str==NULL)
 		return;
 	{
