@@ -24,7 +24,7 @@ public:
 	static bool GetOptLensFlares() { return opt_lensflares; }
 	static bool GetOptStarTwinkle() { return opt_startwinkle; }
 private:
-	static bool IsInString(const char *string, const char *search);
+	static bool IsExtensionSupported(const char *string, const char *search);
 	static void GetVersion(int *major, int *minor, int *patch);
 	static void GetExtensions();
 	static void GetOptions();

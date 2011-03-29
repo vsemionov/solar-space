@@ -82,26 +82,23 @@ void CVideoBase::ShutDown()
 
 
 
-bool CVideoBase::IsInString(const char *string, const char *search)
+bool CVideoBase::IsExtensionSupported(const char *supported, const char *extension)
 {
-	int i;
-	int pos=0;
-	int maxpos=strlen(search)-1;
-	int len=strlen(string);	
-	for (i=0; i<len; i++)
+	const size_t extlen = strlen(extension);
+
+	if (supported == NULL)
+		return false;
+
+	for (const char* p = supported; ; p++)
 	{
-		if ((i==0) || ((i>1) && string[i-1]=='\n'))
-		{				// New Extension Begins Here!
-			pos=0;													// Begin New Search
-			while (string[i]!='\n')
-			{								// Search Whole Extension-String
-				if (string[i]==search[pos]) pos++;					// Next Position
-				if ((pos>maxpos) && string[i+1]=='\n') return true; // We Have A Winner!
-				i++;
-			}			
-		}
-	}	
-	return false;													// Sorry, Not Found!
+		p = strstr(p, extension);
+
+		if (p == NULL)
+			return false;
+
+		if ((p==supported || p[-1]==' ') && (p[extlen]==' ' || p[extlen]==0))
+			return true;
+	}
 }
 
 
@@ -136,19 +133,13 @@ void CVideoBase::GetExtensions()
 	char *ext_str=strdup((const char*)glGetString(GL_EXTENSIONS));
 	if (ext_str==NULL)
 		return;
-	int l=strlen(ext_str);
-	for (int i=0; i<l; i++)
 	{
-		if (ext_str[i]==' ')
-			ext_str[i]='\n';
-	}
-	{
-		ext_bgra=IsInString(ext_str,"GL_EXT_bgra");
+		ext_bgra=IsExtensionSupported(ext_str,"GL_EXT_bgra");
 		if (VER(major,minor,patch)>=VER(1,2,0))
 			ext_bgra=true;
 	}
 	{
-		ext_point_params=IsInString(ext_str,"GL_ARB_point_parameters");
+		ext_point_params=IsExtensionSupported(ext_str,"GL_ARB_point_parameters");
 		if (VER(major,minor,patch)>=VER(1,4,0))
 			ext_point_params=true;
 	}
