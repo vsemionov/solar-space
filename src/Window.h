@@ -21,6 +21,8 @@ protected:
 private:
 	static bool ChangeVideoMode(int width, int height);
 	static bool RestoreVideoMode();
+	static bool CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, int width, int height);
+	static void DestroySaverWindow();
 	static HWND hwnd;
 	static HDC hDC;
 	static HGLRC hRC;

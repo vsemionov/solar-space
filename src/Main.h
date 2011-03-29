@@ -8,6 +8,8 @@ enum TScrMode {smNone,smConfig,smPassword,smPreview,smSaver};
 
 extern TScrMode ScrMode;
 
+extern HINSTANCE AppInstance;
+
 extern bool MessagePump();
 
 #endif

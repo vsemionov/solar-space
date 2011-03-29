@@ -34,6 +34,7 @@
 
 TScrMode ScrMode=smNone;
 
+HINSTANCE AppInstance;
 
 
 
@@ -481,6 +482,7 @@ static void ChangePassword(HWND hwnd)
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	int Ret=0;
+	AppInstance=hInstance;
 	LogIn();
 	char *c=GetCommandLine();
 	if (*c=='\"') {c++; while (*c!=0 && *c!='\"') c++;} else {while (*c!=0 && *c!=' ') c++;}

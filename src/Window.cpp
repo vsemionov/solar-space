@@ -14,6 +14,8 @@
 
 #define USE_PASSWORD_THREAD false
 
+#define WINDOW_CLASS_NAME APPNAME " window class"
+
 
 
 
@@ -209,30 +211,136 @@ LRESULT CALLBACK CWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 
 
 
-bool CWindow::Create(HWND hParent)
+bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, int width, int height)
 {
 	if (hwnd!=NULL)
 	{
 		CError::LogError(ERROR_CODE,"Window already exists, can not create new.");
 		return false;
 	}
+
+	if (!(hwnd=CreateWindowEx(	dwExStyle,			// Extended Style For The Window
+								WINDOW_CLASS_NAME,	// Class Name
+								APPNAME,			// Window Title
+								dwStyle,			// Defined Window Style
+								0, 0,				// Window Position
+								width,				// Selected Width
+								height,				// Selected Height
+								hParent,			// Parent Window
+								NULL,				// No Menu
+								AppInstance,		// Instance
+								NULL )))			// Dont Pass Anything To WM_CREATE
+	{
+		CError::LogError(ERROR_CODE,"Window creation error.");
+		return false;
+	}
+
+	if (!(hDC=GetDC(hwnd)))
+	{
+		CError::LogError(ERROR_CODE,"Unable to retrieve window device context.");
+		return false;
+	}
+
+	GLuint PixelFormat;
+	PIXELFORMATDESCRIPTOR pfd=						// pfd Tells Windows How We Want Things To Be
+	{
+		sizeof(PIXELFORMATDESCRIPTOR),				// Size Of This Pixel Format Descriptor
+		1,											// Version Number
+		PFD_DRAW_TO_WINDOW |						// Format Must Support Window
+		PFD_SUPPORT_OPENGL |						// Format Must Support OpenGL
+		PFD_DOUBLEBUFFER,							// Must Support Double Buffering
+		PFD_TYPE_RGBA,								// Request An RGBA Format
+		0,			//bpp							// Select Our Color Depth
+		0, 0, 0, 0, 0, 0,							// Color Bits Ignored
+		0,											// No Alpha Buffer
+		0,											// Shift Bit Ignored
+		0,											// No Accumulation Buffer
+		0, 0, 0, 0,									// Accumulation Bits Ignored
+		Z_BUFFER_BITS,								// 16Bit Z-Buffer (Depth Buffer)  
+		0,											// No Stencil Buffer
+		0,											// No Auxiliary Buffer
+		PFD_MAIN_PLANE,								// Main Drawing Layer
+		0,											// Reserved
+		0, 0, 0										// Layer Masks Ignored
+	};
+	pfd.cColorBits=(unsigned char)0;
+
+	if (!(PixelFormat=ChoosePixelFormat(hDC,&pfd)))
+	{
+		CError::LogError(ERROR_CODE,"No suitable OpenGL pixel format found.");
+		return false;
+	}
+
+	if (!SetPixelFormat(hDC,PixelFormat,&pfd))
+	{
+		CError::LogError(ERROR_CODE,"Unable to set an OpenGL pixel format to the window DC.");
+		return false;
+	}
+
+	if (!(hRC=wglCreateContext(hDC)))
+	{
+		CError::LogError(ERROR_CODE,"Unable to create an OpenGL rendering context.");
+		return false;
+	}
+
+	if (!wglMakeCurrent(hDC,hRC))
+	{
+		CError::LogError(ERROR_CODE,"Unable to select the OpenGL rendering context into the window DC.");
+		return false;
+	}
+
+	return true;
+}
+
+
+
+
+
+void CWindow::DestroySaverWindow()
+{
+	if (hRC)
+	{
+		wglMakeCurrent(NULL,NULL);
+		wglDeleteContext(hRC);
+	}
+	if (hwnd)
+	{
+		if (hDC)
+		{
+			ReleaseDC(hwnd,hDC);
+		}
+		DestroyWindow(hwnd);
+		MessagePump();
+	}
+	hRC=NULL;
+	hDC=NULL;
+	hwnd=NULL;
+}
+
+
+
+
+
+bool CWindow::Create(HWND hParent)
+{
 	WNDCLASS wc;
 	ZeroMemory(&wc,sizeof(wc));
 	wc.style				= CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 	wc.lpfnWndProc			= WindowProc;
 	wc.cbClsExtra			= 0;
 	wc.cbWndExtra			= 0;
-	wc.hInstance			= GetModuleHandle(NULL);
+	wc.hInstance			= AppInstance;
 	wc.hIcon				= NULL;
 	wc.hCursor				= NULL;
 	wc.hbrBackground		= (HBRUSH)GetStockObject(BLACK_BRUSH);
 	wc.lpszMenuName			= NULL;
-	wc.lpszClassName		= APPNAME " window class";
+	wc.lpszClassName		= WINDOW_CLASS_NAME;
 	if (!RegisterClass(&wc))
 	{
 		CError::LogError(ERROR_CODE,"Unable to register window class.");
 		return false;
 	}
+
 	DWORD dwStyle=0;
 	DWORD dwExStyle=0;
 	int width, height;
@@ -290,83 +398,29 @@ bool CWindow::Create(HWND hParent)
 			}
 		}
 	}
+
+	dwStyle|=WS_CLIPSIBLINGS;	// Required Window Style
+	dwStyle|=WS_CLIPCHILDREN;	// Required Window Style
+
+	RECT win_rect;
+	win_rect.top=win_rect.left=0;
+	win_rect.right=width; win_rect.bottom=height;
+	AdjustWindowRectEx(&win_rect,dwStyle,FALSE,dwExStyle);
+	wadd=(win_rect.right-win_rect.left)-width;
+	hadd=(win_rect.bottom-win_rect.top)-height;
+
+	if (!CreateSaverWindow(hParent, dwStyle, dwExStyle, width+wadd, height+hadd))
 	{
-		RECT win_rect;
-		win_rect.top=win_rect.left=0;
-		win_rect.right=width; win_rect.bottom=height;
-		AdjustWindowRectEx(&win_rect,dwStyle,FALSE,dwExStyle);
-		wadd= (win_rect.right-win_rect.left) - width;
-		hadd= (win_rect.bottom-win_rect.top) - height;
-	}
-	if (!(hwnd=CreateWindowEx(	dwExStyle,			// Extended Style For The Window
-								wc.lpszClassName,	// Class Name
-								APPNAME,			// Window Title
-								dwStyle |			// Defined Window Style
-								WS_CLIPSIBLINGS |	// Required Window Style
-								WS_CLIPCHILDREN,	// Required Window Style
-								0, 0,				// Window Position
-								width+wadd,			// Selected Width
-								height+hadd,		// Selected Height
-								hParent,			// Parent Window
-								NULL,				// No Menu
-								wc.hInstance,		// Instance
-								NULL )))			// Dont Pass Anything To WM_CREATE
-	{
-		CError::LogError(ERROR_CODE,"Window creation error.");
-		return false;								// Return FALSE
-	}
-	if (!(hDC=GetDC(hwnd)))
-	{
-		CError::LogError(ERROR_CODE,"Unable to retrieve window device context.");
 		return false;
 	}
-	GLuint PixelFormat;
-	PIXELFORMATDESCRIPTOR pfd=				// pfd Tells Windows How We Want Things To Be
-	{
-		sizeof(PIXELFORMATDESCRIPTOR),				// Size Of This Pixel Format Descriptor
-		1,											// Version Number
-		PFD_DRAW_TO_WINDOW |						// Format Must Support Window
-		PFD_SUPPORT_OPENGL |						// Format Must Support OpenGL
-		PFD_DOUBLEBUFFER,							// Must Support Double Buffering
-		PFD_TYPE_RGBA,								// Request An RGBA Format
-		0,			//bpp							// Select Our Color Depth
-		0, 0, 0, 0, 0, 0,							// Color Bits Ignored
-		0,											// No Alpha Buffer
-		0,											// Shift Bit Ignored
-		0,											// No Accumulation Buffer
-		0, 0, 0, 0,									// Accumulation Bits Ignored
-		Z_BUFFER_BITS,								// 16Bit Z-Buffer (Depth Buffer)  
-		0,											// No Stencil Buffer
-		0,											// No Auxiliary Buffer
-		PFD_MAIN_PLANE,								// Main Drawing Layer
-		0,											// Reserved
-		0, 0, 0										// Layer Masks Ignored
-	};
-	pfd.cColorBits=(unsigned char)0;
-	if (!(PixelFormat=ChoosePixelFormat(hDC,&pfd)))
-	{
-		CError::LogError(ERROR_CODE,"No suitable OpenGL pixel format found.");
-		return false;
-	}
-	if (!SetPixelFormat(hDC,PixelFormat,&pfd))
-	{
-		CError::LogError(ERROR_CODE,"Unable to set an OpenGL pixel format to the window DC.");
-		return false;
-	}
-	if (!(hRC=wglCreateContext(hDC)))
-	{
-		CError::LogError(ERROR_CODE,"Unable to create an OpenGL rendering context.");
-		return false;
-	}
-	if (!wglMakeCurrent(hDC,hRC))
-	{
-		CError::LogError(ERROR_CODE,"Unable to select the OpenGL rendering context into the window DC.");
-		return false;
-	}
-	glViewport(0,0,width,height);
+
+	glViewport(0, 0, width, height);
+
 	ShowWindow(hwnd, SW_SHOWNORMAL);
+
 	winwidth=width;
 	winheight=height;
+
 	return true;
 }
 
@@ -376,23 +430,9 @@ bool CWindow::Create(HWND hParent)
 
 void CWindow::Destroy()
 {
-	if (hRC)
-	{
-		wglMakeCurrent(NULL,NULL);
-		wglDeleteContext(hRC);
-	}
-	if (hwnd)
-	{
-		if (hDC)
-		{
-			ReleaseDC(hwnd,hDC);
-		}
-		DestroyWindow(hwnd);
-		MessagePump();
-	}
-	hRC=NULL;
-	hDC=NULL;
-	hwnd=NULL;
+	DestroySaverWindow();
+
+	UnregisterClass(WINDOW_CLASS_NAME, AppInstance);
 
 	if (ScrMode==smSaver)
 	{
@@ -401,5 +441,6 @@ void CWindow::Destroy()
 			RestoreVideoMode();
 		}
 	}
+
 	winwidth=winheight=0;
 }
