@@ -1,6 +1,9 @@
 #include <windows.h>
 
-#include <gl\gl.h>
+#include <gl/gl.h>
+
+#include <gl/glext.h>
+#include <gl/wglext.h>
 
 #include "Settings.h"
 #include "Main.h"
@@ -26,6 +29,7 @@ HDC CWindow::hDC=NULL;
 HGLRC CWindow::hRC=NULL;
 int CWindow::winwidth=0;
 int CWindow::winheight=0;
+bool CWindow::multisample=false;
 
 
 
@@ -211,7 +215,106 @@ LRESULT CALLBACK CWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 
 
 
-bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, int width, int height)
+bool CWindow::isWGLExtensionSupported(const char *extension)
+{
+	const size_t extlen = strlen(extension);
+	const char *supported = NULL;
+
+	// Try To Use wglGetExtensionStringARB On Current DC, If Possible
+	PROC wglGetExtString = wglGetProcAddress("wglGetExtensionsStringARB");
+
+	if (wglGetExtString)
+		supported = ((char*(__stdcall*)(HDC))wglGetExtString)(wglGetCurrentDC());
+
+	// If That Failed, Try Standard Opengl Extensions String
+	if (supported == NULL)
+		supported = (char*)glGetString(GL_EXTENSIONS);
+
+	// If That Failed Too, Must Be No Extensions Supported
+	if (supported == NULL)
+		return false;
+
+	// Begin Examination At Start Of String, Increment By 1 On False Match
+	for (const char* p = supported; ; p++)
+	{
+		// Advance p Up To The Next Possible Match
+		p = strstr(p, extension);
+
+		if (p == NULL)
+			return false;															// No Match
+
+		// Make Sure That Match Is At The Start Of The String Or That
+		// The Previous Char Is A Space, Or Else We Could Accidentally
+		// Match "wglFunkywglExtension" With "wglExtension"
+
+		// Also, Make Sure That The Following Character Is Space Or NULL
+		// Or Else "wglExtensionTwo" Might Match "wglExtension"
+		if ((p==supported || p[-1]==' ') && (p[extlen]=='\0' || p[extlen]==' '))
+			return true;															// Match
+	}
+}
+
+
+
+
+
+bool CWindow::InitMultisample(HDC hDC, GLuint *pixel_format)
+{
+	if (!isWGLExtensionSupported("WGL_ARB_multisample"))
+	{
+		return false;
+	}
+
+	PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMATARBPROC)wglGetProcAddress("wglChoosePixelFormatARB");
+	if (!wglChoosePixelFormatARB)
+	{
+		return false;
+	}
+
+	int		pixelFormat;
+	int		valid;
+	UINT	numFormats;
+	float	fAttributes[] = {0,0};
+
+	int iAttributes[] =
+	{
+		WGL_DRAW_TO_WINDOW_ARB,		GL_TRUE,
+		WGL_ACCELERATION_ARB,		WGL_FULL_ACCELERATION_ARB,
+		WGL_SUPPORT_OPENGL_ARB,		GL_TRUE,
+		WGL_DOUBLE_BUFFER_ARB,		GL_TRUE,
+		WGL_COLOR_BITS_ARB,			0,
+		WGL_ALPHA_BITS_ARB,			0,
+		WGL_DEPTH_BITS_ARB,			16,
+		WGL_STENCIL_BITS_ARB,		0,
+		WGL_SAMPLE_BUFFERS_ARB,		GL_TRUE,
+		WGL_SAMPLES_ARB,			4,
+		0,0
+	};
+
+	valid = wglChoosePixelFormatARB(hDC,iAttributes,fAttributes,1,&pixelFormat,&numFormats);
+
+	if (valid && numFormats >= 1)
+	{
+		*pixel_format = pixelFormat;
+		return true;
+	}
+
+	iAttributes[19] = 2;
+	valid = wglChoosePixelFormatARB(hDC,iAttributes,fAttributes,1,&pixelFormat,&numFormats);
+	if (valid && numFormats >= 1)
+	{
+		*pixel_format = pixelFormat;
+		return true;
+	}
+
+	return  false;
+}
+
+
+
+
+
+bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, int width, int height, const GLuint *pformat)
 {
 	if (hwnd!=NULL)
 	{
@@ -242,6 +345,7 @@ bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, in
 	}
 
 	GLuint PixelFormat;
+
 	PIXELFORMATDESCRIPTOR pfd=						// pfd Tells Windows How We Want Things To Be
 	{
 		sizeof(PIXELFORMATDESCRIPTOR),				// Size Of This Pixel Format Descriptor
@@ -256,7 +360,7 @@ bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, in
 		0,											// Shift Bit Ignored
 		0,											// No Accumulation Buffer
 		0, 0, 0, 0,									// Accumulation Bits Ignored
-		Z_BUFFER_BITS,								// 16Bit Z-Buffer (Depth Buffer)  
+		Z_BUFFER_BITS,								// 16Bit Z-Buffer (Depth Buffer)
 		0,											// No Stencil Buffer
 		0,											// No Auxiliary Buffer
 		PFD_MAIN_PLANE,								// Main Drawing Layer
@@ -265,10 +369,17 @@ bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, in
 	};
 	pfd.cColorBits=(unsigned char)0;
 
-	if (!(PixelFormat=ChoosePixelFormat(hDC,&pfd)))
+	if (!pformat)
 	{
-		CError::LogError(ERROR_CODE,"No suitable OpenGL pixel format found.");
-		return false;
+		if (!(PixelFormat=ChoosePixelFormat(hDC,&pfd)))
+		{
+			CError::LogError(ERROR_CODE,"No suitable OpenGL pixel format found.");
+			return false;
+		}
+	}
+	else
+	{
+		PixelFormat=*pformat;
 	}
 
 	if (!SetPixelFormat(hDC,PixelFormat,&pfd))
@@ -409,9 +520,24 @@ bool CWindow::Create(HWND hParent)
 	wadd=(win_rect.right-win_rect.left)-width;
 	hadd=(win_rect.bottom-win_rect.top)-height;
 
-	if (!CreateSaverWindow(hParent, dwStyle, dwExStyle, width+wadd, height+hadd))
+	if (!CreateSaverWindow(hParent, dwStyle, dwExStyle, width+wadd, height+hadd, NULL))
 	{
 		return false;
+	}
+
+	multisample=false;
+	if (CSettings::Antialiasing)
+	{
+		GLuint pixel_format;
+		if (InitMultisample(hDC, &pixel_format))
+		{
+			DestroySaverWindow();
+			if (!CreateSaverWindow(hParent, dwStyle, dwExStyle, width+wadd, height+hadd, &pixel_format))
+			{
+				return false;
+			}
+			multisample=true;
+		}
 	}
 
 	glViewport(0, 0, width, height);
@@ -442,5 +568,6 @@ void CWindow::Destroy()
 		}
 	}
 
+	multisample=false;
 	winwidth=winheight=0;
 }

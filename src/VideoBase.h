@@ -23,6 +23,8 @@ public:
 	static bool GetOptBumpMaps() { return opt_bumpmaps; }
 	static bool GetOptLensFlares() { return opt_lensflares; }
 	static bool GetOptStarTwinkle() { return opt_startwinkle; }
+	static void EnableMultisample();
+	static void DisableMultisample();
 private:
 	static bool IsExtensionSupported(const char *string, const char *search);
 	static void GetVersion(int *major, int *minor, int *patch);

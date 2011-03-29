@@ -1,7 +1,7 @@
 #include <windows.h>
 
-#include <gl\glu.h>
-#include <gl\gl.h>
+#include <gl/glu.h>
+#include <gl/gl.h>
 
 #ifdef _MSC_VER
 #define _USE_MATH_DEFINES
@@ -927,10 +927,12 @@ bool CBody::LoadGFX()
 	glNewList(objects[0],GL_COMPILE);
 	{
 		glPushAttrib(GL_ENABLE_BIT | GL_LIGHTING_BIT);
+		CVideoBase::EnableMultisample();
 		if (type==star) MakeStar(quadric);
 		if (type==planetoid) MakePlanetoid(quadric);
 		if (type==rings) MakeRings();
 		if (type==asteroid) MakeAsteroid();
+		CVideoBase::DisableMultisample();
 		glPopAttrib();
 	}
 	glEndList();

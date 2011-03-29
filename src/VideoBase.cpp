@@ -1,11 +1,13 @@
 #include <windows.h>
 
-#include <gl\glu.h>
-#include <gl\gl.h>
+#include <gl/glu.h>
+#include <gl/gl.h>
 
-#include <gl\glext.h>
+#include <gl/glext.h>
+#include <gl/wglext.h>
 
 #include "Settings.h"
+#include "Window.h"
 #include "VideoBase.h"
 
 
@@ -67,6 +69,7 @@ bool CVideoBase::Init()
 	glDisable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 	glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL,GL_SEPARATE_SPECULAR_COLOR);
+	DisableMultisample();
 	return true;
 }
 
@@ -172,5 +175,29 @@ void CVideoBase::GetOptions()
 		opt_linear=true;
 	default:
 		break;
+	}
+}
+
+
+
+
+
+void CVideoBase::EnableMultisample()
+{
+	if (CWindow::IsMultisampleActive())
+	{
+		glEnable(GL_MULTISAMPLE_ARB);
+	}
+}
+
+
+
+
+
+void CVideoBase::DisableMultisample()
+{
+	if (CWindow::IsMultisampleActive())
+	{
+		glDisable(GL_MULTISAMPLE_ARB);
 	}
 }

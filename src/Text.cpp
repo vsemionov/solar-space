@@ -1,6 +1,6 @@
 #include <windows.h>
 
-#include <gl\gl.h>
+#include <gl/gl.h>
 
 #include <stdio.h>
 

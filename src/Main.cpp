@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#include <gl\glu.h>
+#include <gl/glu.h>
 
 #include "Settings.h"
 #include "Loader.h"
@@ -34,7 +34,7 @@
 
 TScrMode ScrMode=smNone;
 
-HINSTANCE AppInstance;
+HINSTANCE AppInstance=NULL;
 
 
 

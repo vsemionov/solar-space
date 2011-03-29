@@ -1,7 +1,7 @@
 #ifndef BODY_H
 #define BODY_H
 
-#include <gl\glu.h>
+#include <gl/glu.h>
 
 #include "defs.h"
 

@@ -1,8 +1,8 @@
 #include <windows.h>
 #include <olectl.h>
 
-#include <gl\glu.h>
-#include <gl\gl.h>
+#include <gl/glu.h>
+#include <gl/gl.h>
 
 #ifdef _MSC_VER
 #define _USE_MATH_DEFINES

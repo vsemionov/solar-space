@@ -1,7 +1,7 @@
 #include <windows.h>
 
-#include <gl\glu.h>
-#include <gl\gl.h>
+#include <gl/glu.h>
+#include <gl/gl.h>
 
 #include "Window.h"
 #include "Loader.h"
