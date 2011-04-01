@@ -26,6 +26,8 @@
 #define SPLASH_TEXT_COLOR_G 0.75f
 #define SPLASH_TEXT_COLOR_B 0.75f
 
+#define TIMER_RESOLUTION_MS 1
+
 #define RESTART_ALLOWED true
 #define RESTART_TIME 10.0f
 
@@ -72,6 +74,7 @@ CGamePlay::~CGamePlay()
 bool CGamePlay::Init()
 {
 	bool ret=true;
+	timeBeginPeriod(TIMER_RESOLUTION_MS);
 	if (!splashtext.BuildFTFont(SPLASH_FONT_NAME,SPLASH_FONT_SIZE))
 		CError::LogError(WARNING_CODE,"Failed to load the splash text font - ignoring.");
 	if (!InitScene())
@@ -95,6 +98,7 @@ bool CGamePlay::Init()
 void CGamePlay::ShutDown()
 {
 	DestroyScene();
+	timeEndPeriod(TIMER_RESOLUTION_MS);
 }
 
 
