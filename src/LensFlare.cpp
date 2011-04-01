@@ -71,8 +71,6 @@ bool CLensFlare::Load(CBody *star)
 	viewport[0]=viewport[1]=0;
 	viewport[2]=CWindow::GetWidth();
 	viewport[3]=CWindow::GetHeight();
-	scrwidth=(float)CWindow::GetWidth();
-	scrheight=(float)CWindow::GetHeight();
 	CLoader loader;
 	if (!loader.WithResource(FLARE_RESOURCE))
 	{
@@ -277,7 +275,6 @@ void CLensFlare::Init()
 	ZeroMemory(modelview,sizeof(modelview));
 	ZeroMemory(projection,sizeof(projection));
 	ZeroMemory(viewport,sizeof(viewport));
-	scrwidth=scrheight=0.0f;
 	flareX=flareY=flareZ=0.0f;
 	vispts=0;
 	time=lasttime=starttime=endtime=0.0f;

@@ -30,7 +30,6 @@ private:
 	double modelview[16];
 	double projection[16];
 	int viewport[4];
-	float scrwidth, scrheight;
 	int vispts;
 	float flareX, flareY, flareZ;
 	float time, lasttime, starttime, endtime;
