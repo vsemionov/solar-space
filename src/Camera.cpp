@@ -28,10 +28,10 @@
 #define INIT_TIME		CAMERA_INIT_TIME
 #define INIT_FADE_TIME	CAMERA_INIT_FADE_TIME
 
-#define CAM_DURATION 30.0
-#define ZOOM_SPEED 0.66
-#define MOVE_SPEED 20.0
-#define AIM_SPEED 30.0
+#define CAM_DURATION 30.0f
+#define ZOOM_SPEED 0.66f
+#define MOVE_SPEED 20.0f
+#define AIM_SPEED 30.0f
 
 #define WIDE_CAM_GEN_ALT 1 /* 1/0 */
 #define WIDE_CAM_TARGET_DIST 0.33f	/*	in halves of star system radius				*
@@ -359,7 +359,7 @@ void CCamera::Update(float seconds)
 			x=ex-cx+tx; y=ey-cy+ty; z=ez-cz+tz;
 			sx=cx; sy=cy; sz=cz;
 			starttime=seconds;
-			tau=(float)LEN(x,y,z)/(float)MOVE_SPEED;
+			tau=(float)LEN(x,y,z)/MOVE_SPEED;
 			endtime=starttime+tau;
 			Update(seconds);
 		}
@@ -376,7 +376,7 @@ void CCamera::Update(float seconds)
 			else
 			{
 				mainbody->Predict(target,0.0f,&tx,&ty,&tz);
-				f=tp*tp*(float)MOVE_SPEED/tau;
+				f=tp*tp*MOVE_SPEED/tau;
 				x=ex-cx+tx; y=ey-cy+ty; z=ez-cz+tz;
 				lr=f/(float)LEN(x,y,z);
 				x*=lr; y*=lr; z*=lr;
@@ -405,7 +405,7 @@ void CCamera::Update(float seconds)
 			yaw=eyaw-syaw;
 			pitch=epitch-spitch;
 			starttime=seconds;
-			tau=(float)LEN2(yaw,pitch)/(float)AIM_SPEED;
+			tau=(float)LEN2(yaw,pitch)/AIM_SPEED;
 			endtime=starttime+tau;
 			Update(seconds);
 		}
@@ -427,7 +427,7 @@ void CCamera::Update(float seconds)
 			}
 			else
 			{
-				f=tp*tp*(float)AIM_SPEED/tau;
+				f=tp*tp*AIM_SPEED/tau;
 				x=-cx; y=-cy; z=-cz;
 				if (type.chaseor)
 				{
@@ -475,7 +475,7 @@ void CCamera::Update(float seconds)
 										(type.chaseor?CBody::bodycache[target]->name:CBody::systemname),
 										(type.chaseor?CBody::bodycache[target]:NULL));
 				}
-				endtime=seconds+(float)CAM_DURATION;
+				endtime=seconds+CAM_DURATION;
 				Update(seconds);
 			}
 		}
@@ -497,7 +497,7 @@ void CCamera::Update(float seconds)
 									(type.chaseor?CBody::bodycache[target]->name:CBody::systemname),
 									(type.chaseor?CBody::bodycache[target]:NULL));
 			}
-			endtime=seconds+(float)CAM_DURATION;
+			endtime=seconds+CAM_DURATION;
 			Update(seconds);
 		}
 		break;
