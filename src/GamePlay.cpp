@@ -302,19 +302,19 @@ void CGamePlay::DestroyScene()
 void CGamePlay::UpdateScene()
 {
 	static DWORD starttime=timeGetTime();
-	DWORD milidelta;
+	DWORD millidelta;
 	float seconds;
 
-	milidelta=(timeGetTime()-starttime);
+	millidelta=(timeGetTime()-starttime);
 
-	seconds=(float)milidelta*0.001f;
+	seconds=(float)millidelta*0.001f;
 	mainbody.Update(seconds);
 	camera.Update(seconds);
 	if (flares)
 		lensflare.UpdateTime(seconds);
 	if (planetinfo)
 		info.Update(seconds);
-	if (CSettings::ClockOn==TRUE && milidelta>=500)
+	if (CSettings::ClockOn==TRUE && millidelta>=500)
 		clock.Update();
 	if (RESTART_ALLOWED)
 	{
@@ -326,7 +326,7 @@ void CGamePlay::UpdateScene()
 				lensflare.Restart();
 			if (planetinfo)
 				info.Restart();
-			starttime=starttime+milidelta;
+			starttime=starttime+millidelta;
 		}
 	}
 }
