@@ -118,6 +118,13 @@ bool CStarMap::Load()
 	if (!twinkle)
 	{
 		object = glGenLists(1);
+		if (object==0)
+		{
+			CError::LogError(WARNING_CODE,"Internal OpenGL error - starmap display list not recorded.");
+			Free();
+			return false;
+		}
+
 		glNewList(object,GL_COMPILE);
 		{
 			DrawStars();
@@ -125,13 +132,7 @@ bool CStarMap::Load()
 		glEndList();
 	}
 
-	if (Check())
-		return true;
-	else
-	{
-		CError::LogError(WARNING_CODE,"Internal OpenGL error - starmap display list not recorded.");
-		return false;
-	}
+	return true;
 }
 
 
@@ -140,7 +141,8 @@ bool CStarMap::Load()
 
 void CStarMap::Free()
 {
-	glDeleteLists(object,1);
+	if (glIsList(object))
+		glDeleteLists(object,1);
 	if (stars)
 	{
 		free(stars);
@@ -175,15 +177,6 @@ void CStarMap::Init()
 	stars=NULL;
 	num_stars=0;
 	point_size=1.0f;
-}
-
-
-
-
-
-bool CStarMap::Check()
-{
-	return (glIsList(object)==TRUE || twinkle==true);
 }
 
 

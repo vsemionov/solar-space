@@ -182,7 +182,7 @@ bool CGamePlay::LoadSplash()
 
 void CGamePlay::FreeSplash()
 {
-	glDeleteTextures(1,(GLuint*)&splash_tex);
+	glDeleteTextures(1,(GLuint *)&splash_tex);
 	splash_tex=0;
 }
 
@@ -328,8 +328,7 @@ bool CGamePlay::InitScene()
 
 void CGamePlay::DestroyScene()
 {
-	if (have_clock)
-		clock.Free();
+	clock.Free();
 	info.Free();
 	have_info=false;
 	lensflare.Free();

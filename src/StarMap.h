@@ -15,7 +15,6 @@ public:
 	bool Load();
 	void Free();
 	void Draw();
-	bool Check();
 private:
 	typedef struct
 	{

@@ -139,10 +139,7 @@ void CLensFlare::Free()
 	}
 	if (textures)
 	{
-		for (i=0;i<num_flares;i++)
-		{
-			glDeleteTextures(1,(const GLuint*)&textures[i]);
-		}
+		glDeleteTextures(num_flares,(GLuint *)textures);
 		free(textures);
 	}
 	Init();

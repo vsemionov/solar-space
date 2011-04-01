@@ -93,7 +93,7 @@ void CText::Free()
 		glDeleteLists(listbase,NUM_CHARS);
 	if (UseFT)
 	{
-		glDeleteTextures(NUM_CHARS,(GLuint*)FT_tex);
+		glDeleteTextures(NUM_CHARS,(GLuint *)FT_tex);
 	}
 	Construct();
 }

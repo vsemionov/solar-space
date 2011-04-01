@@ -370,7 +370,8 @@ void CBody::Destroy()
 	numbodies--;
 	if (mainbody)
 	{
-		free(bodycache);
+		if (bodycache)
+			free(bodycache);
 		bodycache=NULL;
 		numbodies=0;
 	}
@@ -967,9 +968,10 @@ bool CBody::CheckGFX()
 
 void CBody::FreeGFX()
 {
-	glDeleteTextures(4,(GLuint*)textures);
+	glDeleteTextures(4,(GLuint *)textures);
 	ZeroMemory(textures,sizeof(textures));
-	glDeleteLists(objects[0],1);
+	if (glIsList(objects[0]))
+		glDeleteLists(objects[0],1);
 	ZeroMemory(objects,sizeof(objects));
 }
 

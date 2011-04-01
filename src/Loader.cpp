@@ -335,7 +335,7 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 				}
 				if (b==false)
 				{
-					glDeleteTextures(1,(GLuint*)&texture);
+					glDeleteTextures(1,(GLuint *)&texture);
 					texture=0;
 				}
 			}

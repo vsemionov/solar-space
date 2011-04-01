@@ -108,8 +108,7 @@ bool CClock::Load()
 
 void CClock::Free()
 {
-	for (int i=0;i<12;i++)
-		glDeleteTextures(1,(const GLuint*)&textures[i]);
+	glDeleteTextures(12,(GLuint *)textures);
 	Init();
 }
 
