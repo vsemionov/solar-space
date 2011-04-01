@@ -250,9 +250,9 @@ void CCamera::ChangeCam()
 //else it is close to target, and position is relative to body
 
 	int gen=rand();
-	type.chaseor=(gen&1)==1;
-	type.chasepos=(gen&2)==2;
-	type.children=(gen&4)==4;
+	type.chaseor=((gen&1)!=0);
+	type.chasepos=((gen&2)!=0);
+	type.children=((gen&4)!=0);
 	target=(rand()%(mainbody->numbodies-1))+1; //exclude the star
 
 	if (type.chasepos) type.chaseor=true; //exclude these ugly cams
@@ -266,7 +266,7 @@ void CCamera::ChangeCam()
 	if (type.chasepos)
 		len=(float)DIST(targetsize,MAX_FOV);
 	else
-		len=(float)(rand()%(int)((MAX_DIST-MIN_DIST+1.0)*4.0))*0.25f+(float)MIN_DIST;
+		len=(float)(rand()%(int)((MAX_DIST-MIN_DIST)*4.0+1.0))*0.25f+(float)MIN_DIST;
 	len=(float)min(len,MAX_DIST);
 	nx=ny=nz=0.0f;
 	double Z=((double)(rand()%(2*4096+1))/4096.0)-1.0;
