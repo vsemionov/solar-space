@@ -173,7 +173,7 @@ void CLensFlare::UpdatePos()
 	int i;
 	for (i=0;i<n;i++)
 	{
-		vis+=(int)IsPointVisible(points[i]);
+		vis+=(int)IsPointVisible(&points[i]);
 	}
 	double wx,wy,wz;
 	gluProject(0.0,0.0,0.0,modelview,projection,viewport,&wx,&wy,&wz);
@@ -337,10 +337,10 @@ bool CLensFlare::ComputePoints(CBody *star)
 
 
 
-bool CLensFlare::IsPointVisible(Vector p)
+bool CLensFlare::IsPointVisible(const Vector *p)
 {
 	double winx,winy,winz;
-	gluProject(p[0],p[1],p[2],modelview,projection,viewport,&winx,&winy,&winz);
+	gluProject((*p)[0],(*p)[1],(*p)[2],modelview,projection,viewport,&winx,&winy,&winz);
 	float fZ=(float)winz;
 	float bufferZ=0.0f;
 	glReadPixels((int)winx,(int)winy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&bufferZ);
