@@ -160,8 +160,7 @@ void CLensFlare::UpdateTime(float seconds)
 	alpha=((time-starttime)*DaDt)+startalpha;
 	if ((endalpha<startalpha && alpha<endalpha) || (endalpha>startalpha && alpha>endalpha))
 		alpha=endalpha;
-	if (alpha>1.0f) alpha=1.0f;
-	if (alpha<0.0f) alpha=0.0f;
+	CLAMP(alpha,0.0f,1.0f);
 }
 
 
