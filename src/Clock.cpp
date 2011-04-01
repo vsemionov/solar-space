@@ -120,7 +120,9 @@ void CClock::Free()
 void CClock::Update()
 {
 	SYSTEMTIME st;
+
 	GetLocalTime(&st);
+
 	cur_tex[0]=textures[(st.wHour/10)];
 	cur_tex[1]=textures[(st.wHour%10)];
 	cur_tex[2]=textures[10]*(st.wMilliseconds/500);

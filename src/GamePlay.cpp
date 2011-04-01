@@ -44,8 +44,9 @@ CCamera CGamePlay::camera;
 CStarMap CGamePlay::starmap;
 CClock CGamePlay::clock;
 CLensFlare CGamePlay::lensflare;
-bool CGamePlay::flares=false;
-bool CGamePlay::planetinfo=false;
+bool CGamePlay::have_flares=false;
+bool CGamePlay::have_info=false;
+bool CGamePlay::have_clock=false;
 CText CGamePlay::splashtext;
 CInfo CGamePlay::info;
 UINT CGamePlay::timer_res=0;
@@ -268,8 +269,8 @@ bool CGamePlay::InitScene()
 			CError::LogError(WARNING_CODE,"Failed to load the starmap - ignoring.");
 	}
 
-	flares=CVideoBase::GetOptLensFlares();
-	if (flares)
+	have_flares=CVideoBase::GetOptLensFlares();
+	if (have_flares)
 	{
 		if (UserAbortedLoad())
 		{
@@ -279,12 +280,12 @@ bool CGamePlay::InitScene()
 		if (!lensflare.Load(&mainbody))
 		{
 			CError::LogError(WARNING_CODE,"Failed to load the lens flares - ignoring.");
-			flares=false;
+			have_flares=false;
 		}
 	}
 
-	planetinfo=(CSettings::PlanetInfo==TRUE);
-	if (planetinfo)
+	have_info=(CSettings::PlanetInfo==TRUE);
+	if (have_info)
 	{
 		if (UserAbortedLoad())
 		{
@@ -294,11 +295,12 @@ bool CGamePlay::InitScene()
 		if (!info.Load())
 		{
 			CError::LogError(WARNING_CODE,"Failed to load the planet info - ignoring.");
-			planetinfo=false;
+			have_info=false;
 		}
 	}
 
-	if (CSettings::ClockOn)
+	have_clock=(CSettings::ClockOn==TRUE);
+	if (have_clock)
 	{
 		if (UserAbortedLoad())
 		{
@@ -316,7 +318,7 @@ bool CGamePlay::InitScene()
 	SetSplashText("Done.");
 
 	InitLight();
-	camera.Init(&mainbody,(planetinfo?&info:NULL),CWindow::GetWidth(),CWindow::GetHeight());
+	camera.Init(&mainbody,(have_info?&info:NULL),CWindow::GetWidth(),CWindow::GetHeight());
 	return FadeOutSplash();
 }
 
@@ -326,12 +328,12 @@ bool CGamePlay::InitScene()
 
 void CGamePlay::DestroyScene()
 {
-	if (CSettings::ClockOn)
+	if (have_clock)
 		clock.Free();
 	info.Free();
-	planetinfo=false;
+	have_info=false;
 	lensflare.Free();
-	flares=false;
+	have_flares=false;
 	starmap.Free();
 	mainbody.Destroy();
 }
@@ -347,26 +349,28 @@ void CGamePlay::UpdateScene()
 	float seconds;
 
 	millidelta=(timeGetTime()-starttime);
-
 	seconds=(float)millidelta*0.001f;
+
 	mainbody.Update(seconds);
 	camera.Update(seconds);
-	if (flares)
+	if (have_flares)
 		lensflare.UpdateTime(seconds);
-	if (planetinfo)
+	if (have_info)
 		info.Update(seconds);
-	if (CSettings::ClockOn==TRUE && millidelta>=500)
+	if (have_clock)
 		clock.Update();
+
 	if (RESTART_ALLOWED)
 	{
 		if (seconds>=max(RESTART_TIME,CAMERA_INIT_FADE_TIME))
 		{
 			mainbody.Restart();
 			camera.Restart(seconds);
-			if (flares)
+			if (have_flares)
 				lensflare.Restart();
-			if (planetinfo)
+			if (have_info)
 				info.Restart();
+
 			starttime=starttime+millidelta;
 		}
 	}
@@ -385,17 +389,17 @@ void CGamePlay::DrawScene()
 	starmap.Draw();
 	camera.ApplyTranslation();
 	glLightfv(GL_LIGHT1,GL_POSITION,LightPosition);
-	mainbody.Draw(flares?&lensflare:NULL);
-	if (flares)
+	mainbody.Draw(have_flares?&lensflare:NULL);
+	if (have_flares)
 	{
 		lensflare.Draw();
 	}
-	if (planetinfo || CSettings::ClockOn)
+	if (have_info || have_clock)
 	{
 		Prepare2D(CWindow::GetWidth(),CWindow::GetHeight());
-		if (planetinfo)
+		if (have_info)
 			info.Draw();
-		if (CSettings::ClockOn)
+		if (have_clock)
 			clock.Draw();
 		Restore3D();
 	}

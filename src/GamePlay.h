@@ -57,8 +57,9 @@ private:
 	static CLensFlare lensflare;
 	static CText splashtext;
 	static CInfo info;
-	static bool flares;
-	static bool planetinfo;
+	static bool have_flares;
+	static bool have_info;
+	static bool have_clock;
 	static UINT timer_res;
 };
 
