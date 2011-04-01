@@ -31,6 +31,8 @@ private:
 		int y1;
 		int y2;
 	};
+	static void InitTimer();
+	static void ShutdownTimer();
 	static void CalcSplashRect();
 	static bool LoadSplash();
 	static void FreeSplash();
@@ -57,6 +59,7 @@ private:
 	static CInfo info;
 	static bool flares;
 	static bool planetinfo;
+	static UINT timer_res;
 };
 
 #endif

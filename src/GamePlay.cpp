@@ -2,6 +2,8 @@
 
 #include <gl/gl.h>
 
+#include <math.h>
+
 #include "Settings.h"
 #include "Main.h"
 #include "VideoBase.h"
@@ -46,6 +48,7 @@ bool CGamePlay::flares=false;
 bool CGamePlay::planetinfo=false;
 CText CGamePlay::splashtext;
 CInfo CGamePlay::info;
+UINT CGamePlay::timer_res=0;
 
 
 
@@ -74,7 +77,7 @@ CGamePlay::~CGamePlay()
 bool CGamePlay::Init()
 {
 	bool ret=true;
-	timeBeginPeriod(TIMER_RESOLUTION_MS);
+	InitTimer();
 	if (!splashtext.BuildFTFont(SPLASH_FONT_NAME,SPLASH_FONT_SIZE))
 		CError::LogError(WARNING_CODE,"Failed to load the splash text font - ignoring.");
 	if (!InitScene())
@@ -98,7 +101,41 @@ bool CGamePlay::Init()
 void CGamePlay::ShutDown()
 {
 	DestroyScene();
-	timeEndPeriod(TIMER_RESOLUTION_MS);
+	ShutdownTimer();
+}
+
+
+
+
+
+void CGamePlay::InitTimer()
+{
+	TIMECAPS tc;
+	UINT resolution;
+
+	timer_res=0;
+
+	if (timeGetDevCaps(&tc,sizeof(tc))==MMSYSERR_NOERROR)
+	{
+		resolution=TIMER_RESOLUTION_MS;
+		CLAMP(resolution,tc.wPeriodMin,tc.wPeriodMax);
+		if (timeBeginPeriod(resolution)==MMSYSERR_NOERROR)
+		{
+			timer_res=resolution;
+		}
+	}
+}
+
+
+
+
+
+void CGamePlay::ShutdownTimer()
+{
+	if (timer_res!=0)
+	{
+		timeEndPeriod(timer_res);
+	}
 }
 
 
