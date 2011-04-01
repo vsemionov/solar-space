@@ -301,10 +301,12 @@ void CGamePlay::DestroyScene()
 
 void CGamePlay::UpdateScene()
 {
-	float seconds;
 	static DWORD starttime=timeGetTime();
 	DWORD milidelta;
+	float seconds;
+
 	milidelta=(timeGetTime()-starttime);
+
 	seconds=(float)milidelta*0.001f;
 	mainbody.Update(seconds);
 	camera.Update(seconds);
@@ -366,9 +368,9 @@ void CGamePlay::DrawScene()
 void CGamePlay::Frame()
 {
 	UpdateScene();
-	SwapBuffers(wglGetCurrentDC());
 	DrawScene();
 	glFlush();
+	SwapBuffers(wglGetCurrentDC());
 }
 
 
