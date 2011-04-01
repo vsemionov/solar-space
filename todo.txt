@@ -2,7 +2,6 @@ TECH:
 non-visual:
 - full code review (note: watch behavior dependence on time between frames) - only camera code is left (high)
 - check chase cam behavior when target is located at camera location (division by zero?) (high)
-- check camera float precision and casts (high)
 - automated code format (med)
 - window not positioned properly in debug mode (non-client area is outside the viewport) (low)
 
@@ -11,7 +10,7 @@ visual:
 
 performance/testing:
 - test on a remote machine (remote desktop) (low)
-- longevity testing (24h) (low)
+- longevity testing (>48h) (low)
 
 user:
 - review all English messages (med)
@@ -23,7 +22,7 @@ user:
 - installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
 - update all files to match new company name and version (defs.h, , registry paths, installer script, manifest, splash, etc) (med)
 - installer asks before setting solar space as the default screen saver (med)
-- trial version (med)
+- trial version / demo (med)
 
 misc:
 - generate .scr instead of .exe at build time (low)
