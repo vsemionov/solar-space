@@ -303,9 +303,9 @@ void CGamePlay::UpdateScene()
 {
 	float seconds;
 	static DWORD starttime=timeGetTime();
-	int milidelta;
+	DWORD milidelta;
 	milidelta=(timeGetTime()-starttime);
-	seconds=milidelta*0.001f;
+	seconds=(float)milidelta*0.001f;
 	mainbody.Update(seconds);
 	camera.Update(seconds);
 	if (flares)
@@ -493,7 +493,7 @@ bool CGamePlay::FadeOutSplash()
 {
 	int w=CWindow::GetWidth();
 	int h=CWindow::GetHeight();
-	int starttime=timeGetTime();
+	DWORD starttime=timeGetTime();
 	float seconds;
 	do
 	{
