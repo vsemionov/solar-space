@@ -37,12 +37,13 @@
 #define WIDE_CAM_TARGET_DIST 0.33f	/*	in halves of star system radius				*
 									 *	affects deviation of sun from window center	*/
 
-#define ANGLE_RATIO 1.50
+#define VIEW_FACTOR_ZOOM 1.50
+#define VIEW_FACTOR_WIDE 1.64
 
 #define ANGLE(size,dist) \
-	(asin(size/dist)*(ANGLE_RATIO*2.0*180.0/M_PI))
+	(atan(size*VIEW_FACTOR_ZOOM/dist)*(2.0*180.0/M_PI))
 #define DIST(size,angle) \
-	(size/(float)sin(angle*(M_PI/(180.0*2.0*ANGLE_RATIO))))
+	(size*VIEW_FACTOR_WIDE/tan(angle*(M_PI/(180.0*2.0))))
 
 #define MIN_DIST DIST(mainbody->radius,MAX_FOV)
 
