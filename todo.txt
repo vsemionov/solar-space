@@ -1,6 +1,6 @@
 TECH:
 non-visual:
-- check if resource is valid before freeing it (OpenGL lists, textures, etc.) (high)
+- check if resource is valid before freeing it (OpenGL lists, textures, etc.); clock.Free() is conditional in CGamePlay::DestroyScene() (high)
 - automated code format (med)
 - check chase cam behavior when target is located at camera location (division by zero?) (high)
 - window not positioned properly in debug mode (non-client area is outside the viewport) (low)
