@@ -1,5 +1,6 @@
 TECH:
 non-visual:
+- state updates should be state = start + speed * time; NOT state += speed * time; (high)
 - automated code format (med)
 - research current timer resolution (high)
 - fix current timer overflow (high)
