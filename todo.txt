@@ -8,7 +8,6 @@ non-visual:
 - full code review (note: watch behavior dependence on time between frames) - only camera code is left (med)
 
 visual:
-- update screen height to planet disc diameter ratio - maybe planets should be closer/zoomed in more, but only if texture detail is high enough (high)
 - review starmap point parameters (first parameter is 0, but it's 1 by default) (high)
 
 performance/testing:
