@@ -1,6 +1,5 @@
 TECH:
 non-visual:
-- check lens flare blending function (stars are brighter near sun's flare) (high)
 - automated code format (med)
 - check chase cam behavior when target is located at camera location (division by zero?) (high)
 - window not positioned properly in debug mode (non-client area is outside the viewport) (low)
