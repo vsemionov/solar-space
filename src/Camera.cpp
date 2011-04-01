@@ -523,7 +523,7 @@ void CCamera::DrawFade()
 		return;
 	float w,h,d;
 	d=(float)(2.0*DIST_CLIP_NEAR);
-	h=2.0f*d*(float)tan(fov);
+	h=2.0f*d*(float)tan(fov*0.5);
 	w=h*(float)aspect;
 	glLoadIdentity();
 	glPushAttrib(GL_ENABLE_BIT);
