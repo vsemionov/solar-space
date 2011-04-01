@@ -1,9 +1,10 @@
 TECH:
 non-visual:
-- automated code format (med)
+- full code review (note: watch behavior dependence on time between frames) - only camera code is left (high)
 - check chase cam behavior when target is located at camera location (division by zero?) (high)
+- check camera float precision and casts (high)
+- automated code format (med)
 - window not positioned properly in debug mode (non-client area is outside the viewport) (low)
-- full code review (note: watch behavior dependence on time between frames) - only camera code is left (med)
 
 visual:
 - review starmap point parameters (first parameter is 0, but it's 1 by default) (high)
