@@ -35,7 +35,6 @@
 
 
 
-
 int CGamePlay::splash_tex=0;
 char CGamePlay::load_text[256];
 CGamePlay::splash_rect CGamePlay::splash_pos;
@@ -393,16 +392,16 @@ void CGamePlay::DrawScene()
 	{
 		lensflare.Draw();
 	}
-	if (have_info || have_clock)
+	if (have_info || have_clock || camera.fade)
 	{
 		Prepare2D(CWindow::GetWidth(),CWindow::GetHeight());
 		if (have_info)
 			info.Draw();
 		if (have_clock)
 			clock.Draw();
+		camera.DrawFade();
 		Restore3D();
 	}
-	camera.DrawFade();
 }
 
 
@@ -561,10 +560,10 @@ bool CGamePlay::FadeOutSplash()
 			glColor4f(0,0,0,alpha);
 			glBegin(GL_QUADS);
 			{
-				glVertex2f(0,0);
-				glVertex2f((float)w,0);
+				glVertex2f(0.0f,0.0f);
+				glVertex2f((float)w,0.0f);
 				glVertex2f((float)w,(float)h);
-				glVertex2f(0,(float)h);
+				glVertex2f(0.0f,(float)h);
 			}
 			glEnd();
 			glPopAttrib();

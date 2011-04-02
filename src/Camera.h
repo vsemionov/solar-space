@@ -28,6 +28,7 @@ public:
 	void ApplyFOV();
 	double GetFOV() { return fov; };
 	void Restart(float seconds);
+	bool fade;
 private:
 	void GenWideCam(float *len, float *pitch, float yaw);
 	void ChangeCam();
@@ -35,8 +36,9 @@ private:
 	CBody *mainbody;
 	CInfo *planetinfo;
 	double aspect;
+	int scrwidth,scrheight;
 	float cx,cy,cz;
-	float cyaw, cpitch;
+	float cyaw,cpitch;
 	double fov;
 	typedef enum {shooting=0, zoomingout, moving, pointing, zoomingin} action_e;
 	typedef struct {bool chaseor,chasepos; bool children;} type_s;
@@ -47,7 +49,6 @@ private:
 	int target;
 	float targetsize;
 	float starttime,endtime;
-	bool fade;
 	float fadealpha;
 };
 

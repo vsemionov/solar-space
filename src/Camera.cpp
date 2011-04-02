@@ -187,6 +187,8 @@ void CCamera::Init(CBody *refbody, CInfo *info, int scrwidth, int scrheight)
 	mainbody=refbody;
 	planetinfo=info;
 	aspect=(double)scrwidth/(double)scrheight;
+	this->scrwidth=scrwidth;
+	this->scrheight=scrheight;
 	float rc=mainbody->GetRadius(0,true)*0.5f;
 	Set(-rc,-rc,rc,45.0f,-45.0f);
 	fov=MAX_FOV;
@@ -519,12 +521,6 @@ void CCamera::Update(float seconds)
 
 void CCamera::DrawFade()
 {
-	if (!fade)
-		return;
-	float w,h,d;
-	d=(float)(2.0*DIST_CLIP_NEAR);
-	h=2.0f*d*(float)tan(fov*0.5);
-	w=h*(float)aspect;
 	glLoadIdentity();
 	glPushAttrib(GL_ENABLE_BIT);
 	{
@@ -536,10 +532,10 @@ void CCamera::DrawFade()
 		glColor4f(0.0f,0.0f,0.0f,fadealpha);
 		glBegin(GL_QUADS);
 		{
-			glVertex3f(-w,-h,-d);
-			glVertex3f(+w,-h,-d);
-			glVertex3f(+w,+h,-d);
-			glVertex3f(-w,+h,-d);
+			glVertex2f(0.0f,0.0f);
+			glVertex2f((float)scrwidth,0.0f);
+			glVertex2f((float)scrwidth,(float)scrheight);
+			glVertex2f(0.0f,(float)scrheight);
 		}
 		glEnd();
 	}
