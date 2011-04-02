@@ -44,7 +44,6 @@
 
 
 
-
 CLoader CBody::loader;
 
 int CBody::system_format_version=0;
