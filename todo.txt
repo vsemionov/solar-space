@@ -1,11 +1,13 @@
 TECH:
 non-visual:
+- update clock colon only when necessary (high)
 - full code review (note: watch behavior dependence on time between frames) - only camera code is left (high)
 - check chase cam behavior when target is located at camera location (division by zero?) (high)
 - automated code format (med)
 - window not positioned properly in debug mode (non-client area is outside the viewport) (low)
 
 visual:
+- try generated starmaps (high)
 - review starmap point parameters (first parameter is 0, but it's 1 by default) (high)
 - research specular highlights on all planets (found on Deso's laptop) (med)
 
