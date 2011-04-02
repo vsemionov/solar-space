@@ -7,6 +7,7 @@ non-visual:
 
 visual:
 - review starmap point parameters (first parameter is 0, but it's 1 by default) (high)
+- research specular highlights on all planets (found on Deso's laptop) (med)
 
 performance/testing:
 - test on a remote machine (remote desktop) (low)
@@ -32,7 +33,8 @@ misc:
 NON-TECH:
 - adjust ambient reflection (e.g. to 0.1?) (med)
 - adjust body parameters so that planets rotate slower (med)
-- better texture for charon (and for moon?) (med)
+- get high resolution Earth textures (maybe, check compatibility) (med)
+- better texture for Charon (and for Moon?) (med)
 - replace monitor and wrench icons (med)
 - new splash screen (med)
 - new preview image (could be a logo, screenshot, or other; but preferably a logo) (maybe) (med)
