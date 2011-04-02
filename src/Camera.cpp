@@ -521,6 +521,9 @@ void CCamera::Update(float seconds)
 
 void CCamera::DrawFade()
 {
+	if (!fade)
+		return;
+
 	glLoadIdentity();
 	glPushAttrib(GL_ENABLE_BIT);
 	{

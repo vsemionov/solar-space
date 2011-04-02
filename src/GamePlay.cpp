@@ -399,7 +399,8 @@ void CGamePlay::DrawScene()
 			info.Draw();
 		if (have_clock)
 			clock.Draw();
-		camera.DrawFade();
+		if (camera.fade)
+			camera.DrawFade();
 		Restore3D();
 	}
 }
