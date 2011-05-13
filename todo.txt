@@ -21,11 +21,11 @@ user:
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker) (med)
 - redesign settings dialog - merge desktop resolution option into the video modes group, add website link(?), other enhancements, registration info (med)
 - update the show log dialog - make it wider and possibly add an icon (med)
+- update button heights of all dialogs to the default (med)
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
 - installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
 - update all files to match new company name and version (defs.h, , registry paths, installer script, manifest, splash, etc) (med)
 - installer asks before setting solar space as the default screen saver (med)
-- trial version / demo (med)
 
 misc:
 - generate .scr instead of .exe at build time (low)
@@ -38,8 +38,9 @@ NON-TECH:
 - get high resolution Earth textures (maybe, check compatibility) (med)
 - better texture for Charon (and for Moon?) (med)
 - replace monitor and wrench icons (med)
+- logo (med)
 - new splash screen (med)
 - new preview image (could be a logo, screenshot, or other; but preferably a logo) (maybe) (med)
 - company (med)
 - website (med)
-- new license (commercial) (med)
+- license (BSD) (high)
