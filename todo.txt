@@ -29,10 +29,6 @@ user:
 - update all version information (to 1.2.0) (low)
 - update installer readme file (low)
 
-misc:
-- generate .scr instead of .exe at build time (low)
-- map D:\Documents\work to Z:\ and update absolute directory paths in the project (low)
-
 
 NON-TECH:
 - adjust ambient reflection (e.g. to 0.1?) (med)
