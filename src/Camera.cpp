@@ -67,7 +67,7 @@
 #define VIEW_FACTOR 1.50
 
 #define ANGLE(size,dist) \
-	(asin(size/dist)*(VIEW_FACTOR*2.0*180.0/M_PI))
+	(asin(size/max(dist, size))*(VIEW_FACTOR*2.0*180.0/M_PI))
 #define DIST(size,angle) \
 	(size/(float)sin(angle*(M_PI/(180.0*2.0*VIEW_FACTOR))))
 
@@ -315,9 +315,21 @@ void CCamera::ChangeCam()
 void CCamera::Angles(float x, float y, float z, float *yaw, float *pitch)
 {
 	float l=(float)LEN(x,y,z);
+	if (l==0.0f)
+	{
+		*yaw=cyaw;
+		*pitch=cpitch;
+		return;
+	}
 	float t=(float)asin(z/l);
 	*pitch=t*180.0f/(float)M_PI;
-	*yaw=(float)asin(y/(l*(float)cos(t)))*180.0f/(float)M_PI;
+	float c=(float)cos(t);
+	if (c==0.0f)
+	{
+		*yaw=cyaw;
+		return;
+	}
+	*yaw=(float)asin(y/(l*c))*180.0f/(float)M_PI;
 	if (x<0.0f)
 		*yaw=180.0f-*yaw;
 }
@@ -336,6 +348,7 @@ void CCamera::Update(float seconds)
 	float x,y,z;
 	float yaw,pitch;
 	float f,lr,tp;
+	float l;
 	switch (action)
 	{
 	default:
@@ -407,7 +420,14 @@ void CCamera::Update(float seconds)
 				mainbody->Predict(target,0.0f,&tx,&ty,&tz);
 				f=tp*tp*MOVE_SPEED/tau;
 				x=ex-cx+tx; y=ey-cy+ty; z=ez-cz+tz;
-				lr=f/(float)LEN(x,y,z);
+				l=(float)LEN(x,y,z);
+				if (l==0.0f)
+				{
+					endtime=seconds;
+					Update(seconds);
+					return;
+				}
+				lr=f/l;
 				x*=lr; y*=lr; z*=lr;
 				cx=ex+tx-x; cy=ey+ty-y; cz=ez+tz-z;
 			}
@@ -466,7 +486,14 @@ void CCamera::Update(float seconds)
 				CORRECT_ANGLES(cyaw,eyaw);
 				yaw=eyaw-cyaw;
 				pitch=epitch-cpitch;
-				lr=f/(float)LEN2(pitch,yaw);
+				l=(float)LEN2(pitch,yaw);
+				if (l==0.0f)
+				{
+					endtime=seconds;
+					Update(seconds);
+					return;
+				}
+				lr=f/l;
 				yaw*=lr; pitch*=lr;
 				cyaw=eyaw-yaw; cpitch=epitch-pitch;
 			}
