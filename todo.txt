@@ -28,6 +28,7 @@ user:
 - installer asks before setting solar space as the default screen saver (med)
 - update all version information (to 1.2.0) (low)
 - update installer readme file (low)
+- add a changelog (low)
 
 misc:
 - generate .scr instead of .exe at build time (low)
