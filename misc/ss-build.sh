@@ -1,1 +1,0 @@
-g++ -I /d/Documents/work/libs/freetype/include -I /d/Documents/work/libs/freetype/include/freetype2 -L /d/Documents/work/libs/freetype/lib -o ss src/*.cpp -lfreetype -lopengl32 -lglu32 -lgdi32 -lole32 -luuid -loleaut32 -lwinmm -lcomctl32

@@ -39,14 +39,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Documents\work\libs\gl\include;D:\Documents\work\libs\freetype\include;D:\Documents\work\libs\freetype\include\freetype2;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Documents\work\libs\freetype\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>Z:\libs\gl\include;Z:\libs\freetype\include;Z:\libs\freetype\include\freetype2;$(IncludePath)</IncludePath>
+    <LibraryPath>Z:\libs\freetype\lib;$(LibraryPath)</LibraryPath>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\Documents\work\libs\gl\include;D:\Documents\work\libs\freetype\include;D:\Documents\work\libs\freetype\include\freetype2;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Documents\work\libs\freetype\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>Z:\libs\gl\include;Z:\libs\freetype\include;Z:\libs\freetype\include\freetype2;$(IncludePath)</IncludePath>
+    <LibraryPath>Z:\libs\freetype\lib;$(LibraryPath)</LibraryPath>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
