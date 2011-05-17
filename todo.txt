@@ -1,6 +1,5 @@
 TECH:
 non-visual:
-- consider rewriting the camera movement algorithm (high)
 - automated code format (med)
 - window not positioned properly in debug mode (non-client area is outside the viewport) (low)
 
