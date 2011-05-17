@@ -55,7 +55,7 @@ public:
 	void Restart();
 	void Draw(CLensFlare *flare);
 	bool Reload();
-	void Predict(int bodyid, float seconds, float *x, float *y, float *z);
+	void Predict(int bodyid, bool now, float seconds, float *x, float *y, float *z);
 	float GetRadius(int bodyid, bool withchildren);
 	static bool LoadSystemData(char *resource=NULL, int *format_version=&CBody::system_format_version, char *buffer=CBody::systemname,bool quiet=false);
 private:

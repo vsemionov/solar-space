@@ -356,7 +356,7 @@ void CCamera::Update(float seconds)
 		if (seconds<endtime)
 		{
 			if (type.chaseor || type.chasepos)
-				mainbody->Predict(target,0.0f,&tx,&ty,&tz);
+				mainbody->Predict(target,true,0.0f,&tx,&ty,&tz);
 			if (type.chasepos)
 			{
 				cx=tx+ex; cy=ty+ey; cz=tz+ez;
@@ -386,21 +386,18 @@ void CCamera::Update(float seconds)
 		}
 		break;
 	case zoomingout:
-		if (fov<MAX_FOV)
-		{
-			fov=startfov*exp(ZOOM_SPEED*(seconds-starttime));
-			CLAMP(fov,MIN_FOV,MAX_FOV);
-			ApplyFOV();
-		}
-		else
+		fov=startfov*exp(ZOOM_SPEED*(seconds-starttime));
+		CLAMP(fov,MIN_FOV,MAX_FOV);
+		ApplyFOV();
+		if (fov>=MAX_FOV)
 		{
 			ChangeCam();
 			action=moving;
 			if (type.chasepos)
-				mainbody->Predict(target,0.0f,&tx,&ty,&tz);
+				mainbody->Predict(target,true,0.0f,&tx,&ty,&tz);
 			x=ex-cx+tx; y=ey-cy+ty; z=ez-cz+tz;
 			sx=cx; sy=cy; sz=cz;
-			starttime=seconds;
+			starttime=starttime+(float)log(fov/startfov)/ZOOM_SPEED;
 			tau=(float)LEN(x,y,z)/MOVE_SPEED;
 			endtime=starttime+tau;
 			Update(seconds);
@@ -417,7 +414,7 @@ void CCamera::Update(float seconds)
 			}
 			else
 			{
-				mainbody->Predict(target,0.0f,&tx,&ty,&tz);
+				mainbody->Predict(target,true,0.0f,&tx,&ty,&tz);
 				f=tp*tp*MOVE_SPEED/tau;
 				x=ex-cx+tx; y=ey-cy+ty; z=ez-cz+tz;
 				l=(float)LEN(x,y,z);
@@ -436,7 +433,7 @@ void CCamera::Update(float seconds)
 		{
 			action=pointing;
 			if (type.chasepos || type.chaseor)
-				mainbody->Predict(target,0.0f,&tx,&ty,&tz);
+				mainbody->Predict(target,true,0.0f,&tx,&ty,&tz);
 			cx=ex; cy=ey; cz=ez;
 			if (type.chasepos)
 			{
@@ -453,7 +450,7 @@ void CCamera::Update(float seconds)
 			CORRECT_ANGLES(syaw,eyaw);
 			yaw=eyaw-syaw;
 			pitch=epitch-spitch;
-			starttime=seconds;
+			starttime=endtime;
 			tau=(float)LEN2(yaw,pitch)/AIM_SPEED;
 			endtime=starttime+tau;
 			Update(seconds);
@@ -462,7 +459,7 @@ void CCamera::Update(float seconds)
 	case pointing:
 		if (seconds<endtime)
 		{
-			mainbody->Predict(target,0.0f,&tx,&ty,&tz);
+			mainbody->Predict(target,true,0.0f,&tx,&ty,&tz);
 			if (type.chasepos)
 			{
 				cx=tx+ex; cy=ty+ey; cz=tz+ez;
@@ -501,7 +498,7 @@ void CCamera::Update(float seconds)
 		else
 		{
 			if (type.chaseor || type.chaseor)
-				mainbody->Predict(target,0.0f,&tx,&ty,&tz);
+				mainbody->Predict(target,true,0.0f,&tx,&ty,&tz);
 			cx=ex; cy=ey; cz=ez;
 			if (type.chasepos)
 			{
@@ -526,18 +523,18 @@ void CCamera::Update(float seconds)
 				action=shooting;
 				if (planetinfo)
 				{
-					planetinfo->Start(	seconds,
+					planetinfo->Start(	endtime,
 										CAM_DURATION,
 										(type.chaseor?CBody::bodycache[target]->name:CBody::systemname),
 										(type.chaseor?CBody::bodycache[target]:NULL));
 				}
-				endtime=seconds+CAM_DURATION;
+				endtime=endtime+CAM_DURATION;
 				Update(seconds);
 			}
 		}
 		break;
 	case zoomingin:
-		mainbody->Predict(target,0.0f,&tx,&ty,&tz);
+		mainbody->Predict(target,true,0.0f,&tx,&ty,&tz);
 		x=tx-cx; y=ty-cy; z=tz-cz;
 		Angles(x,y,z,&cyaw,&cpitch);
 		fov=startfov*exp(-ZOOM_SPEED*(seconds-starttime));
@@ -546,18 +543,20 @@ void CCamera::Update(float seconds)
 		if (fov<=ANGLE(targetsize,LEN(x,y,z)) || fov<=MIN_FOV)
 		{
 			action=shooting;
+			starttime=starttime-(float)log(fov/startfov)/ZOOM_SPEED;
 			if (planetinfo)
 			{
-				planetinfo->Start(	seconds,
+				planetinfo->Start(	starttime,
 									CAM_DURATION,
 									(type.chaseor?CBody::bodycache[target]->name:CBody::systemname),
 									(type.chaseor?CBody::bodycache[target]:NULL));
 			}
-			endtime=seconds+CAM_DURATION;
+			endtime=starttime+CAM_DURATION;
 			Update(seconds);
 		}
 		break;
 	}
+
 	if (fade)
 	{
 		fadealpha=1.0f-(seconds/INIT_FADE_TIME);

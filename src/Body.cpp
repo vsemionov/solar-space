@@ -1054,11 +1054,11 @@ void CBody::CalcMaxChildDist()
 
 
 
-void CBody::Predict(int bodyid, float seconds, float *x, float *y, float *z)
+void CBody::Predict(int bodyid, bool now, float seconds, float *x, float *y, float *z)
 {
 	if (mainbody)
 		glLoadIdentity();
-	if (seconds)
+	if (!now)
 		UpdateOrbit(seconds);
 	//no glLoadIdentity call, so coords are relative to camera
 	TransformPosition();
@@ -1075,7 +1075,7 @@ void CBody::Predict(int bodyid, float seconds, float *x, float *y, float *z)
 	for (i=0; i<numsubbodies;i++)
 		if (subbodies[i].id>bodyid)
 			break;
-	subbodies[--i].Predict(bodyid,seconds,x,y,z);
+	subbodies[--i].Predict(bodyid,now,seconds,x,y,z);
 }
 
 
