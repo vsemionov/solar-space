@@ -1,0 +1,15 @@
+1.2.0:
+ - New BSD License
+ - render correctly on screen resolutions different from 4:3 (widescreen 16:9, 5:4, etc.)
+ - support for antialiasing
+ - improved performance (less CPU usage) when the starmap is enabled
+ - various other fixes and enhancements
+
+1.1.x:
+ - not released to avoid confusion with version 1.01 which uses the old naming scheme
+
+1.01:
+ - minor changes to installer
+
+ 1.0:
+ - initial release
