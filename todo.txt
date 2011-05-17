@@ -19,14 +19,13 @@ user:
 - review all English messages (med)
 - rename the "Show planet info" option (to e.g. "Information window") (med)
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker) (med)
-- redesign settings dialog - merge desktop resolution option into the video modes group, add website link(?), other enhancements, registration info (med)
+- redesign settings dialog - horizontal shape if suitable, merge desktop resolution option into the video modes group (maybe), add website link, other enhancements (med)
 - update the show log dialog - make it wider and possibly add an icon (med)
 - update button heights of all dialogs to the default (med)
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
 - installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
-- update all files to match new company name and version (defs.h, , registry paths, installer script, manifest, splash, etc) (med)
+- update all files to match new company name and version (defs.h, registry paths, installer script, manifest, splash, etc) (med)
 - installer asks before setting solar space as the default screen saver (med)
-- update all version information (to 1.2.0) (low)
 - update installer readme file (low)
 
 
@@ -39,5 +38,4 @@ NON-TECH:
 - logo (med)
 - new splash screen (med)
 - new preview image (could be a logo, screenshot, or other; but preferably a logo) (maybe) (med)
-- company (med)
-- website (med)
+- update website (downloads, screenshots, etc.) (med)
