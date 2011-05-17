@@ -27,6 +27,7 @@ user:
 - update all files to match new company name and version (defs.h, , registry paths, installer script, manifest, splash, etc) (med)
 - installer asks before setting solar space as the default screen saver (med)
 - update all version information (to 1.2.0) (low)
+- update installer readme file (low)
 
 misc:
 - generate .scr instead of .exe at build time (low)
