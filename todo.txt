@@ -7,6 +7,7 @@ non-visual:
 visual:
 - try generated starmaps (high)
 - review starmap point parameters (first parameter is 0, but it's 1 by default) (high)
+- in CStarMap::PrepData(), export the hard-coded constant (1.6) as a macro (and possibly use a higher value for generated starmaps) (high)
 - research specular highlights on all planets (found on Deso's laptop) (med)
 
 performance/testing:
