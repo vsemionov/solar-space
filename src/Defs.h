@@ -25,8 +25,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef defs_h_incl
-#define defs_h_incl
+#ifndef DEFS_H
+#define DEFS_H
 
 
 #ifndef __cplusplus
