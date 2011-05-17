@@ -45,4 +45,3 @@ NON-TECH:
 - new preview image (could be a logo, screenshot, or other; but preferably a logo) (maybe) (med)
 - company (med)
 - website (med)
-- license (BSD) (high)
