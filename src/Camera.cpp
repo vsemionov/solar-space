@@ -418,15 +418,12 @@ void CCamera::Update(float seconds)
 				f=tp*tp*MOVE_SPEED/tau;
 				x=ex-cx+tx; y=ey-cy+ty; z=ez-cz+tz;
 				l=(float)LEN(x,y,z);
-				if (l==0.0f)
+				if (l!=0.0f)
 				{
-					endtime=seconds;
-					Update(seconds);
-					return;
+					lr=f/l;
+					x*=lr; y*=lr; z*=lr;
+					cx=ex+tx-x; cy=ey+ty-y; cz=ez+tz-z;
 				}
-				lr=f/l;
-				x*=lr; y*=lr; z*=lr;
-				cx=ex+tx-x; cy=ey+ty-y; cz=ez+tz-z;
 			}
 		}
 		else
@@ -484,15 +481,12 @@ void CCamera::Update(float seconds)
 				yaw=eyaw-cyaw;
 				pitch=epitch-cpitch;
 				l=(float)LEN2(pitch,yaw);
-				if (l==0.0f)
+				if (l!=0.0f)
 				{
-					endtime=seconds;
-					Update(seconds);
-					return;
+					lr=f/l;
+					yaw*=lr; pitch*=lr;
+					cyaw=eyaw-yaw; cpitch=epitch-pitch;
 				}
-				lr=f/l;
-				yaw*=lr; pitch*=lr;
-				cyaw=eyaw-yaw; cpitch=epitch-pitch;
 			}
 		}
 		else
