@@ -59,8 +59,8 @@
 
 //random star size and color
 #define MIN_INTENSITY 0.6f //also affects colorfulness of stars, when generated randomly
-#define MIN_MAG 3.5
-#define MAX_MAG 7.5
+#define MIN_MAG 4.75
+#define MAX_MAG 7.9
 
 //real-star color levels
 #define YELLOW_LEVEL 0.6f
@@ -81,6 +81,8 @@
 #define STAR_DIST(star_size) (CVideoBase::GetExtPointParams()?		\
 								(SQRT_QUAD_ATTEN_INV/star_size):	\
 								STARMAP_RADIUS)
+
+#define AUTO_SIZE_COEF 0.625
 
 
 
@@ -380,7 +382,7 @@ void CStarMap::PrepData()
 		double size=STAR_SIZE(stars[i].Mag);
 		// size correction
 		if (CVideoBase::GetExtPointParams())
-			size/=1.6;
+			size*=AUTO_SIZE_COEF;
 		stars[i].size=(float)size;
 		stars[i].pos[0]=(float)(STAR_DIST(size)*Cphi*Stheta);
 		stars[i].pos[1]=(float)(STAR_DIST(size)*Sphi*Stheta);
