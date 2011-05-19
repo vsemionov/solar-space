@@ -6,7 +6,7 @@ visual:
 
 performance/testing:
 - test on a remote machine (remote desktop) (low)
-- longevity testing (>48h) (low)
+- longevity testing (with camera transition times decreased) (>48h) (low)
 
 user:
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker) (med)
