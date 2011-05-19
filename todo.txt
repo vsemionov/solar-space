@@ -5,7 +5,6 @@ non-visual:
 
 visual:
 - review starmap point parameters (first parameter is 0, but it's 1 by default) (high)
-- generated starmaps rendered with and without point parameters extension do not match (high)
 - research specular highlights on all planets (found on Deso's laptop) (med)
 
 performance/testing:
