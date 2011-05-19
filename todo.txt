@@ -33,7 +33,6 @@ NON-TECH:
 - adjust body parameters so that planets rotate slower (med)
 - adjust camera parameters (movement, orientation and zoom speeds, duration, etc) (med)
 - adjust info window parameters (fade time) (med)
-- better texture for Charon (and for Moon?) (med)
 - replace monitor and wrench icons (med)
 - logo (med)
 - new splash screen (med)
