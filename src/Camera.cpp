@@ -61,7 +61,7 @@
 #define AIM_SPEED 30.0f
 
 #define WIDE_CAM_GEN_ALT 1 /* 1/0 */
-#define WIDE_CAM_TARGET_DIST 0.33f	/*	in halves of star system radius				*
+#define WIDE_CAM_TARGET_DIST 0.33f	/*	in halves of planetary system radius		*
 									 *	affects deviation of sun from window center	*/
 
 #define VIEW_FACTOR 1.50

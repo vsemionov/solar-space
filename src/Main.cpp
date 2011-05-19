@@ -526,7 +526,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		CSettings::ReadConfigRegistry();
 		if (!CSettings::BuildFileList())
 		{
-			CError::LogError(ERROR_CODE, "Error enumerating available star systems.");
+			CError::LogError(ERROR_CODE, "Error enumerating available planetary systems.");
 			Ret=2;
 		}
 		else

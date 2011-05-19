@@ -141,25 +141,25 @@ bool CBody::LoadSystemData(char *resource, int *format_version, char *buffer,boo
 	if (!loader.WithResource(resource))
 	{
 		if (!quiet)
-			CError::LogError(ERROR_CODE,"Unable to load star system - missing or invalid resource.");
+			CError::LogError(ERROR_CODE,"Unable to load planetary system - missing or invalid resource.");
 		return false;
 	}
 	if (!loader.LoadText(SYSTEM_NAME_FILE,&textlines,&numlines))
 	{
 		if (!quiet)
-			CError::LogError(ERROR_CODE,"Unable to load star system - file missing from resource or internal loader subsystem error.");
+			CError::LogError(ERROR_CODE,"Unable to load planetary system - file missing from resource or internal loader subsystem error.");
 		return false;
 	}
 	if (textlines==NULL)
 	{
 		if (!quiet)
-			CError::LogError(ERROR_CODE,"Unable to load star system - internal loader subsystem error.");
+			CError::LogError(ERROR_CODE,"Unable to load planetary system - internal loader subsystem error.");
 		return false;
 	}
 	if (numlines==0)
 	{
 		if (!quiet)
-			CError::LogError(ERROR_CODE,"Unable to load star system - empty data file.");
+			CError::LogError(ERROR_CODE,"Unable to load planetary system - empty data file.");
 		return false;
 	}
 	lineindex=-1;
@@ -173,7 +173,7 @@ bool CBody::LoadSystemData(char *resource, int *format_version, char *buffer,boo
 			if (lineindex>=numlines)
 			{
 				if (!quiet)
-					CError::LogError(ERROR_CODE,"Unable to load star system - unexpected end of file.");
+					CError::LogError(ERROR_CODE,"Unable to load planetary system - unexpected end of file.");
 				for (int i=0;i<numlines;i++) free(textlines[i]);
 				free(textlines); textlines=NULL;
 				lineindex=0;
@@ -235,7 +235,7 @@ bool CBody::Load()
 		glMaterialf(GL_BACK,GL_SHININESS,Shininess);
 		if (!LoadSystemData())
 		{
-			CError::LogError(ERROR_CODE,"Loading of star system failed - aborting.");
+			CError::LogError(ERROR_CODE,"Loading of planetary system failed - aborting.");
 			return false;
 		}
 		if (!loader.WithResource(BODY_DATA_RESOURCE))
@@ -273,7 +273,7 @@ bool CBody::Load()
 		numlines=0;
 		if (!b)
 		{
-			CError::LogError(ERROR_CODE,"Loading of star system failed - aborting.");
+			CError::LogError(ERROR_CODE,"Loading of planetary system failed - aborting.");
 			return false;
 		}
 		CalcMaxChildDist();

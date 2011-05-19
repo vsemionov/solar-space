@@ -257,7 +257,7 @@ bool CSettings::BuildFileList()
 			newsystem=(stardrs_s*)malloc(sizeof(stardrs_s));
 			if (!newsystem)
 			{
-				CError::LogError(ERROR_CODE,"Failed to list star systems - memory allocation error.");
+				CError::LogError(ERROR_CODE,"Failed to list planetary systems - memory allocation error.");
 				res=false;
 				break;
 			}
