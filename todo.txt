@@ -4,7 +4,6 @@ non-visual:
 - window not positioned properly in debug mode (non-client area is outside the viewport) (low)
 
 visual:
-- anisotropic filtering (maybe) (high)
 - research specular highlights on all planets (found on Deso's laptop) (med)
 
 performance/testing:
