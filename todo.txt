@@ -12,6 +12,7 @@ user:
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker) (med)
 - redesign settings dialog (med)
  - rename the "Show planet info" option (to e.g. "Show information window")
+ - add a medium detail level
  - rename "Detail level" (to something that suggests effects lefel, e.g. "Graphics", or "Effects", or "Graphic effects level")
  - horizontal shape if suitable
  - merge desktop resolution option into the video modes group (maybe)
