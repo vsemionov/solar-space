@@ -4,7 +4,6 @@ non-visual:
 - window not positioned properly in debug mode (non-client area is outside the viewport) (low)
 
 visual:
-- review starmap point parameters (first parameter is 0, but it's 1 by default) (high)
 - research specular highlights on all planets (found on Deso's laptop) (med)
 
 performance/testing:
