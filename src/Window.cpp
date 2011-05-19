@@ -476,6 +476,28 @@ int CWindow::prev_p2(int a)
 
 
 
+void CWindow::CenterWindow(HWND hwnd)
+{
+	RECT rect;
+	int x,y;
+	HWND hParent=GetParent(hwnd);
+	if (!hParent)
+		hParent=GetDesktopWindow();
+	GetClientRect(hParent,&rect);
+	x=rect.right;
+	y=rect.bottom;
+	GetClientRect(hwnd,&rect);
+	x-=rect.right;
+	y-=rect.bottom;
+	x/=2;
+	y/=2;
+	SetWindowPos(hwnd,NULL,x,y,0,0,SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOSIZE|SWP_NOZORDER);
+}
+
+
+
+
+
 bool CWindow::Create(HWND hParent)
 {
 	WNDCLASS wc;
@@ -585,6 +607,11 @@ bool CWindow::Create(HWND hParent)
 	}
 
 	glViewport(0, 0, width, height);
+
+	if (DEBUG)
+	{
+		CenterWindow(hwnd);
+	}
 
 	ShowWindow(hwnd, SW_SHOWNORMAL);
 

@@ -107,35 +107,13 @@ bool MessagePump()
 
 
 
-static void CenterWindow(HWND hwnd)
-{
-	RECT rect;
-	int x,y;
-	HWND hParent=GetParent(hwnd);
-	if (!hParent)
-		hParent=GetDesktopWindow();
-	GetClientRect(hParent,&rect);
-	x=rect.right;
-	y=rect.bottom;
-	GetClientRect(hwnd,&rect);
-	x-=rect.right;
-	y-=rect.bottom;
-	x/=2;
-	y/=2;
-	SetWindowPos(hwnd,NULL,x,y,0,0,SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOSIZE|SWP_NOZORDER);
-}
-
-
-
-
-
 static BOOL CALLBACK PreviewProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
 	{
 	case WM_INITDIALOG:
 		SetWindowPos(hwnd,NULL,0,0,THUMBNAIL_WIDTH,THUMBNAIL_HEIGHT,SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOMOVE|SWP_NOZORDER);
-		CenterWindow(hwnd);
+		CWindow::CenterWindow(hwnd);
 		return FALSE;
 	}
 	return FALSE;
@@ -181,7 +159,7 @@ static BOOL CALLBACK QuestionLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
 	switch (msg)
 	{
 	case WM_INITDIALOG:
-		CenterWindow(hwnd);
+		CWindow::CenterWindow(hwnd);
 		SetTimer(hwnd,0,1000,NULL);
 		PrintCloseTime(hwnd);
 		return TRUE;
@@ -454,7 +432,7 @@ static BOOL CALLBACK ConfigDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 		UpdateRes(hwnd);
 		FillList(hwnd);
 		SelectList(hwnd);
-		CenterWindow(hwnd);
+		CWindow::CenterWindow(hwnd);
 		return TRUE;
 	case WM_COMMAND:
 		int id=LOWORD(wParam);
