@@ -52,6 +52,7 @@ public:
 	static bool GetOptLensFlares() { return opt_lensflares; }
 	static bool GetOptStarTwinkle() { return opt_startwinkle; }
 	static bool GetOptAntialiasing() { return opt_antialiasing; }
+	static bool GetOptAnisotropic() { return opt_anisotropic; }
 	static void EnableMultisample();
 	static void DisableMultisample();
 private:
@@ -69,6 +70,7 @@ private:
 	static bool opt_lensflares;
 	static bool opt_startwinkle;
 	static bool opt_antialiasing;
+	static bool opt_anisotropic;
 };
 
 #endif

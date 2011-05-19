@@ -57,6 +57,7 @@ bool CVideoBase::opt_bumpmaps=false;
 bool CVideoBase::opt_lensflares=false;
 bool CVideoBase::opt_startwinkle=false;
 bool CVideoBase::opt_antialiasing=false;
+bool CVideoBase::opt_anisotropic=false;
 
 
 
@@ -198,6 +199,7 @@ void CVideoBase::GetOptions()
 	opt_lensflares=false;
 	opt_startwinkle=false;
 	opt_antialiasing=false;
+	opt_anisotropic=false;
 	switch (CSettings::DetailLevel)
 	{
 	case 2:
@@ -205,6 +207,7 @@ void CVideoBase::GetOptions()
 		opt_bumpmaps=true;
 		opt_startwinkle=true;
 		opt_antialiasing=true;
+		opt_anisotropic=true;
 	case 1:
 		opt_geodetail=1.0f;
 		opt_mipmaps=true;
