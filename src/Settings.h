@@ -54,7 +54,6 @@ public:
 	static int VideoMode;
 	static int DetailLevel;
 	static BOOL DefaultRes;
-	static BOOL Antialiasing;
 	static BOOL PlanetInfo;
 	static BOOL ClockOn;
 	static char DataDir[MAX_PATH];

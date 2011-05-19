@@ -53,7 +53,6 @@ BOOL  CSettings::PasswordOK;
 int CSettings::VideoMode;
 int CSettings::DetailLevel;
 BOOL CSettings::DefaultRes;
-BOOL CSettings::Antialiasing;
 BOOL CSettings::ClockOn;
 BOOL CSettings::PlanetInfo;
 char CSettings::DataDir[MAX_PATH];
@@ -95,7 +94,6 @@ void CSettings::Init()
 	VideoMode=0;
 	DetailLevel=0;
 	DefaultRes=TRUE;
-	Antialiasing=FALSE;
 	ClockOn=FALSE;
 	PlanetInfo=FALSE;
 	DataDir[0]=0;
@@ -162,9 +160,8 @@ void CSettings::ReadCommonRegistry()
 void CSettings::ReadConfigRegistry()
 {
 	VideoMode=2;
-	DetailLevel=1;
+	DetailLevel=2;
 	DefaultRes=TRUE;
-	Antialiasing=TRUE;
 	ClockOn=TRUE;
 	PlanetInfo=TRUE;
 	strcpy(DataFile,"");
@@ -176,7 +173,6 @@ void CSettings::ReadConfigRegistry()
 	valsize=sizeof(val); res=RegQueryValueEx(skey,"Video Mode",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) VideoMode=val;
 	valsize=sizeof(val); res=RegQueryValueEx(skey,"Detail Level",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) DetailLevel=val;
 	valsize=sizeof(val); res=RegQueryValueEx(skey,"Default Resolution",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) DefaultRes=val;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Antialiasing",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) Antialiasing=val;
 	valsize=sizeof(val); res=RegQueryValueEx(skey,"Planet Info",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) PlanetInfo=val;
 	valsize=sizeof(val); res=RegQueryValueEx(skey,"Clock On",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) ClockOn=val;
 	valsize=sizeof(strval); res=RegQueryValueEx(skey,"Data File",0,&valtype,(LPBYTE)strval,&valsize);   if (res==ERROR_SUCCESS) strcpy(DataFile,strval);
@@ -199,7 +195,6 @@ void CSettings::WriteConfigRegistry()
 	val=VideoMode; RegSetValueEx(skey,"Video Mode",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
 	val=DetailLevel; RegSetValueEx(skey,"Detail Level",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
 	val=DefaultRes; RegSetValueEx(skey,"Default Resolution",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
-	val=Antialiasing; RegSetValueEx(skey,"Antialiasing",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
 	val=PlanetInfo; RegSetValueEx(skey,"Planet Info",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
 	val=ClockOn; RegSetValueEx(skey,"Clock On",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
 	strcpy(strval,DataFile); RegSetValueEx(skey,"Data File",0,REG_SZ,(CONST BYTE*)strval,strlen(strval)+1);

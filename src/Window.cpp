@@ -33,6 +33,7 @@
 #include <gl/wglext.h>
 
 #include "Settings.h"
+#include "VideoBase.h"
 #include "Main.h"
 #include "Error.h"
 #include "Window.h"
@@ -558,7 +559,7 @@ bool CWindow::Create(HWND hParent)
 	}
 
 	multisample=false;
-	if (CSettings::Antialiasing)
+	if (CVideoBase::GetOptAntialiasing())
 	{
 		GLuint pixel_format;
 		if (InitMultisample(hDC, &pixel_format))

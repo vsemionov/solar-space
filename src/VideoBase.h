@@ -39,7 +39,8 @@ class CVideoBase
 public:
 	CVideoBase();
 	virtual ~CVideoBase();
-	static bool Init();
+	static void Init();
+	static bool InitGL();
 	static void ShutDown();
 	static bool GetExtBGRA() { return ext_bgra; }
 	static bool GetExtPointParams() { return ext_point_params; }
@@ -50,6 +51,7 @@ public:
 	static bool GetOptBumpMaps() { return opt_bumpmaps; }
 	static bool GetOptLensFlares() { return opt_lensflares; }
 	static bool GetOptStarTwinkle() { return opt_startwinkle; }
+	static bool GetOptAntialiasing() { return opt_antialiasing; }
 	static void EnableMultisample();
 	static void DisableMultisample();
 private:
@@ -66,6 +68,7 @@ private:
 	static bool opt_bumpmaps;
 	static bool opt_lensflares;
 	static bool opt_startwinkle;
+	static bool opt_antialiasing;
 };
 
 #endif

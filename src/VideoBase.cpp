@@ -56,6 +56,7 @@ bool CVideoBase::opt_shadows=false;
 bool CVideoBase::opt_bumpmaps=false;
 bool CVideoBase::opt_lensflares=false;
 bool CVideoBase::opt_startwinkle=false;
+bool CVideoBase::opt_antialiasing=false;
 
 
 
@@ -77,10 +78,18 @@ CVideoBase::~CVideoBase()
 
 
 
-bool CVideoBase::Init()
+void CVideoBase::Init()
+{
+	GetOptions();
+}
+
+
+
+
+
+bool CVideoBase::InitGL()
 {
 	GetExtensions();
-	GetOptions();
 	glShadeModel(GL_SMOOTH);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClearDepth(1.0f);
@@ -188,12 +197,14 @@ void CVideoBase::GetOptions()
 	opt_bumpmaps=false;
 	opt_lensflares=false;
 	opt_startwinkle=false;
+	opt_antialiasing=false;
 	switch (CSettings::DetailLevel)
 	{
 	case 2:
 		opt_shadows=true;
 		opt_bumpmaps=true;
 		opt_startwinkle=true;
+		opt_antialiasing=true;
 	case 1:
 		opt_geodetail=1.0f;
 		opt_mipmaps=true;

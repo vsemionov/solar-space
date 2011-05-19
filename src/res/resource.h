@@ -16,9 +16,8 @@
 #define IDC_RLOW                        1010
 #define IDC_RHIGH                       1011
 #define IDC_CKDEFRES                    1020
-#define IDC_CKANTIALIAS                 1021
-#define IDC_CKINFO                      1022
-#define IDC_CKCLOCK                     1023
+#define IDC_CKINFO                      1021
+#define IDC_CKCLOCK                     1022
 #define IDC_CMBSYSTEMS                  1030
 #define IDC_BLOG                        1040
 
