@@ -14,7 +14,8 @@
 #define IDC_R800                        1001
 #define IDC_R1024                       1002
 #define IDC_RLOW                        1010
-#define IDC_RHIGH                       1011
+#define IDC_RMED                        1011
+#define IDC_RHIGH                       1012
 #define IDC_CKDEFRES                    1020
 #define IDC_CKINFO                      1021
 #define IDC_CKCLOCK                     1022
