@@ -1,6 +1,5 @@
 TECH:
 non-visual:
-- window not positioned properly in debug mode (non-client area is outside the viewport) (low)
 
 visual:
 - research specular highlights on all planets (found on Deso's laptop) (med)
@@ -26,6 +25,8 @@ user:
 - update all files to match new company name and version (defs.h, registry paths, installer script, manifest, splash, etc) (med)
 - installer asks before setting solar space as the default screen saver (med)
 - update installer readme file (low)
+
+misc:
 
 
 NON-TECH:
