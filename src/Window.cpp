@@ -40,7 +40,11 @@
 
 
 
-#define Z_BUFFER_BITS 32
+#define COLOR_BUFFER_BITS 24
+#define ALPHA_BUFFER_BITS 8
+#define Z_BUFFER_BITS 16
+#define MULTI_SAMPLES 4
+#define MULTI_SAMPLES_FALLBACK 2
 
 #define USE_PASSWORD_THREAD false
 
@@ -309,12 +313,13 @@ bool CWindow::InitMultisample(HDC hDC, GLuint *pixel_format)
 		WGL_ACCELERATION_ARB,		WGL_FULL_ACCELERATION_ARB,
 		WGL_SUPPORT_OPENGL_ARB,		GL_TRUE,
 		WGL_DOUBLE_BUFFER_ARB,		GL_TRUE,
-		WGL_COLOR_BITS_ARB,			0,
-		WGL_ALPHA_BITS_ARB,			0,
-		WGL_DEPTH_BITS_ARB,			16,
+		WGL_PIXEL_TYPE_ARB,			WGL_TYPE_RGBA_ARB,
+		WGL_COLOR_BITS_ARB,			COLOR_BUFFER_BITS,
+		WGL_ALPHA_BITS_ARB,			ALPHA_BUFFER_BITS,
+		WGL_DEPTH_BITS_ARB,			Z_BUFFER_BITS,
 		WGL_STENCIL_BITS_ARB,		0,
 		WGL_SAMPLE_BUFFERS_ARB,		GL_TRUE,
-		WGL_SAMPLES_ARB,			4,
+		WGL_SAMPLES_ARB,			MULTI_SAMPLES,
 		0,0
 	};
 
@@ -326,7 +331,7 @@ bool CWindow::InitMultisample(HDC hDC, GLuint *pixel_format)
 		return true;
 	}
 
-	iAttributes[19] = 2;
+	iAttributes[21] = MULTI_SAMPLES_FALLBACK;
 	valid = wglChoosePixelFormatARB(hDC,iAttributes,fAttributes,1,&pixelFormat,&numFormats);
 	if (valid && numFormats >= 1)
 	{
@@ -381,13 +386,13 @@ bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, in
 		PFD_SUPPORT_OPENGL |						// Format Must Support OpenGL
 		PFD_DOUBLEBUFFER,							// Must Support Double Buffering
 		PFD_TYPE_RGBA,								// Request An RGBA Format
-		0,			//bpp							// Select Our Color Depth
+		COLOR_BUFFER_BITS,	//bpp					// Select Our Color Depth
 		0, 0, 0, 0, 0, 0,							// Color Bits Ignored
-		0,											// No Alpha Buffer
+		ALPHA_BUFFER_BITS,							// Alpha Buffer
 		0,											// Shift Bit Ignored
 		0,											// No Accumulation Buffer
 		0, 0, 0, 0,									// Accumulation Bits Ignored
-		Z_BUFFER_BITS,								// 16Bit Z-Buffer (Depth Buffer)
+		Z_BUFFER_BITS,								// Z-Buffer (Depth Buffer)
 		0,											// No Stencil Buffer
 		0,											// No Auxiliary Buffer
 		PFD_MAIN_PLANE,								// Main Drawing Layer
