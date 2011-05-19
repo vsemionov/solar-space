@@ -1,6 +1,5 @@
 TECH:
 non-visual:
-- automated code format (med)
 - window not positioned properly in debug mode (non-client area is outside the viewport) (low)
 
 visual:
