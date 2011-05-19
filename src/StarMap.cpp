@@ -139,7 +139,7 @@ bool CStarMap::Load()
 
 	point_size=(float)(POINT_SIZE_AT_H600*((double)CWindow::GetHeight()/600.0));
 
-//	twinkle=CVideoBase::GetOptStarTwinkle();
+	twinkle=CVideoBase::GetOptStarTwinkle();
 	twinkle=false; //no twinkle effect yet
 
 	InitGL();
