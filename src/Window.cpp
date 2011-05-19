@@ -465,6 +465,17 @@ void CWindow::DestroySaverWindow()
 
 
 
+int CWindow::prev_p2(int a)
+{
+	int p=1;
+	while (1<<p<=a) p++;
+	return 1<<(p-1);
+}
+
+
+
+
+
 bool CWindow::Create(HWND hParent)
 {
 	WNDCLASS wc;
@@ -524,7 +535,7 @@ bool CWindow::Create(HWND hParent)
 		}
 		if (DEBUG)
 		{
-			width/=2; height/=2;
+			width=prev_p2(width-1); height=width*3/4;
 			dwStyle=WS_POPUPWINDOW|WS_CAPTION|WS_MINIMIZEBOX;
 			dwExStyle=0;
 		}

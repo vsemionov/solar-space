@@ -38,6 +38,7 @@ class CWindow
 public:
 	CWindow();
 	virtual ~CWindow();
+	static int prev_p2(int a);
 	static bool Create(HWND hParent);
 	static void Destroy();
 	static int GetWidth() { return winwidth; };
