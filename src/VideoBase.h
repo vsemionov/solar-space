@@ -31,6 +31,11 @@
 #include "defs.h"
 
 
+#define MAX_ANISOTROPY 4.0f
+
+
+
+
 
 
 
@@ -44,6 +49,7 @@ public:
 	static void ShutDown();
 	static bool GetExtBGRA() { return ext_bgra; }
 	static bool GetExtPointParams() { return ext_point_params; }
+	static bool GetExtAnisotropic() { return ext_anisotropic; }
 	static float GetOptGeoDetail() { return opt_geodetail; }
 	static bool GetOptLinear() { return opt_linear; }
 	static bool GetOptMipmaps() { return opt_mipmaps; }
@@ -62,6 +68,7 @@ private:
 	static void GetOptions();
 	static bool ext_bgra;
 	static bool ext_point_params;
+	static bool ext_anisotropic;
 	static float opt_geodetail;
 	static bool opt_linear;
 	static bool opt_mipmaps;

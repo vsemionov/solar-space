@@ -198,7 +198,7 @@ bool CGamePlay::LoadSplash()
 	CalcSplashRect();
 	CLoader loader;
 	loader.WithResource(SPLASH_RESOURCE);
-	splash_tex=loader.LoadTexture(SPLASH_FILE,NULL,CVideoBase::GetOptMipmaps(),CVideoBase::GetOptLinear());
+	splash_tex=loader.LoadTexture(SPLASH_FILE,NULL,CVideoBase::GetOptMipmaps(),CVideoBase::GetOptLinear(), false);
 	return (splash_tex>0);
 }
 

@@ -128,7 +128,7 @@ bool CLensFlare::Load(CBody *star)
 		else
 		{
 			char *entry=tex_names[i];
-			textures[i]=loader.LoadTexture(entry,NULL,CVideoBase::GetOptMipmaps(),CVideoBase::GetOptLinear());
+			textures[i]=loader.LoadTexture(entry,NULL,CVideoBase::GetOptMipmaps(),CVideoBase::GetOptLinear(), false);
 			if (textures[i]==0)
 			{
 				CError::LogError(WARNING_CODE,"Failed to load a lens flare image - ignoring.");

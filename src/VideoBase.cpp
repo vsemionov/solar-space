@@ -49,6 +49,7 @@
 
 bool CVideoBase::ext_bgra=false;
 bool CVideoBase::ext_point_params=false;
+bool CVideoBase::ext_anisotropic=false;
 float CVideoBase::opt_geodetail=0.5f;
 bool CVideoBase::opt_linear=false;
 bool CVideoBase::opt_mipmaps=false;
@@ -182,6 +183,9 @@ void CVideoBase::GetExtensions()
 		ext_point_params=IsExtensionSupported(ext_str,"GL_ARB_point_parameters");
 		if (VER(major,minor,patch)>=VER(1,4,0))
 			ext_point_params=true;
+	}
+	{
+		ext_anisotropic=IsExtensionSupported(ext_str,"GL_EXT_texture_filter_anisotropic");
 	}
 }
 

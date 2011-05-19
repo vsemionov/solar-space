@@ -117,7 +117,7 @@ bool CClock::Load()
 		}
 		CGamePlay::UpdateSplash(ds);
 		char *entry=tex_names[i];
-		textures[i]=loader.LoadTexture(entry,entry,false,false);
+		textures[i]=loader.LoadTexture(entry,entry,false,false,false);
 		if (textures[i]==0)
 		{
 			CError::LogError(WARNING_CODE,"Failed to load a clock digit - skipping.");

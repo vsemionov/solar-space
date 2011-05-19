@@ -31,6 +31,8 @@
 #include <gl/glu.h>
 #include <gl/gl.h>
 
+#include <gl/glext.h>
+
 #ifdef _MSC_VER
 #define _USE_MATH_DEFINES
 #endif
@@ -38,6 +40,7 @@
 
 
 #include "Settings.h"
+#include "VideoBase.h"
 #include "Loader.h"
 
 
@@ -307,7 +310,7 @@ bool CLoader::ResizeImage(void **pImage, int *width, int *height)
 
 
 
-int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmaps, bool linear)
+int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmaps, bool linear, bool anisotropic)
 {
 	bool b;
 	int tex_width[2], tex_height[2], tex_size[2];
@@ -360,7 +363,17 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 							b=false;
 					}
 				}
-				if (b==false)
+				if (b==true)
+				{
+					if (anisotropic)
+					{
+						if (CVideoBase::GetExtAnisotropic())
+						{
+							glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAX_ANISOTROPY_EXT,MAX_ANISOTROPY);
+						}
+					}
+				}
+				else
 				{
 					glDeleteTextures(1,(GLuint *)&texture);
 					texture=0;
