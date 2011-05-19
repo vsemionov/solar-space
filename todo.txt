@@ -13,9 +13,15 @@ performance/testing:
 
 user:
 - review all English messages (med)
-- rename the "Show planet info" option (to e.g. "Information window") (med)
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker) (med)
-- redesign settings dialog - horizontal shape if suitable, merge desktop resolution option into the video modes group (maybe), are group box shortcut key necessary?, add website link, other enhancements (med)
+- redesign settings dialog (med)
+ - rename the "Show planet info" option (to e.g. "Show information window")
+ - rename "Detail level" (to something that suggests effects lefel, e.g. "Graphics", or "Effects", or "Graphic effects level")
+ - horizontal shape if suitable
+ - merge desktop resolution option into the video modes group (maybe)
+ - are group box shortcut key necessary?
+ - add website link
+ - other enhancements
 - update the show log dialog - make it wider and possibly add an icon (med)
 - update button heights of all dialogs to the default (med)
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
