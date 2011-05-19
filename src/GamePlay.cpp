@@ -234,7 +234,7 @@ void CGamePlay::InitLight()
 void CGamePlay::OnUserAbortLoad()
 {
 	// log new error
-	CError::LogError(ERROR_CODE,"User aborted load.");
+	CError::LogError(ERROR_CODE,"Loading aborted by user.");
 	// get first error, and if it's "user abort", clear the log so it's not printed
 	if (CError::ErrorsOccured())
 	{

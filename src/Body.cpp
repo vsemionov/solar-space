@@ -141,25 +141,25 @@ bool CBody::LoadSystemData(char *resource, int *format_version, char *buffer,boo
 	if (!loader.WithResource(resource))
 	{
 		if (!quiet)
-			CError::LogError(ERROR_CODE,"Unable to open star system - missing or invalid resource.");
+			CError::LogError(ERROR_CODE,"Unable to load star system - missing or invalid resource.");
 		return false;
 	}
 	if (!loader.LoadText(SYSTEM_NAME_FILE,&textlines,&numlines))
 	{
 		if (!quiet)
-			CError::LogError(ERROR_CODE,"Unable to open star system - file missing from resource or internal loader subsystem error.");
+			CError::LogError(ERROR_CODE,"Unable to load star system - file missing from resource or internal loader subsystem error.");
 		return false;
 	}
 	if (textlines==NULL)
 	{
 		if (!quiet)
-			CError::LogError(ERROR_CODE,"Unable to open star system - internal loader subsystem error.");
+			CError::LogError(ERROR_CODE,"Unable to load star system - internal loader subsystem error.");
 		return false;
 	}
 	if (numlines==0)
 	{
 		if (!quiet)
-			CError::LogError(ERROR_CODE,"Unable to open system - empty data file.");
+			CError::LogError(ERROR_CODE,"Unable to load star system - empty data file.");
 		return false;
 	}
 	lineindex=-1;
@@ -235,27 +235,27 @@ bool CBody::Load()
 		glMaterialf(GL_BACK,GL_SHININESS,Shininess);
 		if (!LoadSystemData())
 		{
-			CError::LogError(ERROR_CODE,"Star system load failed - aborting.");
+			CError::LogError(ERROR_CODE,"Loading of star system failed - aborting.");
 			return false;
 		}
 		if (!loader.WithResource(BODY_DATA_RESOURCE))
 		{
-			CError::LogError(ERROR_CODE,"Unable to open bodies - missing or invalid resource.");
+			CError::LogError(ERROR_CODE,"Unable to load bodies - missing or invalid resource.");
 			return false;
 		}
 		if (!loader.LoadText(BODY_DATA_FILE,&textlines,&numlines))
 		{
-			CError::LogError(ERROR_CODE,"Unable to open bodies - file missing from resource or internal loader subsystem error.");
+			CError::LogError(ERROR_CODE,"Unable to load bodies - file missing from resource or internal loader subsystem error.");
 			return false;
 		}
 		if (textlines==NULL)
 		{
-			CError::LogError(ERROR_CODE,"Unable to open bodies - internal loader subsystem error.");
+			CError::LogError(ERROR_CODE,"Unable to load bodies - internal loader subsystem error.");
 			return false;
 		}
 		if (numlines==0)
 		{
-			CError::LogError(ERROR_CODE,"Unable to open bodies - empty data file.");
+			CError::LogError(ERROR_CODE,"Unable to load bodies - empty data file.");
 			return false;
 		}
 		bodycache=(CBody**)malloc(numlines*sizeof(CBody*));
@@ -273,7 +273,7 @@ bool CBody::Load()
 		numlines=0;
 		if (!b)
 		{
-			CError::LogError(ERROR_CODE,"Star system load failed - aborting.");
+			CError::LogError(ERROR_CODE,"Loading of star system failed - aborting.");
 			return false;
 		}
 		CalcMaxChildDist();
@@ -291,7 +291,7 @@ bool CBody::Load()
 	{
 		if (!LoadPhys())
 		{
-			CError::LogError(ERROR_CODE,"Body parse failed - aborting.");
+			CError::LogError(ERROR_CODE,"Parsing of body data failed - aborting.");
 			return false;
 		}
 		id=numbodies;
@@ -563,7 +563,7 @@ bool CBody::Reload()
 	{
 		if (loader.WithResource(BODY_GFX_RESOURCE)!=true)
 		{
-			CError::LogError(ERROR_CODE,"Unable to open body GFX - missing or invalid resource.");
+			CError::LogError(ERROR_CODE,"Unable to load body GFX - missing or invalid resource.");
 			return false;
 		}
 	}
@@ -691,22 +691,22 @@ bool CBody::LoadInfo()
 {
 	if (!loader.WithResource(BODY_DATA_RESOURCE))
 	{
-		CError::LogError(WARNING_CODE,"Unable to open body info - missing or invalid resource.");
+		CError::LogError(WARNING_CODE,"Unable to load body info - missing or invalid resource.");
 		return false;
 	}
 	if (!loader.LoadText(info_name,&info.textlines,&info.numlines))
 	{
-		CError::LogError(WARNING_CODE,"Unable to open body info - file missing from resource or internal loader subsystem error.");
+		CError::LogError(WARNING_CODE,"Unable to load body info - file missing from resource or internal loader subsystem error.");
 		return false;
 	}
 	if (info.textlines==NULL)
 	{
-		CError::LogError(WARNING_CODE,"Unable to open body info - internal loader subsystem error.");
+		CError::LogError(WARNING_CODE,"Unable to load body info - internal loader subsystem error.");
 		return false;
 	}
 	if (info.numlines==0)
 	{
-		CError::LogError(WARNING_CODE,"Unable to body info - empty data file.");
+		CError::LogError(WARNING_CODE,"Unable to load body info - empty data file.");
 		return false;
 	}
 	return true;
@@ -723,7 +723,7 @@ bool CBody::LoadTextures()
 	{
 		if (CGamePlay::UserAbortedLoad())
 		{
-			CError::LogError(ERROR_CODE,"Body load aborted by user.");
+			CError::LogError(ERROR_CODE,"Loading of body aborted by user.");
 			return false;
 		}
 		textures[i]=loader.LoadTexture(tex_names[i][0],tex_names[i][1],CVideoBase::GetOptMipmaps(),CVideoBase::GetOptLinear(),CVideoBase::GetOptAnisotropic());
@@ -923,7 +923,7 @@ bool CBody::LoadGFX()
 {
 	if (CGamePlay::UserAbortedLoad())
 	{
-		CError::LogError(ERROR_CODE,"Body load aborted by user.");
+		CError::LogError(ERROR_CODE,"Loading of body aborted by user.");
 		return false;
 	}
 	CGamePlay::UpdateSplash(name);

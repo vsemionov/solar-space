@@ -123,7 +123,7 @@ bool CStarMap::Load()
 		Free();
 		if (CGamePlay::UserAbortedLoad())
 		{
-			CError::LogError(ERROR_CODE,"Starmap load aborted by user.");
+			CError::LogError(ERROR_CODE,"Loading of starmap aborted by user.");
 			return false;
 		}
 		CGamePlay::UpdateSplash("generating... ");
@@ -149,7 +149,7 @@ bool CStarMap::Load()
 		object = glGenLists(1);
 		if (object==0)
 		{
-			CError::LogError(WARNING_CODE,"Internal OpenGL error - starmap display list not recorded.");
+			CError::LogError(WARNING_CODE,"Unable to record starmap display list - internal OpenGL error.");
 			Free();
 			return false;
 		}
@@ -247,7 +247,7 @@ bool CStarMap::LoadStars()
 	CLoader loader;
 	if (!loader.WithResource(STARMAP_RESOURCE))
 	{
-		CError::LogError(WARNING_CODE,"Unable to open starmap file - missing or invalid resource.");
+		CError::LogError(WARNING_CODE,"Unable to load starmap file - missing or invalid resource.");
 		return false;
 	}
 	if (!loader.LoadText(STARMAP_FILE,&textlines,&numlines))

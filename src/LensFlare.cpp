@@ -101,12 +101,12 @@ bool CLensFlare::Load(CBody *star)
 	CLoader loader;
 	if (!loader.WithResource(FLARE_RESOURCE))
 	{
-		CError::LogError(WARNING_CODE,"Unable to open lens flares - missing or invalid resource.");
+		CError::LogError(WARNING_CODE,"Unable to load lens flares - missing or invalid resource.");
 		AbortLoad();
 	}
 	if (!ParseSpecsFile(&loader))
 	{
-		CError::LogError(WARNING_CODE,"Lens flare parse failed - skipping.");
+		CError::LogError(WARNING_CODE,"Parsing of lens flare failed - skipping.");
 		AbortLoad();
 	}
 	char fs[16];
@@ -116,7 +116,7 @@ bool CLensFlare::Load(CBody *star)
 		itoa(i+1,fs,10);
 		if (CGamePlay::UserAbortedLoad())
 		{
-			CError::LogError(ERROR_CODE,"Lens flare load aborted by user.");
+			CError::LogError(ERROR_CODE,"Loading of lens flare aborted by user.");
 			AbortLoad();
 		}
 		CGamePlay::UpdateSplash(fs);
@@ -415,17 +415,17 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 	int i;
 	if (!loader->LoadText(FLARE_SPECS_FILE,&textlines,&numlines))
 	{
-		CError::LogError(WARNING_CODE,"Unable to open lens flares - file missing from resource or internal loader subsystem error.");
+		CError::LogError(WARNING_CODE,"Unable to load lens flares - file missing from resource or internal loader subsystem error.");
 		return false;
 	}
 	if (textlines==NULL)
 	{
-		CError::LogError(WARNING_CODE,"Unable to open lens flares - internal loader subsystem error.");
+		CError::LogError(WARNING_CODE,"Unable to load lens flares - internal loader subsystem error.");
 		return false;
 	}
 	if (numlines==0)
 	{
-		CError::LogError(WARNING_CODE,"Unable to open lens flares - empty data file.");
+		CError::LogError(WARNING_CODE,"Unable to load lens flares - empty data file.");
 		return false;
 	}
 	{

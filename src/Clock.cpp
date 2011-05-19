@@ -96,12 +96,12 @@ bool CClock::Load()
 	CLoader loader;
 	if (!loader.WithResource(CLOCK_RESOURCE))
 	{
-		CError::LogError(WARNING_CODE,"Unable to open clock - missing or invalid resource.");
+		CError::LogError(WARNING_CODE,"Unable to load clock - missing or invalid resource.");
 		return false;
 	}
 	if (!ParseSpecsFile(&loader))
 	{
-		CError::LogError(WARNING_CODE,"Clock parse failed - skipping.");
+		CError::LogError(WARNING_CODE,"Parsing of clock failed - skipping.");
 		return false;
 	}
 	char ds[2];
@@ -112,7 +112,7 @@ bool CClock::Load()
 		ds[0]=(i==10?':':'0'+i);
 		if (CGamePlay::UserAbortedLoad())
 		{
-			CError::LogError(ERROR_CODE,"Clock load aborted by user.");
+			CError::LogError(ERROR_CODE,"Loading of clock aborted by user.");
 			AbortLoad();
 		}
 		CGamePlay::UpdateSplash(ds);
@@ -120,7 +120,7 @@ bool CClock::Load()
 		textures[i]=loader.LoadTexture(entry,entry,false,false,false);
 		if (textures[i]==0)
 		{
-			CError::LogError(WARNING_CODE,"Failed to load a clock digit - skipping.");
+			CError::LogError(WARNING_CODE,"Failed to load clock digit - skipping.");
 			AbortLoad();
 		}
 	}
@@ -217,17 +217,17 @@ bool CClock::ParseSpecsFile(CLoader *loader)
 	int i;
 	if (!loader->LoadText(CLOCK_SPECS_FILE,&textlines,&numlines))
 	{
-		CError::LogError(WARNING_CODE,"Unable to open clock - file missing from resource or internal loader subsystem error.");
+		CError::LogError(WARNING_CODE,"Unable to load clock - file missing from resource or internal loader subsystem error.");
 		return false;
 	}
 	if (textlines==NULL)
 	{
-		CError::LogError(WARNING_CODE,"Unable to open clock - internal loader subsystem error.");
+		CError::LogError(WARNING_CODE,"Unable to load clock - internal loader subsystem error.");
 		return false;
 	}
 	if (numlines==0)
 	{
-		CError::LogError(WARNING_CODE,"Unable to open clock - empty data file.");
+		CError::LogError(WARNING_CODE,"Unable to load clock - empty data file.");
 		return false;
 	}
 	{
