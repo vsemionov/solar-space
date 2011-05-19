@@ -270,7 +270,7 @@ bool CText::BuildFTFont(const char *name, int size)
 int CText::next_p2(int a)
 {
 	int rval=2;
-	while(rval<a) rval<<=1;
+	while (rval<a) rval<<=1;
 	return rval;
 }
 
