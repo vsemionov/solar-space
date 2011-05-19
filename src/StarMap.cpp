@@ -381,8 +381,7 @@ void CStarMap::PrepData()
 		double Sphi=sin(phi);
 		double size=STAR_SIZE(stars[i].Mag);
 		// size correction
-		if (CVideoBase::GetExtPointParams())
-			size*=AUTO_SIZE_COEF;
+		size*=AUTO_SIZE_COEF;
 		stars[i].size=(float)size;
 		stars[i].pos[0]=(float)(STAR_DIST(size)*Cphi*Stheta);
 		stars[i].pos[1]=(float)(STAR_DIST(size)*Sphi*Stheta);
