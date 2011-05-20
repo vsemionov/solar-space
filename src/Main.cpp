@@ -54,7 +54,7 @@
 #define LOG_TIMEOUT 15
 #define LOG_NAME APPNAME " Log.txt"
 
-#define RANDOM_STRING "<Random>"
+#define RANDOM_STRING "<random>"
 
 
 
