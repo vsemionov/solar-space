@@ -4,7 +4,8 @@
  - antialiasing
  - anisotropic filtering
  - significantly improved performance (less CPU usage) when rendering stars
- - various other fixes and enhancements
+ - per-user configuration
+ - various other fixes and enhancements in most aspects
 
 1.1.x:
  - not released to avoid confusion with version 1.01 which uses the old naming scheme
