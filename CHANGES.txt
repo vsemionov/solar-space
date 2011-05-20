@@ -1,8 +1,9 @@
 1.2.0:
  - New BSD License
- - render correctly on screen resolutions different from 4:3 (widescreen 16:9, 5:4, etc.)
- - support for antialiasing
- - improved performance (less CPU usage) when the starmap is enabled
+ - correct rendering on screen resolutions other than 4:3 (widescreen 16:9, 5:4, etc.)
+ - antialiasing
+ - anisotropic filtering
+ - significantly improved performance (less CPU usage) when rendering stars
  - various other fixes and enhancements
 
 1.1.x:
