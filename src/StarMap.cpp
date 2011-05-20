@@ -123,7 +123,7 @@ bool CStarMap::Load()
 		Free();
 		if (CGamePlay::UserAbortedLoad())
 		{
-			CError::LogError(ERROR_CODE,"Loading of starmap aborted by user.");
+			CError::LogError(ERROR_CODE,"Loading of star map aborted by user.");
 			return false;
 		}
 		CGamePlay::UpdateSplash("generating... ");
@@ -149,7 +149,7 @@ bool CStarMap::Load()
 		object = glGenLists(1);
 		if (object==0)
 		{
-			CError::LogError(WARNING_CODE,"Unable to record starmap display list - internal OpenGL error.");
+			CError::LogError(WARNING_CODE,"Unable to record star map display list - internal OpenGL error.");
 			Free();
 			return false;
 		}
@@ -247,22 +247,22 @@ bool CStarMap::LoadStars()
 	CLoader loader;
 	if (!loader.WithResource(STARMAP_RESOURCE))
 	{
-		CError::LogError(WARNING_CODE,"Unable to load starmap file - missing or invalid resource.");
+		CError::LogError(WARNING_CODE,"Unable to load star map file - missing or invalid resource.");
 		return false;
 	}
 	if (!loader.LoadText(STARMAP_FILE,&textlines,&numlines))
 	{
-		CError::LogError(WARNING_CODE,"Unable to load starmap data - file missing from resource or internal loader subsystem error.");
+		CError::LogError(WARNING_CODE,"Unable to load star map data - file missing from resource or internal loader subsystem error.");
 		return false;
 	}
 	if (textlines==NULL)
 	{
-		CError::LogError(WARNING_CODE,"Unable to load starmap - internal loader subsystem error.");
+		CError::LogError(WARNING_CODE,"Unable to load star map - internal loader subsystem error.");
 		return false;
 	}
 	if (numlines==0)
 	{
-		CError::LogError(WARNING_CODE,"Unable to load starmap - empty data file.");
+		CError::LogError(WARNING_CODE,"Unable to load star map - empty data file.");
 		return false;
 	}
 	{

@@ -290,9 +290,9 @@ bool CGamePlay::InitScene()
 		{
 			return false;
 		}
-		SetSplashText("Loading starmap... ");
+		SetSplashText("Loading star map... ");
 		if (!starmap.Load())
-			CError::LogError(WARNING_CODE,"Failed to load the starmap - ignoring.");
+			CError::LogError(WARNING_CODE,"Failed to load the star map - ignoring.");
 	}
 
 	have_flares=CVideoBase::GetOptLensFlares();
