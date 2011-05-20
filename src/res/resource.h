@@ -2,8 +2,8 @@
 // Microsoft Visual C++ generated include file.
 // Used by Solar Space.rc
 //
+#define VS_VERSION_INFO                 1
 #define IDS_DESC                        1
-#define VS_VERSION_INFO                 2
 #define IDD_PREVIEW                     101
 #define IDD_CONFIG                      102
 #define IDD_SHOWLOG                     103
