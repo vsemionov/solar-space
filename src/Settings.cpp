@@ -35,7 +35,7 @@
 
 
 #define REGSTR_PATH_PLUSSCR (REGSTR_PATH_SETUP "\\Screen Savers")
-#define REGSTR_PATH_CONFIG  ("Software\\" TEAMNAME "\\" APPNAME)
+#define REGSTR_PATH_CONFIG  ("Software\\" TEAM_NAME "\\" APP_NAME)
 
 
 
@@ -100,8 +100,8 @@ void CSettings::Init()
 	DataFile[0]=0;
 	RandomDataFile=TRUE;
 	filechain.next=filechain.prev=&filechain;
-	strcpy(filechain.filename,APPNAME);
-	strcpy(filechain.systemname,APPNAME);
+	strcpy(filechain.filename,APP_NAME);
+	strcpy(filechain.systemname,APP_NAME);
 	numfiles=0;
 }
 

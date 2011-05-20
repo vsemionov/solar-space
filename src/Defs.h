@@ -34,14 +34,15 @@ typedef enum{false,true} bool;
 #endif
 
 
-#define CLAMP(val,valmin,valmax) { val=max(min(val,valmax),valmin); }
-
-#define TEAMNAME "vs"
-#define APPNAME  "Solar Space"
-#define APPNAMEZ "Solar Space\0"
+#define TEAM_NAME "vsemionov"
+#define APP_NAME  "Solar Space"
+#define APP_VERSION  "1.2.0"
+#define APP_DESCRIPTION "A three-dimensional, animated screen saver for Windows, showing a view of the Solar System"
 
 #define WEBSITE_URL "http://www.vsemionov.org/solar-space/"
 
+
+#define CLAMP(val,valmin,valmax) { val=max(min(val,valmax),valmin); }
 
 #ifdef _DEBUG
 #define DEBUG TRUE

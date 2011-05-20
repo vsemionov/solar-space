@@ -52,9 +52,18 @@
 #define THUMBNAIL_HEIGHT 112
 
 #define LOG_TIMEOUT 15
-#define LOG_NAME APPNAME " Log.txt"
+#define LOG_NAME APP_NAME " Log.txt"
 
 #define RANDOM_STRING "<random>"
+
+#define ABOUT_HEADER APP_NAME " " APP_VERSION "\n" APP_DESCRIPTION
+#define ABOUT_BODY "For more information, latest news and downloads, please visit the " APP_NAME " website at:" "\n" WEBSITE_URL
+#define ABOUT_AUTHORS "Authors and contributors:"
+#define ABOUT_TEXT ABOUT_HEADER "\n\n" ABOUT_BODY "\n\n" ABOUT_AUTHORS "\n"
+
+#define AUTHORS_FILE "AUTHORS.txt"
+#define AUTHORS_FILE_ERROR "<error: failed to load " AUTHORS_FILE ">"
+
 
 
 
@@ -71,7 +80,7 @@ static void LogIn()
 {
 #ifdef USE_ZLOG
 	INIT_ZIRON_LOG();
-	ZLOG("\"%s\" started.\0",APPNAME);
+	ZLOG("\"%s\" started.\0",APP_NAME);
 #endif
 }
 
@@ -82,7 +91,7 @@ static void LogIn()
 static void LogOut()
 {
 #ifdef USE_ZLOG
-	ZLOG("\"%s\" normally terminated.",APPNAME);
+	ZLOG("\"%s\" normally terminated.",APP_NAME);
 	END_ZIRON_LOG();
 #endif
 }
@@ -266,12 +275,12 @@ static void ErrorLogDialog()
 	if (res!=IDC_BLOG) return;
 	if (!SaveLog())
 	{
-		MessageBox(NULL,"Error saving log.",(APPNAME " error"),MB_OK|MB_ICONERROR);
+		MessageBox(NULL,"Error saving log.",(APP_NAME " Error"),MB_OK|MB_ICONERROR);
 		return;
 	}
 	if (!ViewLog())
 	{
-		MessageBox(NULL,"Error opening log.",(APPNAME " error"),MB_OK|MB_ICONERROR);
+		MessageBox(NULL,"Error opening log.",(APP_NAME " Error"),MB_OK|MB_ICONERROR);
 		return;
 	}
 }
@@ -419,6 +428,91 @@ static void GetSelectedSystem(HWND hwnd)
 
 
 
+static void ShowAboutBox(HWND hwnd)
+{
+	char filename[MAX_PATH];
+	FILE *fp;
+	long tlen;
+	long flen;
+	long size;
+	char *text;
+	char *cur;
+	const char *mb_title;
+	const char *mb_text;
+	int mb_type;
+
+	flen=-1;
+	tlen=strlen(ABOUT_TEXT);
+	size=tlen+1;
+	strcpy(filename,CSettings::DataDir);
+	strcat(filename,"\\");
+	strcat(filename,AUTHORS_FILE);
+	fp=fopen(filename,"rt");
+	if (fp)
+	{
+		if (!fseek(fp,0,SEEK_END))
+		{
+			flen=ftell(fp);
+			if (flen>=0)
+			{
+				size+=flen;
+			}
+			rewind(fp);
+		}
+	}
+
+	if (flen<0)
+	{
+		size+=strlen(AUTHORS_FILE_ERROR);
+	}
+
+	text=(char*)malloc(size);
+	if (text)
+	{
+		strcpy(text,ABOUT_TEXT);
+		if (flen>=0)
+		{
+			cur=text+tlen;
+			while (fgets(cur,flen+1,fp))
+			{
+				tlen=strlen(cur);
+				if (tlen==0)
+					break;
+				flen-=tlen;
+				cur+=tlen;
+			}
+			while (cur>text && *(--cur)=='\n')
+				*cur=0;
+		}
+		else
+		{
+			strcat(text,AUTHORS_FILE_ERROR);
+		}
+		mb_title=("About " APP_NAME);
+		mb_text=text;
+		mb_type=MB_OK|MB_ICONINFORMATION;
+	}
+	else
+	{
+		mb_title=(APP_NAME " Error");
+		mb_text="Memory allocation error.";
+		mb_type=MB_OK|MB_ICONERROR;
+		MessageBox(hwnd,"Memory allocation error.",(APP_NAME " Error"),MB_OK|MB_ICONERROR);
+	}
+
+	if (fp)
+		fclose(fp);
+
+	MessageBox(hwnd,mb_text,mb_title,mb_type);
+
+	if (text)
+		free(text);
+}
+
+
+
+
+
 static BOOL CALLBACK ConfigDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	int i;
@@ -442,6 +536,9 @@ static BOOL CALLBACK ConfigDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 		{
 		case IDC_CKDEFRES:
 			UpdateRes(hwnd);
+			return TRUE;
+		case IDC_ABOUT:
+			ShowAboutBox(hwnd);
 			return TRUE;
 		case IDOK:
 			for (i=0;i<3;i++) if (IsDlgButtonChecked(hwnd,IDC_R640+i)==BST_CHECKED) CSettings::VideoMode=i;

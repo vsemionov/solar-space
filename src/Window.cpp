@@ -49,7 +49,7 @@
 
 #define USE_PASSWORD_THREAD false
 
-#define WINDOW_CLASS_NAME APPNAME " window class"
+#define WINDOW_CLASS_NAME APP_NAME " window class"
 
 
 
@@ -357,7 +357,7 @@ bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, in
 
 	if (!(hwnd=CreateWindowEx(	dwExStyle,			// Extended Style For The Window
 								WINDOW_CLASS_NAME,	// Class Name
-								APPNAME,			// Window Title
+								APP_NAME,			// Window Title
 								dwStyle,			// Defined Window Style
 								0, 0,				// Window Position
 								width,				// Selected Width
