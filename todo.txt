@@ -2,6 +2,7 @@ TECH:
 non-visual:
 
 visual:
+- review and possibly reimplement parsing of stars - correct location size, and color (high)
 - research specular highlights on all planets (found on Deso's laptop) (med)
 
 performance/testing:
