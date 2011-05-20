@@ -517,12 +517,13 @@ void CCamera::Update(float seconds)
 				action=shooting;
 				if (planetinfo)
 				{
-					planetinfo->Start(	endtime,
+					starttime=endtime;
+					planetinfo->Start(	starttime,
 										CAM_DURATION,
 										(type.chaseor?CBody::bodycache[target]->name:CBody::systemname),
 										(type.chaseor?CBody::bodycache[target]:NULL));
 				}
-				endtime=endtime+CAM_DURATION;
+				endtime=starttime+CAM_DURATION;
 				Update(seconds);
 			}
 		}

@@ -33,7 +33,7 @@
 #include "Info.h"
 
 #define CAMERA_INIT_TIME 3.0f
-#define CAMERA_INIT_FADE_TIME 2.0f
+#define CAMERA_INIT_FADE_TIME 2.0f // must be greater than RESTART_TIME (in CGamePlay.cpp)
 
 
 
