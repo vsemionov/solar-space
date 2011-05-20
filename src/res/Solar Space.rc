@@ -31,14 +31,14 @@ BEGIN
     CONTROL         107,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE,0,0,76,56
 END
 
-IDD_SHOWLOG DIALOGEX 0, 0, 172, 88
+IDD_SHOWLOG DIALOGEX 0, 0, 172, 72
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "Show Log"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "Solar Space has encountered problems.\nDo you want to see the errors/warnings log?",IDC_STATIC,8,8,156,50
-    DEFPUSHBUTTON   "Show",IDC_BLOG,34,66,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,88,66,50,14
+    LTEXT           "Solar Space has encountered problems.\nDo you want to see the errors/warnings log?",IDC_STATIC,8,8,156,24
+    DEFPUSHBUTTON   "Show",IDC_BLOG,34,50,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,88,50,50,14
 END
 
 IDD_CONFIG DIALOGEX 0, 0, 160, 226
@@ -89,7 +89,7 @@ BEGIN
         LEFTMARGIN, 8
         RIGHTMARGIN, 164
         TOPMARGIN, 8
-        BOTTOMMARGIN, 80
+        BOTTOMMARGIN, 64
     END
 
     IDD_CONFIG, DIALOG
