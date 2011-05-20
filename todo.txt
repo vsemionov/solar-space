@@ -15,7 +15,7 @@ user:
 - installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
 - update all files to match new company name and version (defs.h, registry paths, installer script, manifest, splash, etc) (med)
 - installer asks before setting solar space as the default screen saver (med)
-- update installer readme file (low)
+- update installer readme file (or remove if not really necessary) (low)
 
 misc:
 
