@@ -13,8 +13,6 @@ user:
 - redesign settings dialog (med)
  - add website link
  - other enhancements
-- update the show log dialog - make it wider and possibly add an icon (med)
-- update button heights of all dialogs to the default (med)
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
 - installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
 - update all files to match new company name and version (defs.h, registry paths, installer script, manifest, splash, etc) (med)
