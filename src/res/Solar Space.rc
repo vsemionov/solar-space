@@ -119,8 +119,8 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "Solar Space.ico"
-IDI_ICON2               ICON                    "WRENCH.ICO"
+IDI_APP                 ICON                    "Solar Space.ico"
+IDI_OPTIONS             ICON                    "WRENCH.ICO"
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////

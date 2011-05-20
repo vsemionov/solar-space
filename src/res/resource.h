@@ -5,11 +5,11 @@
 #define IDS_DESC                        1
 #define VS_VERSION_INFO                 1
 #define IDD_CONFIG                      101
-#define IDI_ICON1                       102
+#define IDI_APP                         102
 #define IDB_PREVIEW                     107
 #define IDD_PREVIEW                     108
 #define IDD_SHOWLOG                     109
-#define IDI_ICON2                       115
+#define IDI_OPTIONS                     115
 #define IDC_R640                        1000
 #define IDC_R800                        1001
 #define IDC_R1024                       1002
