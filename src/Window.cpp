@@ -557,7 +557,9 @@ bool CWindow::Create(HWND hParent)
 		}
 		if (DEBUG)
 		{
-			width=prev_p2(width-1); height=width*3/4;
+			int nwidth=prev_p2(width-1);
+			int nheight=nwidth*height/width;
+			width=nwidth; height=nheight;
 			dwStyle=WS_POPUPWINDOW|WS_CAPTION|WS_MINIMIZEBOX;
 			dwExStyle=0;
 		}
