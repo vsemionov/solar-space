@@ -10,9 +10,6 @@ performance/testing:
 
 user:
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker) (med)
-- redesign settings dialog (med)
- - add website link
- - other enhancements
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
 - installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
 - update all files to match new company name and version (defs.h, registry paths, installer script, manifest, splash, etc) (med)
