@@ -40,6 +40,9 @@ typedef enum{false,true} bool;
 #define APPNAME  "Solar Space"
 #define APPNAMEZ "Solar Space\0"
 
+#define WEBSITE_URL "http://www.vsemionov.org/solar-space/"
+
+
 #ifdef _DEBUG
 #define DEBUG TRUE
 //#define USE_ZLOG

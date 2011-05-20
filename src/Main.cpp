@@ -421,6 +421,8 @@ static void GetSelectedSystem(HWND hwnd)
 
 static BOOL CALLBACK ConfigDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	int i;
+	int id;
 	switch (msg)
 	{
 	case WM_INITDIALOG:
@@ -435,14 +437,13 @@ static BOOL CALLBACK ConfigDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 		CWindow::CenterWindow(hwnd);
 		return TRUE;
 	case WM_COMMAND:
-		int id=LOWORD(wParam);
-		if (id==IDC_CKDEFRES)
+		id=LOWORD(wParam);
+		switch (id)
 		{
+		case IDC_CKDEFRES:
 			UpdateRes(hwnd);
-		}
-		if (id==IDOK)
-		{
-			int i;
+			return TRUE;
+		case IDOK:
 			for (i=0;i<3;i++) if (IsDlgButtonChecked(hwnd,IDC_R640+i)==BST_CHECKED) CSettings::VideoMode=i;
 			for (i=0;i<2;i++) if (IsDlgButtonChecked(hwnd,IDC_RLOW+i)==BST_CHECKED) CSettings::DetailLevel=i;
 			CSettings::DefaultRes=(IsDlgButtonChecked(hwnd,IDC_CKDEFRES)==BST_CHECKED);
@@ -450,9 +451,26 @@ static BOOL CALLBACK ConfigDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 			CSettings::ClockOn=(IsDlgButtonChecked(hwnd,IDC_CKCLOCK)==BST_CHECKED);
 			GetSelectedSystem(hwnd);
 			CSettings::WriteConfigRegistry();
+			EndDialog(hwnd,id);
+			return TRUE;
+		case IDCANCEL:
+			EndDialog(hwnd,id);
+			return TRUE;
 		}
-		if (id==IDOK || id==IDCANCEL) EndDialog(hwnd,id);
-		return TRUE;
+		break;
+	case WM_NOTIFY:
+		id=wParam;
+		if (id==IDC_WEBSITE)
+		{
+			switch (((LPNMHDR)lParam)->code)
+			{
+			case NM_CLICK:
+			case NM_RETURN:
+				ShellExecute(NULL, NULL, WEBSITE_URL, NULL, NULL, SW_SHOWNORMAL);
+				return TRUE;
+			}
+		}
+		break;
 	}
 	return FALSE;
 }
