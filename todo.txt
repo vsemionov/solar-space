@@ -7,7 +7,7 @@ visual:
 - research specular highlights on all planets (found on Deso's laptop) (med)
 
 performance/testing:
-- test on a remote machine (remote desktop) (low)
+- test (the release configuration) on a remote machine (remote desktop) (low)
 - longevity testing (with camera transition times decreased) (>48h) (low)
 
 user:
