@@ -17,7 +17,7 @@ LIBS = $(GL_LIBS) $(FT_LIBS) $(WIN_LIBS)
 
 WIN_LIBS = -lgdi32 -lwinmm -luuid -lole32 -loleaut32 -lcomctl32
 
-CXXFLAGS = $(INCLUDE_DIRS) $(DEBUG) $(OPTIMIZATION)
+CXXFLAGS = $(INCLUDE_DIRS) $(DEBUG) $(OPTIMIZATION) -Wall -Wextra
 LDFLAGS = $(LIB_DIRS)
 
 SRC_DIR = src
