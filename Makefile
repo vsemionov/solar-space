@@ -17,8 +17,10 @@ LIBS = $(GL_LIBS) $(FT_LIBS) $(WIN_LIBS)
 
 WIN_LIBS = -lgdi32 -lwinmm -luuid -lole32 -loleaut32 -lcomctl32
 
-CXXFLAGS = $(INCLUDE_DIRS) $(DEBUG) $(OPTIMIZATION) -Wall -Wextra
-LDFLAGS = $(LIB_DIRS)
+CXX_MISC = -Wall -Wextra
+LD_MISC = -static-libgcc -static-libstdc++
+CXXFLAGS = $(INCLUDE_DIRS) $(DEBUG) $(OPTIMIZATION) $(CXX_MISC)
+LDFLAGS = $(LIB_DIRS) $(LD_MISC)
 
 SRC_DIR = src
 OUTPUT_DIR = build
