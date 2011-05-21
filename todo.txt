@@ -1,7 +1,7 @@
 TECH:
 non-visual:
 - check unused params in CCamera::GenWideCam() (high)
-- switch to MinGW, create a makefile (use -Wall and -Wextra), research code generation and optimization options (high)
+- research GCC code generation and optimization options (high)
 
 visual:
 - review and possibly reimplement parsing of stars - correct location, size, and color; see e.g. http://home.comcast.net/~erniew/astro/tycho.html (high)
