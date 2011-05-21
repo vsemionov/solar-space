@@ -1,6 +1,6 @@
 TECH:
 non-visual:
-- switch to MinGW, create a makefile, research code generation and optimization options (med)
+- switch to MinGW, create a makefile (use -Wall and -Wextra), research code generation and optimization options (med)
 
 visual:
 - review and possibly reimplement parsing of stars - correct location, size, and color; see e.g. http://home.comcast.net/~erniew/astro/tycho.html (high)
