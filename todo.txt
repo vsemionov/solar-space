@@ -1,5 +1,6 @@
 TECH:
 non-visual:
+- MinGW compiled binaries show a console window (high)
 
 visual:
 - review and possibly reimplement parsing of stars - correct location, size, and color; see e.g. http://home.comcast.net/~erniew/astro/tycho.html (high)
