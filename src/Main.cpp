@@ -258,7 +258,7 @@ static bool ViewLog()
 	if (fp)
 	{
 		fclose(fp);
-		HINSTANCE hInst=ShellExecute(NULL,"open",filename,NULL,NULL,SW_SHOWNORMAL);
+		HINSTANCE hInst=ShellExecute(NULL,NULL,filename,NULL,NULL,SW_SHOWNORMAL);
 		if ((int)hInst>32)
 		{
 			return true;
