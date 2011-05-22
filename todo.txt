@@ -20,7 +20,7 @@ user:
 - why are short paths used for the saver location in the installer; change output filename to a short name (e.g. SolSpace.scr) if necessary (high)
 - save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
-- installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
+- installer should use Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
 - update all files to match new team name and version (defs.h, registry paths, installer script, manifest, splash, etc) (med)
 - installer asks before setting solar space as the default screen saver (med)
 - update installer readme file (or remove if not really necessary) (low)
