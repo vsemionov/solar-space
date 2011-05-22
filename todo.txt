@@ -16,7 +16,7 @@ user:
 - error log dialog not shown (entire screen is black) when warnings should be shown after being run as a screensaver by windows (high)
 - preview image not shown (high)
 - config dialog not centered properly (high)
-- why are short paths used for the saver location in the installer; change output filename to a short name (e.g. SolSpace.scr) if necessary (high)
+- change output filename to a short name (e.g. SolSpace.scr) (high)
 - save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
 - installer should use Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
