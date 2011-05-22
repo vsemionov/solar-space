@@ -478,20 +478,38 @@ int CWindow::prev_p2(int a)
 
 void CWindow::CenterWindow(HWND hwnd)
 {
-	RECT rect;
-	int x,y;
-	HWND hParent=GetParent(hwnd);
-	if (!hParent)
-		hParent=GetDesktopWindow();
-	GetClientRect(hParent,&rect);
-	x=rect.right;
-	y=rect.bottom;
-	GetClientRect(hwnd,&rect);
-	x-=rect.right;
-	y-=rect.bottom;
-	x/=2;
-	y/=2;
-	SetWindowPos(hwnd,NULL,x,y,0,0,SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOSIZE|SWP_NOZORDER);
+	HWND hwndOwner;
+	RECT rc, rcWin, rcOwner;
+
+	// Get the owner window and child rectangles.
+
+	if ((hwndOwner = GetParent(hwnd)) == NULL)
+	{
+		hwndOwner = GetDesktopWindow();
+	}
+
+	GetWindowRect(hwndOwner, &rcOwner);
+	GetWindowRect(hwnd, &rcWin);
+	CopyRect(&rc, &rcOwner);
+
+	// Offset the owner and child rectangles so that right and bottom
+	// values represent the width and height, and then offset the owner again
+	// to discard space taken up by the child.
+
+	OffsetRect(&rcWin, -rcWin.left, -rcWin.top);
+	OffsetRect(&rc, -rc.left, -rc.top);
+	OffsetRect(&rc, -rcWin.right, -rcWin.bottom);
+
+	// The new position is the sum of half the remaining space and the owner's
+	// original position.
+
+	SetWindowPos(hwnd,
+			NULL,
+			rcOwner.left + (rc.right / 2),
+			rcOwner.top + (rc.bottom / 2),
+			0,
+			0,
+			SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOSIZE|SWP_NOZORDER);
 }
 
 
