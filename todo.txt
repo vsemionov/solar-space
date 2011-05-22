@@ -13,7 +13,6 @@ performance/testing:
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
 user:
-- "Show Log" button text overwritten (med)
 - save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
 - installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
