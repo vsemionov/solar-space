@@ -162,7 +162,7 @@ static BOOL PrintCloseTime(HWND hwDlg)
 
 
 
-static BOOL CALLBACK QuestionLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+static BOOL CALLBACK ShowLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	int id;
 	switch (msg)
@@ -271,7 +271,7 @@ static bool ViewLog()
 static void ErrorLogDialog()
 {
 	int res;
-	res=DialogBox(GetModuleHandle(NULL),MAKEINTRESOURCE(IDD_SHOWLOG),NULL,QuestionLogProc);
+	res=DialogBox(GetModuleHandle(NULL),MAKEINTRESOURCE(IDD_SHOWLOG),NULL,ShowLogProc);
 	if (res!=IDC_BLOG) return;
 	if (!SaveLog())
 	{
