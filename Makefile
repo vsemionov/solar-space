@@ -18,7 +18,7 @@ LIBS = $(GL_LIBS) $(FT_LIBS) $(WIN_LIBS)
 WIN_LIBS = -lgdi32 -lwinmm -luuid -lole32 -loleaut32 -lcomctl32
 
 CXX_MISC = -Wall -Wextra
-LD_MISC = -static-libgcc -static-libstdc++
+LD_MISC = -Wl,-subsystem,windows -static-libgcc -static-libstdc++
 CXXFLAGS = $(INCLUDE_DIRS) $(DEBUG) $(OPTIMIZATION) $(CXX_MISC)
 LDFLAGS = $(LIB_DIRS) $(LD_MISC)
 
