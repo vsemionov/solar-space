@@ -149,13 +149,23 @@ static void StaticPreview(HWND hwndParent)
 
 
 
-static BOOL PrintCloseTime(HWND hwDlg)
+static BOOL UpdateCloseTime(HWND hwDlg)
 {
-	static int timeleft=LOG_TIMEOUT+1;
-	timeleft--;
+	static int timeleft=0;
+	static char orig[32]={0};
+	static bool retrieved=false;
 	char btxt[32];
-	sprintf(btxt,"Show log (%d)",timeleft);
+	if (timeleft>0)
+		timeleft--;
+	else
+		timeleft=LOG_TIMEOUT;
 	HWND hwItem=GetDlgItem(hwDlg,IDC_BLOG);
+	if (retrieved==false)
+	{
+		GetWindowText(hwItem,orig,sizeof(orig));
+		retrieved=true;
+	}
+	sprintf(btxt,"%s (%d)",orig,timeleft);
 	SetWindowText(hwItem,btxt);
 	return (timeleft>0);
 }
@@ -173,10 +183,10 @@ static BOOL CALLBACK ShowLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 	case WM_INITDIALOG:
 		CWindow::CenterWindow(hwnd);
 		SetTimer(hwnd,0,1000,NULL);
-		PrintCloseTime(hwnd);
+		UpdateCloseTime(hwnd);
 		return TRUE;
 	case WM_TIMER:
-		if (!PrintCloseTime(hwnd))
+		if (!UpdateCloseTime(hwnd))
 			EndDialog(hwnd,IDCANCEL);
 		return TRUE;
 	case WM_COMMAND:
