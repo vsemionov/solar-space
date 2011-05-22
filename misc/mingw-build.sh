@@ -1,1 +1,0 @@
-g++ -I /z/libs/gl/include -I /z/libs/freetype/include -I /z/libs/freetype/include/freetype2 -L /z/libs/freetype/lib -o solar-space src/*.cpp -lfreetype -lopengl32 -lglu32 -lgdi32 -lole32 -luuid -loleaut32 -lwinmm -lcomctl32
