@@ -6,18 +6,18 @@ visual:
 - research specular highlights on all planets (found on Deso's laptop) (med)
 
 performance/testing:
-- test config dialog (low)
+- test sll dialogs (including preview) (low)
 - test for backplane clipping, correct z ordering from very far distances, also verify the system config, etc (med)
 - test by terminating application while run by windows as a screensaver; also by showing the error log dialog, before and after opening the saver window, without terminating (med)
 - test on a remote machine (remote desktop) (low)
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
 user:
-- "Show Log" button text overwritten; rename QuestionLogProc() to ShowLogProc(); save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
-- check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker) (med)
+- "Show Log" button text overwritten (med)
+- save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
 - installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
-- update all files to match new company name and version (defs.h, registry paths, installer script, manifest, splash, etc) (med)
+- update all files to match new team name and version (defs.h, registry paths, installer script, manifest, splash, etc) (med)
 - installer asks before setting solar space as the default screen saver (med)
 - update installer readme file (or remove if not really necessary) (low)
 
