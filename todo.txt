@@ -14,7 +14,7 @@ performance/testing:
 
 user:
 - error log dialog not shown (entire screen is black) when warnings should be shown after being run as a screensaver by windows (high)
-- preview image not shown (high)
+- preview image not shown; update bitmap id value in preview dialog resource; if possible, set to its symbolic name (high)
 - config dialog not centered properly (high)
 - change output filename to a short name (e.g. SolSpace.scr) (high)
 - save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
