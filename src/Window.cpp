@@ -476,8 +476,9 @@ int CWindow::prev_p2(int a)
 
 
 
-void CWindow::CenterWindow(HWND hwnd)
+void CWindow::CenterWindow(HWND hwnd, bool relative)
 {
+	BOOL (WINAPI *GetRectFunc)(HWND,LPRECT)=(relative?GetClientRect:GetWindowRect);
 	HWND hwndOwner;
 	RECT rc, rcWin, rcOwner;
 
@@ -488,8 +489,8 @@ void CWindow::CenterWindow(HWND hwnd)
 		hwndOwner = GetDesktopWindow();
 	}
 
-	GetWindowRect(hwndOwner, &rcOwner);
-	GetWindowRect(hwnd, &rcWin);
+	GetRectFunc(hwndOwner, &rcOwner);
+	GetRectFunc(hwnd, &rcWin);
 	CopyRect(&rc, &rcOwner);
 
 	// Offset the owner and child rectangles so that right and bottom
@@ -630,7 +631,7 @@ bool CWindow::Create(HWND hParent)
 
 	if (DEBUG)
 	{
-		CenterWindow(hwnd);
+		CenterWindow(hwnd,false);
 	}
 
 	ShowWindow(hwnd, SW_SHOWNORMAL);

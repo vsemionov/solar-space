@@ -120,7 +120,7 @@ static BOOL CALLBACK PreviewProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 	switch (msg)
 	{
 	case WM_INITDIALOG:
-		CWindow::CenterWindow(hwnd);
+		CWindow::CenterWindow(hwnd,true);
 		return FALSE;
 	}
 	return FALSE;
@@ -178,7 +178,7 @@ static BOOL CALLBACK ShowLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 	switch (msg)
 	{
 	case WM_INITDIALOG:
-		CWindow::CenterWindow(hwnd);
+		CWindow::CenterWindow(hwnd,false);
 		SetTimer(hwnd,0,1000,NULL);
 		UpdateCloseTime(hwnd);
 		return TRUE;
@@ -538,7 +538,7 @@ static BOOL CALLBACK ConfigDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 		UpdateRes(hwnd);
 		FillList(hwnd);
 		SelectList(hwnd);
-		CWindow::CenterWindow(hwnd);
+		CWindow::CenterWindow(hwnd,false);
 		return TRUE;
 	case WM_COMMAND:
 		id=LOWORD(wParam);
