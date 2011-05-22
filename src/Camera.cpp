@@ -257,6 +257,8 @@ void CCamera::GenWideCam(float *len, float *pitch, float yaw)
 	if (rand()&1) *pitch=-(*pitch);
 	a=(float)LEN2(rc,rc)-rc;
 #else
+	(void)pitch; // avoid unused parameter warning
+	(void)yaw; // avoid unused parameter warning
 	a=rc*WIDE_CAM_TARGET_DIST;
 	trot=(float)(rand()%(360*4))*0.25f;
 	trot*=(float)(M_PI/180.0);

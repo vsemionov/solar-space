@@ -118,6 +118,8 @@ bool MessagePump()
 
 static BOOL CALLBACK PreviewProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	(void)wParam; // avoid unused parameter warning
+	(void)lParam; // avoid unused parameter warning
 	switch (msg)
 	{
 	case WM_INITDIALOG:
@@ -165,6 +167,7 @@ static BOOL PrintCloseTime(HWND hwDlg)
 static BOOL CALLBACK ShowLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	int id;
+	(void)lParam; // avoid unused parameter warning
 	switch (msg)
 	{
 	case WM_INITDIALOG:
@@ -600,6 +603,9 @@ static void ChangePassword(HWND hwnd)
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	int Ret=0;
+	(void)hPrevInstance; // avoid unused parameter warning
+	(void)lpCmdLine; // avoid unused parameter warning
+	(void)nCmdShow; // avoid unused parameter warning
 	AppInstance=hInstance;
 	LogIn();
 	char *c=GetCommandLine();
