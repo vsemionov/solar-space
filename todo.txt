@@ -1,14 +1,14 @@
 TECH:
 non-visual:
-- check unused params in CCamera::GenWideCam() (high)
-- research GCC code generation and optimization options (high)
 
 visual:
 - review and possibly reimplement parsing of stars - correct location, size, and color; see e.g. http://home.comcast.net/~erniew/astro/tycho.html (high)
 - research specular highlights on all planets (found on Deso's laptop) (med)
 
 performance/testing:
-- test by terminating application while run by windows as a screensaver (med)
+- test config dialog (low)
+- test for backplane clipping, correct z ordering from very far distances, also verify the system config, etc (med)
+- test by terminating application while run by windows as a screensaver; also by showing the error log dialog, before and after opening the saver window, without terminating (med)
 - test on a remote machine (remote desktop) (low)
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
@@ -22,6 +22,7 @@ user:
 - update installer readme file (or remove if not really necessary) (low)
 
 misc:
+- credit people (med)
 
 
 NON-TECH:
