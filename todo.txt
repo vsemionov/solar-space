@@ -1,5 +1,6 @@
 TECH:
 non-visual:
+- check MS screesaver library implementation (high)
 
 visual:
 - review and possibly reimplement parsing of stars - correct location, size, and color; see e.g. http://home.comcast.net/~erniew/astro/tycho.html (high)
@@ -14,7 +15,7 @@ performance/testing:
 
 user:
 - error log dialog not shown (entire screen is black) when warnings should be shown after being run as a screensaver by windows (high)
-- resize precompiled preview dialog resource, not programmatically (maybe?) (high)
+- preview not shown (caused by new implementaion of CenterWindow()) (high)
 - change output filename to a short name (e.g. SolSpace.scr) (high)
 - save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
