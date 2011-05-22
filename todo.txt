@@ -8,7 +8,7 @@ visual:
 performance/testing:
 - test sll dialogs (including preview) (low)
 - test for backplane clipping, correct z ordering from very far distances, also verify the system config, etc (med)
-- test by terminating application while run by windows as a screensaver; also by showing the error log dialog, before and after opening the saver window, without terminating (med)
+- test by terminating application while run by windows as a screensaver; also by showing the error log dialog, before and after opening the saver window, without terminating (high)
 - test on a remote machine (remote desktop) (low)
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
