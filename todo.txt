@@ -12,7 +12,7 @@ performance/testing:
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
 user:
-- "Show Log" button text overwritten; rename QuestionLogProc() to ShowLogProc() (high)
+- "Show Log" button text overwritten; rename QuestionLogProc() to ShowLogProc(); save the log to a non-temp file under %APPDATA% (high)
 - check/redistribute MSVC C runtime library, check all other runtime dependencies (depends walker) (med)
 - update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
 - installer uses Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
