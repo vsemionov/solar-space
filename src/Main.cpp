@@ -154,12 +154,13 @@ static BOOL UpdateCloseTime(HWND hwDlg)
 	static int timeleft=0;
 	static char orig[32]={0};
 	static bool retrieved=false;
+	HWND hwItem;
 	char btxt[32];
 	if (timeleft>0)
 		timeleft--;
 	else
 		timeleft=LOG_TIMEOUT;
-	HWND hwItem=GetDlgItem(hwDlg,IDC_BLOG);
+	hwItem=GetDlgItem(hwDlg,IDC_BLOG);
 	if (retrieved==false)
 	{
 		GetWindowText(hwItem,orig,sizeof(orig));
