@@ -187,6 +187,7 @@ LRESULT CALLBACK CWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 	case WM_MBUTTONDOWN:
 	case WM_RBUTTONDOWN:
 	case WM_KEYDOWN:
+	case WM_KEYUP:
 		if (ScrMode==smSaver && !CSettings::IsDialogActive && !DEBUG)
 			CSettings::CloseSaverWindow();
 		break;
