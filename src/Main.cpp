@@ -48,6 +48,9 @@
 #include "res\resource.h"
 
 
+#define THUMBNAIL_WIDTH 152
+#define THUMBNAIL_HEIGHT 112
+
 #define LOG_TIMEOUT 15
 #define LOG_NAME APP_NAME " Log.txt"
 
@@ -120,6 +123,7 @@ static BOOL CALLBACK PreviewProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 	switch (msg)
 	{
 	case WM_INITDIALOG:
+		SetWindowPos(hwnd,NULL,0,0,THUMBNAIL_WIDTH,THUMBNAIL_HEIGHT,SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOMOVE|SWP_NOZORDER);
 		CWindow::CenterWindow(hwnd,true);
 		return FALSE;
 	}
