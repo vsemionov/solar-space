@@ -42,16 +42,16 @@
     <IncludePath>Z:\libs\gl\include;Z:\libs\freetype\include;Z:\libs\freetype\include\freetype2;$(IncludePath)</IncludePath>
     <LibraryPath>Z:\libs\freetype\lib;$(LibraryPath)</LibraryPath>
     <GenerateManifest>false</GenerateManifest>
-    <TargetExt>.scr</TargetExt>
     <TargetName>SolSpace</TargetName>
+    <TargetExt>.scr</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>Z:\libs\gl\include;Z:\libs\freetype\include;Z:\libs\freetype\include\freetype2;$(IncludePath)</IncludePath>
     <LibraryPath>Z:\libs\freetype\lib;$(LibraryPath)</LibraryPath>
     <GenerateManifest>false</GenerateManifest>
-    <TargetExt>.scr</TargetExt>
     <TargetName>SolSpace</TargetName>
+    <TargetExt>.scr</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
