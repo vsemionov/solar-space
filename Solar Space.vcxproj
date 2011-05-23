@@ -43,6 +43,7 @@
     <LibraryPath>Z:\libs\freetype\lib;$(LibraryPath)</LibraryPath>
     <GenerateManifest>false</GenerateManifest>
     <TargetExt>.scr</TargetExt>
+    <TargetName>SolSpace</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -50,6 +51,7 @@
     <LibraryPath>Z:\libs\freetype\lib;$(LibraryPath)</LibraryPath>
     <GenerateManifest>false</GenerateManifest>
     <TargetExt>.scr</TargetExt>
+    <TargetName>SolSpace</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
