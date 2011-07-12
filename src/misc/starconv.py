@@ -88,12 +88,7 @@ for line in catalog:
     star = parse(line)
     if star is not None:
         stars.append(star)
-        ch = '.'
-    else:
-        ch = 'x'
-    print(ch, end='')
 catalog.close()
-print()
 
 print("sorting...")
 stars.sort(key=lambda star: star.mag, reverse=True)
