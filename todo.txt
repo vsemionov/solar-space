@@ -1,13 +1,13 @@
 TECH:
 non-visual:
-- check MS screesaver library implementation (high)
+- check MS screesaver library implementation (description unclear; what should be checked? see revision history and determine from other changes from the sameperiod; probably implementation of preview dialog sizing) (high)
 
 visual:
 - review and possibly reimplement parsing of stars - correct location, size, and color; see e.g. http://home.comcast.net/~erniew/astro/tycho.html (high)
 - research specular highlights on all planets (found on Deso's laptop) (med)
 
 performance/testing:
-- test sll dialogs (including preview) (low)
+- test all dialogs (including preview) (low)
 - test for backplane clipping, correct z ordering from very far distances, also verify the system config, etc (med)
 - test by terminating application while run by windows as a screensaver; also by showing the error log dialog, before and after opening the saver window, without terminating (high)
 - test on a remote machine (remote desktop) (low)
