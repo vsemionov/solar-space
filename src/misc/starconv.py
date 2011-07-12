@@ -14,8 +14,8 @@ header = """\
 //...........
 //
 //Star line format: (separator=='|')
-//Dec, degrees [0-180]
-//RA, degrees [0-360)
+//Dec, degrees [-90:90]
+//RA, degrees [0:360)
 //SEPARATOR
 //star magnitute, mag
 //SEPARATOR
@@ -67,7 +67,7 @@ def parse(line):
     if not valid_line(line):
         return None
     star = Star()
-    star.dec = 90 - parse_field(line, "DE-") * (parse_field(line, "DEd") + parse_field(line, "DEm")/60 + parse_field(line, "DEs")/3600)
+    star.dec = parse_field(line, "DE-") * (parse_field(line, "DEd") + parse_field(line, "DEm")/60 + parse_field(line, "DEs")/3600)
     star.ra = 15 * (parse_field(line, "RAh") + parse_field(line, "RAm")/60 + parse_field(line, "RAs")/3600)
     star.mag = parse_field(line, "Vmag")
     try:

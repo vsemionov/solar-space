@@ -373,7 +373,7 @@ void CStarMap::PrepData()
 	int i;
 	for (i=0;i<num_stars;i++)
 	{
-		double theta=stars[i].Dec*(M_PI/180.0);
+		double theta=(90.0-stars[i].Dec)*(M_PI/180.0);
 		double phi=stars[i].RA*(M_PI/180.0);
 		double Ctheta=cos(theta);
 		double Stheta=sin(theta);
