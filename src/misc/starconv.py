@@ -17,9 +17,11 @@ header = """\
 //Dec, degrees [-90:90]
 //RA, degrees [0:360)
 //SEPARATOR
-//star magnitute, mag
+//relative brightness (proportional to point size)
 //SEPARATOR
-//B-V color index, mag
+//red color component [0:1]
+//green color component [0:1]
+//blue color component [0:1]
 
 """
 
@@ -43,8 +45,8 @@ class Star:
     def __init__(self):
         self.dec = 0.0
         self.ra = 0.0
-        self.mag = 0.0
-        self.bv = 0.0
+        self.brightness = 0.0
+        self.color = [0.0, 0.0, 0.0]
 
 
 def usage():
@@ -63,17 +65,24 @@ def parse_field(line, field):
 def valid_line(line):
     return line[fields["Vmag"][0]-1+2] == '.'
 
+def calc_brightness(mag):
+    return (1/2.512) ** mag
+
+def calc_color(bv):
+    return [1.0, 1.0, 1.0]
+
 def parse(line):
     if not valid_line(line):
         return None
     star = Star()
     star.dec = parse_field(line, "DE-") * (parse_field(line, "DEd") + parse_field(line, "DEm")/60 + parse_field(line, "DEs")/3600)
     star.ra = 15 * (parse_field(line, "RAh") + parse_field(line, "RAm")/60 + parse_field(line, "RAs")/3600)
-    star.mag = parse_field(line, "Vmag")
+    star.brightness = calc_brightness(parse_field(line, "Vmag"))
     try:
-        star.bv = parse_field(line, "B-V")
+        bv = parse_field(line, "B-V")
     except ValueError:
-        star.bv = 0.0 # light blue if B-V is not specified
+        bv = 0.0 # light blue if B-V is not specified
+    star.color = calc_color(bv)
     return star
 
 
@@ -91,14 +100,14 @@ for line in catalog:
 catalog.close()
 
 print("sorting...")
-stars.sort(key=lambda star: star.mag, reverse=True)
+stars.sort(key=lambda star: star.brightness, reverse=False)
 
 print("writing output data...")
 starmap = open(sys.argv[2], "wt")
 starmap.write(header)
 starmap.write(str(len(stars)) + "\n")
 for star in stars:
-    line = "{} {} | {} | {}\n".format(star.dec, star.ra, star.mag, star.bv)
+    line = "{} {} | {} | {} {} {}\n".format(star.dec, star.ra, star.brightness, star.color[0], star.color[1], star.color[2])
     starmap.write(line)
 starmap.close()
 
