@@ -1,4 +1,6 @@
 import sys
+import math
+import bisect
 
 
 # Related articles:
@@ -46,6 +48,18 @@ fields = {
             "B-V": (110, 114)
             }
 
+bv_html = (
+            (-0.40, 0x9bb2ff), (-0.35, 0x9eb5ff), (-0.30, 0xa3b9ff), (-0.25, 0xaabfff), (-0.20, 0xb2c5ff), (-0.15, 0xbbccff), (-0.10, 0xc4d2ff), (-0.05, 0xccd8ff),
+            ( 0.00, 0xd3ddff), ( 0.05, 0xdae2ff), ( 0.10, 0xdfe5ff), ( 0.15, 0xe4e9ff), ( 0.20, 0xe9ecff), ( 0.25, 0xeeefff), ( 0.30, 0xf3f2ff), ( 0.35, 0xf8f6ff),
+            ( 0.40, 0xfef9ff), ( 0.45, 0xfff9fb), ( 0.50, 0xfff7f5), ( 0.55, 0xfff5ef), ( 0.60, 0xfff3ea), ( 0.65, 0xfff1e5), ( 0.70, 0xffefe0), ( 0.75, 0xffeddb),
+            ( 0.80, 0xffebd6), ( 0.85, 0xffe9d2), ( 0.90, 0xffe8ce), ( 0.95, 0xffe6ca), ( 1.00, 0xffe5c6), ( 1.05, 0xffe3c3), ( 1.10, 0xffe2bf), ( 1.15, 0xffe0bb),
+            ( 1.20, 0xffdfb8), ( 1.25, 0xffddb4), ( 1.30, 0xffdbb0), ( 1.35, 0xffdaad), ( 1.40, 0xffd8a9), ( 1.45, 0xffd6a5), ( 1.50, 0xffd5a1), ( 1.55, 0xffd29c),
+            ( 1.60, 0xffd096), ( 1.65, 0xffcc8f), ( 1.70, 0xffc885), ( 1.75, 0xffc178), ( 1.80, 0xffb765), ( 1.85, 0xffa94b), ( 1.90, 0xff9523), ( 1.95, 0xff7b00),
+            ( 2.00, 0xff5200)
+            )
+
+bv_rgb = tuple([(bv, (html>>16, html>>8&0xff, html&0xff)) for (bv, html) in bv_html])
+bv_list, rgb_list = zip(*bv_rgb)
 
 stars = []
 
@@ -55,11 +69,14 @@ class Star:
         self.dec = 0.0
         self.ra = 0.0
         self.brightness = 0.0
-        self.color = [0.0, 0.0, 0.0]
+        self.color = (0.0, 0.0, 0.0)
 
 
 def usage():
     print("Usage: starconv.py catalog starmap", file=sys.stderr)
+
+def valid_line(line):
+    return line[fields["Vmag"][0]-1+2] == '.'
 
 def parse_field(line, field):
     byte_range = fields[field]
@@ -71,14 +88,37 @@ def parse_field(line, field):
         index = byte_range[0] - 1
         return float(line[index] + "1")
 
-def valid_line(line):
-    return line[fields["Vmag"][0]-1+2] == '.'
-
 def calc_brightness(mag):
-    return (1/2.512) ** mag
+    return math.pow((1/2.512), mag)
+
+def find_bv1(bv):
+    i = bisect.bisect_right(bv_list, bv)
+    return max(i - 1, 0)
+
+def find_bv2(bv):
+    i = bisect.bisect_left(bv_list, bv)
+    return min(i, len(bv_list) - 1)
 
 def calc_color(bv):
-    return [1.0, 1.0, 1.0]
+    c3 = range(3)
+
+    index1, index2 = find_bv1(bv), find_bv2(bv)
+    if index1 == index2:
+        rgb = rgb_list[index1]
+    else:
+        bv1, bv2 = bv_list[index1], bv_list[index2]
+        rgb1, rgb2 = rgb_list[index1], rgb_list[index2]
+
+        deltabv = bv2 - bv1
+        rgb_der = [(rgb2[c] - rgb1[c])/deltabv for c in c3]
+
+        dbv = bv - bv1
+        rgb = [rgb1[c] + rgb_der[c] * dbv for c in c3]
+
+    cmax = max(rgb)
+    rgb = [rgb[c]/cmax for c in c3]
+
+    return tuple(rgb)
 
 def parse(line):
     if not valid_line(line):
