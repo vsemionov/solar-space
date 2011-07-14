@@ -14,10 +14,7 @@ performance/testing:
 user:
 - error log dialog not shown (entire screen is black) after closing the main window when run as a screensaver by windows; try creating the dialog as a child of the main window before closing the latter; if no other options are found, do not display this dialog after creating the main window (high)
 - save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
-- update installer to latest InnoSetup version, check installer script logic (registry changes, etc?) (med)
 - installer should use Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
-- update all files to match new team name and version (defs.h, registry paths, installer script, manifest, splash, etc) (med)
-- installer asks before setting solar space as the default screen saver (med)
 - update installer readme file (or remove if not really necessary) (low)
 
 misc:
