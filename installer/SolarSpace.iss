@@ -50,8 +50,8 @@ Root: HKCU; Subkey: "Control Panel\Desktop"; ValueType: string; ValueName: "SCRN
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Parameters: "-s"
-Name: "{group}\{#MyAppName} Options"; Filename: "{app}\{#MyAppExeName}"; Parameters: "-c 0"; IconIndex: 1
-Name: "{group}\{#MyAppName} Readme"; Filename: "{app}\README.txt"
+Name: "{group}\Options"; Filename: "{app}\{#MyAppExeName}"; Parameters: "-c 0"; IconIndex: 1
+Name: "{group}\Readme"; Filename: "{app}\README.txt"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Parameters: "-s"; Tasks: desktopicon
 
 [Run]
