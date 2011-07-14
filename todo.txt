@@ -16,7 +16,6 @@ user:
 - save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
 - installer should use Get/WritePrivateProfileString to select the default screen saver (maybe, see http://www.wischik.com/scr/howtoscr.html) (med)
 - update installer readme file (or remove if not really necessary) (low)
-- installed options shortcut starts the saver (high)
 
 misc:
 - credit people (med)
