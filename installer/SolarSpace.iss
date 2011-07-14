@@ -2,7 +2,7 @@
 #define MyAppVersion "1.2.0"
 #define MyAppPublisher "Victor Semionov"
 #define MyPublisherURL "http://www.vsemionov.org/"
-#define MyAppURL "{#MyPublisherURL}solar-space/"
+#define MyAppURL "http://www.vsemionov.org/solar-space/"
 #define MyAppExeName "SolSpace.scr"
 
 [Setup]
