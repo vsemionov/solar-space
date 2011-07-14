@@ -39,7 +39,7 @@ Source: "..\freetype6.dll"; DestDir: "{sys}"; Flags: sharedfile
 Source: "..\zlib1.dll"; DestDir: "{sys}"; Flags: sharedfile
 Source: "..\Solar Space.d2"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Solar System.d2"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\README.txt"; DestDir: "{app}"; Flags: ignoreversion isreadme
+Source: "..\README.rst"; DestDir: "{app}"; DestName: "README.txt"; Flags: ignoreversion isreadme
 Source: "..\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\AUTHORS.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\CHANGES.txt"; DestDir: "{app}"; Flags: ignoreversion
