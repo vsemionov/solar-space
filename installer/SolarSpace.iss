@@ -1,6 +1,7 @@
 #define MyAppName "Solar Space"
 #define MyAppVersion "1.2.0"
 #define MyAppPublisher "Victor Semionov"
+#define MyAppPublisherShort "vsemionov"
 #define MyPublisherURL "http://www.vsemionov.org/"
 #define MyAppURL "http://www.vsemionov.org/solar-space/"
 #define MyAppExeName "SolSpace.scr"
@@ -28,6 +29,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "setsaver"; Description: "&Set as the current screen saver"
 
 [Files]
 Source: "..\Release\{#MyAppExeName}"; DestDir: "{win}"; Flags: ignoreversion
@@ -40,10 +42,15 @@ Source: "..\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\AUTHORS.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\CHANGES.txt"; DestDir: "{app}"; Flags: ignoreversion
 
+[Registry]
+Root: HKLM; Subkey: "Software\{#MyAppPublisherShort}\{#MyAppName}"; ValueType: string; ValueName: "Data Directory"; ValueData: "{app}"; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Control Panel\Desktop"; ValueType: string; ValueName: "SCRNSAVE.EXE"; ValueData: "{code:GetShortName|{win}\{#MyAppExeName}}"; Tasks: setsaver
+
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{group}\{#MyAppName}"; Filename: "{win}\{#MyAppExeName}"; Parameters: "-s"
+Name: "{group}\{#MyAppName} Options"; Filename: "{win}\{#MyAppExeName}"
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{win}\{#MyAppExeName}"; Parameters: "-s"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, "&", "&&")}}"; Flags: nowait postinstall skipifsilent
+Filename: "{win}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, "&", "&&")}}"; Parameters: "-s"; Flags: nowait postinstall skipifsilent
 
