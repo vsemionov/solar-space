@@ -1,1 +1,6 @@
-Solar Space is written an maintained by Victor Semionov <vsemionov@gmail.com>
+Solar Space is written and maintained by Victor Semionov <vsemionov@gmail.com>
+
+I would like to give special thanks to:
+ - NeHe for his excellent OpenGL tutorials
+ - James Hastings-Trew and Bjorn Jonsson for their beautiful planet textures
+ - Ernie Wright for kindly sharing information on properly rendering stars
