@@ -30,7 +30,15 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Program Files (x86)\Inno Setup 5\Examples\MyProg.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Release\{#MyAppExeName}"; DestDir: "{win}"; Flags: ignoreversion
+Source: "..\freetype6.dll"; DestDir: "{sys}"; Flags: sharedfile
+Source: "..\zlib1.dll"; DestDir: "{sys}"; Flags: sharedfile
+Source: "..\Solar Space.d2"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Solar System.d2"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\README.txt"; DestDir: "{app}"; Flags: ignoreversion isreadme
+Source: "..\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\AUTHORS.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\CHANGES.txt"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
