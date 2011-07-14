@@ -47,8 +47,7 @@ private:
 	{
 		double Dec;
 		double RA;
-		float Mag;
-		float U_B, B_V, R_I;
+		float mag;
 		float pos[3];
 		float size;
 		float color[3];

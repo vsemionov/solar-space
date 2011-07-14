@@ -63,12 +63,7 @@
 #define MAX_MAG 7.9
 
 //real-star color levels
-#define YELLOW_LEVEL 0.6f
-#define BLUE_LEVEL 0.5f
-#define COLOR_INDEX_SCALE 0.25f
-#define BRIGHT_SCALE true
-#define MIN_BRIGHT 0.75f
-#define BRIGHT_INDEX_SCALE 0.125f
+#define COLOR_SCALE 0.75f
 
 //magnitude-size conversion
 #define STAR_SIZE(star_mag) (0.75+(7.0-star_mag)/2.5)
@@ -235,10 +230,10 @@ bool CStarMap::LoadStars()
 #define VA_ARGS			\
 	&stars[i].Dec,		\
 	&stars[i].RA,		\
-	&stars[i].Mag,		\
-	&stars[i].B_V,		\
-	&stars[i].U_B,		\
-	&stars[i].R_I
+	&stars[i].mag,		\
+	&stars[i].color[0],		\
+	&stars[i].color[1],		\
+	&stars[i].color[2]
 /////////////////////
 	char **textlines=NULL;
 	int numlines=0;
@@ -322,7 +317,7 @@ bool CStarMap::GenStars()
 		double Z=((double)(rand()%(2*16384+1))/16384.0)-1.0;
 		stars[i].Dec=acos(Z)*(180.0/M_PI);
 		stars[i].RA=(double)(rand()%(360*64))/64.0;
-		stars[i].Mag=(float)(MIN_MAG+(double)(rand()%(int)((MAX_MAG-MIN_MAG)*100.0+1.0))/100.0);
+		stars[i].mag=(float)(MIN_MAG+(double)(rand()%(int)((MAX_MAG-MIN_MAG)*100.0+1.0))/100.0);
 		stars[i].color[0]=mi+(float)(rand()%256)*(ri/255.0f);
 		stars[i].color[1]=mi+(float)(rand()%256)*(ri/255.0f);
 		stars[i].color[2]=mi+(float)(rand()%256)*(ri/255.0f);
@@ -336,31 +331,14 @@ bool CStarMap::GenStars()
 
 void CStarMap::PrepColor()
 {
-	float r,g,b;
-	float f;
-	int i;
+	int i,j;
 	for (i=0;i<num_stars;i++)
 	{
 		stardata_s *star=&stars[i];
-		// init components
-		r=g=YELLOW_LEVEL;
-		b=BLUE_LEVEL;
-		// diff color
-		b+=star->B_V*COLOR_INDEX_SCALE;
-		// maximize brightness
-		f=1.0f/max(max(r,g),b);
-		r*=f; g*=f; b*=f;
-		// diff brightness (optional)
-		if (BRIGHT_SCALE)
+		for (j=0;j<3;j++)
 		{
-			f=MIN_BRIGHT+(float)fabs(star->R_I)*BRIGHT_INDEX_SCALE;
-			f=min(f,1.0f);
-			r*=f; g*=f; b*=f;
+			star->color[j]*=COLOR_SCALE;
 		}
-		// apply color
-		star->color[0]=r;
-		star->color[1]=g;
-		star->color[2]=b;
 	}
 }
 
@@ -379,7 +357,7 @@ void CStarMap::PrepData()
 		double Stheta=sin(theta);
 		double Cphi=cos(phi);
 		double Sphi=sin(phi);
-		double size=STAR_SIZE(stars[i].Mag);
+		double size=STAR_SIZE(stars[i].mag);
 		// size correction
 		size*=AUTO_SIZE_COEF;
 		stars[i].size=(float)size;
