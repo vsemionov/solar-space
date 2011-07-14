@@ -29,7 +29,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "setsaver"; Description: "&Set as the current screen saver"
+Name: "setsaver"; Description: "&Set as the current screen saver"; GroupDescription: "Miscellaneous:"
 
 [Files]
 Source: "..\Release\{#MyAppExeName}"; DestDir: "{win}"; Flags: ignoreversion
