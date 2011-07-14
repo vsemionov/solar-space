@@ -28,7 +28,7 @@ OUTPUT_DIR = build
 SRC_FILES = $(SRC_DIR)/*.cpp
 RC_FILE = "$(SRC_DIR)/res/Solar Space.rc"
 RES_FILE = $(OUTPUT_DIR)/res.o
-OUTPUT_FILE = "$(OUTPUT_DIR)/SolSpace.scr"
+OUTPUT_FILE = "$(OUTPUT_DIR)/Solar Space"
 
 .PHONY: all clean
 
