@@ -20,6 +20,7 @@ misc:
 
 
 NON-TECH:
+- fix graphics (resize again the original images with the bicubic sharper method; try to reduce the luminosity at the edges of Sun's flare) (med)
 - adjust ambient reflection (e.g. to 0.1?) (med)
 - adjust body parameters so that planets rotate slower (med)
 - adjust camera parameters (movement, orientation and zoom speeds, duration, etc) (med)
