@@ -16,7 +16,6 @@ user:
 - save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
 
 misc:
-- credit people (med)
 
 
 NON-TECH:
