@@ -66,7 +66,7 @@ Source: "..\freetype6.dll"; DestDir: "{sys}"; Flags: sharedfile
 Source: "..\zlib1.dll"; DestDir: "{sys}"; Flags: sharedfile
 Source: "..\Solar Space.d2"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Solar System.d2"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\README.rst"; DestDir: "{app}"; DestName: "README.txt"; Flags: ignoreversion isreadme
+Source: "..\README.rst"; DestDir: "{app}"; DestName: "README.txt"; Flags: ignoreversion
 Source: "..\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\AUTHORS.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\CHANGES.txt"; DestDir: "{app}"; Flags: ignoreversion
@@ -82,5 +82,6 @@ Name: "{group}\Readme"; Filename: "{app}\README.txt"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Parameters: "-s"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, "&", "&&")}}"; Parameters: "-s"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, "&", "&&")}}"; Parameters: "-s"; Flags: nowait postinstall skipifsilent unchecked
+Filename: "{app}\README.txt"; Description: "View Readme"; Flags: shellexec skipifdoesntexist postinstall skipifsilent unchecked
 
