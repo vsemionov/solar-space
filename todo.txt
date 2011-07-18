@@ -17,6 +17,7 @@ user:
 - save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
 
 misc:
+- evaluate the possibility of dynamically loading the freetype library, and installing it, as well as its dependency (zlib1), into the application directory (high)
 
 
 NON-TECH:
