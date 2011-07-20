@@ -144,6 +144,7 @@ void CSettings::ReadGeneralRegistry()
 
 void CSettings::ReadCommonRegistry()
 {
+	int l;
 	strcpy(DataDir,".");
 	LONG res; HKEY skey; DWORD valtype, valsize;
 	char strval[sizeof(DataDir)];
@@ -151,6 +152,7 @@ void CSettings::ReadCommonRegistry()
 	if (res!=ERROR_SUCCESS) return;
 	valsize=sizeof(strval); res=RegQueryValueEx(skey,"Data Directory",0,&valtype,(LPBYTE)strval,&valsize);   if (res==ERROR_SUCCESS) strcpy(DataDir,strval);
 	RegCloseKey(skey);
+	l=strlen(DataDir); if (l>0 && DataDir[l-1]=='\\') DataDir[l-1]=0;
 }
 
 
