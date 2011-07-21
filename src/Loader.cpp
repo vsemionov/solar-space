@@ -349,6 +349,7 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 				if (mipmaps)
 				{
 					glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,(linear?GL_LINEAR_MIPMAP_LINEAR:GL_NEAREST_MIPMAP_LINEAR));
+					// note: the internalFormat parameter is intentionally left at 4 unconditionally, assuming a negative performance impact if changed to 3 in case of no alpha map
 					if (gluBuild2DMipmaps(GL_TEXTURE_2D,4,tex_width[0],tex_height[0],GL_RGBA,GL_UNSIGNED_BYTE,pImage[0])!=0)
 						b=false;
 				}
@@ -358,6 +359,7 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 					if (ResizeImage((void**)&pImage[0],&tex_width[0],&tex_height[0]))
 					{
 						glGetError();
+						// note: the internalFormat parameter is intentionally left at 4 unconditionally, assuming a negative performance impact if changed to 3 in case of no alpha map
 						glTexImage2D(GL_TEXTURE_2D,0,4,tex_width[0],tex_height[0],0,GL_RGBA,GL_UNSIGNED_BYTE,pImage[0]);
 						if (glGetError()!=GL_NO_ERROR)
 							b=false;
