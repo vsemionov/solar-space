@@ -8,7 +8,7 @@ visual:
 performance/testing:
 - test planetary system choice and randomness (low)
 - test all dialogs (including preview) (low)
-- test for backplane clipping, correct z ordering from very far distances, also verify the system config, etc (med)
+- test for backplane clipping, correct z ordering from very far distances, also verify the system config, etc (high)
 - test by terminating application while run by windows as a screensaver; also by showing the error log dialog, before and after opening the saver window, without terminating (high)
 - test on a remote machine (remote desktop) (low)
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
@@ -18,7 +18,7 @@ user:
 - save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
 
 misc:
-- add a table of contents, system requirements, and known issues sections to the readme; mention WinXP SP2 in the system requirements (med)
+- add a table of contents, system requirements, and known issues sections to the readme; mention WinXP SP2 in the system requirements (high)
 
 
 NON-TECH:
@@ -31,4 +31,4 @@ NON-TECH:
 - logo (med)
 - new splash screen (med)
 - new preview image (could be a logo, screenshot, or other; but preferably a logo) (maybe) (med)
-- update website (downloads, screenshots, etc.) (med)
+- update website (downloads, screenshots, etc.) (low)
