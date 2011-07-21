@@ -41,6 +41,20 @@
 
 
 
+typedef FT_Error (*ptr_FT_Init_FreeType)(FT_Library *);
+typedef FT_Error (*ptr_FT_Done_FreeType)(FT_Library);
+typedef FT_Error (*ptr_FT_New_Face)(FT_Library, const char *, FT_Long, FT_Face *);
+typedef FT_Error (*ptr_FT_Done_Face)(FT_Face);
+typedef FT_Error (*ptr_FT_Set_Char_Size)(FT_Face, FT_F26Dot6, FT_F26Dot6, FT_UInt, FT_UInt);
+typedef FT_UInt (*ptr_FT_Get_Char_Index)(FT_Face, FT_ULong);
+typedef FT_Error (*ptr_FT_Load_Glyph)(FT_Face, FT_UInt, FT_Int32);
+typedef void (*ptr_FT_Done_Glyph)(FT_Glyph);
+typedef FT_Error (*ptr_FT_Get_Glyph)(FT_GlyphSlot, FT_Glyph *);
+typedef FT_Error (*ptr_FT_Glyph_To_Bitmap)(FT_Glyph *, FT_Render_Mode, FT_Vector *, FT_Bool);
+
+
+
+
 
 class CText
 {
@@ -48,7 +62,8 @@ public:
 	CText();
 	virtual ~CText();
 	bool BuildOutlineFont(const char *name, int size, bool bold, bool italic, bool underline, bool strikeout, float thickness);
-	bool Init(bool FreeType=false);
+	static bool Init();
+	static void Shutdown();
 	void Free();
 	bool BuildFTFont(const char *name, int size);
 	void Print(const char *fmt, ...);
@@ -64,6 +79,19 @@ private:
 	float charheight;
 	int FT_tex[NUM_CHARS];
 	float sizescale;
+	// FreeType functions:
+	static bool FreeType_loaded;
+	static HMODULE FreeType;
+	static ptr_FT_Init_FreeType pFT_Init_FreeType;
+	static ptr_FT_Done_FreeType pFT_Done_FreeType;
+	static ptr_FT_New_Face pFT_New_Face;
+	static ptr_FT_Done_Face pFT_Done_Face;
+	static ptr_FT_Set_Char_Size pFT_Set_Char_Size;
+	static ptr_FT_Get_Char_Index pFT_Get_Char_Index;
+	static ptr_FT_Load_Glyph pFT_Load_Glyph;
+	static ptr_FT_Done_Glyph pFT_Done_Glyph;
+	static ptr_FT_Get_Glyph pFT_Get_Glyph;
+	static ptr_FT_Glyph_To_Bitmap pFT_Glyph_To_Bitmap;
 };
 
 #endif

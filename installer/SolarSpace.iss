@@ -62,8 +62,8 @@ Name: "setsaver"; Description: "&Set as the current screen saver"; GroupDescript
 [Files]
 Source: "..\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Release\{#MyAppExeName}"; DestDir: "{win}"; DestName: "{#MyAppScrName}"; Flags: ignoreversion
-Source: "..\freetype6.dll"; DestDir: "{sys}"; Flags: sharedfile
-Source: "..\zlib1.dll"; DestDir: "{sys}"; Flags: sharedfile
+Source: "..\freetype6.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Solar Space.d2"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Solar System.d2"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\README.rst"; DestDir: "{app}"; DestName: "README.txt"; Flags: ignoreversion

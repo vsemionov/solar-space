@@ -105,6 +105,8 @@ bool CGamePlay::Init()
 {
 	bool ret=true;
 	InitTimer();
+	if (!CText::Init())
+		CError::LogError(WARNING_CODE,"Failed to initialize text font library - ignoring.");
 	if (!splashtext.BuildFTFont(SPLASH_FONT_NAME,SPLASH_FONT_SIZE))
 		CError::LogError(WARNING_CODE,"Failed to load the splash text font - ignoring.");
 	if (!InitScene())
@@ -128,6 +130,7 @@ bool CGamePlay::Init()
 void CGamePlay::ShutDown()
 {
 	DestroyScene();
+	CText::Shutdown();
 	ShutdownTimer();
 }
 

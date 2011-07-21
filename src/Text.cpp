@@ -48,6 +48,26 @@
 #define ALLOW_FONT_SCALING false
 #define FT_FONT_SIZE_THRESHOLD 32
 
+#define FREETYPE_DLL "freetype6.dll"
+
+
+
+
+
+
+bool CText::FreeType_loaded=false;
+HMODULE CText::FreeType=NULL;
+ptr_FT_Init_FreeType CText::pFT_Init_FreeType=NULL;
+ptr_FT_Done_FreeType CText::pFT_Done_FreeType=NULL;
+ptr_FT_New_Face CText::pFT_New_Face=NULL;
+ptr_FT_Done_Face CText::pFT_Done_Face=NULL;
+ptr_FT_Set_Char_Size CText::pFT_Set_Char_Size=NULL;
+ptr_FT_Get_Char_Index CText::pFT_Get_Char_Index=NULL;
+ptr_FT_Load_Glyph CText::pFT_Load_Glyph=NULL;
+ptr_FT_Done_Glyph CText::pFT_Done_Glyph=NULL;
+ptr_FT_Get_Glyph CText::pFT_Get_Glyph=NULL;
+ptr_FT_Glyph_To_Bitmap CText::pFT_Glyph_To_Bitmap=NULL;
+
 
 
 
@@ -92,21 +112,49 @@ void CText::Construct()
 
 
 
-bool CText::Init(bool FreeType)
+bool CText::Init()
 {
+#define LoadFTFunc(ptr, type, name) (FreeType_loaded&=(ptr=(type)GetProcAddress(FreeType,name))!=NULL)
+
+	char filename[MAX_PATH];
+
+	if (FreeType_loaded)
+		return true;
+
+	strcpy(filename,CSettings::DataDir);
+	strcat(filename,"\\");
+	strcat(filename,FREETYPE_DLL);
+
+	FreeType=LoadLibrary(filename);
 	if (FreeType)
 	{
-		return BuildFTFont(FONT_NAME,FONT_SIZE);
+		FreeType_loaded=true;
+		LoadFTFunc(pFT_Init_FreeType,ptr_FT_Init_FreeType,"FT_Init_FreeType");
+		LoadFTFunc(pFT_Done_FreeType,ptr_FT_Done_FreeType,"FT_Done_FreeType");
+		LoadFTFunc(pFT_New_Face,ptr_FT_New_Face,"FT_New_Face");
+		LoadFTFunc(pFT_Done_Face,ptr_FT_Done_Face,"FT_Done_Face");
+		LoadFTFunc(pFT_Set_Char_Size,ptr_FT_Set_Char_Size,"FT_Set_Char_Size");
+		LoadFTFunc(pFT_Get_Char_Index,ptr_FT_Get_Char_Index,"FT_Get_Char_Index");
+		LoadFTFunc(pFT_Load_Glyph,ptr_FT_Load_Glyph,"FT_Load_Glyph");
+		LoadFTFunc(pFT_Done_Glyph,ptr_FT_Done_Glyph,"FT_Done_Glyph");
+		LoadFTFunc(pFT_Get_Glyph,ptr_FT_Get_Glyph,"FT_Get_Glyph");
+		LoadFTFunc(pFT_Glyph_To_Bitmap,ptr_FT_Glyph_To_Bitmap,"FT_Glyph_To_Bitmap");
 	}
-	else
+
+	return FreeType_loaded;
+}
+
+
+
+
+
+void CText::Shutdown()
+{
+	FreeType_loaded=false;
+	if (FreeType)
 	{
-		return BuildOutlineFont(FONT_NAME,
-								FONT_SIZE,
-								FONT_BOLD,
-								FONT_ITALIC,
-								FONT_UNDERLINE,
-								FONT_STRIKEOUT,
-								FONT_THICKNESS);
+		FreeLibrary(FreeType);
+		FreeType=NULL;
 	}
 }
 
@@ -203,6 +251,9 @@ bool CText::BuildOutlineFont(const char *name, int size, bool bold, bool italic,
 
 bool CText::BuildFTFont(const char *name, int size)
 {
+	if (!FreeType_loaded)
+		return false;
+
 	if (loaded)
 	{
 		Free();
@@ -224,16 +275,16 @@ bool CText::BuildFTFont(const char *name, int size)
 	strcat(fontpath,".TTF");
 
 	FT_Library library;
-	if (FT_Init_FreeType(&library))
+	if (pFT_Init_FreeType(&library))
 		return false;
 
 	FT_Face face;
-	if (FT_New_Face(library,fontpath,0,&face)) 
+	if (pFT_New_Face(library,fontpath,0,&face))
 	{
-		FT_Done_FreeType(library);
+		pFT_Done_FreeType(library);
 		return false;
 	}
-	FT_Set_Char_Size(face,size<<6,size<<6,96,96);
+	pFT_Set_Char_Size(face,size<<6,size<<6,96,96);
 
 	listbase=glGenLists(NUM_CHARS);
 	glGenTextures(NUM_CHARS,(GLuint*)FT_tex);
@@ -248,8 +299,8 @@ bool CText::BuildFTFont(const char *name, int size)
 		}
 	}
 
-	FT_Done_Face(face);
-	FT_Done_FreeType(library);
+	pFT_Done_Face(face);
+	pFT_Done_FreeType(library);
 
 	if (loaded)
 	{
@@ -282,14 +333,14 @@ bool CText::MakeFTChar(FT_Face face, char ch, int list_base, int textures[NUM_CH
 {
 	const int ich = ch;
 
-	if(FT_Load_Glyph(face,FT_Get_Char_Index(face,ich),FT_LOAD_DEFAULT))
+	if(pFT_Load_Glyph(face,pFT_Get_Char_Index(face,ich),FT_LOAD_DEFAULT))
 		return false;
 
 	FT_Glyph glyph;
-	if(FT_Get_Glyph(face->glyph,&glyph))
+	if(pFT_Get_Glyph(face->glyph,&glyph))
 		return false;
 
-	bool empty=(FT_Glyph_To_Bitmap(&glyph,FT_RENDER_MODE_NORMAL,0,1)!=0);
+	bool empty=(pFT_Glyph_To_Bitmap(&glyph,FT_RENDER_MODE_NORMAL,0,1)!=0);
 	FT_BitmapGlyph bitmap_glyph=(FT_BitmapGlyph)glyph;
 	FT_Bitmap& bitmap=bitmap_glyph->bitmap;
 
@@ -302,7 +353,7 @@ bool CText::MakeFTChar(FT_Face face, char ch, int list_base, int textures[NUM_CH
 		unsigned char *expanded_data=(unsigned char *)malloc(2*width*height);
 		if (!expanded_data)
 		{
-			FT_Done_Glyph(glyph);
+			pFT_Done_Glyph(glyph);
 			return false;
 		}
 
@@ -325,7 +376,7 @@ bool CText::MakeFTChar(FT_Face face, char ch, int list_base, int textures[NUM_CH
 			if (gluBuild2DMipmaps(GL_TEXTURE_2D,2,width,height,GL_LUMINANCE_ALPHA,GL_UNSIGNED_BYTE,expanded_data)!=0)
 			{
 				free(expanded_data);
-				FT_Done_Glyph(glyph);
+				pFT_Done_Glyph(glyph);
 				return false;
 			}
 		}
@@ -378,7 +429,7 @@ bool CText::MakeFTChar(FT_Face face, char ch, int list_base, int textures[NUM_CH
 	charsizes[ich][0]=((float)face->glyph->advance.x/64.0f);
 	charsizes[ich][1]=((float)face->size->metrics.height/64.0f);
 
-	FT_Done_Glyph(glyph);
+	pFT_Done_Glyph(glyph);
 
 	return true;
 }
