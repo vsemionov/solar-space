@@ -689,7 +689,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 	if (CError::ErrorsOccured())
 	{
-		ErrorLogDialog();
+		if (DEBUG)
+			ErrorLogDialog();
 		if (Ret==0)
 			Ret=5;
 	}
