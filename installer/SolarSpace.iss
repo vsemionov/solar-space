@@ -51,6 +51,7 @@ OutputDir=..\build
 OutputBaseFilename={#MyAppName} {#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
+UninstallDisplayIcon={app}\{#MyAppExeName}
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
