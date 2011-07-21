@@ -260,7 +260,7 @@ void CCamera::GenWideCam(float *len, float *pitch, float yaw)
 	(void)pitch; // avoid unused parameter warning
 	(void)yaw; // avoid unused parameter warning
 	a=rc*WIDE_CAM_TARGET_DIST;
-	trot=(float)(rand()%(360*4))*0.25f;
+	trot=(float)(rand()%(360*64))/64.0f;
 	trot*=(float)(M_PI/180.0);
 #endif
 	nx=a*(float)cos(trot);
@@ -292,15 +292,15 @@ void CCamera::ChangeCam()
 		type.children=false; //for correct view info on objects with no subbodies
 
 	float len,yaw,pitch;
-	yaw=(float)(rand()%(360*4))*0.25f;
+	yaw=(float)(rand()%(360*64))/64.0f;
 	yaw*=(float)(M_PI/180.0);
 	if (type.chasepos)
 		len=(float)DIST(targetsize,MAX_FOV);
 	else
-		len=(float)(rand()%(int)((MAX_DIST-MIN_DIST)*4.0+1.0))*0.25f+(float)MIN_DIST;
+		len=(float)(rand()%(int)((MAX_DIST-MIN_DIST)*16.0+1.0))/16.0f+(float)MIN_DIST;
 	len=(float)min(len,MAX_DIST);
 	nx=ny=nz=0.0f;
-	double Z=((double)(rand()%(2*4096+1))/4096.0)-1.0;
+	double Z=((double)(rand()%(2*8192+1))/8192.0)-1.0;
 	pitch=(float)asin(Z);
 	if (!type.chasepos && !type.chaseor)
 		GenWideCam(&len,&pitch,yaw);

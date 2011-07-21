@@ -314,13 +314,13 @@ bool CStarMap::GenStars()
 	const float ri=(1.0f-MIN_INTENSITY);
 	for (i=0;i<num_stars;i++)
 	{
-		double Z=((double)(rand()%(2*16384+1))/16384.0)-1.0;
+		double Z=((double)(rand()%(2*8192+1))/8192.0)-1.0;
 		stars[i].Dec=asin(Z)*(180.0/M_PI);
 		stars[i].RA=(double)(rand()%(360*64))/64.0;
-		stars[i].mag=(float)(MIN_MAG+(double)(rand()%(int)((MAX_MAG-MIN_MAG)*100.0+1.0))/100.0);
-		stars[i].color[0]=mi+(float)(rand()%256)*(ri/255.0f);
-		stars[i].color[1]=mi+(float)(rand()%256)*(ri/255.0f);
-		stars[i].color[2]=mi+(float)(rand()%256)*(ri/255.0f);
+		stars[i].mag=(float)(MIN_MAG+(double)(rand()%(int)((MAX_MAG-MIN_MAG)*1000.0+1.0))/1000.0);
+		stars[i].color[0]=mi+(float)(rand()%256)*ri/255.0f;
+		stars[i].color[1]=mi+(float)(rand()%256)*ri/255.0f;
+		stars[i].color[2]=mi+(float)(rand()%256)*ri/255.0f;
 	}
 	return true;
 }

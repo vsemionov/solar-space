@@ -650,13 +650,13 @@ bool CBody::LoadPhys()
 	if (tex_names[2][1][0]!=0)
 		strcpy(tex_names[2][0],tex_names[0][0]);
 	if (orbit_rot_start==0.0f)
-		orbit_rot_start=(float)(rand()%360);
+		orbit_rot_start=(float)(rand()%(360*64))/64.0f;
 	if (own_rot_start==0.0f)
-		own_rot_start=(float)(rand()%360);
+		own_rot_start=(float)(rand()%(360*64))/64.0f;
 	if (orb_incl_dir_angle==0.0f)
-		orb_incl_dir_angle=(float)(rand()%360);
+		orb_incl_dir_angle=(float)(rand()%(360*64))/64.0f;
 	if (own_incl_dir_angle==0.0f)
-		own_incl_dir_angle=(float)(rand()%360);
+		own_incl_dir_angle=(float)(rand()%(360*64))/64.0f;
 	orb_incl[0]=radius*(float)cos(orb_incl_dir_angle*M_PI/180);
 	orb_incl[1]=radius*(float)sin(orb_incl_dir_angle*M_PI/180);
 	orb_incl[2]=0.0f;
@@ -860,10 +860,10 @@ void CBody::MakeAsteroid()
 	}
 	float scale=radius/objsize;
 	float rot[4];
-	rot[0]=(float)(rand()%1001)*0.001f;
-	rot[1]=(float)(rand()%1001)*0.001f;
-	rot[2]=(float)(rand()%1001)*0.001f;
-	rot[3]=(float)(rand()%(360*4))*0.250f;
+	rot[0]=(float)(rand()%1001)/1000.0f;
+	rot[1]=(float)(rand()%1001)/1000.0f;
+	rot[2]=(float)(rand()%1001)/1000.0f;
+	rot[3]=(float)(rand()%(360*64))/64.0f;
 	// these are used only if no texture is present for the asteroid
 	float ma[4]={AMBIENT_REFLECTION*ASTEROID_REFLECTION,AMBIENT_REFLECTION*ASTEROID_REFLECTION,AMBIENT_REFLECTION*ASTEROID_REFLECTION,1.0f};
 	float md[4]={DIFFUSE_REFLECTION*ASTEROID_REFLECTION,DIFFUSE_REFLECTION*ASTEROID_REFLECTION,DIFFUSE_REFLECTION*ASTEROID_REFLECTION,1.0f};
