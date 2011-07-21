@@ -27,6 +27,7 @@
 
 DEBUG = 
 OPTIMIZATION = -O2
+DEFINES = -D_WIN32_WINNT=0x0502
 
 DEP_BASE = /z/libs
 
@@ -42,7 +43,7 @@ WIN_LIBS = -lgdi32 -lwinmm -luuid -lole32 -loleaut32 -lcomctl32
 
 CXX_MISC = -Wall -Wextra
 LD_MISC = -Wl,-subsystem,windows -static-libgcc -static-libstdc++
-CXXFLAGS = $(INCLUDE_DIRS) $(DEBUG) $(OPTIMIZATION) $(CXX_MISC)
+CXXFLAGS = $(INCLUDE_DIRS) $(DEBUG) $(OPTIMIZATION) $(DEFINES) $(CXX_MISC)
 LDFLAGS = $(LD_MISC)
 
 SRC_DIR = src
