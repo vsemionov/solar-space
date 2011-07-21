@@ -26,7 +26,7 @@
 
 
 #define MyAppName "Solar Space"
-#define MyAppVersion "1.2.0"
+#define MyAppVersion "1.2"
 #define MyAppPublisher "Victor Semionov"
 #define MyAppPublisherShort "vsemionov"
 #define MyPublisherURL "http://www.vsemionov.org/"
