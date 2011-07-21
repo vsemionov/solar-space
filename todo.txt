@@ -14,6 +14,7 @@ performance/testing:
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
 user:
+- installer asks to delete user preferences on uninstall (high)
 - error log dialog not shown (entire screen is black) after closing the main window when run as a screensaver by windows; try creating the dialog as a child of the main window before closing the latter; if no other options are found, do not display this dialog after creating the main window (high)
 - save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
 
