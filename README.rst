@@ -20,6 +20,7 @@ System Requirements
 ===================
 TODO
 
-Known Issues
-============
-None.
+Miscellaneous
+=============
+For the latest information and downloads, please visit:
+http://www.vsemionov.org/solar-space/
