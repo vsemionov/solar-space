@@ -1,6 +1,5 @@
 TECH:
 non-visual:
-- define _WIN32_WINNT at build time, not in source (high)
 - check internal texture format, if possible prevent excess use of (video) memory, e.g. look for textures stored in RGBA format, where only RGB is necessary (high)
 
 visual:
