@@ -859,11 +859,6 @@ void CBody::MakeAsteroid()
 			objsize=veclen;
 	}
 	float scale=radius/objsize;
-	float rot[4];
-	rot[0]=(float)(rand()%1001)/1000.0f;
-	rot[1]=(float)(rand()%1001)/1000.0f;
-	rot[2]=(float)(rand()%1001)/1000.0f;
-	rot[3]=(float)(rand()%(360*64))/64.0f;
 	// these are used only if no texture is present for the asteroid
 	float ma[4]={AMBIENT_REFLECTION*ASTEROID_REFLECTION,AMBIENT_REFLECTION*ASTEROID_REFLECTION,AMBIENT_REFLECTION*ASTEROID_REFLECTION,1.0f};
 	float md[4]={DIFFUSE_REFLECTION*ASTEROID_REFLECTION,DIFFUSE_REFLECTION*ASTEROID_REFLECTION,DIFFUSE_REFLECTION*ASTEROID_REFLECTION,1.0f};
@@ -874,7 +869,6 @@ void CBody::MakeAsteroid()
 	}
 	glBindTexture(GL_TEXTURE_2D,textures[0]);
 	glRotatef(90.0f,1.0f,0.0f,0.0f);
-	glRotatef(rot[3],rot[0],rot[1],rot[2]);
 	glScalef(scale,scale,scale);
 	glEnable(GL_NORMALIZE);
 	bool smooth=(textures[0] || (textures[1] && CVideoBase::GetOptBumpMaps()));
