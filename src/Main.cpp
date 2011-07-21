@@ -30,6 +30,7 @@
 
 #include <windows.h>
 #include <commctrl.h>
+#include <shlobj.h>
 
 #include <stdio.h>
 
@@ -52,7 +53,7 @@
 #define THUMBNAIL_HEIGHT 112
 
 #define LOG_TIMEOUT 15
-#define LOG_NAME APP_NAME " Log.txt"
+#define LOG_NAME "LastLog.txt"
 
 #define RANDOM_STRING "<random>"
 
@@ -211,8 +212,15 @@ static BOOL CALLBACK ShowLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 static bool SaveLog(int level=WARNING_CODE)
 {
 	char filename[MAX_PATH];
+	int len;
 	FILE *fp;
-	GetTempPath(sizeof(filename)-strlen(LOG_NAME),filename);
+	if (!SHGetSpecialFolderPath(NULL,filename,CSIDL_APPDATA,true))
+		return false;
+	len=strlen(filename); if (len>0 && filename[len-1]=='\\') filename[len-1]=0;
+	strcat(filename,"\\");
+	strcat(filename,APP_NAME);
+	CreateDirectory(filename,NULL);
+	strcat(filename,"\\");
 	strcat(filename,LOG_NAME);
 	fp=fopen(filename,"wt");
 	if (fp)
@@ -262,36 +270,33 @@ static bool SaveLog(int level=WARNING_CODE)
 static bool ViewLog()
 {
 	char filename[MAX_PATH];
-	FILE *fp;
-	GetTempPath(sizeof(filename)-strlen(LOG_NAME),filename);
+	int len;
+	HINSTANCE hInst;
+	if (!SHGetSpecialFolderPath(NULL,filename,CSIDL_APPDATA,true))
+		return false;
+	len=strlen(filename); if (len>0 && filename[len-1]=='\\') filename[len-1]=0;
+	strcat(filename,"\\");
+	strcat(filename,APP_NAME);
+	strcat(filename,"\\");
 	strcat(filename,LOG_NAME);
-	fp=fopen(filename,"rb");
-	if (fp)
-	{
-		fclose(fp);
-		HINSTANCE hInst=ShellExecute(NULL,NULL,filename,NULL,NULL,SW_SHOWNORMAL);
-		if ((int)hInst>32)
-		{
-			return true;
-		}
-	}
-	return false;
+	hInst=ShellExecute(NULL,NULL,filename,NULL,NULL,SW_SHOWNORMAL);
+	return ((int)hInst>32);
 }
 
 
 
 
 
-static void ErrorLogDialog()
+static void ErrorLogDialog(bool saved_ok)
 {
 	int res;
-	res=DialogBox(GetModuleHandle(NULL),MAKEINTRESOURCE(IDD_SHOWLOG),NULL,ShowLogProc);
-	if (res!=IDC_BLOG) return;
-	if (!SaveLog())
+	if (!saved_ok)
 	{
 		MessageBox(NULL,"Error saving log.",(APP_NAME " Error"),MB_OK|MB_ICONERROR);
 		return;
 	}
+	res=DialogBox(GetModuleHandle(NULL),MAKEINTRESOURCE(IDD_SHOWLOG),NULL,ShowLogProc);
+	if (res!=IDC_BLOG) return;
 	if (!ViewLog())
 	{
 		MessageBox(NULL,"Error opening log.",(APP_NAME " Error"),MB_OK|MB_ICONERROR);
@@ -613,6 +618,7 @@ static void ChangePassword(HWND hwnd)
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	int Ret=0;
+	bool log_saved;
 	(void)hPrevInstance; // avoid unused parameter warning
 	(void)lpCmdLine; // avoid unused parameter warning
 	(void)nCmdShow; // avoid unused parameter warning
@@ -687,10 +693,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			}
 		}
 	}
-	if (CError::ErrorsOccured())
+	log_saved=SaveLog();
+	if (CError::ErrorsOccured() || !log_saved)
 	{
 		if (DEBUG)
-			ErrorLogDialog();
+			ErrorLogDialog(log_saved);
 		if (Ret==0)
 			Ret=5;
 	}
