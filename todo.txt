@@ -18,6 +18,7 @@ user:
 - save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
 
 misc:
+- update fields in manifest.xml - name, company, version, etc (high)
 - add a table of contents, system requirements, and known issues sections to the readme (med)
 
 
