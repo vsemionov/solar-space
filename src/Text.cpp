@@ -25,6 +25,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#define _WIN32_WINNT 0x0502
 #include <windows.h>
 
 #include <gl/gl.h>
@@ -116,16 +117,13 @@ bool CText::Init()
 {
 #define LoadFTFunc(ptr, type, name) (FreeType_loaded&=(ptr=(type)GetProcAddress(FreeType,name))!=NULL)
 
-	char filename[MAX_PATH];
-
 	if (FreeType_loaded)
 		return true;
 
-	strcpy(filename,CSettings::DataDir);
-	strcat(filename,"\\");
-	strcat(filename,FREETYPE_DLL);
+	SetDllDirectory(CSettings::DataDir);
+	FreeType=LoadLibrary(FREETYPE_DLL);
+	SetDllDirectory(NULL);
 
-	FreeType=LoadLibrary(filename);
 	if (FreeType)
 	{
 		FreeType_loaded=true;
