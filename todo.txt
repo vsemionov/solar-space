@@ -5,15 +5,10 @@ visual:
 - research specular highlights on all planets (found on Deso's laptop) (med)
 
 performance/testing:
-- test planetary system choice and randomness (low)
-- test all dialogs (including preview) (low)
 - test for backplane clipping, correct z ordering from very far distances, also verify the system config, etc (high)
-- test by terminating application while run by windows as a screensaver; also by showing the error log dialog, before and after opening the saver window, without terminating (high)
-- test on a remote machine (remote desktop) (low)
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
 user:
-- error log dialog not shown (entire screen is black) after closing the main window when run as a screensaver by windows; try creating the dialog as a child of the main window before closing the latter; if no other options are found, do not display this dialog after creating the main window (high)
 - save the log to a non-temp file under %APPDATA% (see SHGetSpecialFolderPath()) (high)
 
 misc:
