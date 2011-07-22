@@ -11,6 +11,7 @@ user:
 
 misc:
 - add system requirements to the readme; mention WinXP SP2 & IE 4.0 (high)
+- mention enhanced rendering of stars in changelog (think of other thigs to mention too) (high)
 
 
 NON-TECH:
