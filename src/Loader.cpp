@@ -284,8 +284,8 @@ bool CLoader::ResizeImage(void **pImage, int *width, int *height)
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE,&maxsize);
 	CLAMP(oldwidth,1,maxsize);
 	CLAMP(oldheight,1,maxsize);
-	while (newwidth<oldwidth) { newwidth<<=1; }
-	while (newheight<oldheight) { newheight<<=1; }
+	while ((newwidth<<1)<=oldwidth) { newwidth<<=1; }
+	while ((newheight<<1)<=oldheight) { newheight<<=1; }
 	if (newwidth==*width && newheight==*height)
 		return true;
 	void *bits=malloc(4*newwidth*newheight);
