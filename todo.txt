@@ -10,7 +10,7 @@ performance/testing:
 user:
 
 misc:
-- add a table of contents, system requirements, and known issues sections to the readme; mention WinXP SP2 & IE 4.0 in the system requirements (high)
+- add system requirements to the readme; mention WinXP SP2 & IE 4.0 (high)
 
 
 NON-TECH:
