@@ -4,6 +4,7 @@ non-visual:
 visual:
 - research specular highlights on all planets (found on Deso's laptop) (med)
 - do not rotate rings (high)
+- jerky movement of some bodies (Europa) when zoomed in (high)
 
 performance/testing:
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
