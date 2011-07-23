@@ -12,6 +12,7 @@ performance/testing:
 user:
 
 misc:
+- check for possible body collisions (med)
 
 
 NON-TECH:
