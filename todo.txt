@@ -17,7 +17,7 @@ misc:
 NON-TECH:
 - mention enhanced rendering of stars in changelog; maybe mention updated textures (think of other thigs to mention too) (high)
 - add system requirements to the readme; mention WinXP SP2 & IE 4.0 (high)
-- check for possible body collisions (med)
+- adjust body sizes and distances, check for possible body collisions (none now), keep in mind jupiter is too close to saturn (med)
 - check all data (names, info facts, body data) (med)
 - adjust ambient reflection (e.g. to 0.1?) (maybe) (med)
 - adjust body parameters so that planets rotate slower (maybe) (med)
