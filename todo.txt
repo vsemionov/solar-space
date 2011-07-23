@@ -5,7 +5,7 @@ non-visual:
 visual:
 - research specular highlights on all planets (found on Deso's laptop) (med)
 - do not rotate rings (maybe) (high)
-- check jerky movement of some bodies (Europa) when zoomed in (high)
+- check jerky movement of some bodies (Europa) when zoomed in; use double precision where applicable, check and remove the comment about min body size in the body data file (high)
 
 performance/testing:
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
