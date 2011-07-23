@@ -82,7 +82,7 @@ CVideoBase::~CVideoBase()
 
 void CVideoBase::Init()
 {
-	GetOptions();
+	SetOptions();
 }
 
 
@@ -193,7 +193,7 @@ void CVideoBase::GetExtensions()
 
 
 
-void CVideoBase::GetOptions()
+void CVideoBase::SetOptions()
 {
 	opt_geodetail=0.5f;
 	opt_linear=false;

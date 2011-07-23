@@ -65,7 +65,7 @@ private:
 	static bool IsExtensionSupported(const char *string, const char *search);
 	static void GetVersion(int *major, int *minor, int *patch);
 	static void GetExtensions();
-	static void GetOptions();
+	static void SetOptions();
 	static bool ext_bgra;
 	static bool ext_point_params;
 	static bool ext_anisotropic;
