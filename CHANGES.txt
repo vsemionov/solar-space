@@ -1,14 +1,40 @@
 1.2:
  - New BSD License
  - correct rendering on screen resolutions other than 4:3 (widescreen 16:9, 5:4, etc.)
- - antialiasing
- - anisotropic filtering
- - significantly improved performance (less CPU usage) when rendering stars
+ - enhanced colors of the stars from the Yale catalog
+ - anti-aliasing in the high detail level
+ - anisotropic filtering in the high detail level
+ - slightly sharper planet textures
+ - enhanced positioning, spacing and rendering of info text fonts
+ - anti-aliased splash screen status text font
+ - (planned) enhanced general look and feel - planet sizes and distances, rotation periods, ambient light intensity, camera movement, info window size and fade duration
+ - (planned) new splash screen, preview image, and icons
+ - (planned) double-precision calculations of object and camera position and orientation
+ - increased timer resolution
+ - improved handling of Windows-related events (window messages)
+ - updated load order (splash, bodies, star map, lens flares, info fonts, clock)
+ - slight adjustment to the OpenGL texture filter selection
+ - new and updated UI elements - about box, website link, slight changes to existing elements
  - per-user configuration
- - various other fixes and enhancements in most aspects
+ - DLL dependencies are installed in the application directory
+ - setting as the current screen saver at installation time is optional
+ - the installer never changes any screen saver properties, except the screen saver program
+ - the uninstaller does not unset the current screen saver, unless it's Solar Space
+ - the error log dialog is never shown
+ - the options dialog is properly centered
+ - a log file from the last run is always saved in the per-user application data directory
+ - improved documentation - new readme, authors, changes, and license files
+ - format version field in the planetary system specification
+ - improved performance of star map rendering
+ - camera state is completely independent of frame rate
+ - fixed memory leaks, segmentation faults, and divisions by zero
+ - official binaries built with Visual Studio 2010
+ - the MinGW compiler is supported
+ - spelling corrections
+ - various other fixes and improvements in most aspects
 
 1.1:
- - not released to avoid confusion with version 1.01 which uses the old naming scheme
+ - not released to avoid confusion with version 1.01, which uses the old naming scheme
 
 1.01:
  - minor changes to installer
