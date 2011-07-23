@@ -13,12 +13,11 @@ user:
 
 misc:
 - add system requirements to the readme; mention WinXP SP2 & IE 4.0 (high)
-- mention enhanced rendering of stars in changelog; mention updated textures and (possibly) smaller size (think of other thigs to mention too) (high)
+- mention enhanced rendering of stars in changelog; mention updated textures (think of other thigs to mention too) (high)
 - check all data (names, info facts, body data) (med)
 
 
 NON-TECH:
-- update graphics (resize textures again, save all using baseline optimized, possibly reduce quality to high 8) (high)
 - adjust ambient reflection (e.g. to 0.1?) (med)
 - adjust body parameters so that planets rotate slower (med)
 - adjust camera parameters (movement, orientation and zoom speeds, duration, etc) (med)
