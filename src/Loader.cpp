@@ -324,7 +324,16 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 		{
 			if (alphamap!=NULL)
 			{
-				tex_size[1]=LoadImage(alphamap,&tex_width[1],&tex_height[1],(void**)&pImage[1]);
+				if (CLoader::FindEntry(alphamap)==CLoader::FindEntry(imagemap))
+				{
+					alphamap=NULL;
+					pImage[1]=pImage[0];
+					tex_size[1]=tex_size[0]; tex_width[1]=tex_width[0]; tex_height[1]=tex_height[0];
+				}
+				else
+				{
+					tex_size[1]=LoadImage(alphamap,&tex_width[1],&tex_height[1],(void**)&pImage[1]);
+				}
 				if (tex_size[1]>0 && tex_width[1]==tex_width[0] && tex_height[1]==tex_height[0])
 				{
 					int j;
@@ -337,7 +346,8 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 						pImage[0][j+3]=(unsigned char)lum;
 					}
 				}
-				free(pImage[1]);
+				if (alphamap!=NULL)
+					free(pImage[1]);
 				pImage[1]=NULL;
 			}
 			glGenTextures(1,(GLuint*)&texture);

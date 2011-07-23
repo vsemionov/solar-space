@@ -210,7 +210,7 @@ void CResource::CloseResource()
 int CResource::FindEntry(const char *entryname)
 {
 	char uprname[16];
-	if (entryname==NULL)
+	if (entryname==NULL || entryname[0]==0)
 		return -1;
 	strncpy(uprname,entryname,sizeof(uprname));
 	uprname[sizeof(uprname)-1]=0;
