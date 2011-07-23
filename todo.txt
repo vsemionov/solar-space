@@ -1,6 +1,6 @@
 TECH:
 non-visual:
-- optimize loading of alphamap that is the same filename as the texture map (high)
+- searching the name tree seems to access the char past the end of the name (at least when the name is empty) (high)
 
 visual:
 - research specular highlights on all planets (found on Deso's laptop) (med)
