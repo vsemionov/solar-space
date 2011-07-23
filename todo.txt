@@ -3,8 +3,8 @@ non-visual:
 
 visual:
 - research specular highlights on all planets (found on Deso's laptop) (med)
-- do not rotate rings (high)
-- jerky movement of some bodies (Europa) when zoomed in (high)
+- do not rotate rings (maybe) (high)
+- check jerky movement of some bodies (Europa) when zoomed in (high)
 
 performance/testing:
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
@@ -12,18 +12,18 @@ performance/testing:
 user:
 
 misc:
-- add system requirements to the readme; mention WinXP SP2 & IE 4.0 (high)
-- mention enhanced rendering of stars in changelog; mention updated textures (think of other thigs to mention too) (high)
-- check all data (names, info facts, body data) (med)
 
 
 NON-TECH:
-- adjust ambient reflection (e.g. to 0.1?) (med)
-- adjust body parameters so that planets rotate slower (med)
-- adjust camera parameters (movement, orientation and zoom speeds, duration, etc) (med)
-- adjust info window parameters (fade time) (med)
+- mention enhanced rendering of stars in changelog; maybe mention updated textures (think of other thigs to mention too) (high)
+- add system requirements to the readme; mention WinXP SP2 & IE 4.0 (high)
+- check all data (names, info facts, body data) (med)
+- adjust ambient reflection (e.g. to 0.1?) (maybe) (med)
+- adjust body parameters so that planets rotate slower (maybe) (med)
+- adjust camera parameters (movement, orientation and zoom speeds, duration, etc) (maybe) (med)
+- adjust info window parameters (fade time) (maybe) (med)
 - replace monitor and wrench icons (med)
-- logo (med)
+- logo (if necessary) (med)
 - new splash screen (med)
 - new preview image (could be a logo, screenshot, or other; but preferably a logo) (maybe) (med)
-- update website (downloads, screenshots, etc.) (low)
+- update website (downloads, screenshots, etc.) and upload binaries to all "mirrors" (vsemionov.org, bitbucket, sf, google?) (low)
