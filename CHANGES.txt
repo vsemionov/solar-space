@@ -1,22 +1,25 @@
 1.2:
  - New BSD License
  - correct rendering on screen resolutions other than 4:3 (widescreen 16:9, 5:4, etc.)
- - enhanced colors of the stars from the Yale catalog
+ - improved rendering of the stars from the Yale catalog - enhanced colors and correct positions
  - anti-aliasing in the high detail level
  - anisotropic filtering in the high detail level
  - slightly sharper planet textures
  - enhanced positioning, spacing and rendering of info text fonts
  - anti-aliased splash screen status text font
- - (planned) enhanced general look and feel - planet sizes and distances, rotation periods, ambient light intensity, camera movement, info window size and fade duration
+ - (planned) enhanced general look and feel - planet sizes and distances, rotation periods, ambient light intensity, star brightness, camera movement, info window size and fade duration
+ - updated object facts information
  - (planned) new splash screen, preview image, and icons
- - (planned) double-precision calculations of object and camera position and orientation
+ - (planned) smoother animation because of double-precision calculations of object and camera position and orientation
  - increased timer resolution
  - improved handling of Windows-related events (window messages)
  - updated load order (splash, bodies, star map, lens flares, info fonts, clock)
  - slight adjustment to the OpenGL texture filter selection
  - new and updated UI elements - about box, website link, slight changes to existing elements
  - per-user configuration
- - DLL dependencies are installed in the application directory
+ - changed the path to the configuration data in the Windows registry
+ - updated Inno Setup to version 5.4.2
+ - DLL dependencies are installed in the application directory and loaded dynamically at run-time
  - setting as the current screen saver at installation time is optional
  - the installer never changes any screen saver properties, except the screen saver program
  - the uninstaller does not unset the current screen saver, unless it's Solar Space
@@ -30,7 +33,9 @@
  - fixed memory leaks, segmentation faults, and divisions by zero
  - official binaries built with Visual Studio 2010
  - the MinGW compiler is supported
- - spelling corrections
+ - updated FreeType to version 2.3.5
+ - spelling corrections, changes to English messages
+ - clock colon state is updated more correctly
  - various other fixes and improvements in most aspects
 
 1.1:
