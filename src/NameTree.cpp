@@ -178,13 +178,12 @@ CNameTree::node_s *CNameTree::FindNode(node_s *chain, char ch)
 	{
 		do
 		{
-			if (node->ch==ch || node->ch>ch)
+			if (node->ch>=ch)
 				break;
 			node=node->next;
 		}
 		while (node!=chain);
 	}
-
 
 	return node;
 }
@@ -201,6 +200,8 @@ int CNameTree::SearchBranch(node_s *chain, char *string)
 
 	if (node->id!=-1)
 		return node->id;
+	else if (!node->sub)
+		return -1;
 	else
 		return SearchBranch(node->sub,string+1);
 }
