@@ -7,6 +7,7 @@ visual:
 - check jerky movement of some bodies (Europa) when zoomed in; use double precision where applicable, check and remove the comment about min body size in the body data file (high)
 
 performance/testing:
+- test all settings (low)
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
 user:
@@ -15,11 +16,10 @@ misc:
 
 
 NON-TECH:
-- mention enhanced rendering of stars in changelog; maybe mention updated textures (think of other thigs to mention too) (high)
 - add system requirements to the readme; mention WinXP SP2 & IE 4.0 (high)
 - adjust body sizes and distances, check for possible body collisions (none now), keep in mind jupiter is too close to saturn (med)
 - check all data (names, info facts, body data) (med)
-- adjust ambient reflection (e.g. to 0.1?) (maybe) (med)
+- adjust ambient reflection (e.g. to 0.1?); check specular reflection too (maybe) (med)
 - adjust body parameters so that planets rotate slower (maybe) (med)
 - adjust camera parameters (movement, orientation and zoom speeds, duration, etc) (maybe) (med)
 - adjust info window parameters (fade time) (maybe) (med)
@@ -27,4 +27,5 @@ NON-TECH:
 - logo (if necessary) (med)
 - new splash screen (med)
 - new preview image (could be a logo, screenshot, or other; but preferably a logo) (maybe) (med)
+- final review of change log - add any missing items, change existing ones if necessary (low)
 - update website (downloads, screenshots, etc.) and upload binaries to all "mirrors" (vsemionov.org, bitbucket, sf, google?) (low)
