@@ -17,7 +17,6 @@ misc:
 
 
 NON-TECH:
-- add system requirements to the readme; mention WinXP SP2 & IE 4.0 (high)
 - adjust body sizes and distances, check for possible body collisions (none now), keep in mind jupiter is too close to saturn (med)
 - check all data (names, info facts, body data) (med)
 - adjust ambient reflection (e.g. to 0.1?); check specular reflection too (maybe) (med)
