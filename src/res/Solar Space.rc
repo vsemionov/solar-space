@@ -43,7 +43,7 @@ END
 
 IDD_CONFIG DIALOGEX 0, 0, 160, 244
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Solar Space Options"
+CAPTION "Solar Space Settings"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     GROUPBOX        "Planetary system:",IDC_STATIC,8,8,144,40
@@ -120,7 +120,7 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_APP                 ICON                    "Solar Space.ico"
-IDI_OPTIONS             ICON                    "Settings.ico"
+IDI_SETTINGS            ICON                    "Settings.ico"
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////

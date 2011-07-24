@@ -32,7 +32,7 @@ usability:
  - the installer never changes any screen saver properties, except the screen saver program
  - the uninstaller does not unset the current screen saver
  - DLL dependencies are installed in the application directory and loaded dynamically at run-time
- - the options dialog is properly centered
+ - the settings dialog is properly centered
  - the error log dialog is never shown
  - a log file from the last run is always saved in the per-user application data directory
  - spelling corrections, changes to English messages

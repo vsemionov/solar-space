@@ -8,7 +8,7 @@
 #define IDD_CONFIG                      102
 #define IDD_SHOWLOG                     103
 #define IDI_APP                         111
-#define IDI_OPTIONS                     112
+#define IDI_SETTINGS                    112
 #define IDB_PREVIEW                     121
 #define IDC_R640                        1000
 #define IDC_R800                        1001
