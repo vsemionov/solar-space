@@ -58,7 +58,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "setsaver"; Description: "&Set as the current screen saver"; GroupDescription: "Miscellaneous:"
+Name: "setsaver"; Description: "&Set {#MyAppName} as the current screen saver"; GroupDescription: "Miscellaneous:"
 
 [Files]
 Source: "..\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
