@@ -26,7 +26,7 @@ For platform support and acceptable performance, Solar Space requires the follow
 * Windows XP Service Pack 2 or later operating system with Internet Explorer 4 or later (both required as a strict minimum)
 * AMD Athlon XP 1800+ or equivalent processor
 * 512 MB RAM
-* 10 MB free disk space (minimum)
+* 12 MB free disk space (minimum)
 * NVIDIA GeForce4 MX 440 or equivalent video card with 32 MB of memory
 
 Note that most of the hardware listed above is not a strict minimum.
