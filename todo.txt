@@ -15,6 +15,7 @@ user:
 - set the dialog window icon when the settings are started from the shortcut (high)
 
 misc:
+- credit Harwen Zhang for his icon; see http://harwen.net/
 
 
 NON-TECH:
