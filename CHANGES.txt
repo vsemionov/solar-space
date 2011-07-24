@@ -1,15 +1,15 @@
 Version 1.2:
 graphics:
  - correct rendering on screen resolutions other than 4:3 (widescreen 16:9, 5:4, etc.)
- - anti-aliasing in the high detail level
- - anisotropic filtering in the high detail level
+ - anti-aliasing in the high graphics level
+ - anisotropic filtering in the high graphics level
  - improved rendering of the stars from the Yale catalog - enhanced colors and correct positions
  - enhanced positioning, sizing, spacing and rendering of info text fonts and window
  - anti-aliased splash screen status text font
  - slightly sharper planet textures
- - (planned) enhanced general look and feel - planet sizes and distances, rotation periods, ambient light intensity, star brightness, camera movement, info window size and fade duration
- - (planned) new splash screen, preview image, and icons
- - (planned) smoother animation because of double-precision calculations of object and camera position and orientation
+ - (planned) enhanced general look and feel - tuned planet sizes and distances, rotation periods, ambient light intensity, star brightness, camera movement, info window size and fade duration
+ - (planned) new splash screen, preview image and icons
+ - (planned) smoother animation via double-precision calculations of object and camera position and orientation
  - camera state is completely independent of frame rate
  - Z buffer depth is 16 bits
  - slight adjustment to the OpenGL texture filter selection
@@ -23,9 +23,9 @@ data:
 usability:
  - new and updated UI elements - about box, website link, enhancements to existing elements
  - the default video mode, when not using the desktop resolution, is 1024x768
- - new medium graphics setting
+ - new graphics setting - medium
  - per-user configuration
- - changed the path to the configuration data in the Windows registry
+ - changed path to the configuration data in the Windows registry
  - updated Inno Setup to version 5.4.2
  - setting as the current screen saver at installation time is optional
  - the installer never changes any screen saver properties, except the screen saver program
@@ -40,7 +40,7 @@ performance:
  - increased timer resolution
  - slight optimizations to the loading of textures at initialization time
 stability:
- - fixed memory leaks, segmentation faults, and divisions by zero
+ - fixed memory leaks, segmentation faults and divisions by zero
  - improved handling of Windows-related events (window messages)
 development:
  - official binaries built with Visual Studio 2010
@@ -48,7 +48,7 @@ development:
  - changed the version control system to Mercurial
  - moved the development website and repository to https://bitbucket.org/vsemionov/solar-space
 misc:
- - improved documentation - new readme, authors, changes, and license files
+ - improved documentation - new readme, changes, authors and license files
  - moved the main website to http://www.vsemionov.org/solar-space/
  - New BSD License
  - various other fixes and improvements in most aspects
