@@ -23,7 +23,6 @@ NON-TECH:
 - adjust body parameters so that planets rotate slower (maybe) (med)
 - adjust camera parameters (movement, orientation and zoom speeds, duration, etc) (maybe) (med)
 - adjust info window parameters (fade time) (maybe) (med)
-- replace wrench icon (med)
 - new splash screen (med)
 - final review of change log - add any missing items, change existing ones if necessary (low)
 - check spelling of all text files (low)
