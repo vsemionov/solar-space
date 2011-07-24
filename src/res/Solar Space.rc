@@ -72,7 +72,7 @@ END
 // Bitmap
 //
 
-IDB_PREVIEW             BITMAP                  "Preview.bmp"
+IDB_PREVIEW             BITMAP                  "preview.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
