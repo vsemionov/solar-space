@@ -92,7 +92,7 @@ static void LogIn()
 static void LogOut()
 {
 #ifdef USE_ZLOG
-	ZLOG("\"%s\" normally terminated.",APP_NAME);
+	ZLOG("\"%s\" terminated.",APP_NAME);
 	END_ZIRON_LOG();
 #endif
 }
@@ -127,6 +127,12 @@ static BOOL CALLBACK PreviewProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 		SetWindowPos(hwnd,NULL,0,0,THUMBNAIL_WIDTH,THUMBNAIL_HEIGHT,SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOMOVE|SWP_NOZORDER);
 		CWindow::CenterWindow(hwnd,true);
 		return FALSE;
+	case WM_CLOSE:
+		DestroyWindow(hwnd);
+		return TRUE;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		return TRUE;
 	}
 	return FALSE;
 }
@@ -143,7 +149,6 @@ static void StaticPreview(HWND hwndParent)
 	{
 		DispatchMessage(&msg);
 	}
-	DestroyWindow(hwnd);
 }
 
 
@@ -322,10 +327,10 @@ static void MainLoop()
 
 static void DoSaver(HWND hwnd)
 {
-	CVideoBase::Init();
-	if (CWindow::Create(hwnd))
+	if (ScrMode==smSaver)
 	{
-		if (ScrMode==smSaver)
+		CVideoBase::Init();
+		if (CWindow::Create(hwnd))
 		{
 			if (!DEBUG)
 				ShowCursor(FALSE);
@@ -341,12 +346,12 @@ static void DoSaver(HWND hwnd)
 			if (!DEBUG)
 				ShowCursor(TRUE);
 		}
-		else
-		{
-			StaticPreview(CSettings::hwnd);
-		}
+		CWindow::Destroy();
 	}
-	CWindow::Destroy();
+	else
+	{
+		StaticPreview(hwnd);
+	}
 }
 
 
@@ -660,12 +665,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 	else
 	{
-		CSettings::ReadGeneralRegistry();
-		CSettings::ReadCommonRegistry();
-		CSettings::ReadConfigRegistry();
+		if (ScrMode==smConfig || ScrMode==smSaver)
+		{
+			CSettings::ReadGeneralRegistry();
+			CSettings::ReadCommonRegistry();
+			CSettings::ReadConfigRegistry();
+		}
 		if ((ScrMode==smConfig || ScrMode==smSaver) && !CSettings::BuildFileList())
 		{
-			CError::LogError(ERROR_CODE, "Error enumerating available planetary systems.");
+			CError::LogError(ERROR_CODE, "Error listing available planetary systems.");
 			Ret=2;
 		}
 		else
