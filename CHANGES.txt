@@ -24,6 +24,7 @@ usability:
  - new and updated UI elements - about box, website link, enhancements to existing elements
  - the default video mode, when not using the desktop resolution, is 1024x768
  - new graphics setting - medium
+ - no initial flicker when showing the preview image
  - per-user configuration
  - changed path to the configuration data in the Windows registry
  - updated Inno Setup to version 5.4.2
