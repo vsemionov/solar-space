@@ -1,7 +1,6 @@
 TECH:
 non-visual:
 - set internal texture format to RGB, when not using an alpha map, to conserve video memory (high)
-- should data files be listed in preview mode (high)
 
 visual:
 - research specular highlights on all planets (found on Deso's laptop) (med)
