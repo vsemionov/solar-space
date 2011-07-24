@@ -327,7 +327,8 @@ static void DoSaver(HWND hwnd)
 	{
 		if (ScrMode==smSaver)
 		{
-			if (!DEBUG) ShowCursor(FALSE);
+			if (!DEBUG)
+				ShowCursor(FALSE);
 			if (CVideoBase::InitGL())
 			{
 				if (CGamePlay::Init())
@@ -337,7 +338,8 @@ static void DoSaver(HWND hwnd)
 				CGamePlay::ShutDown();
 			}
 			CVideoBase::ShutDown();
-			if (!DEBUG) ShowCursor(TRUE);
+			if (!DEBUG)
+				ShowCursor(TRUE);
 		}
 		else
 		{
