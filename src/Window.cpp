@@ -49,7 +49,7 @@
 
 #define USE_PASSWORD_THREAD false
 
-#define WINDOW_CLASS_NAME APP_NAME " window class"
+#define WINDOW_CLASS_NAME APP_NAME " Window Class"
 
 
 
