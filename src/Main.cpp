@@ -145,9 +145,16 @@ static void StaticPreview(HWND hwndParent)
 {
 	MSG msg;
 	HWND hwnd=CreateDialog(GetModuleHandle(NULL),MAKEINTRESOURCE(IDD_PREVIEW),hwndParent,PreviewProc);
-	while (GetMessage(&msg,NULL,0,0))
+	if (hwnd)
 	{
-		DispatchMessage(&msg);
+		while (GetMessage(&msg,NULL,0,0))
+		{
+			DispatchMessage(&msg);
+		}
+	}
+	else
+	{
+		CError::LogError(ERROR_CODE, "Unable to create preview window.");
 	}
 }
 
