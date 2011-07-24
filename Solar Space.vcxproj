@@ -126,8 +126,8 @@
   <ItemGroup>
     <None Include="src\res\manifest.xml" />
     <None Include="src\res\Preview.bmp" />
+    <None Include="src\res\Settings.ico" />
     <None Include="src\res\Solar Space.ico" />
-    <None Include="src\res\WRENCH.ICO" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

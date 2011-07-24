@@ -138,10 +138,10 @@
     <None Include="src\res\Preview.bmp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="src\res\Solar Space.ico">
+    <None Include="src\res\Settings.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="src\res\WRENCH.ICO">
+    <None Include="src\res\Solar Space.ico">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
