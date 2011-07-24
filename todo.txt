@@ -12,6 +12,7 @@ performance/testing:
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
 user:
+- change strings "Options" to "Preferences" (high)
 
 misc:
 
