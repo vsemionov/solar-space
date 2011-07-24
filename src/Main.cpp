@@ -661,7 +661,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		CSettings::ReadGeneralRegistry();
 		CSettings::ReadCommonRegistry();
 		CSettings::ReadConfigRegistry();
-		if (!CSettings::BuildFileList())
+		if ((ScrMode==smConfig || ScrMode==smSaver) && !CSettings::BuildFileList())
 		{
 			CError::LogError(ERROR_CODE, "Error enumerating available planetary systems.");
 			Ret=2;
