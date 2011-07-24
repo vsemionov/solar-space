@@ -674,7 +674,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			}
 			else if (ScrMode==smSaver || ScrMode==smPreview)
 			{
-				if (CSettings::numfiles > 0 || ScrMode==smPreview)
+				if (CSettings::numfiles>0 || ScrMode==smPreview)
 				{
 					if (ScrMode==smSaver && CSettings::RandomDataFile)
 						CSettings::RandomizeDataFile();
