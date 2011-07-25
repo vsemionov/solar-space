@@ -50,7 +50,6 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 LicenseFile=..\LICENSE.txt
-InfoAfterFile=..\AUTHORS.txt
 OutputDir=..\dist
 OutputBaseFilename={#MyAppName} Setup {#MyAppVersion}
 Compression=lzma
