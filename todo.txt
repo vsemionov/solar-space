@@ -7,7 +7,6 @@ visual:
 - check again the reason for choosing GL_NEAREST_MIPMAP_LINEAR; update change log if changes are made again, or if not - explain the nature of the mentioned "adjustment" (high)
 
 non-visual:
-- try to optimize CBody::SortNonSolidObject(), do not iterate all rings, just find the last one (high)
 - set internal texture format to RGB, when not using an alpha map, to conserve video memory, mention in change log (high)
 - extend d2 for extraction (high)
 
