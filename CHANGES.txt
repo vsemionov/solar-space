@@ -18,6 +18,7 @@ graphics:
  - updated FreeType to version 2.3.5
 data:
  - (planned) updated object facts/information
+ - rings rotation is specified with the orbit period field
  - initial cloud rotation angle is random if specified as zero
  - data files are in a new format (d2)
  - added a format version field to the planetary system specification for future compatibility purposes
