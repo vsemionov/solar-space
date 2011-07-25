@@ -8,19 +8,21 @@ visual:
 
 non-visual:
 - set internal texture format to RGB, when not using an alpha map, to conserve video memory (high)
+- extend d2 for extraction (high)
 
 performance/testing:
 - test all settings (low)
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
 user:
+- install d2, mention in change log (high)
 
 misc:
 - credit Harwen Zhang for his icon; see http://harwen.net/ (high)
 - mark authors of 3rd party products and add links (in a new text file, e.g. acknowledgements); install the new file; menstion new file in change log (high)
 - remove original 3rd party resources(high)
 - rearrange authors file (high)
-- review data files (file names, lowercase, comments, etc) (high)
+- review data files (file names, lowercase, comments, etc), mention in change log if changed (high)
 - mention author and license in readme (high)
 
 
