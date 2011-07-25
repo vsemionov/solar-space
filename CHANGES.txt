@@ -14,16 +14,16 @@ graphics:
  - Z buffer depth is 16 bits
  - slight adjustment to the OpenGL texture filter selection
  - updated load order (splash, bodies, star map, lens flares, info fonts, clock)
- - clock colon state is updated more correctly
+ - clock colon state is updated more correctly, on every frame
  - updated FreeType to version 2.3.5
 data:
- - updated object facts/information
+ - (planned) updated object facts/information
  - data files are in a new format (d2)
- - added a format version field to the planetary system specification
+ - added a format version field to the planetary system specification for future compatibility purposes
 usability:
  - new and updated UI elements - about box, website link, enhancements to existing elements
  - the default video mode, when not using the desktop resolution, is 1024x768
- - new graphics setting - medium
+ - new graphics setting, medium, which lacks anti-aliasing and anisotropic filtering
  - no initial flicker when showing the preview image
  - per-user configuration
  - changed path to the configuration data in the Windows registry
@@ -39,9 +39,9 @@ usability:
  - a log file from the last run is always saved in the per-user application data directory
  - spelling corrections, changes to English messages
 performance:
- - improved performance of star map rendering
+ - improved performance of star map rendering (by fixing a bug that disabled an optimization)
  - increased timer resolution
- - slight optimizations to the loading of textures at initialization time
+ - slight optimizations to the loading of textures at initialization time (image not loaded twice if texture and alpha maps are the same file)
 stability:
  - fixed memory leaks, segmentation faults and divisions by zero
  - improved handling of Windows-related events (window messages)
