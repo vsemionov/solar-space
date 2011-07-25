@@ -21,6 +21,7 @@ misc:
 - add moon map 4k; check md5 sums and remove original 3rd party resources(high)
 - rearrange authors file (high)
 - review data files (file names, lowercase, comments, etc) (high)
+- mention author and license in readme (high)
 
 
 NON-TECH:
