@@ -3,6 +3,7 @@ visual:
 - research specular highlights on all planets (found on Deso's laptop) (med)
 - do not rotate rings (maybe) (high)
 - check jerky movement of some bodies (Europa) when zoomed in; use double precision where applicable, check and remove the comment about min body size in the body data file (high)
+- consider reverting the random rotation of asteroids (high)
 - consider adjusting the specular spot size per-planet, depending on distance from Sun (high)
 
 non-visual:
