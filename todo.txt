@@ -15,7 +15,7 @@ user:
 
 misc:
 - credit Harwen Zhang for his icon; see http://harwen.net/ (high)
-- mark authors of 3rd party products and add links (in a new text file); install the new file (high)
+- mark authors of 3rd party products and add links (in a new text file); install the new file; menstion new file in change log (high)
 - add moon map 4k; check md5 sums and remove original 3rd party resources(high)
 - rearrange authors file (high)
 - review data files (file names, lowercase, comments, etc) (high)
