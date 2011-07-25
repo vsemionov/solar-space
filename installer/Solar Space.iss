@@ -57,7 +57,7 @@ Compression=lzma
 SolidCompression=yes
 
 VersionInfoVersion=1.2
-VersionInfoCopyright=Copyright (C) {#MyCopyrightPeriod} {#MyCopyrightHolder}. All rights reserved.
+VersionInfoCopyright=Copyright (C) {#MyCopyrightPeriod} {#MyCopyrightHolder}
 SetupIconFile=..\src\res\Solar Space.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
 
