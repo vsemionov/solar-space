@@ -12,7 +12,6 @@ performance/testing:
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
 user:
-- set the dialog window icon only when the settings are started from the shortcut (high)
 
 misc:
 - credit Harwen Zhang for his icon; see http://harwen.net/
