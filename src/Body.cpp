@@ -535,7 +535,7 @@ void CBody::Draw(CLensFlare *flare)
 		if (flare)
 			flare->UpdatePos();
 	}
-	glRotatef(own_rot,0.0f,0.0f,1.0f);
+	glRotatef((type!=rings?own_rot:orbit_rot),0.0f,0.0f,1.0f);
 	if (type!=rings)
 	{
 		if (textures[3]>0)
