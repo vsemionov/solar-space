@@ -2,7 +2,7 @@ TECH:
 visual:
 - research specular highlights on all planets (found on Deso's laptop), mention in change log (high)
 - specify ring rotation with the time of year, not the time of day, mention in the change log (med)
-- note that radius is width for a ring spec (high)
+- note that radius is width for a ring spec, note in change log (high)
 - check jerky movement of some bodies (Europa) when zoomed in; use double precision where applicable, check and remove the comment about min body size in the body data file, removed "planned" marker from change log (high)
 - consider adjusting the specular spot size per-planet, depending on distance from Sun, mention in change log (high)
 - check again the reason for choosing GL_NEAREST_MIPMAP_LINEAR; update change log if changes are made again, or if not - explain the nature of the mentioned "adjustment" (high)
