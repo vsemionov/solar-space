@@ -24,6 +24,7 @@ misc:
 
 
 NON-TECH:
+- try to find a better moon texture with no visible shadows (high)
 - consider removing Charon (med)
 - consider adding Titan and Rhea (med)
 - adjust body sizes and distances, check for possible body collisions (none now), keep in mind jupiter is too close to saturn (med)
