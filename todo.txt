@@ -37,6 +37,6 @@ NON-TECH:
 - adjust camera parameters (movement, orientation and zoom speeds, duration, etc) (maybe) (med)
 - adjust info window parameters (fade time) (maybe) (med)
 - new splash screen (med)
-- final review of all text files; add any missing change log items, change existing ones if necessary, watch for "planned" markers (low)
+- final review of all text files; add any missing change log items, change existing ones if necessary, watch for "planned" markers, review entries that are too irrelevant (low)
 - check spelling of all text files (low)
 - update website (downloads, screenshots, etc.) and upload binaries to all "mirrors" (vsemionov.org, bitbucket, sf, google?) (low)
