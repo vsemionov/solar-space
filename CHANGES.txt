@@ -12,7 +12,7 @@ graphics:
  - smoother animation via double-precision calculations of object and camera position and orientation
  - camera state is completely independent of frame rate
  - Z buffer depth is 16 bits
- - slight adjustment to the OpenGL texture filter selection
+ - OpenGL texture filter is GL_NEAREST for all overlays
  - updated load order (splash, bodies, star map, lens flares, info fonts, clock)
  - clock colon state is updated more correctly, on every frame
  - updated FreeType to version 2.3.5
