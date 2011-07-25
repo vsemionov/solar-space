@@ -56,7 +56,6 @@ OutputBaseFilename={#MyAppName} Setup {#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
 
-; keep the file version in full format
 VersionInfoVersion=1.2.0.0
 VersionInfoCopyright=Copyright (C) {#MyCopyrightPeriod} {#MyCopyrightHolder}
 SetupIconFile=..\src\res\Solar Space.ico
