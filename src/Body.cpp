@@ -665,6 +665,8 @@ bool CBody::LoadPhys()
 	own_incl[2]=0.0f;
 	if (!orbit_period)
 		orbit_period=(float)sqrt(distance*distance*distance);
+	if (clouds_rot_start==0.0f)
+		clouds_rot_start=(float)(rand()%(360*64))/64.0f;
 	clouds_rot_start/=360.0f;
 	distance*=(type!=rings?distmult:radmult);
 	radius*=radmult;

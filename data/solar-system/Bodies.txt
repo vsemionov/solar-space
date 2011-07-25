@@ -22,8 +22,8 @@
 // siderial orbit period (length of year, in seconds, if 0 its calculated from the orbit radius with Kepler's law 3)
 // siderial rotation period (length of day, in seconds, infinity or sync with orbit if 0)
 // SEPARATOR
-// orbit rotation start (degrees at t0, random if 0)
-// siderial rotation start (degrees at t0, random if 0)
+// initial orbit rotation angle (degrees at t0, random if 0)
+// initial siderial rotation angle (degrees at t0, random if 0)
 // SEPARATOR
 // orbital inclination to ecliptic (to equator of parent, in degrees)
 // equatorial inclination to orbit (in degrees)
@@ -32,7 +32,7 @@
 // direction of equator inclination (in degrees, how to incline, random if 0)
 // SEPARATOR
 // clouds rotation period (relative to planet surface)
-// clouds rotation start angle
+// initial clouds rotation angle (degrees at t0, random if 0)
 // SEPARATOR
 // number of subbodies (subbody data on subsequent lines)
 // SEPARATOR
