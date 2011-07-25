@@ -1,16 +1,16 @@
 TECH:
 visual:
-- research specular highlights on all planets (found on Deso's laptop) (med)
-- do not rotate rings (maybe) (high)
-- check jerky movement of some bodies (Europa) when zoomed in; use double precision where applicable, check and remove the comment about min body size in the body data file (high)
-- consider reverting the random rotation of asteroids (high)
-- consider adjusting the specular spot size per-planet, depending on distance from Sun (high)
+- research specular highlights on all planets (found on Deso's laptop), mention in change log (high)
+- check jerky movement of some bodies (Europa) when zoomed in; use double precision where applicable, check and remove the comment about min body size in the body data file, removed "planned" marker from change log (high)
+- consider adjusting the specular spot size per-planet, depending on distance from Sun, mention in change log (high)
+- check again the reason for choosing GL_NEAREST_MIPMAP_LINEAR; update change log if changes are made again, or if not - explain the nature of the mentioned "adjustment" (high)
 
 non-visual:
-- set internal texture format to RGB, when not using an alpha map, to conserve video memory (high)
+- set internal texture format to RGB, when not using an alpha map, to conserve video memory, mention in change log (high)
 - extend d2 for extraction (high)
 
 performance/testing:
+- test all variants of star map rendering on the laptop (high)
 - test all settings (low)
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
@@ -18,15 +18,19 @@ user:
 - install d2, mention in change log (high)
 
 misc:
-- credit Harwen Zhang for his icon; see http://harwen.net/ (high)
 - mark authors of 3rd party products and add links (in a new text file, e.g. acknowledgements); install the new file; mention new file in change log (high)
 - rearrange authors file (high)
-- review data files (check file names, filename correctness, filename lowercase, use dashes instead of underscores in filenames, review text comments, etc), mention in change log if changed (high)
+- acknowledge Harwen Zhang for his icon; see http://harwen.net/ (high)
+- acknowledge JPL/Caltech for the Charon texture map; see http://www.jpl.nasa.gov/images/policy/ (high)
 - mention author and license in readme (high)
+- maybe change the title of the "miscellaneous" section in the readme (high)
+- mention in change log that asteroids are not randomly rotated (high)
+- add a note in the body spec that ring rotation is specified in the axis rotation period field (med)
+- review data files (check file names for correctness, filename lowercase, use dashes instead of underscores in filenames, review text comments, etc), mention in change log if changed (med)
 
 
 NON-TECH:
-- try to find a better moon texture with no visible shadows; see http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg and http://www.celestiamotherlode.net/creators/hermes/moon-4k.zip from http://laps.noaa.gov/albers/sos/sos.html and http://www.celestiamotherlode.net/catalog/moon.php, respectively (high)
+- try to find a better moon texture with no visible shadows; see http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg and http://www.celestiamotherlode.net/creators/hermes/moon-4k.zip from http://laps.noaa.gov/albers/sos/sos.html and http://www.celestiamotherlode.net/catalog/moon.php, respectively; find and acknowledge original authors; mention in change log (med)
 - adjust body sizes and distances, check for possible body collisions (none now), keep in mind jupiter is too close to saturn (med)
 - check all data (names, info facts, body data) (med)
 - adjust ambient reflection (e.g. to 0.1?); check specular reflection too (maybe) (med)
@@ -34,6 +38,6 @@ NON-TECH:
 - adjust camera parameters (movement, orientation and zoom speeds, duration, etc) (maybe) (med)
 - adjust info window parameters (fade time) (maybe) (med)
 - new splash screen (med)
-- final review of all text files; add any missing change log items, change existing ones if necessary (low)
+- final review of all text files; add any missing change log items, change existing ones if necessary, watch for "planned" markers (low)
 - check spelling of all text files (low)
 - update website (downloads, screenshots, etc.) and upload binaries to all "mirrors" (vsemionov.org, bitbucket, sf, google?) (low)
