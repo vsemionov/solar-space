@@ -15,7 +15,7 @@
 // type - 0=star, 1=planet(oid), 2=rings, 3=asteroid
 // SEPARATOR
 // distance from parent body (relative units)
-// radius (relative units)
+// radius (or width, for rings) (relative units)
 // SEPARATOR
 // shape (polar/equatorial radius ratio)
 // SEPARATOR
