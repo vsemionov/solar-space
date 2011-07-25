@@ -1,11 +1,12 @@
 TECH:
-non-visual:
-- set internal texture format to RGB, when not using an alpha map, to conserve video memory (high)
-
 visual:
 - research specular highlights on all planets (found on Deso's laptop) (med)
 - do not rotate rings (maybe) (high)
 - check jerky movement of some bodies (Europa) when zoomed in; use double precision where applicable, check and remove the comment about min body size in the body data file (high)
+- consider adjusting the specular spot size per-planet, depending on distance from Sun (high)
+
+non-visual:
+- set internal texture format to RGB, when not using an alpha map, to conserve video memory (high)
 
 performance/testing:
 - test all settings (low)
@@ -23,7 +24,7 @@ misc:
 
 NON-TECH:
 - consider removing Charon (med)
-- consider adding Rhea (med)
+- consider adding Titan and Rhea (med)
 - adjust body sizes and distances, check for possible body collisions (none now), keep in mind jupiter is too close to saturn (med)
 - check all data (names, info facts, body data) (med)
 - adjust ambient reflection (e.g. to 0.1?); check specular reflection too (maybe) (med)
