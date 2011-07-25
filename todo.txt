@@ -13,6 +13,7 @@ performance/testing:
 
 user:
 - installer icon (maybe) (high)
+- installer version info (high)
 
 misc:
 - credit Harwen Zhang for his icon; see http://harwen.net/
