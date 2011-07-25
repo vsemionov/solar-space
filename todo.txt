@@ -14,7 +14,8 @@ performance/testing:
 user:
 
 misc:
-- credit Harwen Zhang for his icon; see http://harwen.net/
+- credit Harwen Zhang for his icon; see http://harwen.net/ (high)
+- mark authors of 3rd party products and add links (high)
 
 
 NON-TECH:
