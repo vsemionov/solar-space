@@ -26,6 +26,7 @@
 
 
 #define MyAppName "Solar Space"
+; the version is also specified below for VersionInfoVersion
 #define MyAppVersion "1.2"
 #define MyAppPublisher "Victor Semionov"
 #define MyAppPublisherShort "vsemionov"
@@ -33,6 +34,9 @@
 #define MyAppURL "http://www.vsemionov.org/solar-space/"
 #define MyAppExeName "Solar Space.exe"
 #define MyAppScrName "SolSpace.scr"
+#define MyCopyrightHolder MyAppPublisher
+#define MyCopyrightPeriod "2003-2011"
+
 
 [Setup]
 AppId={{DEA29385-E983-4A44-81AB-F9CA69961459}
@@ -51,7 +55,12 @@ OutputDir=..\dist
 OutputBaseFilename={#MyAppName} Setup {#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
+
+VersionInfoVersion=1.2
+VersionInfoCopyright=Copyright (C) {#MyCopyrightPeriod} {#MyCopyrightHolder}. All rights reserved.
+SetupIconFile=..\src\res\Solar Space.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
+
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -85,4 +94,3 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Paramet
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, "&", "&&")}}"; Parameters: "-s"; Flags: nowait postinstall skipifsilent unchecked
 Filename: "{app}\README.txt"; Description: "View Readme"; Flags: shellexec skipifdoesntexist postinstall skipifsilent unchecked
-
