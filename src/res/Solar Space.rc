@@ -177,7 +177,7 @@ BEGIN
             VALUE "LegalCopyright", "Copyright (C) 2003-2011 Victor Semionov"
             VALUE "OriginalFilename", "Solar Space.exe"
             VALUE "ProductName", "Solar Space"
-            VALUE "ProductVersion", "1.2.0.0"
+            VALUE "ProductVersion", "1.2"
         END
     END
     BLOCK "VarFileInfo"
