@@ -28,6 +28,7 @@ usability:
  - per-user configuration
  - changed path to the configuration data in the Windows registry
  - updated Inno Setup to version 5.4.2
+ - custom installer/uninstaller icon (same as the new application icon)
  - setting as the current screen saver at installation time is optional
  - the installer never changes any screen saver properties, except the screen saver program
  - the uninstaller does not unset the current screen saver
