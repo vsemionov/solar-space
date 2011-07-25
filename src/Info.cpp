@@ -252,7 +252,6 @@ void CInfo::GetInfoCoords(int linenum, int *x, int *y)
 void CInfo::MakeName(int list, char *targetname)
 {
 	if (!targetname) return;
-	if (*targetname==' ') targetname++;
 	int x,y;
 	GetNameCoords(targetname,&x,&y);
 	glNewList(list,GL_COMPILE);
@@ -315,18 +314,30 @@ void CInfo::MakeInfo(int list, CBody *targetbody)
 
 void CInfo::Start(float seconds, float duration, char *targetname, CBody *targetbody)
 {
+	int l;
+	int i;
+	int idx;
+	char name[32];
 	if (!loaded)
 		return;
-	char name[32];
 	strcpy(name,targetname);
-	int l=strlen(name);
-	for (int i=0;i<l;i++)
+	l=strlen(name);
+	for (i=0;i<l;i++)
 		if (name[i]=='_')
 			name[i]=' ';
+	for (i=l-1;i>=0;i--)
+	{
+		if (name[i]!=' ')
+			break;
+		name[i]=0;
+	}
+	for (idx=0;idx<l;idx++)
+		if (name[idx]!=' ')
+			break;
 	starttime=seconds;
 	endtime=starttime+duration;
 	fadetime=FADE_TIME(duration);
-	MakeName(namelist,name);
+	MakeName(namelist,name+idx);
 	MakeInfo(infolist,targetbody);
 }
 
