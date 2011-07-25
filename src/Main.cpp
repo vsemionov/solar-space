@@ -572,7 +572,8 @@ static BOOL CALLBACK ConfigDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 	switch (msg)
 	{
 	case WM_INITDIALOG:
-		SetConfigIcon(hwnd);
+		if (!GetParent(hwnd))
+			SetConfigIcon(hwnd);
 		CheckRadioButton(hwnd,IDC_R640,IDC_R1024,(IDC_R640+CSettings::VideoMode));
 		CheckRadioButton(hwnd,IDC_RLOW,IDC_RHIGH,(IDC_RLOW+CSettings::DetailLevel));
 		CheckDlgButton(hwnd,IDC_CKDEFRES,CSettings::DefaultRes);
