@@ -113,7 +113,7 @@ bool CLensFlare::Load(CBody *star)
 	int i;
 	for (i=0;i<num_flares;i++)
 	{
-		itoa(i+1,fs,10);
+		itoa(i,fs,10);
 		if (CGamePlay::UserAbortedLoad())
 		{
 			CError::LogError(ERROR_CODE,"Loading of lens flare aborted by user.");
