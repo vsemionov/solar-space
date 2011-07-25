@@ -17,17 +17,15 @@ user:
 
 misc:
 - credit Harwen Zhang for his icon; see http://harwen.net/ (high)
-- mark authors of 3rd party products and add links (in a new text file); install the new file; menstion new file in change log (high)
-- add moon map 4k; check md5 sums and remove original 3rd party resources(high)
+- mark authors of 3rd party products and add links (in a new text file, e.g. acknowledgements); install the new file; menstion new file in change log (high)
+- remove original 3rd party resources(high)
 - rearrange authors file (high)
 - review data files (file names, lowercase, comments, etc) (high)
 - mention author and license in readme (high)
 
 
 NON-TECH:
-- try to find a better moon texture with no visible shadows (high)
-- consider removing Charon (med)
-- consider adding Titan and Rhea (med)
+- try to find a better moon texture with no visible shadows; see http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg and http://www.celestiamotherlode.net/creators/hermes/moon-4k.zip from http://laps.noaa.gov/albers/sos/sos.html and http://www.celestiamotherlode.net/catalog/moon.php, respectively (high)
 - adjust body sizes and distances, check for possible body collisions (none now), keep in mind jupiter is too close to saturn (med)
 - check all data (names, info facts, body data) (med)
 - adjust ambient reflection (e.g. to 0.1?); check specular reflection too (maybe) (med)
