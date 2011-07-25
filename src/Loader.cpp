@@ -316,6 +316,7 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 	int tex_width[2], tex_height[2], tex_size[2];
 	unsigned char *pImage[2];
 	int texture;
+	int alphachan=0;
 	texture=0;
 	if (imagemap!=NULL)
 	{
@@ -326,7 +327,6 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 			{
 				if (CLoader::FindEntry(alphamap)==CLoader::FindEntry(imagemap))
 				{
-					alphamap=NULL;
 					pImage[1]=pImage[0];
 					tex_size[1]=tex_size[0]; tex_width[1]=tex_width[0]; tex_height[1]=tex_height[0];
 				}
@@ -336,6 +336,7 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 				}
 				if (tex_size[1]>0 && tex_width[1]==tex_width[0] && tex_height[1]==tex_height[0])
 				{
+					alphachan=1;
 					int j;
 					for (j=0;j<tex_size[1];j+=4)
 					{
@@ -346,7 +347,7 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 						pImage[0][j+3]=(unsigned char)lum;
 					}
 				}
-				if (alphamap!=NULL)
+				if (pImage[1]!=pImage[0])
 					free(pImage[1]);
 				pImage[1]=NULL;
 			}
@@ -359,8 +360,7 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 				if (mipmaps)
 				{
 					glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,(linear?GL_LINEAR_MIPMAP_LINEAR:GL_NEAREST_MIPMAP_LINEAR));
-					// note: the internalFormat parameter is intentionally left at 4 unconditionally, assuming a negative performance impact if changed to 3 in case of no alpha map
-					if (gluBuild2DMipmaps(GL_TEXTURE_2D,4,tex_width[0],tex_height[0],GL_RGBA,GL_UNSIGNED_BYTE,pImage[0])!=0)
+					if (gluBuild2DMipmaps(GL_TEXTURE_2D,3+alphachan,tex_width[0],tex_height[0],GL_RGBA,GL_UNSIGNED_BYTE,pImage[0])!=0)
 						b=false;
 				}
 				else
@@ -369,8 +369,7 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 					if (ResizeImage((void**)&pImage[0],&tex_width[0],&tex_height[0]))
 					{
 						glGetError();
-						// note: the internalFormat parameter is intentionally left at 4 unconditionally, assuming a negative performance impact if changed to 3 in case of no alpha map
-						glTexImage2D(GL_TEXTURE_2D,0,4,tex_width[0],tex_height[0],0,GL_RGBA,GL_UNSIGNED_BYTE,pImage[0]);
+						glTexImage2D(GL_TEXTURE_2D,0,3+alphachan,tex_width[0],tex_height[0],0,GL_RGBA,GL_UNSIGNED_BYTE,pImage[0]);
 						if (glGetError()!=GL_NO_ERROR)
 							b=false;
 					}
