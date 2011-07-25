@@ -3,14 +3,15 @@ visual:
 - research specular highlights on all planets (found on Deso's laptop), mention in change log (high)
 - check jerky movement of some bodies (Europa) when zoomed in; use double precision where applicable, check and remove the comment about min body size in the body data file, removed "planned" marker from change log (high)
 - consider adjusting the specular spot size per-planet, depending on distance from Sun, mention in change log (high)
+- replace underscores with spaces for body names in splash screen (high)
 
 non-visual:
-- set internal texture format to RGB, when not using an alpha map, to conserve video memory, mention in change log (high)
 - extend d2 for extraction (high)
 
 performance/testing:
 - test all variants of star map rendering on the laptop (high)
 - test all settings (low)
+- verify all bodies render fine, in both camera modes (low)
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
 user:
