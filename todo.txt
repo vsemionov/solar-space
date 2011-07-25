@@ -19,10 +19,9 @@ user:
 
 misc:
 - credit Harwen Zhang for his icon; see http://harwen.net/ (high)
-- mark authors of 3rd party products and add links (in a new text file, e.g. acknowledgements); install the new file; menstion new file in change log (high)
-- remove original 3rd party resources(high)
+- mark authors of 3rd party products and add links (in a new text file, e.g. acknowledgements); install the new file; mention new file in change log (high)
 - rearrange authors file (high)
-- review data files (file names, lowercase, comments, etc), mention in change log if changed (high)
+- review data files (check file names, filename correctness, filename lowercase, use dashes instead of underscores in filenames, review text comments, etc), mention in change log if changed (high)
 - mention author and license in readme (high)
 
 
@@ -35,6 +34,6 @@ NON-TECH:
 - adjust camera parameters (movement, orientation and zoom speeds, duration, etc) (maybe) (med)
 - adjust info window parameters (fade time) (maybe) (med)
 - new splash screen (med)
-- final review of change log - add any missing items, change existing ones if necessary (low)
+- final review of all text files; add any missing change log items, change existing ones if necessary (low)
 - check spelling of all text files (low)
 - update website (downloads, screenshots, etc.) and upload binaries to all "mirrors" (vsemionov.org, bitbucket, sf, google?) (low)
