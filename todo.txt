@@ -14,7 +14,6 @@ performance/testing:
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
 user:
-- install d2, mention in change log (high)
 
 misc:
 - note max string length in body spec (high)
