@@ -5,7 +5,6 @@ visual:
 - consider adjusting the specular spot size per-planet, depending on distance from Sun, mention in change log (high)
 
 non-visual:
-- loading of bodies does not indicate error if a body is not loaded and the number loaded bodies does not match specified of children (high)
 - review loading and parsing of text and data files (high)
 - extend d2 for extraction (high)
 
