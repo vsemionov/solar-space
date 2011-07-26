@@ -314,30 +314,12 @@ void CInfo::MakeInfo(int list, CBody *targetbody)
 
 void CInfo::Start(float seconds, float duration, char *targetname, CBody *targetbody)
 {
-	int l;
-	int i;
-	int idx;
-	char name[32];
 	if (!loaded)
 		return;
-	strcpy(name,targetname);
-	l=strlen(name);
-	for (i=0;i<l;i++)
-		if (name[i]=='_')
-			name[i]=' ';
-	for (i=l-1;i>=0;i--)
-	{
-		if (name[i]!=' ')
-			break;
-		name[i]=0;
-	}
-	for (idx=0;idx<l;idx++)
-		if (name[idx]!=' ')
-			break;
 	starttime=seconds;
 	endtime=starttime+duration;
 	fadetime=FADE_TIME(duration);
-	MakeName(namelist,name+idx);
+	MakeName(namelist,targetname);
 	MakeInfo(infolist,targetbody);
 }
 
