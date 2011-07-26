@@ -967,6 +967,7 @@ bool CBody::LoadGFX()
 	if (!LoadTextures())
 	{
 		CError::LogError(ERROR_CODE,"Failed to load body textures.");
+		gluDeleteQuadric(quadric);
 		FreeGFX();
 		return false;
 	}
