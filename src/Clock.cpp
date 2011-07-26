@@ -288,6 +288,8 @@ bool CClock::ParseSpecsFile(CLoader *loader)
 		if (color_g>1.0f) color_g=1.0f;
 		if (color_b<0.0f) color_b=0.0f;
 		if (color_b>1.0f) color_b=1.0f;
+		if (color_a<0.0f) color_a=0.0f;
+		if (color_a>1.0f) color_a=1.0f;
 		digit_s=(float)digit_w/(float)digit_tex_max;
 		digit_t=1.0f-((float)digit_h/(float)digit_tex_max);
 	}
