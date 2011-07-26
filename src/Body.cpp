@@ -597,7 +597,7 @@ bool CBody::LoadPhys()
 #define VA_NUM 24
 #define VA_FMT "%s | %d | %f %f | %f | %f %f | %f %f | %f %f | %f %f | %f %f | %d | %s %s | %s | %s | %s %s | %s | %s"
 #define VA_ARGS				\
-	name,					\
+	tmpname,				\
 	(int *)&type,			\
 	&distance,				\
 	&radius,				\
@@ -623,7 +623,10 @@ bool CBody::LoadPhys()
 	info_name
 /////////////////////
 	float orb_incl_dir_angle, own_incl_dir_angle;
+	char tmpname[sizeof(name)];
+	int l;
 	int i;
+	int idx;
 	while (sscanf(textlines[lineindex],VA_FMT,VA_ARGS)!=VA_NUM || textlines[lineindex][0]=='/')
 	{
 		ZeroMemory(tex_names,sizeof(tex_names));
@@ -636,6 +639,20 @@ bool CBody::LoadPhys()
 			return false;
 		}
 	}
+	l=strlen(tmpname);
+	for (i=0;i<l;i++)
+		if (tmpname[i]=='_')
+			tmpname[i]=' ';
+	for (i=l-1;i>=0;i--)
+	{
+		if (tmpname[i]!=' ')
+			break;
+		tmpname[i]=0;
+	}
+	for (idx=0;idx<l;idx++)
+		if (tmpname[idx]!=' ')
+			break;
+	strcpy(name,tmpname+idx);
 	if (obj_name[0]=='.')
 		obj_name[0]=0;
 	if (info_name[0]=='.')
