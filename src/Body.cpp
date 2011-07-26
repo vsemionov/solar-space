@@ -595,7 +595,7 @@ bool CBody::Reload()
 bool CBody::LoadPhys()
 {
 #define VA_NUM 24
-#define VA_FMT "%s | %d | %f %f | %f | %f %f | %f %f | %f %f | %f %f | %f %f | %d | %s %s | %s | %s | %s %s | %s | %s"
+#define VA_FMT "%31s | %d | %f %f | %f | %f %f | %f %f | %f %f | %f %f | %f %f | %d | %12s %12s | %12s | %12s | %12s %12s | %12s | %12s"
 #define VA_ARGS				\
 	tmpname,				\
 	(int *)&type,			\

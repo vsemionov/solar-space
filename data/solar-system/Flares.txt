@@ -16,7 +16,7 @@
 // position (along the flare vector)
 // size (if sun-flare (pos==+1.00), size is in percent of sun's radius; else in relative units, multiplied by planet size multiplier)
 // color (reg,green,blue)
-// image file name
+// image file name (12 chars max)
 
 14
 +1.00

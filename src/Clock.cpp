@@ -264,7 +264,7 @@ bool CClock::ParseSpecsFile(CLoader *loader)
 		for (i=0;i<11;i++)
 		{
 			lineindex++;
-			while (sscanf(textlines[lineindex],"%s",tex_names[i])!=1 || textlines[lineindex][0]=='/')
+			while (sscanf(textlines[lineindex],"%12s",tex_names[i])!=1 || textlines[lineindex][0]=='/')
 			{
 				lineindex++;
 				if (lineindex>=numlines)

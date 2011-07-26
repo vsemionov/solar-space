@@ -20,6 +20,8 @@
 // digit hour/minute separator ":" image file name
 //
 
+// NOTE: all filenames must be 12 chars max
+
 // dimensions:
 64
 32 48

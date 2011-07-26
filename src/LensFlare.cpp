@@ -400,7 +400,7 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 	}
 ////////////////
 #define VA_NUM 6
-#define VA_FMT "%f  |  %f  | %f %f %f  | %s"
+#define VA_FMT "%f  |  %f  | %f %f %f  | %12s"
 #define VA_ARGS				\
 	&flaredata[i].pos,		\
 	&flaredata[i].size,		\

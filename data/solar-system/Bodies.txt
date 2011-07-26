@@ -10,7 +10,7 @@
 // ...........
 
 //Body line format: (separator == '|')
-// name (in planet info, underscore converted to spaces)
+// name (shown in planet info, underscore converted to spaces, 31 chars max)
 // SEPARATOR
 // type - 0=star, 1=planet(oid), 2=rings, 3=asteroid
 // SEPARATOR
@@ -59,6 +59,7 @@
 //-roughly about 0.20 units is the minimum radius of objects,
 //  otherwise in chase orientation mode, they'll jump around the center of
 //  the screen (angle of camera rotation, floating point precision)
+//-all filenames must be 12 chars max
 
 
 //current:
