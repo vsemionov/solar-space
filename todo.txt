@@ -38,3 +38,5 @@ NON-TECH:
 - final review of all text files; add any missing change log items, change existing ones if necessary, watch for "planned" markers, review entries that are too irrelevant (low)
 - check spelling of all text files (low)
 - update website (downloads, screenshots, etc.) and upload binaries to all "mirrors" (vsemionov.org, bitbucket, sf, google?) (low)
+- update mirrors (source, screenshots, etc) (low)
+- promote project (low)
