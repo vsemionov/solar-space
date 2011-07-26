@@ -5,6 +5,8 @@ visual:
 - consider adjusting the specular spot size per-planet, depending on distance from Sun, mention in change log (high)
 
 non-visual:
+- clock parsing crashes if the number of specified digits is less than required (high)
+- flare parsing crashes if the number of specified flares is less than specified (high)
 - extend d2 for extraction (high)
 
 performance/testing:
