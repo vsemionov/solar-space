@@ -16,14 +16,12 @@ performance/testing:
 user:
 
 misc:
-- note max string length in body spec (high)
 - mark authors of 3rd party products and add links (in a new text file, e.g. acknowledgements); install the new file; mention new file in change log (high)
 - rearrange authors file (high)
 - acknowledge Harwen Zhang for his icon; see http://harwen.net/ (high)
 - acknowledge JPL/Caltech for the Charon texture map; see http://www.jpl.nasa.gov/images/policy/ (high)
 - mention author and license in readme (high)
 - maybe change the title of the "miscellaneous" section in the readme (high)
-- mention in change log that asteroids are not randomly rotated (high)
 - review data files (check file names for correctness, filename lowercase, use dashes instead of underscores in filenames, review text comments, etc), mention in change log if changed (med)
 
 
