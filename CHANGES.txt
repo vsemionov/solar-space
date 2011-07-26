@@ -11,7 +11,7 @@ graphics:
  - new splash screen, preview image and icons
  - smoother animation via double-precision calculations of object and camera position and orientation
  - camera state is completely independent of frame rate
- - Z buffer depth is 16 bits
+ - Z buffer depth is 32 bits if available, but 16 bits otherwise
  - OpenGL texture filter is GL_NEAREST for all overlays
  - updated load order (splash, bodies, star map, lens flares, info fonts, clock)
  - clock colon state is updated more correctly, on every frame

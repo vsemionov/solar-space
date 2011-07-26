@@ -52,7 +52,7 @@ private:
 	static bool ChangeVideoMode(int width, int height);
 	static bool RestoreVideoMode();
 	static bool isWGLExtensionSupported(const char *extension);
-	static bool InitMultisample(HDC hDC, GLuint *pixel_format);
+	static bool InitMultisample(HDC hDC, int zbits, GLuint *pixel_format);
 	static bool CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, int width, int height, const GLuint *pixel_format);
 	static void DestroySaverWindow();
 	static HWND hwnd;

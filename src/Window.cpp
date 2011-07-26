@@ -43,7 +43,8 @@
 
 #define COLOR_BUFFER_BITS 24
 #define ALPHA_BUFFER_BITS 8
-#define Z_BUFFER_BITS 16
+#define Z_BUFFER_BITS 32
+#define Z_BUFFER_BITS_FALLBACK 16
 #define MULTI_SAMPLES 4
 #define MULTI_SAMPLES_FALLBACK 2
 
@@ -291,7 +292,7 @@ bool CWindow::isWGLExtensionSupported(const char *extension)
 
 
 
-bool CWindow::InitMultisample(HDC hDC, GLuint *pixel_format)
+bool CWindow::InitMultisample(HDC hDC, int zbits, GLuint *pixel_format)
 {
 	if (!isWGLExtensionSupported("WGL_ARB_multisample"))
 	{
@@ -318,12 +319,13 @@ bool CWindow::InitMultisample(HDC hDC, GLuint *pixel_format)
 		WGL_PIXEL_TYPE_ARB,			WGL_TYPE_RGBA_ARB,
 		WGL_COLOR_BITS_ARB,			COLOR_BUFFER_BITS,
 		WGL_ALPHA_BITS_ARB,			ALPHA_BUFFER_BITS,
-		WGL_DEPTH_BITS_ARB,			Z_BUFFER_BITS,
+		WGL_DEPTH_BITS_ARB,			-1,
 		WGL_STENCIL_BITS_ARB,		0,
 		WGL_SAMPLE_BUFFERS_ARB,		GL_TRUE,
 		WGL_SAMPLES_ARB,			MULTI_SAMPLES,
 		0,0
 	};
+	iAttributes[15] = zbits;
 
 	valid = wglChoosePixelFormatARB(hDC,iAttributes,fAttributes,1,&pixelFormat,&numFormats);
 
@@ -407,8 +409,12 @@ bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, in
 	{
 		if (!(PixelFormat=ChoosePixelFormat(hDC,&pfd)))
 		{
-			CError::LogError(ERROR_CODE,"No suitable OpenGL pixel format found.");
-			return false;
+			pfd.cDepthBits=Z_BUFFER_BITS_FALLBACK;
+			if (!(PixelFormat=ChoosePixelFormat(hDC,&pfd)))
+			{
+				CError::LogError(ERROR_CODE,"No suitable OpenGL pixel format found.");
+				return false;
+			}
 		}
 	}
 	else
@@ -608,7 +614,7 @@ bool CWindow::Create(HWND hParent)
 	wadd=(win_rect.right-win_rect.left)-width;
 	hadd=(win_rect.bottom-win_rect.top)-height;
 
-	if (!CreateSaverWindow(hParent, dwStyle, dwExStyle, width+wadd, height+hadd, NULL))
+	if (!CreateSaverWindow(hParent,dwStyle,dwExStyle,width+wadd,height+hadd,NULL))
 	{
 		return false;
 	}
@@ -617,10 +623,10 @@ bool CWindow::Create(HWND hParent)
 	if (CVideoBase::GetOptAntialiasing())
 	{
 		GLuint pixel_format;
-		if (InitMultisample(hDC, &pixel_format))
+		if (InitMultisample(hDC,Z_BUFFER_BITS,&pixel_format) || InitMultisample(hDC,Z_BUFFER_BITS_FALLBACK,&pixel_format))
 		{
 			DestroySaverWindow();
-			if (!CreateSaverWindow(hParent, dwStyle, dwExStyle, width+wadd, height+hadd, &pixel_format))
+			if (!CreateSaverWindow(hParent,dwStyle,dwExStyle,width+wadd,height+hadd,&pixel_format))
 			{
 				return false;
 			}
@@ -628,14 +634,14 @@ bool CWindow::Create(HWND hParent)
 		}
 	}
 
-	glViewport(0, 0, width, height);
+	glViewport(0,0,width,height);
 
 	if (DEBUG)
 	{
 		CenterWindow(hwnd,false);
 	}
 
-	ShowWindow(hwnd, SW_SHOWNORMAL);
+	ShowWindow(hwnd,SW_SHOWNORMAL);
 
 	winwidth=width;
 	winheight=height;
