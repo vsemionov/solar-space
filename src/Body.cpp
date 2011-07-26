@@ -905,13 +905,19 @@ void CBody::MakeAsteroid()
 				CLoader::vertex_t *vertex=&object->vertices[vertexnum];
 				float tx=vertex->tex_coords[0];
 				if (tx<0.25f)
+				{
 					for (int k=0;k<3;k++)
+					{
 						if (k!=j)
+						{
 							if (object->vertices[object->faces[i].vertexnum[k]].tex_coords[0]>0.75f)
 							{
 								tx+=1.0f;
 								break;
 							}
+						}
+					}
+				}
 				if (smooth)
 				{
 					glNormal3f(vertex->normal[0],vertex->normal[1],vertex->normal[2]);
