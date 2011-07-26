@@ -15,6 +15,7 @@ performance/testing:
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
 user:
+- in config mode, set a lower limit on window Y position when centering the window, to avoid hiding the title bar (high)
 
 misc:
 - mark authors of 3rd party products and add links (in a new text file, e.g. acknowledgements); install the new file; mention new file in change log (high)
