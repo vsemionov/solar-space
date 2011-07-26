@@ -39,4 +39,4 @@ NON-TECH:
 - check spelling of all text files (low)
 - update website (downloads, screenshots, etc.) and upload binaries to all "mirrors" (vsemionov.org, bitbucket, sf, google?) (low)
 - update mirrors (source, screenshots, etc) (low)
-- promote project - list in software directories, other promotions (low)
+- promote project - list in software directories, video in youtube (also available shown on the website), other promotions (low)
