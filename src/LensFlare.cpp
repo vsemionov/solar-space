@@ -106,7 +106,7 @@ bool CLensFlare::Load(CBody *star)
 	}
 	if (!ParseSpecsFile(&loader))
 	{
-		CError::LogError(WARNING_CODE,"Failed to parse lens flare - skipping.");
+		CError::LogError(WARNING_CODE,"Failed to parse lens flare.");
 		AbortLoad();
 	}
 	char fs[16];

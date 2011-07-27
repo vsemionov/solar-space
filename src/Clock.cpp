@@ -101,7 +101,7 @@ bool CClock::Load()
 	}
 	if (!ParseSpecsFile(&loader))
 	{
-		CError::LogError(WARNING_CODE,"Failed to parse clock - skipping.");
+		CError::LogError(WARNING_CODE,"Failed to parse clock.");
 		return false;
 	}
 	char ds[2];
@@ -120,7 +120,7 @@ bool CClock::Load()
 		textures[i]=loader.LoadTexture(entry,entry,false,false,false);
 		if (textures[i]==0)
 		{
-			CError::LogError(WARNING_CODE,"Failed to load clock digit - skipping.");
+			CError::LogError(WARNING_CODE,"Failed to load clock digit.");
 			AbortLoad();
 		}
 	}
