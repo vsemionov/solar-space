@@ -171,7 +171,7 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "CompanyName", "Victor Semionov"
-            VALUE "FileDescription", "Screen Saver"
+            VALUE "FileDescription", "Solar Space"
             VALUE "FileVersion", "1.2.0.0"
             VALUE "InternalName", "Solar Space"
             VALUE "LegalCopyright", "Copyright (C) 2003-2011 Victor Semionov"
