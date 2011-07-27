@@ -27,11 +27,12 @@ misc:
 NON-TECH:
 - try to find a better moon texture with no visible shadows; see http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg and http://www.celestiamotherlode.net/creators/hermes/moon-4k.zip from http://laps.noaa.gov/albers/sos/sos.html and http://www.celestiamotherlode.net/catalog/moon.php, respectively; find and acknowledge original authors; mention in change log (med)
 - adjust body sizes and distances, check for possible body collisions (none now), keep in mind jupiter is too close to saturn (med)
-- check all data (names, info facts, body data) (med)
+- adjust lens flare colors (the should be no browns like now, only colors of the rainbow) (med)
 - adjust ambient reflection (e.g. to 0.1?); check specular reflection too (maybe) (med)
 - adjust body parameters so that planets rotate slower (maybe) (med)
 - adjust camera parameters (movement, orientation and zoom speeds, duration, etc) (maybe) (med)
 - adjust info window parameters (fade time) (maybe) (med)
+- check all data (names, info facts, body data) (med)
 - new splash screen (med)
 - final review of all text files; add any missing change log items, change existing ones if necessary, watch for "planned" markers, review entries that are too irrelevant (low)
 - check spelling of the content of all text files (low)
