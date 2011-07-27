@@ -216,6 +216,8 @@ bool CBody::LoadSystemData(char *resource, int *format_version, char *buffer,boo
 
 bool CBody::Load()
 {
+	const char *mem_msg="Unable to load bodies - memory allocation failed.";
+	const char *fail_msg="Failed to load planetary system - aborting.";
 	int i;
 	bool b=true;
 	if (textlines==NULL)
@@ -235,7 +237,7 @@ bool CBody::Load()
 		glMaterialf(GL_BACK,GL_SHININESS,Shininess);
 		if (!LoadSystemData())
 		{
-			CError::LogError(ERROR_CODE,"Loading of planetary system failed - aborting.");
+			CError::LogError(ERROR_CODE,fail_msg);
 			return false;
 		}
 		if (!loader.WithResource(BODY_DATA_RESOURCE))
@@ -261,7 +263,7 @@ bool CBody::Load()
 		bodycache=(CBody**)malloc(numlines*sizeof(CBody*));
 		if (!bodycache)
 		{
-			CError::LogError(ERROR_CODE,"Unable to load bodies - memory allocation failed.");
+			CError::LogError(ERROR_CODE,mem_msg);
 			return false;
 		}
 		lineindex=-1;
@@ -273,14 +275,14 @@ bool CBody::Load()
 		numlines=0;
 		if (!b)
 		{
-			CError::LogError(ERROR_CODE,"Loading of planetary system failed - aborting.");
+			CError::LogError(ERROR_CODE,fail_msg);
 			return false;
 		}
 		CalcMaxChildDist();
 		bodycache=(CBody**)realloc(bodycache,numbodies*sizeof(CBody*));
 		if (!bodycache)
 		{
-			CError::LogError(ERROR_CODE,"Unable to load bodies - memory allocation failed.");
+			CError::LogError(ERROR_CODE,mem_msg);
 			return false;
 		}
 		b=Reload();
@@ -290,7 +292,7 @@ bool CBody::Load()
 	{
 		if (!LoadPhys())
 		{
-			CError::LogError(ERROR_CODE,"Parsing of body data failed - aborting.");
+			CError::LogError(ERROR_CODE,"Failed to parse body data - aborting.");
 			return false;
 		}
 		id=numbodies;
@@ -309,7 +311,7 @@ bool CBody::Load()
 				b=subbodies[i].Load();
 				if (!b)
 				{
-					CError::LogError(ERROR_CODE,"Unable to load subbody - aborting.");
+					CError::LogError(ERROR_CODE,"Failed to load subbody - aborting.");
 					break;
 				}
 			}
@@ -324,12 +326,13 @@ bool CBody::Load()
 
 bool CBody::LoadMultipliers()
 {
+	const char *eof_msg="Unable to load bodies - unexpected end of file.";
 	do
 	{
 		lineindex++;
 		if (lineindex>=numlines)
 		{
-			CError::LogError(ERROR_CODE,"Unable to load body - unexpected end of file.");
+			CError::LogError(ERROR_CODE,eof_msg);
 			return false;
 		}
 	} while (sscanf(textlines[lineindex],"%f",&distmult)!=1 || textlines[lineindex][0]=='/');
@@ -338,7 +341,7 @@ bool CBody::LoadMultipliers()
 		lineindex++;
 		if (lineindex>=numlines)
 		{
-			CError::LogError(ERROR_CODE,"Unable to load body - unexpected end of file.");
+			CError::LogError(ERROR_CODE,eof_msg);
 			return false;
 		}
 	} while (sscanf(textlines[lineindex],"%f",&radmult)!=1 || textlines[lineindex][0]=='/');
@@ -347,7 +350,7 @@ bool CBody::LoadMultipliers()
 		lineindex++;
 		if (lineindex>=numlines)
 		{
-			CError::LogError(ERROR_CODE,"Unable to load body - unexpected end of file.");
+			CError::LogError(ERROR_CODE,eof_msg);
 			return false;
 		}
 	} while (sscanf(textlines[lineindex],"%f",&orbtimemult)!=1 || textlines[lineindex][0]=='/');
@@ -356,7 +359,7 @@ bool CBody::LoadMultipliers()
 		lineindex++;
 		if (lineindex>=numlines)
 		{
-			CError::LogError(ERROR_CODE,"Unable to load body - unexpected end of file.");
+			CError::LogError(ERROR_CODE,eof_msg);
 			return false;
 		}
 	} while (sscanf(textlines[lineindex],"%f",&owntimemult)!=1 || textlines[lineindex][0]=='/');

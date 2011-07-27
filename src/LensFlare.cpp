@@ -106,7 +106,7 @@ bool CLensFlare::Load(CBody *star)
 	}
 	if (!ParseSpecsFile(&loader))
 	{
-		CError::LogError(WARNING_CODE,"Parsing of lens flare failed - skipping.");
+		CError::LogError(WARNING_CODE,"Failed to parse lens flare - skipping.");
 		AbortLoad();
 	}
 	char fs[16];
@@ -409,6 +409,8 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 	&flaredata[i].color[2],	\
 	tex_names[i]
 /////////////////////
+	const char *eof_msg="Unable to load lens flares - unexpected end of file.";
+	const char *mem_msg="Unable to load lens flares - memory allocation failed.";
 	char **textlines=NULL;
 	int numlines=0;
 	int lineindex;
@@ -435,7 +437,7 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 			lineindex++;
 			if (lineindex>=numlines)
 			{
-				CError::LogError(WARNING_CODE,"Unable to load lens flares - unexpected end of file.");
+				CError::LogError(WARNING_CODE,eof_msg);
 				AbortParse();
 			}
 		} while (sscanf(textlines[lineindex],"%d",&num_flares)!=1 || textlines[lineindex][0]=='/');
@@ -444,28 +446,28 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 			lineindex++;
 			if (lineindex>=numlines)
 			{
-				CError::LogError(WARNING_CODE,"Unable to load lens flares - unexpected end of file.");
+				CError::LogError(WARNING_CODE,eof_msg);
 				AbortParse();
 			}
 		} while (sscanf(textlines[lineindex],"%f",&sizefactor)!=1 || textlines[lineindex][0]=='/');
 		flaredata=(flaredata_s*)malloc(num_flares*sizeof(flaredata_s));
 		if (!flaredata)
 		{
-			CError::LogError(WARNING_CODE,"Unable to load lens flares - memory allocation failed.");
+			CError::LogError(WARNING_CODE,mem_msg);
 			AbortParse();
 		}
 		ZeroMemory(flaredata,num_flares*sizeof(flaredata_s));
 		textures=(int*)malloc(num_flares*sizeof(int));
 		if (!textures)
 		{
-			CError::LogError(WARNING_CODE,"Unable to load lens flares - memory allocation failed.");
+			CError::LogError(WARNING_CODE,mem_msg);
 			AbortParse();
 		}
 		ZeroMemory(textures,num_flares*sizeof(int));
 		tex_names=(char**)malloc(num_flares*sizeof(char*));
 		if (!tex_names)
 		{
-			CError::LogError(WARNING_CODE,"Unable to load lens flares - memory allocation failed.");
+			CError::LogError(WARNING_CODE,mem_msg);
 			AbortParse();
 		}
 		ZeroMemory(tex_names,num_flares*sizeof(char*));
@@ -474,7 +476,7 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 			tex_names[i]=(char*)malloc(16);
 			if (!tex_names[i])
 			{
-				CError::LogError(WARNING_CODE,"Unable to load lens flares - memory allocation failed.");
+				CError::LogError(WARNING_CODE,mem_msg);
 				AbortParse();
 			}
 			tex_names[i][0]=0;
@@ -484,7 +486,7 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 				lineindex++;
 				if (lineindex>=numlines)
 				{
-					CError::LogError(WARNING_CODE,"Unable to load lens flares - unexpected end of file.");
+					CError::LogError(WARNING_CODE,eof_msg);
 					AbortParse();
 				}
 			} while (sscanf(textlines[lineindex],VA_FMT,VA_ARGS)!=VA_NUM || textlines[lineindex][0]=='/');

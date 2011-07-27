@@ -114,7 +114,7 @@ bool CGamePlay::Init()
 		if (UserAbortedLoad())
 			OnUserAbortLoad();
 		else
-			CError::LogError(ERROR_CODE,"Unable to load scene critical data - aborting.");
+			CError::LogError(ERROR_CODE,"Failed to load scene critical data - aborting.");
 		DestroyScene();
 		ret=false;
 	}

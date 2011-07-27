@@ -235,6 +235,7 @@ bool CStarMap::LoadStars()
 	&stars[i].color[1],		\
 	&stars[i].color[2]
 /////////////////////
+	const char *eof_msg="Unable to load star data - unexpected end of file.";
 	char **textlines=NULL;
 	int numlines=0;
 	int lineindex;
@@ -267,7 +268,7 @@ bool CStarMap::LoadStars()
 			lineindex++;
 			if (lineindex>=numlines)
 			{
-				CError::LogError(WARNING_CODE,"Unable to load star data - unexpected end of file.");
+				CError::LogError(WARNING_CODE,eof_msg);
 				AbortParse();
 			}
 		} while (sscanf(textlines[lineindex],"%d",&num_stars)!=1 || textlines[lineindex][0]=='/');
@@ -285,7 +286,7 @@ bool CStarMap::LoadStars()
 				lineindex++;
 				if (lineindex>=numlines)
 				{
-					CError::LogError(WARNING_CODE,"Unable to load star data - unexpected end of file.");
+					CError::LogError(WARNING_CODE,eof_msg);
 					AbortParse();
 				}
 			} while (sscanf(textlines[lineindex],VA_FMT,VA_ARGS)!=VA_NUM || textlines[lineindex][0]=='/');

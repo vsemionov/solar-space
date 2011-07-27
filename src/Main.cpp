@@ -557,7 +557,7 @@ static void SetConfigIcon(HWND hwnd)
 	}
 	else
 	{
-		CError::LogError(ERROR_CODE, "Unable to load the settings icon.");
+		CError::LogError(WARNING_CODE, "Unable to load the settings icon.");
 	}
 }
 
