@@ -30,7 +30,7 @@
 
 #include <windows.h>
 
-#include "defs.h"
+#include "Defs.h"
 
 #include <stdio.h>
 #include <stdint.h>

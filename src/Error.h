@@ -28,7 +28,7 @@
 #ifndef ERROR_H
 #define ERROR_H
 
-#include "defs.h"
+#include "Defs.h"
 
 
 #define ERROR_MAXLEN 256

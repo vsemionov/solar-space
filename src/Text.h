@@ -34,7 +34,7 @@
 #include <freetype/ftoutln.h>
 #include <freetype/fttrigon.h>
 
-#include "defs.h"
+#include "Defs.h"
 
 
 #define NUM_CHARS 128

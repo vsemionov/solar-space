@@ -28,7 +28,7 @@
 #ifndef VIDEOBASE_H
 #define VIDEOBASE_H
 
-#include "defs.h"
+#include "Defs.h"
 
 
 #define MAX_ANISOTROPY 4.0f

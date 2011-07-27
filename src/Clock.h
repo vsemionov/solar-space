@@ -28,7 +28,7 @@
 #ifndef CLOCK_H
 #define CLOCK_H
 
-#include "defs.h"
+#include "Defs.h"
 
 
 

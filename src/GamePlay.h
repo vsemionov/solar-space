@@ -28,7 +28,7 @@
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
 
-#include "defs.h"
+#include "Defs.h"
 
 #include "Body.h"
 #include "Camera.h"

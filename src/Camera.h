@@ -28,7 +28,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "defs.h"
+#include "Defs.h"
 
 #include "Info.h"
 

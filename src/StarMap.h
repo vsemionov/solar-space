@@ -28,7 +28,7 @@
 #ifndef STARMAP_H
 #define STARMAP_H
 
-#include "defs.h"
+#include "Defs.h"
 
 
 

@@ -28,7 +28,7 @@
 #ifndef INFO_H
 #define INFO_H
 
-#include "defs.h"
+#include "Defs.h"
 
 #include "Text.h"
 

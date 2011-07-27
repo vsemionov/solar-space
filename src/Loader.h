@@ -28,7 +28,7 @@
 #ifndef LOADER_H
 #define LOADER_H
 
-#include "defs.h"
+#include "Defs.h"
 
 #include "Resource.h"
 

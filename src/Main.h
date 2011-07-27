@@ -28,7 +28,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "defs.h"
+#include "Defs.h"
 
 
 enum TScrMode {smNone,smConfig,smPassword,smPreview,smSaver};

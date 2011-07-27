@@ -28,7 +28,7 @@
 #ifndef LENSFLARE_H
 #define LENSFLARE_H
 
-#include "defs.h"
+#include "Defs.h"
 
 #include "Tensor.h"
 

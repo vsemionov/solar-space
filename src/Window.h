@@ -28,7 +28,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include "defs.h"
+#include "Defs.h"
 
 
 

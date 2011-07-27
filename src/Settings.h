@@ -28,7 +28,7 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include "defs.h"
+#include "Defs.h"
 
 #include "Body.h"
 

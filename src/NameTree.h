@@ -28,7 +28,7 @@
 #ifndef NAMETREE_H
 #define NAMETREE_H
 
-#include "defs.h"
+#include "Defs.h"
 
 
 

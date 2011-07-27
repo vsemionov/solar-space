@@ -30,7 +30,7 @@
 
 #include <gl/glu.h>
 
-#include "defs.h"
+#include "Defs.h"
 
 #include "Loader.h"
 #include "LensFlare.h"
