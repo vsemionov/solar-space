@@ -209,7 +209,7 @@ int extract_d2(string file, string dir)
 	for (int i = 0; i < NUM_RES_ENTRIES; i++)
 	{
 		const char *pname = loader.GetEntryName(i);
-		if (!pname)
+		if (!pname || pname[0]==0)
 			continue;
 
 		if (!loader.ExtractFile(pname, (string(dir) + "\\" + string(pname)).c_str()))
