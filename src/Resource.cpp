@@ -109,7 +109,7 @@ bool CResource::BuildNameTree()
 
 
 
-int CResource::SearchNameTree(char *name)
+int CResource::SearchNameTree(const char *name)
 {
 	return nametree.FindLeaf(name);
 }
@@ -118,7 +118,7 @@ int CResource::SearchNameTree(char *name)
 
 
 
-int CResource::FindEntryBrutal(char *entryname)
+int CResource::FindEntryBrutal(const char *entryname)
 {
 	int i;
 	if (drs!=NULL)
@@ -265,7 +265,7 @@ bool CResource::ReadEntryEx(void *buffer, int entrynum, int offset, int size)
 
 
 
-char *CResource::GetEntryName(int entrynum)
+const char *CResource::GetEntryName(int entrynum)
 {
 	if (drs==NULL || entrynum>=NUM_RES_ENTRIES || entrynum<0)
 		return NULL;

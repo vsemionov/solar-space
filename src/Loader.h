@@ -37,7 +37,7 @@
 
 
 
-class CLoader : protected CResource
+class CLoader : public CResource
 {
 public:
 
@@ -67,13 +67,17 @@ public:
 	bool WithResource(const char *filename);
 	void End();
 	int LoadRaw(const char *entryname, void **buffer);
+#ifndef LOADER_NO_GFX
 	int LoadImage(const char *entryname, int *width, int *height, void **buffer, bool convert_bgr_rgb=true);
 	int LoadTexture(const char *imagemap, const char *alphamap, bool mipmaps, bool linear, bool anisotropic);
-	bool ExtractFile(const char *resfile, const char *destfile);
+#endif // LOADER_NO_GFX
+	bool ExtractFile(const char *entryname, const char *destfile);
 	bool LoadText(const char *entryname, char ***lines, int *numlines);
 	object_t *LoadObject(const char *entryname);
 private:
+#ifndef LOADER_NO_GFX
 	static bool ResizeImage(void **pImage, int *width, int *height);
+#endif // LOADER_NO_GFX
 };
 
 #endif

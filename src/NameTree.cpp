@@ -80,7 +80,7 @@ void CNameTree::Destroy()
 
 
 
-bool CNameTree::AddLeaf(char *name, int id)
+bool CNameTree::AddLeaf(const char *name, int id)
 {
 	return AddBranch(&nodechain,name,id);
 }
@@ -89,7 +89,7 @@ bool CNameTree::AddLeaf(char *name, int id)
 
 
 
-int CNameTree::FindLeaf(char *name)
+int CNameTree::FindLeaf(const char *name)
 {
 	return SearchBranch(&nodechain,name);
 }
@@ -98,7 +98,7 @@ int CNameTree::FindLeaf(char *name)
 
 
 
-bool CNameTree::AddBranch(node_s *chain, char *string, int id)
+bool CNameTree::AddBranch(node_s *chain, const char *string, int id)
 {
 	node_s *newnode;
 	node_s *node=FindNode(chain,*string);
@@ -192,7 +192,7 @@ CNameTree::node_s *CNameTree::FindNode(node_s *chain, char ch)
 
 
 
-int CNameTree::SearchBranch(node_s *chain, char *string)
+int CNameTree::SearchBranch(node_s *chain, const char *string)
 {
 	node_s *node=FindNode(chain,*string);
 	if (!node || node->ch!=*string)

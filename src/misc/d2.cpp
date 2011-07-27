@@ -34,6 +34,9 @@
 #include <windows.h>
 #include <stdint.h>
 
+#include "../Loader.h"
+
+
 using std::string;
 using std::list;
 using std::cout;
@@ -61,12 +64,17 @@ typedef struct
 } d2_entry;
 
 
+const char d2_header[HEADER_LEN] = {'v', 's', ' ', 'd', '2', 0, 0, 0};
+
+
 void usage()
 {
-	cerr << "Usage: d2 dir file" << endl;
+	cerr << "Usage:" << endl;
+	cerr << "d2 -c directory file" << endl;
+	cerr << "d2 -x file directory" << endl;
 }
 
-int make_d2(string dir, string file)
+int create_d2(string dir, string file)
 {
 	list<d2_entry> entries;
 
@@ -118,8 +126,7 @@ int make_d2(string dir, string file)
 
 	FILE *fout = fopen(file.c_str(), "wb");
 
-	char header[HEADER_LEN] = {'v', 's', ' ', 'd', '2', 0, 0, 0};
-	fwrite(header, 1, sizeof(header), fout);
+	fwrite(d2_header, 1, sizeof(d2_header), fout);
 
 	for (list<d2_entry>::const_iterator it = entries.begin(); it != entries.end(); ++it)
 	{
@@ -190,13 +197,46 @@ int make_d2(string dir, string file)
 	return 0;
 }
 
-int main(int argc, char **argv)
+int extract_d2(string file, string dir)
 {
-	if (argc != 3)
+	CLoader loader;
+	if (!loader.WithResource(file.c_str()))
 	{
-		usage();
+		cerr << "error opening file: " << file << endl;
 		return 1;
 	}
 
-	return make_d2(argv[1], argv[2]);
+	for (int i = 0; i < NUM_RES_ENTRIES; i++)
+	{
+		const char *pname = loader.GetEntryName(i);
+		if (!pname)
+			continue;
+
+		if (!loader.ExtractFile(pname, (string(dir) + "\\" + string(pname)).c_str()))
+		{
+			cerr << "IO error on entry: " << pname << endl;
+			return 1;
+		}
+
+		cout << "extracted file: " << pname << endl;
+	}
+
+	return 0;
+}
+
+int main(int argc, char **argv)
+{
+	if (argc != 4)
+	{
+		usage();
+		return 127;
+	}
+
+	string cmd(argv[1]);
+	if (cmd == "-c")
+		return create_d2(argv[2], argv[3]);
+	else if (cmd == "-x")
+		return extract_d2(argv[2], argv[3]);
+	else
+		return 127;
 }

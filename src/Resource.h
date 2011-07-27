@@ -55,7 +55,7 @@ public:
 	int FindEntry(const char *entryname);
 	bool ReadEntry(void *buffer, int entrynum);
 	bool ReadEntryEx(void *buffer, int entrynum, int offset, int size);
-	char *GetEntryName(int entrynum);
+	const char *GetEntryName(int entrynum);
 	int GetEntrySize(int entrynum);
 protected:
 	FILE *drs;
@@ -76,8 +76,8 @@ private:
 	char path[MAX_PATH];
 	void DestroyNameTree();
 	bool BuildNameTree();
-	int SearchNameTree(char *name);
-	int FindEntryBrutal(char *entryname);
+	int SearchNameTree(const char *name);
+	int FindEntryBrutal(const char *entryname);
 };
 
 #endif

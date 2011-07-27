@@ -26,12 +26,15 @@
  */
 
 #include <windows.h>
+
+#ifndef LOADER_NO_GFX
 #include <olectl.h>
 
 #include <gl/glu.h>
 #include <gl/gl.h>
 
 #include <gl/glext.h>
+#endif // LOADER_NO_GFX
 
 #ifdef _MSC_VER
 #define _USE_MATH_DEFINES
@@ -39,8 +42,10 @@
 #include <math.h>
 
 
+#ifndef LOADER_NO_GFX
 #include "Settings.h"
 #include "VideoBase.h"
+#endif // LOADER_NO_GFX
 #include "Loader.h"
 
 
@@ -91,10 +96,14 @@ bool CLoader::WithResource(const char *filename)
 	const char *ext=".d2";
 	if (filename==NULL)
 		filename=DEFAULT_RESOURCE;
+#ifndef LOADER_NO_GFX
 	strcpy(filepath,CSettings::DataDir);
 	strcat(filepath,"\\");
 	strcat(filepath,filename);
 	strcat(filepath,ext);
+#else
+	strcpy(filepath,filename);
+#endif // LOADER_NO_GFX
 	return CResource::OpenResource(filepath);
 }
 
@@ -147,6 +156,7 @@ int CLoader::LoadRaw(const char *entryname, void **buffer)
 
 
 
+#ifndef LOADER_NO_GFX
 int CLoader::LoadImage(const char *entryname, int *width, int *height, void **buffer, bool convert_bgr_rgb)
 {
 	int i;
@@ -396,20 +406,21 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 	}
 	return texture;
 }
+#endif // LOADER_NO_GFX
 
 
 
 
 
-bool CLoader::ExtractFile(const char *resfile, const char *destfile)
+bool CLoader::ExtractFile(const char *entryname, const char *destfile)
 {
 	void *buffer;
 	int readsize, writesize;
 	FILE *fd;
 	bool b=false;
-	if (resfile!=NULL && destfile!=NULL)
+	if (entryname!=NULL && destfile!=NULL)
 	{
-		readsize=LoadRaw(resfile,&buffer);
+		readsize=LoadRaw(entryname,&buffer);
 		if (readsize>=0)
 		{
 			fd=fopen(destfile,"wb");

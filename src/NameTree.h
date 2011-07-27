@@ -39,9 +39,9 @@ class CNameTree
 public:
 	CNameTree();
 	virtual ~CNameTree();
-	bool AddLeaf(char *name, int id);
+	bool AddLeaf(const char *name, int id);
 	void Destroy();
-	int FindLeaf(char *name);
+	int FindLeaf(const char *name);
 
 private:
 	void Init();
@@ -54,8 +54,8 @@ private:
 		node_s *prev, *next;
 	};
 
-	bool AddBranch(node_s *chain, char *string, int id);
-	int SearchBranch(node_s *chain, char *string);
+	bool AddBranch(node_s *chain, const char *string, int id);
+	int SearchBranch(node_s *chain, const char *string);
 	bool NewBranch(node_s *node);
 	void InsertNode(node_s *node, node_s *before);
 	node_s *NewNode(char ch, int id);
