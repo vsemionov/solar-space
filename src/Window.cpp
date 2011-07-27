@@ -483,7 +483,7 @@ int CWindow::prev_p2(int a)
 
 
 
-void CWindow::CenterWindow(HWND hwnd, bool relative)
+void CWindow::CenterWindow(HWND hwnd, bool relative, bool snap)
 {
 	BOOL (WINAPI *GetRectFunc)(HWND,LPRECT)=(relative?GetClientRect:GetWindowRect);
 	HWND hwndOwner;
@@ -511,10 +511,42 @@ void CWindow::CenterWindow(HWND hwnd, bool relative)
 	// The new position is the sum of half the remaining space and the owner's
 	// original position.
 
+	long left = rcOwner.left + (rc.right / 2);
+	long top = rcOwner.top + (rc.bottom / 2);
+
+	if (!relative && snap)
+	{
+		long right = left + rcWin.right;
+		long bottom = top + rcWin.bottom;
+		RECT newWin = {left, top, right, bottom};
+
+		RECT desktop;
+		GetWindowRect(GetDesktopWindow(), &desktop);
+
+		long clipRight = newWin.right - desktop.right;
+		if (clipRight > 0)
+			OffsetRect(&newWin, -clipRight, 0);
+
+		long clipBottom = newWin.bottom - desktop.bottom;
+		if (clipBottom > 0)
+			OffsetRect(&newWin, 0, -clipBottom);
+
+		long clipLeft = desktop.left - newWin.left;
+		if (clipLeft > 0)
+			OffsetRect(&newWin, clipLeft, 0);
+
+		long clipTop = desktop.top - newWin.top;
+		if (clipTop > 0)
+			OffsetRect(&newWin, 0, clipTop);
+
+		left = newWin.left;
+		top = newWin.top;
+	}
+
 	SetWindowPos(hwnd,
 			NULL,
-			rcOwner.left + (rc.right / 2),
-			rcOwner.top + (rc.bottom / 2),
+			left,
+			top,
 			0,
 			0,
 			SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOSIZE|SWP_NOZORDER);
@@ -638,7 +670,7 @@ bool CWindow::Create(HWND hParent)
 
 	if (DEBUG)
 	{
-		CenterWindow(hwnd,false);
+		CenterWindow(hwnd,false,false);
 	}
 
 	ShowWindow(hwnd,SW_SHOWNORMAL);

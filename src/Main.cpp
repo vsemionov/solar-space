@@ -125,7 +125,7 @@ static BOOL CALLBACK PreviewProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 	{
 	case WM_INITDIALOG:
 		SetWindowPos(hwnd,NULL,0,0,THUMBNAIL_WIDTH,THUMBNAIL_HEIGHT,SWP_NOACTIVATE|SWP_NOREPOSITION|SWP_NOMOVE|SWP_NOZORDER);
-		CWindow::CenterWindow(hwnd,true);
+		CWindow::CenterWindow(hwnd,true,false);
 		return FALSE;
 	case WM_CLOSE:
 		DestroyWindow(hwnd);
@@ -195,7 +195,7 @@ static BOOL CALLBACK ShowLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 	switch (msg)
 	{
 	case WM_INITDIALOG:
-		CWindow::CenterWindow(hwnd,false);
+		CWindow::CenterWindow(hwnd,false,false);
 		SetTimer(hwnd,0,1000,NULL);
 		UpdateCloseTime(hwnd);
 		return TRUE;
@@ -589,7 +589,7 @@ static BOOL CALLBACK ConfigDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 		UpdateRes(hwnd);
 		FillList(hwnd);
 		SelectList(hwnd);
-		CWindow::CenterWindow(hwnd,false);
+		CWindow::CenterWindow(hwnd,false,true);
 		return TRUE;
 	case WM_COMMAND:
 		id=LOWORD(wParam);
