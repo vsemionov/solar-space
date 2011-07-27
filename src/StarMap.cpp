@@ -180,6 +180,8 @@ void CStarMap::Free()
 
 void CStarMap::Draw()
 {
+	if (!num_stars)
+		return;
 	if (!twinkle)
 	{
 		glCallList(object);
