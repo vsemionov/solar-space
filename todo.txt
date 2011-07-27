@@ -28,6 +28,7 @@ misc:
 
 
 NON-TECH:
+- maybe adjust the sun flare texture - it has a green tint; also update all relevant (med)
 - try to find a better moon texture with no visible shadows; see http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg and http://www.celestiamotherlode.net/creators/hermes/moon-4k.zip from http://laps.noaa.gov/albers/sos/sos.html and http://www.celestiamotherlode.net/catalog/moon.php, respectively; find and acknowledge original authors; mention in change log (med)
 - adjust body sizes and distances, check for possible body collisions (none now), keep in mind jupiter is too close to saturn (med)
 - check all data (names, info facts, body data) (med)
