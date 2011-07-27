@@ -231,8 +231,8 @@ bool CClock::ParseSpecsFile(CLoader *loader)
 		return false;
 	}
 	{
-		lineindex=0;
-		while (sscanf(textlines[lineindex],"%d",&digit_tex_max)!=1 || textlines[lineindex][0]=='/')
+		lineindex=-1;
+		do
 		{
 			lineindex++;
 			if (lineindex>=numlines)
@@ -240,9 +240,8 @@ bool CClock::ParseSpecsFile(CLoader *loader)
 				CError::LogError(WARNING_CODE,"Unable to load clock - unexpected end of file.");
 				AbortParse();
 			}
-		}
-		lineindex++;
-		while (sscanf(textlines[lineindex],"%d %d",&digit_w,&digit_h)!=2 || textlines[lineindex][0]=='/')
+		} while (sscanf(textlines[lineindex],"%d",&digit_tex_max)!=1 || textlines[lineindex][0]=='/');
+		do
 		{
 			lineindex++;
 			if (lineindex>=numlines)
@@ -250,9 +249,8 @@ bool CClock::ParseSpecsFile(CLoader *loader)
 				CError::LogError(WARNING_CODE,"Unable to load clock - unexpected end of file.");
 				AbortParse();
 			}
-		}
-		lineindex++;
-		while (sscanf(textlines[lineindex],"%f %f %f %f",&color_r,&color_g,&color_b,&color_a)!=4 || textlines[lineindex][0]=='/')
+		} while (sscanf(textlines[lineindex],"%d %d",&digit_w,&digit_h)!=2 || textlines[lineindex][0]=='/');
+		do
 		{
 			lineindex++;
 			if (lineindex>=numlines)
@@ -260,11 +258,10 @@ bool CClock::ParseSpecsFile(CLoader *loader)
 				CError::LogError(WARNING_CODE,"Unable to load clock - unexpected end of file.");
 				AbortParse();
 			}
-		}
+		} while (sscanf(textlines[lineindex],"%f %f %f %f",&color_r,&color_g,&color_b,&color_a)!=4 || textlines[lineindex][0]=='/');
 		for (i=0;i<11;i++)
 		{
-			lineindex++;
-			while (sscanf(textlines[lineindex],"%12s",tex_names[i])!=1 || textlines[lineindex][0]=='/')
+			do
 			{
 				lineindex++;
 				if (lineindex>=numlines)
@@ -272,7 +269,7 @@ bool CClock::ParseSpecsFile(CLoader *loader)
 					CError::LogError(WARNING_CODE,"Unable to load clock - unexpected end of file.");
 					AbortParse();
 				}
-			}
+			} while (sscanf(textlines[lineindex],"%12s",tex_names[i])!=1 || textlines[lineindex][0]=='/');
 		}
 	}
 	FreeLines();

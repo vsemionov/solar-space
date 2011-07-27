@@ -77,7 +77,7 @@ int CBody::system_format_version=0;
 char CBody::systemname[SYSTEM_NAME_SIZE];
 char **CBody::textlines=NULL;
 int CBody::numlines=0;
-int CBody::lineindex=0;
+int CBody::lineindex=-1;
 int CBody::numbodies=0;
 CBody CBody::ringchain;
 CBody **CBody::bodycache=NULL;
@@ -176,7 +176,7 @@ bool CBody::LoadSystemData(char *resource, int *format_version, char *buffer,boo
 					CError::LogError(ERROR_CODE,"Unable to load planetary system - unexpected end of file.");
 				for (int i=0;i<numlines;i++) free(textlines[i]);
 				free(textlines); textlines=NULL;
-				lineindex=0;
+				lineindex=-1;
 				numlines=0;
 				return false;
 			}
@@ -204,7 +204,7 @@ bool CBody::LoadSystemData(char *resource, int *format_version, char *buffer,boo
 
 	for (int i=0;i<numlines;i++) free(textlines[i]);
 	free(textlines); textlines=NULL;
-	lineindex=0;
+	lineindex=-1;
 	numlines=0;
 
 	return true;
@@ -264,7 +264,7 @@ bool CBody::Load()
 			CError::LogError(ERROR_CODE,"Unable to load bodies - memory allocation failed.");
 			return false;
 		}
-		lineindex=0;
+		lineindex=-1;
 		b=LoadMultipliers();
 		if (b)
 			b=Load();
@@ -285,7 +285,6 @@ bool CBody::Load()
 		}
 		b=Reload();
 		loader.End();
-		return b;
 	}
 	else
 	{
@@ -307,19 +306,16 @@ bool CBody::Load()
 			}
 			for (i=0;i<numsubbodies;i++)
 			{
-				lineindex++;
-				if (lineindex>=numlines)
+				b=subbodies[i].Load();
+				if (!b)
 				{
-					CError::LogError(ERROR_CODE,"Unable to load subbody - unexpected end of file.");
-					numsubbodies=i;
-					b=false;
+					CError::LogError(ERROR_CODE,"Unable to load subbody - aborting.");
 					break;
 				}
-				b&=subbodies[i].Load();
 			}
 		}
-		return b;
 	}
+	return b;
 }
 
 
@@ -328,7 +324,7 @@ bool CBody::Load()
 
 bool CBody::LoadMultipliers()
 {
-	while (sscanf(textlines[lineindex],"%f",&distmult)!=1 || textlines[lineindex][0]=='/')
+	do
 	{
 		lineindex++;
 		if (lineindex>=numlines)
@@ -336,9 +332,8 @@ bool CBody::LoadMultipliers()
 			CError::LogError(ERROR_CODE,"Unable to load body - unexpected end of file.");
 			return false;
 		}
-	}
-	lineindex++;
-	while (sscanf(textlines[lineindex],"%f",&radmult)!=1 || textlines[lineindex][0]=='/')
+	} while (sscanf(textlines[lineindex],"%f",&distmult)!=1 || textlines[lineindex][0]=='/');
+	do
 	{
 		lineindex++;
 		if (lineindex>=numlines)
@@ -346,9 +341,8 @@ bool CBody::LoadMultipliers()
 			CError::LogError(ERROR_CODE,"Unable to load body - unexpected end of file.");
 			return false;
 		}
-	}
-	lineindex++;
-	while (sscanf(textlines[lineindex],"%f",&orbtimemult)!=1 || textlines[lineindex][0]=='/')
+	} while (sscanf(textlines[lineindex],"%f",&radmult)!=1 || textlines[lineindex][0]=='/');
+	do
 	{
 		lineindex++;
 		if (lineindex>=numlines)
@@ -356,9 +350,8 @@ bool CBody::LoadMultipliers()
 			CError::LogError(ERROR_CODE,"Unable to load body - unexpected end of file.");
 			return false;
 		}
-	}
-	lineindex++;
-	while (sscanf(textlines[lineindex],"%f",&owntimemult)!=1 || textlines[lineindex][0]=='/')
+	} while (sscanf(textlines[lineindex],"%f",&orbtimemult)!=1 || textlines[lineindex][0]=='/');
+	do
 	{
 		lineindex++;
 		if (lineindex>=numlines)
@@ -366,8 +359,7 @@ bool CBody::LoadMultipliers()
 			CError::LogError(ERROR_CODE,"Unable to load body - unexpected end of file.");
 			return false;
 		}
-	}
-	lineindex++;
+	} while (sscanf(textlines[lineindex],"%f",&owntimemult)!=1 || textlines[lineindex][0]=='/');
 	return true;
 }
 
@@ -627,7 +619,7 @@ bool CBody::LoadPhys()
 	int l;
 	int i;
 	int idx;
-	while (sscanf(textlines[lineindex],VA_FMT,VA_ARGS)!=VA_NUM || textlines[lineindex][0]=='/')
+	do
 	{
 		ZeroMemory(tex_names,sizeof(tex_names));
 		ZeroMemory(obj_name,sizeof(obj_name));
@@ -638,7 +630,7 @@ bool CBody::LoadPhys()
 			CError::LogError(ERROR_CODE,"Unable to load body - unexpected end of file.");
 			return false;
 		}
-	}
+	} while (sscanf(textlines[lineindex],VA_FMT,VA_ARGS)!=VA_NUM || textlines[lineindex][0]=='/');
 	l=strlen(tmpname);
 	for (i=0;i<l;i++)
 		if (tmpname[i]=='_')

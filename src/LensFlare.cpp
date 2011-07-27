@@ -429,8 +429,8 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 		return false;
 	}
 	{
-		lineindex=0;
-		while (sscanf(textlines[lineindex],"%d",&num_flares)!=1 || textlines[lineindex][0]=='/')
+		lineindex=-1;
+		do
 		{
 			lineindex++;
 			if (lineindex>=numlines)
@@ -438,9 +438,8 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 				CError::LogError(WARNING_CODE,"Unable to load lens flares - unexpected end of file.");
 				AbortParse();
 			}
-		}
-		lineindex++;
-		while (sscanf(textlines[lineindex],"%f",&sizefactor)!=1 || textlines[lineindex][0]=='/')
+		} while (sscanf(textlines[lineindex],"%d",&num_flares)!=1 || textlines[lineindex][0]=='/');
+		do
 		{
 			lineindex++;
 			if (lineindex>=numlines)
@@ -448,7 +447,7 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 				CError::LogError(WARNING_CODE,"Unable to load lens flares - unexpected end of file.");
 				AbortParse();
 			}
-		}
+		} while (sscanf(textlines[lineindex],"%f",&sizefactor)!=1 || textlines[lineindex][0]=='/');
 		flaredata=(flaredata_s*)malloc(num_flares*sizeof(flaredata_s));
 		if (!flaredata)
 		{
@@ -479,8 +478,7 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 				AbortParse();
 			}
 			tex_names[i][0]=0;
-			lineindex++;
-			while (sscanf(textlines[lineindex],VA_FMT,VA_ARGS)!=VA_NUM || textlines[lineindex][0]=='/')
+			do
 			{
 				tex_names[i][0]=0;
 				lineindex++;
@@ -489,7 +487,7 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 					CError::LogError(WARNING_CODE,"Unable to load lens flares - unexpected end of file.");
 					AbortParse();
 				}
-			}
+			} while (sscanf(textlines[lineindex],VA_FMT,VA_ARGS)!=VA_NUM || textlines[lineindex][0]=='/');
 			strupr(tex_names[i]);
 			float *color=flaredata[i].color;
 			int j;

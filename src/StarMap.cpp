@@ -261,8 +261,8 @@ bool CStarMap::LoadStars()
 		return false;
 	}
 	{
-		lineindex=0;
-		while (sscanf(textlines[lineindex],"%d",&num_stars)!=1 || textlines[lineindex][0]=='/')
+		lineindex=-1;
+		do
 		{
 			lineindex++;
 			if (lineindex>=numlines)
@@ -270,7 +270,7 @@ bool CStarMap::LoadStars()
 				CError::LogError(WARNING_CODE,"Unable to load star data - unexpected end of file.");
 				AbortParse();
 			}
-		}
+		} while (sscanf(textlines[lineindex],"%d",&num_stars)!=1 || textlines[lineindex][0]=='/');
 		stars=(stardata_s*)malloc(num_stars*sizeof(stardata_s));
 		if (!stars)
 		{
@@ -280,8 +280,7 @@ bool CStarMap::LoadStars()
 		ZeroMemory(stars,num_stars*sizeof(stardata_s));
 		for (i=0;i<num_stars;i++)
 		{
-			lineindex++;
-			while (sscanf(textlines[lineindex],VA_FMT,VA_ARGS)!=VA_NUM || textlines[lineindex][0]=='/')
+			do
 			{
 				lineindex++;
 				if (lineindex>=numlines)
@@ -289,7 +288,7 @@ bool CStarMap::LoadStars()
 					CError::LogError(WARNING_CODE,"Unable to load star data - unexpected end of file.");
 					AbortParse();
 				}
-			}
+			} while (sscanf(textlines[lineindex],VA_FMT,VA_ARGS)!=VA_NUM || textlines[lineindex][0]=='/');
 		}
 	}
 	FreeLines();
