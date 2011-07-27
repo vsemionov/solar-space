@@ -2,7 +2,6 @@ TECH:
 visual:
 - research specular highlights on all planets (found on Deso's laptop), mention in change log (high)
 - check jerky movement of some bodies (Europa) when zoomed in; use double precision where applicable, check and remove the comment about min body size in the body data file, removed "planned" marker from change log (high)
-- consider adjusting the specular spot size per-planet, depending on distance from Sun, mention in change log (high)
 
 non-visual:
 - clock parsing crashes if the number of specified digits is less than required (high)
@@ -28,7 +27,6 @@ misc:
 
 
 NON-TECH:
-- maybe adjust the sun flare texture - it has a green tint; also update all relevant (med)
 - try to find a better moon texture with no visible shadows; see http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg and http://www.celestiamotherlode.net/creators/hermes/moon-4k.zip from http://laps.noaa.gov/albers/sos/sos.html and http://www.celestiamotherlode.net/catalog/moon.php, respectively; find and acknowledge original authors; mention in change log (med)
 - adjust body sizes and distances, check for possible body collisions (none now), keep in mind jupiter is too close to saturn (med)
 - check all data (names, info facts, body data) (med)
@@ -38,7 +36,7 @@ NON-TECH:
 - adjust info window parameters (fade time) (maybe) (med)
 - new splash screen (med)
 - final review of all text files; add any missing change log items, change existing ones if necessary, watch for "planned" markers, review entries that are too irrelevant (low)
-- check spelling of all text files (low)
-- update website (downloads, screenshots, etc.) and upload binaries to all "mirrors" (vsemionov.org, bitbucket, sf, google?) (low)
-- update mirrors (source, screenshots, etc) (low)
+- check spelling of the content of all text files (low)
+- update website (downloads, screenshots, etc.) and upload sources and binaries to all "mirrors" (vsemionov.org, bitbucket, sf, google?) (low)
+- update development sites (source, screenshots, etc) (low)
 - promote project - list in software directories, video in youtube (also available shown on the website), other promotions (low)
