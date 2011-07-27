@@ -106,15 +106,15 @@ bool CGamePlay::Init()
 	bool ret=true;
 	InitTimer();
 	if (!CText::Init())
-		CError::LogError(WARNING_CODE,"Failed to initialize text font library - ignoring.");
+		CError::LogError(LOG_ERROR,"Failed to initialize text font library - ignoring.");
 	if (!splashtext.BuildFTFont(SPLASH_FONT_NAME,SPLASH_FONT_SIZE))
-		CError::LogError(WARNING_CODE,"Failed to load the splash text font - ignoring.");
+		CError::LogError(LOG_ERROR,"Failed to load the splash text font - ignoring.");
 	if (!InitScene())
 	{
 		if (UserAbortedLoad())
 			OnUserAbortLoad();
 		else
-			CError::LogError(ERROR_CODE,"Failed to load scene critical data - aborting.");
+			CError::LogError(LOG_FATAL,"Failed to load scene critical data - aborting.");
 		DestroyScene();
 		ret=false;
 	}
@@ -237,7 +237,7 @@ void CGamePlay::InitLight()
 void CGamePlay::OnUserAbortLoad()
 {
 	// log new error
-	CError::LogError(ERROR_CODE,"Loading aborted by user.");
+	CError::LogError(LOG_INFO,"Loading aborted by user.");
 	// get first error, and if it's "user abort", clear the log so it's not printed
 	if (CError::ErrorsOccured())
 	{
@@ -272,7 +272,7 @@ bool CGamePlay::InitScene()
 	{
 		SetSplashText("Loading splash screen... ");
 		if (!LoadSplash())
-			CError::LogError(WARNING_CODE,"Failed to load the splash screen - ignoring.");
+			CError::LogError(LOG_ERROR,"Failed to load the splash screen - ignoring.");
 	}
 
 	{
@@ -283,7 +283,7 @@ bool CGamePlay::InitScene()
 		SetSplashText("Loading bodies... ");
 		if (!mainbody.Load())
 		{
-			CError::LogError(ERROR_CODE,"Failed to load the bodies - aborting.");
+			CError::LogError(LOG_ERROR,"Failed to load the bodies - aborting.");
 			return false;
 		}
 	}
@@ -295,7 +295,7 @@ bool CGamePlay::InitScene()
 		}
 		SetSplashText("Loading star map... ");
 		if (!starmap.Load())
-			CError::LogError(WARNING_CODE,"Failed to load the star map - ignoring.");
+			CError::LogError(LOG_ERROR,"Failed to load the star map - ignoring.");
 	}
 
 	have_flares=CVideoBase::GetOptLensFlares();
@@ -308,7 +308,7 @@ bool CGamePlay::InitScene()
 		SetSplashText("Loading lens flares... ");
 		if (!lensflare.Load(&mainbody))
 		{
-			CError::LogError(WARNING_CODE,"Failed to load the lens flares - ignoring.");
+			CError::LogError(LOG_ERROR,"Failed to load the lens flares - ignoring.");
 			have_flares=false;
 		}
 	}
@@ -323,7 +323,7 @@ bool CGamePlay::InitScene()
 		SetSplashText("Loading info text font... ");
 		if (!info.Load())
 		{
-			CError::LogError(WARNING_CODE,"Failed to load the planet info - ignoring.");
+			CError::LogError(LOG_ERROR,"Failed to load the planet info - ignoring.");
 			have_info=false;
 		}
 	}
@@ -337,7 +337,7 @@ bool CGamePlay::InitScene()
 		}
 		SetSplashText("Loading clock... ");
 		if (!clock.Load())
-			CError::LogError(WARNING_CODE,"Failed to load the clock - ignoring.");
+			CError::LogError(LOG_ERROR,"Failed to load the clock - ignoring.");
 	}
 
 	if (UserAbortedLoad())

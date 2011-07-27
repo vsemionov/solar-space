@@ -33,9 +33,10 @@
 
 #define ERROR_MAXLEN 256
 
-#define SUCCESS_CODE 0
-#define WARNING_CODE (SUCCESS_CODE+1)
-#define ERROR_CODE (WARNING_CODE+1)
+#define LOG_INFO 0
+#define LOG_WARN (LOG_INFO+1)
+#define LOG_ERROR (LOG_WARN+1)
+#define LOG_FATAL (LOG_ERROR+1)
 
 
 

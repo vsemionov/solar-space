@@ -154,7 +154,7 @@ static void StaticPreview(HWND hwndParent)
 	}
 	else
 	{
-		CError::LogError(ERROR_CODE, "Unable to create preview window.");
+		CError::LogError(LOG_FATAL, "Unable to create preview window.");
 	}
 }
 
@@ -221,7 +221,7 @@ static BOOL CALLBACK ShowLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 
 
 
-static bool SaveLog(int level=WARNING_CODE)
+static bool SaveLog(int level=LOG_INFO)
 {
 	char filename[MAX_PATH];
 	int len;
@@ -250,14 +250,17 @@ static bool SaveLog(int level=WARNING_CODE)
 				continue;
 			switch (code)
 			{
-			case SUCCESS_CODE:
-				type="Success";
+			case LOG_INFO:
+				type="Info";
 				break;
-			case WARNING_CODE:
+			case LOG_WARN:
 				type="Warning";
 				break;
-			case ERROR_CODE:
+			case LOG_ERROR:
 				type="Error";
+				break;
+			case LOG_FATAL:
+				type="Fatal";
 				break;
 			default:
 				type="";
@@ -352,6 +355,10 @@ static void DoSaver(HWND hwnd)
 			CVideoBase::ShutDown();
 			if (!DEBUG)
 				ShowCursor(TRUE);
+		}
+		else
+		{
+			CError::LogError(LOG_FATAL,"Failed to create the screen saver window.");
 		}
 		CWindow::Destroy();
 	}
@@ -557,7 +564,7 @@ static void SetConfigIcon(HWND hwnd)
 	}
 	else
 	{
-		CError::LogError(WARNING_CODE, "Unable to load the settings icon.");
+		CError::LogError(LOG_ERROR, "Unable to load the settings icon.");
 	}
 }
 
@@ -684,7 +691,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	CSettings::Init();
 	if (ScrMode==smNone)
 	{
-		CError::LogError(ERROR_CODE, "Invalid command line argument.");
+		CError::LogError(LOG_FATAL, "Invalid command line argument.");
 		Ret=1;
 	}
 	else if (ScrMode==smPassword)
@@ -701,7 +708,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 		if ((ScrMode==smConfig || ScrMode==smSaver) && !CSettings::BuildFileList())
 		{
-			CError::LogError(ERROR_CODE, "Error listing available planetary systems.");
+			CError::LogError(LOG_FATAL, "Failed to list available planetary systems.");
 			Ret=2;
 		}
 		else
@@ -720,7 +727,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				}
 				else
 				{
-					CError::LogError(ERROR_CODE, "No data files found.");
+					CError::LogError(LOG_FATAL, "No data files found.");
 					Ret=3;
 				}
 			}

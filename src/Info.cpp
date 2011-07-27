@@ -159,7 +159,7 @@ bool CInfo::Load()
 	winlist=glGenLists(3);
 	if (!winlist)
 	{
-		CError::LogError(WARNING_CODE,"Unable to load planet info - failed to generate display lists.");
+		CError::LogError(LOG_ERROR,"Unable to load planet info - failed to generate display lists.");
 		Free();
 		return false;
 	}
@@ -173,7 +173,7 @@ bool CInfo::Load()
 	loaded&=infotext.BuildFTFont(INFO_FONT_NAME,INFO_FONT_SIZE);
 	if (!loaded)
 	{
-		CError::LogError(WARNING_CODE,"Unable to load planet info - failed to load font.");
+		CError::LogError(LOG_ERROR,"Unable to load planet info - failed to load font.");
 		Free();
 	}
 

@@ -31,7 +31,7 @@
 #include "Error.h"
 
 
-#define INTERNAL_ERROR_CODE (SUCCESS_CODE-1)
+#define INTERNAL_ERROR_CODE (LOG_INFO-1)
 
 
 
@@ -61,7 +61,7 @@ CError::~CError()
 
 void CError::Init()
 {
-	errorchain.code=SUCCESS_CODE;
+	errorchain.code=LOG_INFO;
 	CopyString(errorchain.string,"Successful logging.");
 	errorchain.prev=errorchain.next=&errorchain;
 	logmarker=NULL;
@@ -89,7 +89,7 @@ void CError::Clear()
 
 void CError::LogError(int code, const char *string)
 {
-	if (errorchain.code!=SUCCESS_CODE)
+	if (errorchain.code!=LOG_INFO)
 		return;
 
 	error_s *error;

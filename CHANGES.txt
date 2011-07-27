@@ -39,6 +39,7 @@ usability:
  - DLL dependencies are installed in the application directory and loaded dynamically at run-time
  - version info, copyright and other information in the installer and application executables
  - the settings dialog is properly centered
+ - improved log levels and messages
  - the error log dialog is never shown
  - a log file from the last run is always saved in the per-user application data directory
  - spelling corrections, changes to English messages

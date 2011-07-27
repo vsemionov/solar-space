@@ -96,12 +96,12 @@ bool CClock::Load()
 	CLoader loader;
 	if (!loader.WithResource(CLOCK_RESOURCE))
 	{
-		CError::LogError(WARNING_CODE,"Unable to load clock - missing or invalid resource.");
+		CError::LogError(LOG_ERROR,"Unable to load clock - missing or invalid resource.");
 		return false;
 	}
 	if (!ParseSpecsFile(&loader))
 	{
-		CError::LogError(WARNING_CODE,"Failed to parse clock.");
+		CError::LogError(LOG_ERROR,"Failed to parse clock.");
 		return false;
 	}
 	char ds[2];
@@ -112,7 +112,7 @@ bool CClock::Load()
 		ds[0]=(i==10?':':'0'+i);
 		if (CGamePlay::UserAbortedLoad())
 		{
-			CError::LogError(ERROR_CODE,"Loading of clock aborted by user.");
+			CError::LogError(LOG_INFO,"Loading of clock aborted by user.");
 			AbortLoad();
 		}
 		CGamePlay::UpdateSplash(ds);
@@ -120,7 +120,7 @@ bool CClock::Load()
 		textures[i]=loader.LoadTexture(entry,entry,false,false,false);
 		if (textures[i]==0)
 		{
-			CError::LogError(WARNING_CODE,"Failed to load clock digit.");
+			CError::LogError(LOG_ERROR,"Failed to load clock digit.");
 			AbortLoad();
 		}
 	}
@@ -218,17 +218,17 @@ bool CClock::ParseSpecsFile(CLoader *loader)
 	int i;
 	if (!loader->LoadText(CLOCK_SPECS_FILE,&textlines,&numlines))
 	{
-		CError::LogError(WARNING_CODE,"Unable to load clock - file missing from resource or internal loader subsystem error.");
+		CError::LogError(LOG_ERROR,"Unable to load clock - file missing from resource or internal loader subsystem error.");
 		return false;
 	}
 	if (textlines==NULL)
 	{
-		CError::LogError(WARNING_CODE,"Unable to load clock - internal loader subsystem error.");
+		CError::LogError(LOG_ERROR,"Unable to load clock - internal loader subsystem error.");
 		return false;
 	}
 	if (numlines==0)
 	{
-		CError::LogError(WARNING_CODE,"Unable to load clock - empty data file.");
+		CError::LogError(LOG_ERROR,"Unable to load clock - empty data file.");
 		return false;
 	}
 	{
@@ -238,7 +238,7 @@ bool CClock::ParseSpecsFile(CLoader *loader)
 			lineindex++;
 			if (lineindex>=numlines)
 			{
-				CError::LogError(WARNING_CODE,eof_msg);
+				CError::LogError(LOG_ERROR,eof_msg);
 				AbortParse();
 			}
 		} while (sscanf(textlines[lineindex],"%d",&digit_tex_max)!=1 || textlines[lineindex][0]=='/');
@@ -247,7 +247,7 @@ bool CClock::ParseSpecsFile(CLoader *loader)
 			lineindex++;
 			if (lineindex>=numlines)
 			{
-				CError::LogError(WARNING_CODE,eof_msg);
+				CError::LogError(LOG_ERROR,eof_msg);
 				AbortParse();
 			}
 		} while (sscanf(textlines[lineindex],"%d %d",&digit_w,&digit_h)!=2 || textlines[lineindex][0]=='/');
@@ -256,7 +256,7 @@ bool CClock::ParseSpecsFile(CLoader *loader)
 			lineindex++;
 			if (lineindex>=numlines)
 			{
-				CError::LogError(WARNING_CODE,eof_msg);
+				CError::LogError(LOG_ERROR,eof_msg);
 				AbortParse();
 			}
 		} while (sscanf(textlines[lineindex],"%f %f %f %f",&color_r,&color_g,&color_b,&color_a)!=4 || textlines[lineindex][0]=='/');
@@ -267,7 +267,7 @@ bool CClock::ParseSpecsFile(CLoader *loader)
 				lineindex++;
 				if (lineindex>=numlines)
 				{
-					CError::LogError(WARNING_CODE,eof_msg);
+					CError::LogError(LOG_ERROR,eof_msg);
 					AbortParse();
 				}
 			} while (sscanf(textlines[lineindex],"%12s",tex_names[i])!=1 || textlines[lineindex][0]=='/');

@@ -354,7 +354,7 @@ bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, in
 {
 	if (hwnd!=NULL)
 	{
-		CError::LogError(ERROR_CODE,"Window already exists, can not create new.");
+		CError::LogError(LOG_ERROR,"Window already exists, can not create new.");
 		return false;
 	}
 
@@ -370,13 +370,13 @@ bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, in
 								AppInstance,		// Instance
 								NULL )))			// Dont Pass Anything To WM_CREATE
 	{
-		CError::LogError(ERROR_CODE,"Window creation error.");
+		CError::LogError(LOG_ERROR,"Window creation error.");
 		return false;
 	}
 
 	if (!(hDC=GetDC(hwnd)))
 	{
-		CError::LogError(ERROR_CODE,"Unable to retrieve window device context.");
+		CError::LogError(LOG_ERROR,"Unable to retrieve window device context.");
 		return false;
 	}
 
@@ -412,7 +412,7 @@ bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, in
 			pfd.cDepthBits=Z_BUFFER_BITS_FALLBACK;
 			if (!(PixelFormat=ChoosePixelFormat(hDC,&pfd)))
 			{
-				CError::LogError(ERROR_CODE,"No suitable OpenGL pixel format found.");
+				CError::LogError(LOG_ERROR,"No suitable OpenGL pixel format found.");
 				return false;
 			}
 		}
@@ -424,19 +424,19 @@ bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, in
 
 	if (!SetPixelFormat(hDC,PixelFormat,&pfd))
 	{
-		CError::LogError(ERROR_CODE,"Unable to set an OpenGL pixel format to the window DC.");
+		CError::LogError(LOG_ERROR,"Unable to set an OpenGL pixel format to the window DC.");
 		return false;
 	}
 
 	if (!(hRC=wglCreateContext(hDC)))
 	{
-		CError::LogError(ERROR_CODE,"Unable to create an OpenGL rendering context.");
+		CError::LogError(LOG_ERROR,"Unable to create an OpenGL rendering context.");
 		return false;
 	}
 
 	if (!wglMakeCurrent(hDC,hRC))
 	{
-		CError::LogError(ERROR_CODE,"Unable to select the OpenGL rendering context into the window DC.");
+		CError::LogError(LOG_ERROR,"Unable to select the OpenGL rendering context into the window DC.");
 		return false;
 	}
 
@@ -540,7 +540,7 @@ bool CWindow::Create(HWND hParent)
 	wc.lpszClassName		= WINDOW_CLASS_NAME;
 	if (!RegisterClass(&wc))
 	{
-		CError::LogError(ERROR_CODE,"Unable to register window class.");
+		CError::LogError(LOG_ERROR,"Unable to register window class.");
 		return false;
 	}
 
@@ -597,7 +597,7 @@ bool CWindow::Create(HWND hParent)
 			{
 				if (!ChangeVideoMode(width,height))
 				{
-					CError::LogError(ERROR_CODE,"Unable to switch to selected video mode (resolution and/or color depth).");
+					CError::LogError(LOG_ERROR,"Unable to switch to selected video mode (resolution and/or color depth).");
 					return false;
 				}
 			}
