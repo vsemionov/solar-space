@@ -76,7 +76,7 @@ Source: "..\freetype6.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Solar Space.d2"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Solar System.d2"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\README.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\README.rst"; DestDir: "{app}"; DestName: "README.txt"; Flags: ignoreversion
 Source: "..\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\AUTHORS.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\CHANGES.txt"; DestDir: "{app}"; Flags: ignoreversion
