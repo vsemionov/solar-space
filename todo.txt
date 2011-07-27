@@ -20,6 +20,7 @@ misc:
 - acknowledge JPL/Caltech for the Charon texture map; see http://www.jpl.nasa.gov/images/policy/ (high)
 - mention author and license in readme (high)
 - maybe change the title of the "miscellaneous" section in the readme (high)
+- mention the anti-aliasing Z buffer depth/precision problem in the readme in a known issues section; mention the workaround - medium graphics (high)
 - review data files (check file names for correctness, filename lowercase, use dashes instead of underscores in filenames, review text comments, etc), mention in change log if changed (med)
 
 
