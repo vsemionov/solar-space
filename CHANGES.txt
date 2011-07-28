@@ -9,7 +9,6 @@ graphics:
  - slightly sharper planet textures
  - (planned) enhanced general look and feel - tuned planet sizes and distances, rotation periods, ambient light intensity, star brightness, camera movement, info window size and fade duration
  - new splash screen, preview image and icons
- - smoother animation via double-precision calculations of object and camera position and orientation
  - camera state is completely independent of frame rate
  - Z buffer depth is 32 bits if available, but 16 bits otherwise
  - OpenGL texture filter is GL_NEAREST for all overlays
