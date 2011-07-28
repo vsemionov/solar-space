@@ -42,7 +42,7 @@
 #include "Window.h"
 #include "Text.h"
 #include "GamePlay.h"
-#include "Error.h"
+#include "Log.h"
 #include "Main.h"
 
 
@@ -154,7 +154,7 @@ static void StaticPreview(HWND hwndParent)
 	}
 	else
 	{
-		CError::LogError(LOG_FATAL, "Unable to create preview window.");
+		CLog::Log(LOG_FATAL, "Unable to create preview window.");
 	}
 }
 
@@ -221,7 +221,7 @@ static BOOL CALLBACK ShowLogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 
 
 
-static bool SaveLog(int level=LOG_INFO)
+static bool SaveLog(int min_level=LOG_INFO)
 {
 	char filename[MAX_PATH];
 	int len;
@@ -237,18 +237,18 @@ static bool SaveLog(int level=LOG_INFO)
 	fp=fopen(filename,"wt");
 	if (fp)
 	{
-		char error[ERROR_MAXLEN];
-		int code;
+		char message[MESSAGE_MAXLEN];
+		int level;
 		const char *type;
-		CError::Rewind();
-		int c=CError::GetCount();
+		CLog::Rewind();
+		int c=CLog::GetCount();
 		int i;
 		for (i=0;i<c;i++)
 		{
-			CError::GetNextError(&code,error);
-			if (code<level)
+			CLog::GetNextEntry(&level,message);
+			if (level<min_level)
 				continue;
-			switch (code)
+			switch (level)
 			{
 			case LOG_INFO:
 				type="Info";
@@ -266,7 +266,7 @@ static bool SaveLog(int level=LOG_INFO)
 				type="";
 				break;
 			}
-			int n=fprintf(fp,"%s: %s\n",type,error);
+			int n=fprintf(fp,"%s: %s\n",type,message);
 			if (n<=0) break;
 		}
 		fclose(fp);
@@ -358,7 +358,7 @@ static void DoSaver(HWND hwnd)
 		}
 		else
 		{
-			CError::LogError(LOG_FATAL,"Failed to create the screen saver window.");
+			CLog::Log(LOG_FATAL,"Failed to create the screen saver window.");
 		}
 		CWindow::Destroy();
 	}
@@ -564,7 +564,7 @@ static void SetConfigIcon(HWND hwnd)
 	}
 	else
 	{
-		CError::LogError(LOG_ERROR, "Unable to load the settings icon.");
+		CLog::Log(LOG_ERROR, "Unable to load the settings icon.");
 	}
 }
 
@@ -687,11 +687,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		ScrMode=smSaver;
 	InitCommonControls();
 	srand((unsigned int)time(NULL));
-	CError::Init();
+	CLog::Init();
 	CSettings::Init();
 	if (ScrMode==smNone)
 	{
-		CError::LogError(LOG_FATAL, "Invalid command line argument.");
+		CLog::Log(LOG_FATAL, "Invalid command line argument.");
 		Ret=1;
 	}
 	else if (ScrMode==smPassword)
@@ -708,7 +708,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 		if ((ScrMode==smConfig || ScrMode==smSaver) && !CSettings::BuildFileList())
 		{
-			CError::LogError(LOG_FATAL, "Failed to list available planetary systems.");
+			CLog::Log(LOG_FATAL, "Failed to list available planetary systems.");
 			Ret=2;
 		}
 		else
@@ -727,7 +727,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				}
 				else
 				{
-					CError::LogError(LOG_FATAL, "No data files found.");
+					CLog::Log(LOG_FATAL, "No data files found.");
 					Ret=3;
 				}
 			}
@@ -739,7 +739,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 	}
 	log_saved=SaveLog();
-	if (CError::ErrorsOccured() || !log_saved)
+	if (CLog::ProblemsOccured() || !log_saved)
 	{
 		if (DEBUG)
 			ErrorLogDialog(log_saved);
@@ -747,7 +747,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			Ret=5;
 	}
 	CSettings::Free();
-	CError::Clear();
+	CLog::Clear();
 	LogOut();
 	return Ret;
 }

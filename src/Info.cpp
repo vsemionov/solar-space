@@ -36,7 +36,7 @@
 
 #include "Window.h"
 #include "Body.h"
-#include "Error.h"
+#include "Log.h"
 #include "Info.h"
 
 
@@ -159,7 +159,7 @@ bool CInfo::Load()
 	winlist=glGenLists(3);
 	if (!winlist)
 	{
-		CError::LogError(LOG_ERROR,"Unable to load planet info - failed to generate display lists.");
+		CLog::Log(LOG_ERROR,"Unable to load planet info - failed to generate display lists.");
 		Free();
 		return false;
 	}
@@ -173,7 +173,7 @@ bool CInfo::Load()
 	loaded&=infotext.BuildFTFont(INFO_FONT_NAME,INFO_FONT_SIZE);
 	if (!loaded)
 	{
-		CError::LogError(LOG_ERROR,"Unable to load planet info - failed to load font.");
+		CLog::Log(LOG_ERROR,"Unable to load planet info - failed to load font.");
 		Free();
 	}
 

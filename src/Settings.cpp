@@ -29,7 +29,7 @@
 #include <regstr.h>
 
 
-#include "Error.h"
+#include "Log.h"
 #include "Settings.h"
 
 
@@ -259,7 +259,7 @@ bool CSettings::BuildFileList()
 			newsystem=(stardrs_s*)malloc(sizeof(stardrs_s));
 			if (!newsystem)
 			{
-				CError::LogError(LOG_ERROR,"Unable to list planetary systems - memory allocation error.");
+				CLog::Log(LOG_ERROR,"Unable to list planetary systems - memory allocation error.");
 				res=false;
 				break;
 			}

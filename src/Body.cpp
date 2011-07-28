@@ -39,7 +39,7 @@
 #include "Main.h"
 #include "Loader.h"
 #include "VideoBase.h"
-#include "Error.h"
+#include "Log.h"
 #include "GamePlay.h"
 #include "Body.h"
 #include "LensFlare.h"
@@ -141,25 +141,25 @@ bool CBody::LoadSystemData(char *resource, int *format_version, char *buffer,boo
 	if (!loader.WithResource(resource))
 	{
 		if (!quiet)
-			CError::LogError(LOG_ERROR,"Unable to load planetary system - missing or invalid resource.");
+			CLog::Log(LOG_ERROR,"Unable to load planetary system - missing or invalid resource.");
 		return false;
 	}
 	if (!loader.LoadText(SYSTEM_NAME_FILE,&textlines,&numlines))
 	{
 		if (!quiet)
-			CError::LogError(LOG_ERROR,"Unable to load planetary system - file missing from resource or internal loader subsystem error.");
+			CLog::Log(LOG_ERROR,"Unable to load planetary system - file missing from resource or internal loader subsystem error.");
 		return false;
 	}
 	if (textlines==NULL)
 	{
 		if (!quiet)
-			CError::LogError(LOG_ERROR,"Unable to load planetary system - internal loader subsystem error.");
+			CLog::Log(LOG_ERROR,"Unable to load planetary system - internal loader subsystem error.");
 		return false;
 	}
 	if (numlines==0)
 	{
 		if (!quiet)
-			CError::LogError(LOG_ERROR,"Unable to load planetary system - empty data file.");
+			CLog::Log(LOG_ERROR,"Unable to load planetary system - empty data file.");
 		return false;
 	}
 	lineindex=-1;
@@ -173,7 +173,7 @@ bool CBody::LoadSystemData(char *resource, int *format_version, char *buffer,boo
 			if (lineindex>=numlines)
 			{
 				if (!quiet)
-					CError::LogError(LOG_ERROR,"Unable to load planetary system - unexpected end of file.");
+					CLog::Log(LOG_ERROR,"Unable to load planetary system - unexpected end of file.");
 				for (int i=0;i<numlines;i++) free(textlines[i]);
 				free(textlines); textlines=NULL;
 				lineindex=-1;
@@ -237,33 +237,33 @@ bool CBody::Load()
 		glMaterialf(GL_BACK,GL_SHININESS,Shininess);
 		if (!LoadSystemData())
 		{
-			CError::LogError(LOG_ERROR,fail_msg);
+			CLog::Log(LOG_ERROR,fail_msg);
 			return false;
 		}
 		if (!loader.WithResource(BODY_DATA_RESOURCE))
 		{
-			CError::LogError(LOG_ERROR,"Unable to load bodies - missing or invalid resource.");
+			CLog::Log(LOG_ERROR,"Unable to load bodies - missing or invalid resource.");
 			return false;
 		}
 		if (!loader.LoadText(BODY_DATA_FILE,&textlines,&numlines))
 		{
-			CError::LogError(LOG_ERROR,"Unable to load bodies - file missing from resource or internal loader subsystem error.");
+			CLog::Log(LOG_ERROR,"Unable to load bodies - file missing from resource or internal loader subsystem error.");
 			return false;
 		}
 		if (textlines==NULL)
 		{
-			CError::LogError(LOG_ERROR,"Unable to load bodies - internal loader subsystem error.");
+			CLog::Log(LOG_ERROR,"Unable to load bodies - internal loader subsystem error.");
 			return false;
 		}
 		if (numlines==0)
 		{
-			CError::LogError(LOG_ERROR,"Unable to load bodies - empty data file.");
+			CLog::Log(LOG_ERROR,"Unable to load bodies - empty data file.");
 			return false;
 		}
 		bodycache=(CBody**)malloc(numlines*sizeof(CBody*));
 		if (!bodycache)
 		{
-			CError::LogError(LOG_ERROR,mem_msg);
+			CLog::Log(LOG_ERROR,mem_msg);
 			return false;
 		}
 		lineindex=-1;
@@ -275,14 +275,14 @@ bool CBody::Load()
 		numlines=0;
 		if (!b)
 		{
-			CError::LogError(LOG_ERROR,fail_msg);
+			CLog::Log(LOG_ERROR,fail_msg);
 			return false;
 		}
 		CalcMaxChildDist();
 		bodycache=(CBody**)realloc(bodycache,numbodies*sizeof(CBody*));
 		if (!bodycache)
 		{
-			CError::LogError(LOG_ERROR,mem_msg);
+			CLog::Log(LOG_ERROR,mem_msg);
 			return false;
 		}
 		b=Reload();
@@ -292,7 +292,7 @@ bool CBody::Load()
 	{
 		if (!LoadPhys())
 		{
-			CError::LogError(LOG_ERROR,"Failed to parse body data - aborting.");
+			CLog::Log(LOG_ERROR,"Failed to parse body data - aborting.");
 			return false;
 		}
 		id=numbodies;
@@ -302,7 +302,7 @@ bool CBody::Load()
 			subbodies=new CBody[numsubbodies];
 			if (subbodies==NULL)
 			{
-				CError::LogError(LOG_ERROR,"Unable to load subbody - memory allocation failed.");
+				CLog::Log(LOG_ERROR,"Unable to load subbody - memory allocation failed.");
 				numsubbodies=0;
 				return false;
 			}
@@ -311,7 +311,7 @@ bool CBody::Load()
 				b=subbodies[i].Load();
 				if (!b)
 				{
-					CError::LogError(LOG_ERROR,"Failed to load subbody - aborting.");
+					CLog::Log(LOG_ERROR,"Failed to load subbody - aborting.");
 					break;
 				}
 			}
@@ -332,7 +332,7 @@ bool CBody::LoadMultipliers()
 		lineindex++;
 		if (lineindex>=numlines)
 		{
-			CError::LogError(LOG_ERROR,eof_msg);
+			CLog::Log(LOG_ERROR,eof_msg);
 			return false;
 		}
 	} while (sscanf(textlines[lineindex],"%f",&distmult)!=1 || textlines[lineindex][0]=='/');
@@ -341,7 +341,7 @@ bool CBody::LoadMultipliers()
 		lineindex++;
 		if (lineindex>=numlines)
 		{
-			CError::LogError(LOG_ERROR,eof_msg);
+			CLog::Log(LOG_ERROR,eof_msg);
 			return false;
 		}
 	} while (sscanf(textlines[lineindex],"%f",&radmult)!=1 || textlines[lineindex][0]=='/');
@@ -350,7 +350,7 @@ bool CBody::LoadMultipliers()
 		lineindex++;
 		if (lineindex>=numlines)
 		{
-			CError::LogError(LOG_ERROR,eof_msg);
+			CLog::Log(LOG_ERROR,eof_msg);
 			return false;
 		}
 	} while (sscanf(textlines[lineindex],"%f",&orbtimemult)!=1 || textlines[lineindex][0]=='/');
@@ -359,7 +359,7 @@ bool CBody::LoadMultipliers()
 		lineindex++;
 		if (lineindex>=numlines)
 		{
-			CError::LogError(LOG_ERROR,eof_msg);
+			CLog::Log(LOG_ERROR,eof_msg);
 			return false;
 		}
 	} while (sscanf(textlines[lineindex],"%f",&owntimemult)!=1 || textlines[lineindex][0]=='/');
@@ -558,14 +558,14 @@ bool CBody::Reload()
 	{
 		if (loader.WithResource(BODY_GFX_RESOURCE)!=true)
 		{
-			CError::LogError(LOG_ERROR,"Unable to load body GFX - missing or invalid resource.");
+			CLog::Log(LOG_ERROR,"Unable to load body GFX - missing or invalid resource.");
 			return false;
 		}
 	}
 	FreeGFX();
 	if (!LoadGFX())
 	{
-		CError::LogError(LOG_ERROR,"Failed to load body GFX - aborting.");
+		CLog::Log(LOG_ERROR,"Failed to load body GFX - aborting.");
 		return false;
 	}
 	bodycache[id]=this;
@@ -575,7 +575,7 @@ bool CBody::Reload()
 		{
 			if (!subbodies[i].Reload())
 			{
-				CError::LogError(LOG_ERROR,"Failed to load subbody GFX - aborting.");
+				CLog::Log(LOG_ERROR,"Failed to load subbody GFX - aborting.");
 				return false;
 			}
 		}
@@ -630,7 +630,7 @@ bool CBody::LoadPhys()
 		lineindex++;
 		if (lineindex>=numlines)
 		{
-			CError::LogError(LOG_ERROR,"Unable to load body - unexpected end of file.");
+			CLog::Log(LOG_ERROR,"Unable to load body - unexpected end of file.");
 			return false;
 		}
 	} while (sscanf(textlines[lineindex],VA_FMT,VA_ARGS)!=VA_NUM || textlines[lineindex][0]=='/');
@@ -691,7 +691,7 @@ bool CBody::LoadPhys()
 	{
 		if (!LoadInfo())
 		{
-			CError::LogError(LOG_ERROR,"Failed to load body info - ignoring.");
+			CLog::Log(LOG_ERROR,"Failed to load body info - ignoring.");
 		}
 	}
 	return true;
@@ -705,22 +705,22 @@ bool CBody::LoadInfo()
 {
 	if (!loader.WithResource(BODY_DATA_RESOURCE))
 	{
-		CError::LogError(LOG_ERROR,"Unable to load body info - missing or invalid resource.");
+		CLog::Log(LOG_ERROR,"Unable to load body info - missing or invalid resource.");
 		return false;
 	}
 	if (!loader.LoadText(info_name,&info.textlines,&info.numlines))
 	{
-		CError::LogError(LOG_ERROR,"Unable to load body info - file missing from resource or internal loader subsystem error.");
+		CLog::Log(LOG_ERROR,"Unable to load body info - file missing from resource or internal loader subsystem error.");
 		return false;
 	}
 	if (info.textlines==NULL)
 	{
-		CError::LogError(LOG_ERROR,"Unable to load body info - internal loader subsystem error.");
+		CLog::Log(LOG_ERROR,"Unable to load body info - internal loader subsystem error.");
 		return false;
 	}
 	if (info.numlines==0)
 	{
-		CError::LogError(LOG_ERROR,"Unable to load body info - empty data file.");
+		CLog::Log(LOG_ERROR,"Unable to load body info - empty data file.");
 		return false;
 	}
 	return true;
@@ -737,13 +737,13 @@ bool CBody::LoadTextures()
 	{
 		if (CGamePlay::UserAbortedLoad())
 		{
-			CError::LogError(LOG_INFO,"Loading of body aborted by user.");
+			CLog::Log(LOG_INFO,"Loading of body aborted by user.");
 			return false;
 		}
 		textures[i]=loader.LoadTexture(tex_names[i][0],tex_names[i][1],CVideoBase::GetOptMipmaps(),CVideoBase::GetOptLinear(),CVideoBase::GetOptAnisotropic());
 		if (textures[i]==0 && (tex_names[i][0][0]!=0 || tex_names[i][1][0]!=0))
 		{
-			CError::LogError(LOG_ERROR,"Failed to load a body texture - ignoring.");
+			CLog::Log(LOG_ERROR,"Failed to load a body texture - ignoring.");
 		}
 	}
 	return true;
@@ -860,7 +860,7 @@ void CBody::MakeAsteroid()
 	object=loader.LoadObject(obj_name);
 	if (object==NULL)
 	{
-		CError::LogError(LOG_ERROR,"Unable to load asteroid - file missing from resource or internal loader subsystem error while loading object.");
+		CLog::Log(LOG_ERROR,"Unable to load asteroid - file missing from resource or internal loader subsystem error while loading object.");
 		return;
 	}
 	for (i=0;i<object->numvertices;i++)
@@ -937,7 +937,7 @@ bool CBody::LoadGFX()
 {
 	if (CGamePlay::UserAbortedLoad())
 	{
-		CError::LogError(LOG_INFO,"Loading of body aborted by user.");
+		CLog::Log(LOG_INFO,"Loading of body aborted by user.");
 		return false;
 	}
 	CGamePlay::UpdateSplash(name);
@@ -945,7 +945,7 @@ bool CBody::LoadGFX()
 	quadric=gluNewQuadric();
 	if (quadric==NULL)
 	{
-		CError::LogError(LOG_ERROR,"Unable to load body - unable to create an OpenGL quadric.");
+		CLog::Log(LOG_ERROR,"Unable to load body - unable to create an OpenGL quadric.");
 		return false;
 	}
 	gluQuadricNormals(quadric,GLU_SMOOTH);
@@ -955,13 +955,13 @@ bool CBody::LoadGFX()
 	objects[0]=glGenLists(1);
 	if (objects[0]==0)
 	{
-		CError::LogError(LOG_ERROR,"Unable to load body - unable to create an OpenGL display list.");
+		CLog::Log(LOG_ERROR,"Unable to load body - unable to create an OpenGL display list.");
 		gluDeleteQuadric(quadric);
 		return false;
 	}
 	if (!LoadTextures())
 	{
-		CError::LogError(LOG_ERROR,"Failed to load body textures.");
+		CLog::Log(LOG_ERROR,"Failed to load body textures.");
 		gluDeleteQuadric(quadric);
 		FreeGFX();
 		return false;

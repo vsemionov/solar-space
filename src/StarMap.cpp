@@ -41,7 +41,7 @@
 #include "Loader.h"
 #include "VideoBase.h"
 #include "Window.h"
-#include "Error.h"
+#include "Log.h"
 #include "GamePlay.h"
 #include "StarMap.h"
 
@@ -114,17 +114,17 @@ bool CStarMap::Load()
 	}
 	else
 	{
-		CError::LogError(LOG_ERROR,"Failed to load stars, trying to generate randomly.");
+		CLog::Log(LOG_ERROR,"Failed to load stars, trying to generate randomly.");
 		Free();
 		if (CGamePlay::UserAbortedLoad())
 		{
-			CError::LogError(LOG_INFO,"Loading of star map aborted by user.");
+			CLog::Log(LOG_INFO,"Loading of star map aborted by user.");
 			return false;
 		}
 		CGamePlay::UpdateSplash("generating... ");
 		if (!GenStars())
 		{
-			CError::LogError(LOG_ERROR,"Failed to generate random stars.");
+			CLog::Log(LOG_ERROR,"Failed to generate random stars.");
 			Free();
 			return false;
 		}
@@ -144,7 +144,7 @@ bool CStarMap::Load()
 		object = glGenLists(1);
 		if (object==0)
 		{
-			CError::LogError(LOG_ERROR,"Unable to record star map display list - internal OpenGL error.");
+			CLog::Log(LOG_ERROR,"Unable to record star map display list - internal OpenGL error.");
 			Free();
 			return false;
 		}
@@ -245,22 +245,22 @@ bool CStarMap::LoadStars()
 	CLoader loader;
 	if (!loader.WithResource(STARMAP_RESOURCE))
 	{
-		CError::LogError(LOG_ERROR,"Unable to load star map file - missing or invalid resource.");
+		CLog::Log(LOG_ERROR,"Unable to load star map file - missing or invalid resource.");
 		return false;
 	}
 	if (!loader.LoadText(STARMAP_FILE,&textlines,&numlines))
 	{
-		CError::LogError(LOG_ERROR,"Unable to load star map data - file missing from resource or internal loader subsystem error.");
+		CLog::Log(LOG_ERROR,"Unable to load star map data - file missing from resource or internal loader subsystem error.");
 		return false;
 	}
 	if (textlines==NULL)
 	{
-		CError::LogError(LOG_ERROR,"Unable to load star map - internal loader subsystem error.");
+		CLog::Log(LOG_ERROR,"Unable to load star map - internal loader subsystem error.");
 		return false;
 	}
 	if (numlines==0)
 	{
-		CError::LogError(LOG_ERROR,"Unable to load star map - empty data file.");
+		CLog::Log(LOG_ERROR,"Unable to load star map - empty data file.");
 		return false;
 	}
 	{
@@ -270,14 +270,14 @@ bool CStarMap::LoadStars()
 			lineindex++;
 			if (lineindex>=numlines)
 			{
-				CError::LogError(LOG_ERROR,eof_msg);
+				CLog::Log(LOG_ERROR,eof_msg);
 				AbortParse();
 			}
 		} while (sscanf(textlines[lineindex],"%d",&num_stars)!=1 || textlines[lineindex][0]=='/');
 		stars=(stardata_s*)malloc(num_stars*sizeof(stardata_s));
 		if (!stars)
 		{
-			CError::LogError(LOG_ERROR,"Unable to load stars - memory allocation failed.");
+			CLog::Log(LOG_ERROR,"Unable to load stars - memory allocation failed.");
 			AbortParse();
 		}
 		ZeroMemory(stars,num_stars*sizeof(stardata_s));
@@ -288,7 +288,7 @@ bool CStarMap::LoadStars()
 				lineindex++;
 				if (lineindex>=numlines)
 				{
-					CError::LogError(LOG_ERROR,eof_msg);
+					CLog::Log(LOG_ERROR,eof_msg);
 					AbortParse();
 				}
 			} while (sscanf(textlines[lineindex],VA_FMT,VA_ARGS)!=VA_NUM || textlines[lineindex][0]=='/');
@@ -309,7 +309,7 @@ bool CStarMap::GenStars()
 	stars=(stardata_s*)malloc(num_stars*sizeof(stardata_s));
 	if (!stars)
 	{
-		CError::LogError(LOG_ERROR,"Unable to generate star data - memory allocation failed.");
+		CLog::Log(LOG_ERROR,"Unable to generate star data - memory allocation failed.");
 		return false;
 	}
 	const float mi=MIN_INTENSITY;

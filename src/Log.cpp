@@ -28,22 +28,24 @@
 #include <malloc.h>
 #include <string.h>
 
-#include "Error.h"
+#include "Log.h"
 
 
 #define INTERNAL_ERROR_CODE (LOG_INFO-1)
 
 
 
-CError::error_s CError::errorchain;
-CError::error_s *CError::logmarker=NULL;
-int CError::numerrors=1;
+CLog::entry_s CLog::entrychain;
+CLog::entry_s *CLog::logmarker=NULL;
+int CLog::numentries=1;
+int CLog::numproblems=1;
+bool CLog::logging=true;
 
 
 
 
 
-CError::CError()
+CLog::CLog()
 {
 }
 
@@ -51,7 +53,7 @@ CError::CError()
 
 
 
-CError::~CError()
+CLog::~CLog()
 {
 }
 
@@ -59,23 +61,25 @@ CError::~CError()
 
 
 
-void CError::Init()
+void CLog::Init()
 {
-	errorchain.code=LOG_INFO;
-	CopyString(errorchain.string,"Successful logging.");
-	errorchain.prev=errorchain.next=&errorchain;
+	entrychain.level=LOG_INFO;
+	CopyString(entrychain.message,"Successful logging.");
+	entrychain.prev=entrychain.next=&entrychain;
 	logmarker=NULL;
-	numerrors=1;
+	numentries=1;
+	numproblems=0;
+	logging=true;
 }
 
 
 
 
 
-void CError::Clear()
+void CLog::Clear()
 {
-	error_s *cur=errorchain.next;
-	while (cur!=&errorchain)
+	entry_s *cur=entrychain.next;
+	while (cur!=&entrychain)
 	{
 		cur=cur->next;
 		free(cur->prev);
@@ -87,56 +91,61 @@ void CError::Clear()
 
 
 
-void CError::LogError(int code, const char *string)
+void CLog::Log(int level, const char *message)
 {
-	if (errorchain.code!=LOG_INFO)
+	if (!logging)
 		return;
 
-	error_s *error;
-	error=(error_s*)malloc(sizeof(error_s));
+	if (entrychain.level!=LOG_INFO)
+		return;
 
-	if (!error)
+	entry_s *entry;
+	entry=(entry_s*)malloc(sizeof(entry_s));
+
+	if (!entry)
 	{
-		errorchain.code=INTERNAL_ERROR_CODE;
-		CopyString(errorchain.string,"Memory allocation error when logging.");
+		entrychain.level=INTERNAL_ERROR_CODE;
+		CopyString(entrychain.message,"Memory allocation error when logging.");
 		return;
 	}
 
-	error->code=code;
-	CopyString(error->string,string);
+	entry->level=level;
+	CopyString(entry->message,message);
 
-	error->prev=errorchain.prev;
-	error->next=&errorchain;
-	errorchain.prev->next=error;
-	errorchain.prev=error;
+	entry->prev=entrychain.prev;
+	entry->next=&entrychain;
+	entrychain.prev->next=entry;
+	entrychain.prev=entry;
 
-	numerrors++;
+	numentries++;
+	if (level>LOG_INFO)
+		numproblems++;
 }
 
 
 
 
 
-void CError::Rewind()
+void CLog::Rewind()
 {
-	logmarker=errorchain.next;
+	logmarker=entrychain.next;
 }
 
 
 
 
 
-bool CError::GetNextError(int *code, char *string, int maxlen)
+bool CLog::GetNextEntry(int *level, char *message, int maxlen)
 {
 	if (!logmarker)
 		return false;
 
-	if (code)
-		*code=logmarker->code;
-	if (string)
-		CopyString(string,logmarker->string,maxlen);
+	if (level)
+		*level=logmarker->level;
+	if (message)
+		CopyString(message,logmarker->message,maxlen);
 
-	if (logmarker==&errorchain)
+	if (logmarker==&entrychain)
 		logmarker=NULL;
 	else
 		logmarker=logmarker->next;
@@ -148,7 +157,7 @@ bool CError::GetNextError(int *code, char *string, int maxlen)
 
 
 
-void CError::CopyString(char *dest, const char *src, int maxlen)
+void CLog::CopyString(char *dest, const char *src, int maxlen)
 {
 	strncpy(dest,src,maxlen);
 	dest[maxlen-1]=0;

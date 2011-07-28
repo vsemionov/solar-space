@@ -40,7 +40,7 @@
 #include "VideoBase.h"
 #include "Loader.h"
 #include "Body.h"
-#include "Error.h"
+#include "Log.h"
 #include "GamePlay.h"
 #include "LensFlare.h"
 
@@ -92,7 +92,7 @@ bool CLensFlare::Load(CBody *star)
 ////////////////
 	if (!ComputePoints(star))
 	{
-		CError::LogError(LOG_ERROR,"Unable to compute lens flare alpha points.");
+		CLog::Log(LOG_ERROR,"Unable to compute lens flare alpha points.");
 		AbortLoad();
 	}
 	viewport[0]=viewport[1]=0;
@@ -101,12 +101,12 @@ bool CLensFlare::Load(CBody *star)
 	CLoader loader;
 	if (!loader.WithResource(FLARE_RESOURCE))
 	{
-		CError::LogError(LOG_ERROR,"Unable to load lens flares - missing or invalid resource.");
+		CLog::Log(LOG_ERROR,"Unable to load lens flares - missing or invalid resource.");
 		AbortLoad();
 	}
 	if (!ParseSpecsFile(&loader))
 	{
-		CError::LogError(LOG_ERROR,"Failed to parse lens flare.");
+		CLog::Log(LOG_ERROR,"Failed to parse lens flare.");
 		AbortLoad();
 	}
 	char fs[16];
@@ -116,7 +116,7 @@ bool CLensFlare::Load(CBody *star)
 		itoa(i,fs,10);
 		if (CGamePlay::UserAbortedLoad())
 		{
-			CError::LogError(LOG_INFO,"Loading of lens flare aborted by user.");
+			CLog::Log(LOG_INFO,"Loading of lens flare aborted by user.");
 			AbortLoad();
 		}
 		CGamePlay::UpdateSplash(fs);
@@ -131,7 +131,7 @@ bool CLensFlare::Load(CBody *star)
 			textures[i]=loader.LoadTexture(entry,NULL,CVideoBase::GetOptMipmaps(),CVideoBase::GetOptLinear(), false);
 			if (textures[i]==0)
 			{
-				CError::LogError(LOG_ERROR,"Failed to load a lens flare image - ignoring.");
+				CLog::Log(LOG_ERROR,"Failed to load a lens flare image - ignoring.");
 			}
 		}
 		if (IS_MAIN_FLARE(i))
@@ -325,7 +325,7 @@ bool CLensFlare::ComputePoints(CBody *star)
 	points=(Vector*)malloc(blocksize);
 	if (!points)
 	{
-		CError::LogError(LOG_ERROR,"Unable to compute lens flare alpha points - memory allocation failed.");
+		CLog::Log(LOG_ERROR,"Unable to compute lens flare alpha points - memory allocation failed.");
 		return false;
 	}
 	int i,j;
@@ -417,17 +417,17 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 	int i;
 	if (!loader->LoadText(FLARE_SPECS_FILE,&textlines,&numlines))
 	{
-		CError::LogError(LOG_ERROR,"Unable to load lens flares - file missing from resource or internal loader subsystem error.");
+		CLog::Log(LOG_ERROR,"Unable to load lens flares - file missing from resource or internal loader subsystem error.");
 		return false;
 	}
 	if (textlines==NULL)
 	{
-		CError::LogError(LOG_ERROR,"Unable to load lens flares - internal loader subsystem error.");
+		CLog::Log(LOG_ERROR,"Unable to load lens flares - internal loader subsystem error.");
 		return false;
 	}
 	if (numlines==0)
 	{
-		CError::LogError(LOG_ERROR,"Unable to load lens flares - empty data file.");
+		CLog::Log(LOG_ERROR,"Unable to load lens flares - empty data file.");
 		return false;
 	}
 	{
@@ -437,7 +437,7 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 			lineindex++;
 			if (lineindex>=numlines)
 			{
-				CError::LogError(LOG_ERROR,eof_msg);
+				CLog::Log(LOG_ERROR,eof_msg);
 				AbortParse();
 			}
 		} while (sscanf(textlines[lineindex],"%d",&num_flares)!=1 || textlines[lineindex][0]=='/');
@@ -446,28 +446,28 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 			lineindex++;
 			if (lineindex>=numlines)
 			{
-				CError::LogError(LOG_ERROR,eof_msg);
+				CLog::Log(LOG_ERROR,eof_msg);
 				AbortParse();
 			}
 		} while (sscanf(textlines[lineindex],"%f",&sizefactor)!=1 || textlines[lineindex][0]=='/');
 		flaredata=(flaredata_s*)malloc(num_flares*sizeof(flaredata_s));
 		if (!flaredata)
 		{
-			CError::LogError(LOG_ERROR,mem_msg);
+			CLog::Log(LOG_ERROR,mem_msg);
 			AbortParse();
 		}
 		ZeroMemory(flaredata,num_flares*sizeof(flaredata_s));
 		textures=(int*)malloc(num_flares*sizeof(int));
 		if (!textures)
 		{
-			CError::LogError(LOG_ERROR,mem_msg);
+			CLog::Log(LOG_ERROR,mem_msg);
 			AbortParse();
 		}
 		ZeroMemory(textures,num_flares*sizeof(int));
 		tex_names=(char**)malloc(num_flares*sizeof(char*));
 		if (!tex_names)
 		{
-			CError::LogError(LOG_ERROR,mem_msg);
+			CLog::Log(LOG_ERROR,mem_msg);
 			AbortParse();
 		}
 		ZeroMemory(tex_names,num_flares*sizeof(char*));
@@ -476,7 +476,7 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 			tex_names[i]=(char*)malloc(16);
 			if (!tex_names[i])
 			{
-				CError::LogError(LOG_ERROR,mem_msg);
+				CLog::Log(LOG_ERROR,mem_msg);
 				AbortParse();
 			}
 			tex_names[i][0]=0;
@@ -486,7 +486,7 @@ bool CLensFlare::ParseSpecsFile(CLoader *loader)
 				lineindex++;
 				if (lineindex>=numlines)
 				{
-					CError::LogError(LOG_ERROR,eof_msg);
+					CLog::Log(LOG_ERROR,eof_msg);
 					AbortParse();
 				}
 			} while (sscanf(textlines[lineindex],VA_FMT,VA_ARGS)!=VA_NUM || textlines[lineindex][0]=='/');

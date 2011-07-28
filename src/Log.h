@@ -25,13 +25,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef ERROR_H
-#define ERROR_H
+#ifndef LOG_H
+#define LOG_H
 
 #include "Defs.h"
 
 
-#define ERROR_MAXLEN 256
+#define MESSAGE_MAXLEN 256
 
 #define LOG_INFO 0
 #define LOG_WARN (LOG_INFO+1)
@@ -41,30 +41,35 @@
 
 
 
-class CError
+
+class CLog
 {
 public:
-	CError();
-	virtual ~CError();
+	CLog();
+	virtual ~CLog();
 	static void Init();
 	static void Clear();
-	static void LogError(int code, const char *string);
-	static int GetCount() { return numerrors; }
-	static bool ErrorsOccured() { return (GetCount()>1); }
+	static void Log(int level, const char *message);
+	static int GetCount() { return numentries; }
+	static bool ProblemsOccured() { return (numproblems!=0); }
 	static void Rewind();
-	static bool GetNextError(int *code, char *string, int maxlen=ERROR_MAXLEN);
+	static bool GetNextEntry(int *level, char *message, int maxlen=MESSAGE_MAXLEN);
+	static void Pause() { logging=false; }
+	static void Continue() { logging=true; }
 private:
-	static void CopyString(char *dest, const char *src, int maxlen=ERROR_MAXLEN);
-	struct error_s
+	static void CopyString(char *dest, const char *src, int maxlen=MESSAGE_MAXLEN);
+	struct entry_s
 	{
-		int code;
-		char string[256];
-		error_s *prev;
-		error_s *next;
+		int level;
+		char message[256];
+		entry_s *prev;
+		entry_s *next;
 	};
-	static error_s errorchain;
-	static error_s *logmarker;
-	static int numerrors;
+	static entry_s entrychain;
+	static entry_s *logmarker;
+	static int numentries;
+	static int numproblems;
+	static bool logging;
 };
 
 #endif
