@@ -59,6 +59,7 @@
 //-roughly about 0.20 units is the minimum radius of objects,
 //  otherwise in chase orientation mode, they'll jump around the center of
 //  the screen (angle of camera rotation, floating point precision)
+//  and may also get clipped and not be rendered properly
 //-all filenames must be 12 chars max
 
 
