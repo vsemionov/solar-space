@@ -69,7 +69,7 @@
 #define ANGLE(size,dist) \
 	(asin(size/max(dist, size))*(VIEW_FACTOR*2.0*180.0/M_PI))
 #define DIST(size,angle) \
-	(size/(float)sin(angle*(M_PI/(180.0*2.0*VIEW_FACTOR))))
+	(size/sin(angle*(M_PI/(180.0*2.0*VIEW_FACTOR))))
 
 #define MIN_DIST DIST(mainbody->radius,MAX_FOV)
 
@@ -316,22 +316,22 @@ void CCamera::ChangeCam()
 
 void CCamera::Angles(float x, float y, float z, float *yaw, float *pitch)
 {
-	float l=(float)LEN(x,y,z);
-	if (l==0.0f)
+	double l=LEN(x,y,z);
+	if (l==0.0)
 	{
 		*yaw=cyaw;
 		*pitch=cpitch;
 		return;
 	}
-	float t=(float)asin(z/l);
-	*pitch=t*180.0f/(float)M_PI;
-	float c=(float)cos(t);
-	if (c==0.0f)
+	double t=asin(z/l);
+	*pitch=(float)(t*180.0/M_PI);
+	double c=cos(t);
+	if (c==0.0)
 	{
 		*yaw=cyaw;
 		return;
 	}
-	*yaw=(float)asin(y/(l*c))*180.0f/(float)M_PI;
+	*yaw=(float)(asin(y/(l*c))*180.0/M_PI);
 	if (x<0.0f)
 		*yaw=180.0f-*yaw;
 }

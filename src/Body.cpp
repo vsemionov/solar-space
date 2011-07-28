@@ -54,7 +54,7 @@
 #define BODY_GFX_RESOURCE BODY_DATA_RESOURCE
 
 #define BODY_SEGMENTS_BASE 32
-#define SEGMENTS ((int)((float)BODY_SEGMENTS_BASE*CVideoBase::GetOptGeoDetail()))
+#define SEGMENTS ((int)(BODY_SEGMENTS_BASE*CVideoBase::GetOptGeoDetail()))
 #define SPECULAR_SEGMENTS SEGMENTS
 
 #define AMBIENT_REFLECTION 0.175f
@@ -408,7 +408,7 @@ void CBody::UpdateOrbit(float seconds)
 	orbit_rot=orbit_rot_start;
 	if (orbit_period)
 		orbit_rot+=(360.0f*seconds)/orbit_period;
-	float orbit_rot_angle=(orbit_rot*(float)M_PI)/180.0f;
+	float orbit_rot_angle=(float)((orbit_rot*M_PI)/180.0);
 	orb_pos[0]=distance*(float)cos(orbit_rot_angle);
 	orb_pos[1]=distance*(float)sin(orbit_rot_angle);
 }
