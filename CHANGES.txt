@@ -10,7 +10,7 @@ graphics:
  - (planned) enhanced general look and feel - tuned planet sizes and distances, rotation periods, ambient light intensity, star brightness, camera movement, info window size and fade duration
  - new splash screen, preview image and icons
  - camera state is completely independent of frame rate
- - Z buffer depth is 32 bits if available, but 16 bits otherwise
+ - Z buffer depth is 32, 24 or 16 bits deep (the largest one that is supported)
  - OpenGL texture filter is GL_NEAREST for all overlays
  - updated load order (splash, bodies, star map, lens flares, info fonts, clock)
  - clock colon state is updated more correctly, on every frame

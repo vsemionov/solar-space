@@ -44,7 +44,8 @@
 #define COLOR_BUFFER_BITS 24
 #define ALPHA_BUFFER_BITS 8
 #define Z_BUFFER_BITS 32
-#define Z_BUFFER_BITS_FALLBACK 16
+#define Z_BUFFER_BITS_FALLBACK1 24
+#define Z_BUFFER_BITS_FALLBACK2 16
 #define MULTI_SAMPLES 4
 #define MULTI_SAMPLES_FALLBACK 2
 
@@ -409,11 +410,15 @@ bool CWindow::CreateSaverWindow(HWND hParent, DWORD dwStyle, DWORD dwExStyle, in
 	{
 		if (!(PixelFormat=ChoosePixelFormat(hDC,&pfd)))
 		{
-			pfd.cDepthBits=Z_BUFFER_BITS_FALLBACK;
+			pfd.cDepthBits=Z_BUFFER_BITS_FALLBACK1;
 			if (!(PixelFormat=ChoosePixelFormat(hDC,&pfd)))
 			{
-				CLog::Log(LOG_ERROR,"No suitable OpenGL pixel format found.");
-				return false;
+				pfd.cDepthBits=Z_BUFFER_BITS_FALLBACK2;
+				if (!(PixelFormat=ChoosePixelFormat(hDC,&pfd)))
+				{
+					CLog::Log(LOG_ERROR,"No suitable OpenGL pixel format found.");
+					return false;
+				}
 			}
 		}
 	}
@@ -655,7 +660,7 @@ bool CWindow::Create(HWND hParent)
 	if (CVideoBase::GetOptAntialiasing())
 	{
 		GLuint pixel_format;
-		if (InitMultisample(hDC,Z_BUFFER_BITS,&pixel_format) || InitMultisample(hDC,Z_BUFFER_BITS_FALLBACK,&pixel_format))
+		if (InitMultisample(hDC,Z_BUFFER_BITS,&pixel_format) || InitMultisample(hDC,Z_BUFFER_BITS_FALLBACK1,&pixel_format) || InitMultisample(hDC,Z_BUFFER_BITS_FALLBACK2,&pixel_format))
 		{
 			DestroySaverWindow();
 			if (!CreateSaverWindow(hParent,dwStyle,dwExStyle,width+wadd,height+hadd,&pixel_format))
