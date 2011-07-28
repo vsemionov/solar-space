@@ -1,7 +1,6 @@
 TECH:
 visual:
 - research specular highlights on all planets (found on Deso's laptop), mention in change log (high)
-- check jerky movement of some bodies (Europa) when zoomed in; use double precision where applicable, check and remove the comment about min body size in the body data file, removed "planned" marker from change log (high)
 
 non-visual:
 
