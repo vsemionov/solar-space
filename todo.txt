@@ -3,7 +3,6 @@ visual:
 - research specular highlights on all planets (found on Deso's laptop), mention in change log (high)
 
 non-visual:
-- either increase minimal object radius or decrease DIST_CLIP_NEAR in Camera.cpp, or both, to avoid clipping on wide screens; a combination of radius=0.20 (0.80 with radmult 0.25) and DIST_CLIP_NEAR=0.20 works (med)
 
 performance/testing:
 - test all settings (low)

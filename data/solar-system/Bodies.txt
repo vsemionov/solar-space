@@ -83,7 +83,7 @@ Earth            | 1 | 65 6.38   | 1    | 0 12        | 0 0 | 0.00005 23.45 | 0 
  Moon            | 1 | 10 1.74   | 1    | 136.6 0     | 0 0 | 5.145 6.68    | 0 0  | 0 0   | 0 | MOON.JPG .                | . | .            | . .                      | .          | moon.nfo
 Mars             | 1 | 100 3     | 1    | 0 5.1159951 | 0 0 | 1.8 25.19     | 0 0  | 0 0   | 2 | MARS.JPG .                | . | .            | . .                      | .          | mars.nfo
  Phobos          | 3 | 4 1       | 1    | 66 0        | 0 0 | 1 0           | 0 0  | 0 0   | 0 | PHOBOS.JPG .              | . | .            | . .                      | PHOBOS.OBJ | phobos.nfo
- Deimos          | 3 | 10 0.76   | 1    | 150 0       | 0 0 | 1.8 0         | 0 0  | 0 0   | 0 | DEIMOS.JPG .              | . | .            | . .                      | DEIMOS.OBJ | deimos.nfo
+ Deimos          | 3 | 10 0.80   | 1    | 150 0       | 0 0 | 1.8 0         | 0 0  | 0 0   | 0 | DEIMOS.JPG .              | . | .            | . .                      | DEIMOS.OBJ | deimos.nfo
 
 //outer planets
 Jupiter          | 1 | 165 14.30 | 1    | 0 9.925     | 0 0 | 1.305 3.12    | 0 0  | 0 0   | 4 | JUPITER.JPG .             | . | .            | . .                      | .          | jupiter.nfo

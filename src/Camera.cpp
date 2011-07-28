@@ -43,7 +43,7 @@
 
 
 
-#define DIST_CLIP_NEAR 0.25
+#define DIST_CLIP_NEAR 0.20
 #define DIST_CLIP_FAR 500.0
 
 #define MAX_DIST (DIST_CLIP_FAR*0.5)
