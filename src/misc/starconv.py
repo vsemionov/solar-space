@@ -50,7 +50,7 @@ header = """\
 //star line 2
 //...........
 //
-//Star line format: (separator=='|')
+//Star line format: (field separator is ' ', group separator is '|')
 //Dec, degrees [-90:90]
 //RA, degrees [0:360)
 //SEPARATOR

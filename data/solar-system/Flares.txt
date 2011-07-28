@@ -1,21 +1,20 @@
-// Lens flares specs file
+// Lens flares spec file
 
 // file format:
 
 // line: number of flares
+// line: size multiplier
 //
 // line: flare 1 data
 // line: flare 2 data
 // ..................
 // line: flare N data
 
-// flare data line format (items are separated with a "|"):
+// flare data line format (fields are separated with a "|"):
 //
-// lens flare size unit multiplier
-//
-// position (along the flare vector)
-// size (if sun-flare (pos==+1.00), size is in percent of sun's radius; else in relative units, multiplied by planet size multiplier)
-// color (reg,green,blue)
+// position coefficient (along the flare axis, 0 is center of screen, 1 is position of the star)
+// size (if main flare (pos==+1.00), size is in percent of the star's radius; else in relative units, multiplied by planet size multiplier)
+// color (reg, green, blue)
 // image file name (12 chars max)
 
 14

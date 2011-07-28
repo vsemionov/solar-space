@@ -1,15 +1,15 @@
 
 // Format:
 // distance multiplier (for orbit radius, more is further)
-// size multiplier (for body radius,  more is bigger)
-// orbit period multiplier (for siderial orbit period, more is slower)
-// rotation period multiplier (for siderial rotation period, more is slower)
+// radius multiplier (for body radius, more is bigger)
+// orbital period multiplier (more is slower)
+// sidereal period multiplier (more is slower)
 // line 1: body 1
 // line 2: body 2
 // line 3: body 3
 // ...........
 
-//Body line format: (separator == '|')
+//Body line format: (field separator is ' ', group separator is '|')
 // name (shown in planet info, underscore converted to spaces, 31 chars max)
 // SEPARATOR
 // type - 0=star, 1=planet(oid), 2=rings, 3=asteroid
@@ -19,17 +19,17 @@
 // SEPARATOR
 // shape (polar/equatorial radius ratio)
 // SEPARATOR
-// siderial orbit period (length of year, in seconds, if 0 its calculated from the orbit radius with Kepler's law 3)
-// siderial rotation period (length of day, in seconds, infinity or sync with orbit if 0)
+// orbital period (length of year, in seconds, if 0 it's calculated from the orbit radius with Kepler's third law)
+// sidereal rotation period (length of day, in seconds, infinity or sync with orbit if 0)
 // SEPARATOR
-// initial orbit rotation angle (degrees at t0, random if 0)
-// initial siderial rotation angle (degrees at t0, random if 0)
+// initial orbital rotation angle (degrees at t0, random if 0)
+// initial sidereal rotation angle (degrees at t0, random if 0)
 // SEPARATOR
 // orbital inclination to ecliptic (to equator of parent, in degrees)
-// equatorial inclination to orbit (in degrees)
+// axial tilt (in degrees)
 // SEPARATOR
-// direction of orbit inclination (in degrees, how to incline, random if 0)
-// direction of equator inclination (in degrees, how to incline, random if 0)
+// direction of orbital inclination (in degrees, how to incline, random if 0)
+// direction of axial tilt (in degrees, how to tilt, random if 0)
 // SEPARATOR
 // clouds rotation period (relative to planet surface)
 // initial clouds rotation angle (degrees at t0, random if 0)
@@ -46,7 +46,7 @@
 // name of cloud map file (use "." for none)
 // name of cloud alpha map file (use "." for none)
 // SEPARATOR
-// name of 3d object file for asteroid (use "." for none)
+// name of 3d object file (for asteroids) (use "." for none)
 // SEPARATOR
 // name of .nfo file for body info (use "." for none)
 
@@ -54,23 +54,27 @@
 //-there should always be only one star - the main body
 //  and it should have distance 0 (center),
 //  otherwise lighting and lens flares will not be correct
-//-objects should have total distance from center no more than 250 units,
+//-objects should have maximum distance (including radius) from center no more than 250 units,
 //  otherwise they may get clipped off behind the far clipping plane
 //-roughly about 0.20 units is the minimum radius of objects,
-//  otherwise in chase orientation mode, they'll jump around the center of
-//  the screen (angle of camera rotation, floating point precision)
-//  and may also get clipped and not be rendered properly in chase position mode
+//  otherwise in chase orientation mode, they may jitter around the center of
+//  the screen (variations angle of camera rotation, caused by floating point precision)
+//  and may also get clipped off by the near clipping plane in chase position mode
 //-all filenames must be 12 chars max
 
 
-//current:
 
-//dist&rad
+// Multipliers:
+
+//distance & radius
 00.50
 00.25
-//times orb&own
+//periods (orbit & siderial)
 00.10
 01.00
+
+
+// Bodies:
 
 //========================================================================================
 

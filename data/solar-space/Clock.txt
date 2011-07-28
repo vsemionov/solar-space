@@ -1,4 +1,4 @@
-// Clock color&digits specs file
+// Clock digit spec file
 
 // file format:
 
@@ -21,6 +21,7 @@
 //
 
 // NOTE: all filenames must be 12 chars max
+
 
 // dimensions:
 64
