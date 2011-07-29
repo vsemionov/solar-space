@@ -1,7 +1,8 @@
 TECH:
 visual:
 - research specular highlights on all planets (found on Deso's laptop), mention in change log (high)
-- try fixing the z fighting by scaling the near clipping plane distance when scaling fov (high)
+- try fixing the z fighting by scaling the near clipping plane distance when scaling fov; remove known issue in readme (high)
+
 non-visual:
 
 performance/testing:
