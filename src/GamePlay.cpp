@@ -304,7 +304,7 @@ bool CGamePlay::InitScene()
 		}
 	}
 
-	have_info=(CSettings::PlanetInfo==TRUE);
+	have_info=(CSettings::ShowInfo==TRUE);
 	if (have_info)
 	{
 		if (UserAbortedLoad())
@@ -314,12 +314,12 @@ bool CGamePlay::InitScene()
 		SetSplashText("Loading info text font... ");
 		if (!info.Load())
 		{
-			CLog::Log(LOG_ERROR,"Failed to load the planet info - ignoring.");
+			CLog::Log(LOG_ERROR,"Failed to load the body info - ignoring.");
 			have_info=false;
 		}
 	}
 
-	have_clock=(CSettings::ClockOn==TRUE);
+	have_clock=(CSettings::ShowClock==TRUE);
 	if (have_clock)
 	{
 		if (UserAbortedLoad())

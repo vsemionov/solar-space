@@ -51,11 +51,11 @@ public:
 	static BOOL  ReallyClose;
 	static BOOL  PasswordOK;
 	//user settings:
-	static int VideoMode;
-	static int DetailLevel;
-	static BOOL DefaultRes;
-	static BOOL PlanetInfo;
-	static BOOL ClockOn;
+	static int Resolution;
+	static int Graphics;
+	static BOOL DesktopRes;
+	static BOOL ShowInfo;
+	static BOOL ShowClock;
 	static char DataDir[MAX_PATH];
 	static char DataFile[MAX_PATH];
 	static BOOL RandomDataFile;

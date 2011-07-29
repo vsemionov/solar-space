@@ -50,11 +50,11 @@ BOOL  CSettings::IsDialogActive;
 BOOL  CSettings::ReallyClose;
 BOOL  CSettings::PasswordOK;
 //user settings:
-int CSettings::VideoMode;
-int CSettings::DetailLevel;
-BOOL CSettings::DefaultRes;
-BOOL CSettings::ClockOn;
-BOOL CSettings::PlanetInfo;
+int CSettings::Resolution;
+int CSettings::Graphics;
+BOOL CSettings::DesktopRes;
+BOOL CSettings::ShowClock;
+BOOL CSettings::ShowInfo;
 char CSettings::DataDir[MAX_PATH];
 char CSettings::DataFile[MAX_PATH];
 BOOL CSettings::RandomDataFile;
@@ -91,11 +91,11 @@ void CSettings::Init()
 	ReallyClose=FALSE;
 	PasswordOK=FALSE;
 	/////
-	VideoMode=0;
-	DetailLevel=0;
-	DefaultRes=TRUE;
-	ClockOn=FALSE;
-	PlanetInfo=FALSE;
+	Resolution=0;
+	Graphics=0;
+	DesktopRes=TRUE;
+	ShowClock=FALSE;
+	ShowInfo=FALSE;
 	DataDir[0]=0;
 	DataFile[0]=0;
 	RandomDataFile=TRUE;
@@ -161,22 +161,22 @@ void CSettings::ReadCommonRegistry()
 
 void CSettings::ReadConfigRegistry()
 {
-	VideoMode=2;
-	DetailLevel=2;
-	DefaultRes=TRUE;
-	ClockOn=TRUE;
-	PlanetInfo=TRUE;
+	Resolution=2;
+	Graphics=2;
+	DesktopRes=TRUE;
+	ShowClock=TRUE;
+	ShowInfo=TRUE;
 	strcpy(DataFile,"");
 	RandomDataFile=TRUE;
 	LONG res; HKEY skey; DWORD valtype, valsize, val;
 	char strval[sizeof(DataFile)];
 	res=RegOpenKeyEx(HKEY_CURRENT_USER,REGSTR_PATH_CONFIG,0,KEY_QUERY_VALUE,&skey);
 	if (res!=ERROR_SUCCESS) return;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Video Mode",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) VideoMode=val;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Detail Level",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) DetailLevel=val;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Default Resolution",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) DefaultRes=val;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Planet Info",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) PlanetInfo=val;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Clock On",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) ClockOn=val;
+	valsize=sizeof(val); res=RegQueryValueEx(skey,"Resolution",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) Resolution=val;
+	valsize=sizeof(val); res=RegQueryValueEx(skey,"Graphics",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) Graphics=val;
+	valsize=sizeof(val); res=RegQueryValueEx(skey,"Desktop Resolution",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) DesktopRes=val;
+	valsize=sizeof(val); res=RegQueryValueEx(skey,"Show Info",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) ShowInfo=val;
+	valsize=sizeof(val); res=RegQueryValueEx(skey,"Show Clock",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) ShowClock=val;
 	valsize=sizeof(strval); res=RegQueryValueEx(skey,"Data File",0,&valtype,(LPBYTE)strval,&valsize);   if (res==ERROR_SUCCESS) strcpy(DataFile,strval);
 	RegCloseKey(skey);
 	RandomDataFile=(DataFile[0]==0);
@@ -194,11 +194,11 @@ void CSettings::WriteConfigRegistry()
 	char strval[sizeof(DataFile)];
 	res=RegCreateKeyEx(HKEY_CURRENT_USER,REGSTR_PATH_CONFIG,0,NULL,REG_OPTION_NON_VOLATILE,KEY_SET_VALUE,NULL,&skey,&disp);
 	if (res!=ERROR_SUCCESS) return;
-	val=VideoMode; RegSetValueEx(skey,"Video Mode",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
-	val=DetailLevel; RegSetValueEx(skey,"Detail Level",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
-	val=DefaultRes; RegSetValueEx(skey,"Default Resolution",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
-	val=PlanetInfo; RegSetValueEx(skey,"Planet Info",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
-	val=ClockOn; RegSetValueEx(skey,"Clock On",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
+	val=Resolution; RegSetValueEx(skey,"Resolution",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
+	val=Graphics; RegSetValueEx(skey,"Graphics",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
+	val=DesktopRes; RegSetValueEx(skey,"Desktop Resolution",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
+	val=ShowInfo; RegSetValueEx(skey,"Show Info",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
+	val=ShowClock; RegSetValueEx(skey,"Show Clock",0,REG_DWORD,(CONST BYTE*)&val,sizeof(val));
 	strcpy(strval,DataFile); RegSetValueEx(skey,"Data File",0,REG_SZ,(CONST BYTE*)strval,strlen(strval)+1);
 	RegCloseKey(skey);
 }

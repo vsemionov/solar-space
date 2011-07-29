@@ -595,7 +595,7 @@ bool CWindow::Create(HWND hParent)
 	}
 	else
 	{
-		switch (CSettings::VideoMode)
+		switch (CSettings::Resolution)
 		{
 		default:
 		case 0:
@@ -611,7 +611,7 @@ bool CWindow::Create(HWND hParent)
 			height=768;
 			break;
 		}
-		if (CSettings::DefaultRes)
+		if (CSettings::DesktopRes)
 		{
 			HWND hwDesktop=GetDesktopWindow();
 			GetWindowRect(hwDesktop,&parent_rect);
@@ -630,7 +630,7 @@ bool CWindow::Create(HWND hParent)
 		{
 			dwExStyle=WS_EX_TOPMOST;
 			dwStyle=WS_POPUP;
-			if (!CSettings::DefaultRes)
+			if (!CSettings::DesktopRes)
 			{
 				if (!ChangeVideoMode(width,height))
 				{
@@ -698,7 +698,7 @@ void CWindow::Destroy()
 
 	if (ScrMode==smSaver)
 	{
-		if (!DEBUG && !CSettings::DefaultRes)
+		if (!DEBUG && !CSettings::DesktopRes)
 		{
 			RestoreVideoMode();
 		}

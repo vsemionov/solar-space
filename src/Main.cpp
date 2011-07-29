@@ -581,11 +581,11 @@ static BOOL CALLBACK ConfigDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 	case WM_INITDIALOG:
 		if (!GetParent(hwnd))
 			SetConfigIcon(hwnd);
-		CheckRadioButton(hwnd,IDC_R640,IDC_R1024,(IDC_R640+CSettings::VideoMode));
-		CheckRadioButton(hwnd,IDC_RLOW,IDC_RHIGH,(IDC_RLOW+CSettings::DetailLevel));
-		CheckDlgButton(hwnd,IDC_CKDEFRES,CSettings::DefaultRes);
-		CheckDlgButton(hwnd,IDC_CKINFO,CSettings::PlanetInfo);
-		CheckDlgButton(hwnd,IDC_CKCLOCK,CSettings::ClockOn);
+		CheckRadioButton(hwnd,IDC_R640,IDC_R1024,(IDC_R640+CSettings::Resolution));
+		CheckRadioButton(hwnd,IDC_RLOW,IDC_RHIGH,(IDC_RLOW+CSettings::Graphics));
+		CheckDlgButton(hwnd,IDC_CKDEFRES,CSettings::DesktopRes);
+		CheckDlgButton(hwnd,IDC_CKINFO,CSettings::ShowInfo);
+		CheckDlgButton(hwnd,IDC_CKCLOCK,CSettings::ShowClock);
 		UpdateRes(hwnd);
 		FillList(hwnd);
 		SelectList(hwnd);
@@ -602,11 +602,11 @@ static BOOL CALLBACK ConfigDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 			ShowAboutBox(hwnd);
 			return TRUE;
 		case IDOK:
-			for (i=0;i<3;i++) if (IsDlgButtonChecked(hwnd,IDC_R640+i)==BST_CHECKED) CSettings::VideoMode=i;
-			for (i=0;i<3;i++) if (IsDlgButtonChecked(hwnd,IDC_RLOW+i)==BST_CHECKED) CSettings::DetailLevel=i;
-			CSettings::DefaultRes=(IsDlgButtonChecked(hwnd,IDC_CKDEFRES)==BST_CHECKED);
-			CSettings::PlanetInfo=(IsDlgButtonChecked(hwnd,IDC_CKINFO)==BST_CHECKED);
-			CSettings::ClockOn=(IsDlgButtonChecked(hwnd,IDC_CKCLOCK)==BST_CHECKED);
+			for (i=0;i<3;i++) if (IsDlgButtonChecked(hwnd,IDC_R640+i)==BST_CHECKED) CSettings::Resolution=i;
+			for (i=0;i<3;i++) if (IsDlgButtonChecked(hwnd,IDC_RLOW+i)==BST_CHECKED) CSettings::Graphics=i;
+			CSettings::DesktopRes=(IsDlgButtonChecked(hwnd,IDC_CKDEFRES)==BST_CHECKED);
+			CSettings::ShowInfo=(IsDlgButtonChecked(hwnd,IDC_CKINFO)==BST_CHECKED);
+			CSettings::ShowClock=(IsDlgButtonChecked(hwnd,IDC_CKCLOCK)==BST_CHECKED);
 			GetSelectedSystem(hwnd);
 			CSettings::WriteConfigRegistry();
 			EndDialog(hwnd,id);

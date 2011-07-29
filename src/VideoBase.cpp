@@ -204,7 +204,7 @@ void CVideoBase::SetOptions()
 	opt_startwinkle=false;
 	opt_antialiasing=false;
 	opt_anisotropic=false;
-	switch (CSettings::DetailLevel)
+	switch (CSettings::Graphics)
 	{
 	case 2:
 		opt_shadows=true;
