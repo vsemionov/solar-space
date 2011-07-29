@@ -21,7 +21,7 @@ Solar Space is a three-dimensional, animated screen saver for Windows, showing a
 
 System Requirements
 ===================
-For platform support and acceptable performance, Solar Space requires the following:
+For platform support and acceptable performance, Solar Space requires the following system configuration:
 
 * Windows XP Service Pack 2 or later operating system with Internet Explorer 4 or later (both required as a minimum)
 * AMD Athlon XP 1800+ or equivalent processor
