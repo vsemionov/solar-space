@@ -376,8 +376,8 @@ static void UpdateRes(HWND hwnd)
 {
 	BOOL userres=!(IsDlgButtonChecked(hwnd,IDC_CKDEFRES)==BST_CHECKED);
 	EnableWindow(GetDlgItem(hwnd,IDC_R640),userres);
-	EnableWindow(GetDlgItem(hwnd,IDC_R800),userres);
-	EnableWindow(GetDlgItem(hwnd,IDC_R1024),userres);
+	//EnableWindow(GetDlgItem(hwnd,IDC_R800),userres);
+	//EnableWindow(GetDlgItem(hwnd,IDC_R1024),userres);
 }
 
 

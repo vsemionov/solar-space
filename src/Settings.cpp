@@ -37,6 +37,19 @@
 #define REGSTR_PATH_PLUSSCR (REGSTR_PATH_SETUP "\\Screen Savers")
 #define REGSTR_PATH_CONFIG  ("Software\\" TEAM_NAME "\\" APP_NAME)
 
+#define VALUE_NAME_PASSWORD_DELAY "Password Delay"
+#define VALUE_NAME_MOUSE_THRESHOLD "Mouse Threshold"
+#define VALUE_NAME_MUTE_SOUND "Mute Sound"
+
+#define VALUE_NAME_DATA_DIR "Data Directory"
+
+#define VALUE_NAME_RESOLUTION "Resolution"
+#define VALUE_NAME_GRAPHICS "Graphics"
+#define VALUE_NAME_DESKTOP_RES "Desktop Resolution"
+#define VALUE_NAME_SHOW_INFO "Show Info"
+#define VALUE_NAME_SHOW_CLOCK "Show Clock"
+#define VALUE_NAME_DATA_FILE "Data File"
+
 
 
 
@@ -128,13 +141,14 @@ void CSettings::ReadGeneralRegistry()
 {
 	PasswordDelay=15;
 	MouseThreshold=64;
+	MuteSound=FALSE;
 	IsDialogActive=FALSE;
 	LONG res; HKEY skey; DWORD valtype, valsize, val;
 	res=RegOpenKeyEx(HKEY_CURRENT_USER,REGSTR_PATH_PLUSSCR,0,KEY_QUERY_VALUE,&skey);
 	if (res!=ERROR_SUCCESS) return;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Password Delay",0,&valtype,(LPBYTE)&val,&valsize); if (res==ERROR_SUCCESS) PasswordDelay=val;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Mouse Threshold",0,&valtype,(LPBYTE)&val,&valsize);if (res==ERROR_SUCCESS) MouseThreshold=val;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Mute Sound",0,&valtype,(LPBYTE)&val,&valsize);     if (res==ERROR_SUCCESS) MuteSound=val;
+	valsize=sizeof(val); res=RegQueryValueEx(skey,VALUE_NAME_PASSWORD_DELAY,0,&valtype,(LPBYTE)&val,&valsize); if (res==ERROR_SUCCESS) PasswordDelay=val;
+	valsize=sizeof(val); res=RegQueryValueEx(skey,VALUE_NAME_MOUSE_THRESHOLD,0,&valtype,(LPBYTE)&val,&valsize);if (res==ERROR_SUCCESS) MouseThreshold=val;
+	valsize=sizeof(val); res=RegQueryValueEx(skey,VALUE_NAME_MUTE_SOUND,0,&valtype,(LPBYTE)&val,&valsize);     if (res==ERROR_SUCCESS) MuteSound=val;
 	RegCloseKey(skey);
 }
 
@@ -150,7 +164,7 @@ void CSettings::ReadCommonRegistry()
 	char strval[sizeof(DataDir)];
 	res=RegOpenKeyEx(HKEY_LOCAL_MACHINE,REGSTR_PATH_CONFIG,0,KEY_QUERY_VALUE,&skey);
 	if (res!=ERROR_SUCCESS) return;
-	valsize=sizeof(strval); res=RegQueryValueEx(skey,"Data Directory",0,&valtype,(LPBYTE)strval,&valsize);   if (res==ERROR_SUCCESS) strcpy(DataDir,strval);
+	valsize=sizeof(strval); res=RegQueryValueEx(skey,VALUE_NAME_DATA_DIR,0,&valtype,(LPBYTE)strval,&valsize);   if (res==ERROR_SUCCESS) strcpy(DataDir,strval);
 	RegCloseKey(skey);
 	l=strlen(DataDir); if (l>0 && DataDir[l-1]=='\\') DataDir[l-1]=0;
 }
@@ -172,12 +186,12 @@ void CSettings::ReadConfigRegistry()
 	char strval[sizeof(DataFile)];
 	res=RegOpenKeyEx(HKEY_CURRENT_USER,REGSTR_PATH_CONFIG,0,KEY_QUERY_VALUE,&skey);
 	if (res!=ERROR_SUCCESS) return;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Resolution",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) Resolution=val;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Graphics",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) Graphics=val;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Desktop Resolution",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) DesktopRes=val;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Show Info",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) ShowInfo=val;
-	valsize=sizeof(val); res=RegQueryValueEx(skey,"Show Clock",0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) ShowClock=val;
-	valsize=sizeof(strval); res=RegQueryValueEx(skey,"Data File",0,&valtype,(LPBYTE)strval,&valsize);   if (res==ERROR_SUCCESS) strcpy(DataFile,strval);
+	valsize=sizeof(val); res=RegQueryValueEx(skey,VALUE_NAME_RESOLUTION,0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) Resolution=val;
+	valsize=sizeof(val); res=RegQueryValueEx(skey,VALUE_NAME_GRAPHICS,0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) Graphics=val;
+	valsize=sizeof(val); res=RegQueryValueEx(skey,VALUE_NAME_DESKTOP_RES,0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) DesktopRes=val;
+	valsize=sizeof(val); res=RegQueryValueEx(skey,VALUE_NAME_SHOW_INFO,0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) ShowInfo=val;
+	valsize=sizeof(val); res=RegQueryValueEx(skey,VALUE_NAME_SHOW_CLOCK,0,&valtype,(LPBYTE)&val,&valsize);   if (res==ERROR_SUCCESS) ShowClock=val;
+	valsize=sizeof(strval); res=RegQueryValueEx(skey,VALUE_NAME_DATA_FILE,0,&valtype,(LPBYTE)strval,&valsize);   if (res==ERROR_SUCCESS) strcpy(DataFile,strval);
 	RegCloseKey(skey);
 	RandomDataFile=(DataFile[0]==0);
 }
