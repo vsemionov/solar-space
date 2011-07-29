@@ -328,9 +328,12 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 	int texture;
 	int alphachan=0;
 	texture=0;
+	bool have_bgra;
+	int ridx,bidx;
+	have_bgra=CVideoBase::GetExtBGRA();
 	if (imagemap!=NULL)
 	{
-		tex_size[0]=LoadImage(imagemap,&tex_width[0],&tex_height[0],(void**)&pImage[0]);
+		tex_size[0]=LoadImage(imagemap,&tex_width[0],&tex_height[0],(void**)&pImage[0],!have_bgra);
 		if (tex_size[0]>0)
 		{
 			if (alphamap!=NULL)
@@ -342,17 +345,19 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 				}
 				else
 				{
-					tex_size[1]=LoadImage(alphamap,&tex_width[1],&tex_height[1],(void**)&pImage[1]);
+					tex_size[1]=LoadImage(alphamap,&tex_width[1],&tex_height[1],(void**)&pImage[1],!have_bgra);
 				}
 				if (tex_size[1]>0 && tex_width[1]==tex_width[0] && tex_height[1]==tex_height[0])
 				{
 					alphachan=1;
+					ridx=(have_bgra?2:0);
+					bidx=(have_bgra?0:2);
 					int j;
 					for (j=0;j<tex_size[1];j+=4)
 					{
-						double R=(double)pImage[1][j];
+						double R=(double)pImage[1][j+ridx];
 						double G=(double)pImage[1][j+1];
-						double B=(double)pImage[1][j+2];
+						double B=(double)pImage[1][j+bidx];
 						double lum=(R*0.299)+(G*0.587)+(B*0.114);
 						pImage[0][j+3]=(unsigned char)lum;
 					}
@@ -370,7 +375,7 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 				if (mipmaps)
 				{
 					glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,(linear?GL_LINEAR_MIPMAP_LINEAR:GL_NEAREST_MIPMAP_LINEAR));
-					if (gluBuild2DMipmaps(GL_TEXTURE_2D,3+alphachan,tex_width[0],tex_height[0],GL_RGBA,GL_UNSIGNED_BYTE,pImage[0])!=0)
+					if (gluBuild2DMipmaps(GL_TEXTURE_2D,3+alphachan,tex_width[0],tex_height[0],(have_bgra?GL_BGRA_EXT:GL_RGBA),GL_UNSIGNED_BYTE,pImage[0])!=0)
 						b=false;
 				}
 				else
@@ -379,7 +384,7 @@ int CLoader::LoadTexture(const char *imagemap, const char *alphamap, bool mipmap
 					if (ResizeImage((void**)&pImage[0],&tex_width[0],&tex_height[0]))
 					{
 						glGetError();
-						glTexImage2D(GL_TEXTURE_2D,0,3+alphachan,tex_width[0],tex_height[0],0,GL_RGBA,GL_UNSIGNED_BYTE,pImage[0]);
+						glTexImage2D(GL_TEXTURE_2D,0,3+alphachan,tex_width[0],tex_height[0],0,(have_bgra?GL_BGRA_EXT:GL_RGBA),GL_UNSIGNED_BYTE,pImage[0]);
 						if (glGetError()!=GL_NO_ERROR)
 							b=false;
 					}
