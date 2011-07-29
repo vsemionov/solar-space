@@ -45,5 +45,5 @@ Solar Space is licensed under the BSD license.
 For the latest information and downloads, please visit:
 http://www.vsemionov.org/solar-space/
 
-The development website is at:
+For the source code and other development resources, please visit:
 https://bitbucket.org/vsemionov/solar-space
