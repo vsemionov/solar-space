@@ -603,7 +603,7 @@ static BOOL CALLBACK ConfigDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 			return TRUE;
 		case IDOK:
 			for (i=0;i<3;i++) if (IsDlgButtonChecked(hwnd,IDC_R640+i)==BST_CHECKED) CSettings::VideoMode=i;
-			for (i=0;i<2;i++) if (IsDlgButtonChecked(hwnd,IDC_RLOW+i)==BST_CHECKED) CSettings::DetailLevel=i;
+			for (i=0;i<3;i++) if (IsDlgButtonChecked(hwnd,IDC_RLOW+i)==BST_CHECKED) CSettings::DetailLevel=i;
 			CSettings::DefaultRes=(IsDlgButtonChecked(hwnd,IDC_CKDEFRES)==BST_CHECKED);
 			CSettings::PlanetInfo=(IsDlgButtonChecked(hwnd,IDC_CKINFO)==BST_CHECKED);
 			CSettings::ClockOn=(IsDlgButtonChecked(hwnd,IDC_CKCLOCK)==BST_CHECKED);

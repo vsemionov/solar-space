@@ -11,7 +11,6 @@ performance/testing:
 - longevity testing (the release configuration) (with camera transition times decreased) (>48h) (low)
 
 user:
-- unable to save high graphics setting (high)
 
 misc:
 
