@@ -3,7 +3,7 @@
 <assemblyIdentity
     version="1.2.0.0"
     processorArchitecture="X86"
-    name="vsemionov.SolarSpace.SolarSpace"
+    name="vsemionov.Solar-Space.Solar-Space"
     type="win32"
 />
 <description>vs Solar Space Screen Saver</description>
