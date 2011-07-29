@@ -47,7 +47,8 @@ performance:
  - improved performance of star map rendering (by fixing a bug that disabled an optimization)
  - increased timer resolution
  - to conserve video memory, textures with no alpha channel are stored in memory in RGB format (not RGBA)
- - slight optimizations to the loading of textures at initialization time (image not loaded twice if texture and alpha maps are the same file)
+ - utilize the GL_EXT_BGRA extension when loading textures, slightly reducing loading times
+ - other slight optimizations to the loading of textures at initialization time (image not loaded twice if texture and alpha maps are the same file)
 stability:
  - fixed memory leaks, segmentation faults and divisions by zero
  - improved handling of Windows-related events (window messages)
