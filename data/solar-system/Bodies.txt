@@ -60,6 +60,7 @@
 //  otherwise in chase orientation mode, they may jitter around the center of
 //  the screen (variations angle of camera rotation, caused by floating point precision)
 //  and may also get clipped off by the near clipping plane in chase position mode
+//  (0.20375 is the minimum that is tested that does not get clipped on wide screens (16:9) in chase position mode)
 //-all filenames must be 12 chars max
 
 
