@@ -11,6 +11,7 @@ graphics:
  - new splash screen, preview image and icons
  - camera state is completely independent of frame rate
  - Z buffer depth is 32, 24 or 16 bits deep (the largest one that is supported)
+ - fixed Z fighting of planet rings by moving the near clipping plane inward when the camera zooms in, thus increasing Z buffer precision
  - OpenGL texture filter is GL_NEAREST for all overlays
  - updated load order (splash, bodies, star map, lens flares, info fonts, clock)
  - clock colon state is updated more correctly, on every frame

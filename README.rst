@@ -34,7 +34,7 @@ Note that most of the hardware listed above is not a strict minimum.
 
 Known Issues
 ============
-On some systems, artifacts may appear when rendering distant objects that are very close to each other. If one such object is obscured by another one, polygons from the former may bleed through the latter. For example, the far side of a planet's rings may appear visible, when it should be hidden behind the planet. This effect, known az z-fighting, is a result of insufficient z-buffer precision.
+If you find any issues, please either email me or use the issue tracker on the development site (see below).
 
 
 Other Information
