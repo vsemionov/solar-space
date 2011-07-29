@@ -199,9 +199,11 @@ void CCamera::Get(float *x, float *y, float *z, float *yaw, float *pitch)
 
 void CCamera::ApplyFOV()
 {
+	static double near_view_half=DIST_CLIP_NEAR*tan((MAX_FOV*M_PI/180.0)/2.0);
+	double near_dist=near_view_half/tan((fov*M_PI/180.0)/2.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(fov,aspect,DIST_CLIP_NEAR,DIST_CLIP_FAR);
+	gluPerspective(fov,aspect,near_dist,DIST_CLIP_FAR);
 	glMatrixMode(GL_MODELVIEW);
 }
 
