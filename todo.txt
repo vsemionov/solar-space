@@ -12,13 +12,13 @@ performance/testing:
 user:
 
 misc:
-- mark authors of 3rd party products and add links (in a new text file, e.g. acknowledgements); install the new file; mention new file in change log (high)
+- mark authors of 3rd party products and add links (mention the stars source too) (in a new text file, e.g. acknowledgements); install the new file; mention new file in change log (high)
 - rearrange authors file (high)
 - acknowledge Harwen Zhang for his icon; see http://harwen.net/ (high)
 - acknowledge JPL/Caltech for the Charon texture map; see http://www.jpl.nasa.gov/images/policy/ (high)
 - mention author and license in readme (high)
 - maybe change the title of the "miscellaneous" section in the readme (high)
-- mention the anti-aliasing Z buffer depth/precision problem in the readme in a known issues section; mention the workaround - medium graphics (high)
+- mention the Z buffer depth/precision problem in the readme in a known issues section (high)
 
 
 NON-TECH:
