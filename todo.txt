@@ -14,7 +14,6 @@ user:
 - unable to save high graphics setting (high)
 
 misc:
-- mark authors of 3rd party products and add links (mention the stars source too) (in a new text file, e.g. acknowledgements); install the new file; mention new file in change log (high)
 
 
 NON-TECH:
