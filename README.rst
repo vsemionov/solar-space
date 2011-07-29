@@ -23,7 +23,7 @@ System Requirements
 ===================
 For platform support and acceptable performance, Solar Space requires the following:
 
-* Windows XP Service Pack 2 or later operating system with Internet Explorer 4 or later (both required as a strict minimum)
+* Windows XP Service Pack 2 or later operating system with Internet Explorer 4 or later (both required as a minimum)
 * AMD Athlon XP 1800+ or equivalent processor
 * 512 MB RAM
 * 12 MB free disk space (minimum)
@@ -32,7 +32,18 @@ For platform support and acceptable performance, Solar Space requires the follow
 Note that most of the hardware listed above is not a strict minimum.
 
 
-Miscellaneous
-=============
+Known Issues
+============
+On some systems, artifacts may appear when rendering distant objects that are very close to each other. If one such object is obscured by another one, polygons from the former may bleed through the latter. For example, the far side of a planet's rings may appear visible, when it should be hidden behind the planet. This effect, known az z-fighting, is a result of insufficient z-buffer precision.
+
+
+Other Information
+=================
+Solar Space is written and maintained by Victor Semionov <vsemionov@gmail.com>.
+Solar Space is licensed under the BSD license.
+
 For the latest information and downloads, please visit:
 http://www.vsemionov.org/solar-space/
+
+The development website is at:
+https://bitbucket.org/vsemionov/solar-space

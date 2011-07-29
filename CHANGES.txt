@@ -56,7 +56,7 @@ development:
  - changed the version control system to Mercurial
  - moved the development website and repository to https://bitbucket.org/vsemionov/solar-space
 misc:
- - improved documentation - new readme, changes, authors and license files
+ - improved documentation - new readme, changes, authors, thanks and license files
  - moved the main website to http://www.vsemionov.org/solar-space/
  - New BSD License
  - various other fixes and improvements in most aspects
