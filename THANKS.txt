@@ -1,8 +1,8 @@
 Solar Space uses graphics and other data from the following artists/sources:
-* James Hastings-Trew - Sun, Mercury, Venus surface, Earth, Moon, Mars, Phobos, Deimos, Jupiter, Saturn (incl. rings), Uranus (incl. rings), Neptune, Pluto; see http://planetpixelemporium.com/planets.html
-* Bjorn Jonsson - Venus clouds, Ganymede, Callisto, Io, Europa; see http://www.mmedia.is/~bjj/
-* NASA/JPL-Caltech - Charon. Courtesy NASA/JPL-Caltech; see http://maps.jpl.nasa.gov/
-* Yale Bright Star Catalogue; see http://tdc-www.harvard.edu/catalogs/bsc5.html
+* James Hastings-Trew - texture maps of the Sun, Mercury, Venus surface, Earth, Moon, Mars, Phobos, Deimos, Jupiter, Saturn (incl. rings), Uranus (incl. rings), Neptune and Pluto; 3D models of Phobos and Deimos; see http://planetpixelemporium.com/planets.html
+* Bjorn Jonsson - texture maps of Ganymede, Callisto, Io, Europa and clounds of Venus; see http://www.mmedia.is/~bjj/
+* NASA/JPL-Caltech - texture map of Charon. Courtesy NASA/JPL-Caltech; see http://maps.jpl.nasa.gov/
+* Yale Bright Star Catalogue - data about the stars; see http://tdc-www.harvard.edu/catalogs/bsc5.html
 * Harwen Zhang - settings icon; see http://harwen.net/
 
 I would like to give special thanks to Ernie Wright for kindly explaining how to properly render the stars in the Yale catalog.
