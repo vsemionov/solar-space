@@ -3,6 +3,7 @@ visual:
 - research specular highlights on all planets (found on Deso's laptop), mention in change log (high)
 
 non-visual:
+- requesting a display mode does not really change it, but seems to simulate it (why? try old ChangeDisplaySettings() code) (high)
 
 performance/testing:
 - test all settings (low)
