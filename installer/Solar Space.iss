@@ -57,7 +57,7 @@ SolidCompression=yes
 
 VersionInfoVersion=1.2.0.0
 VersionInfoCopyright=Copyright (C) {#MyCopyrightPeriod} {#MyCopyrightHolder}
-SetupIconFile=..\src\res\Solar Space.ico
+SetupIconFile=Setup.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
 
 
