@@ -696,6 +696,10 @@ bool CBody::LoadPhys()
 		clouds_rot_start=(float)(rand()%(360*64))/64.0f;
 	clouds_rot_start/=360.0f;
 
+	orbit_rot=orbit_rot_start;
+	own_rot=own_rot_start;
+	clouds_offset=clouds_rot_start;
+
 	if (info_name[0])
 	{
 		if (!LoadInfo())
