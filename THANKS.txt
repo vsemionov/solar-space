@@ -5,4 +5,6 @@ Solar Space uses graphics and other data from the following artists/sources:
 * Yale Bright Star Catalogue - data about the stars; see http://tdc-www.harvard.edu/catalogs/bsc5.html
 * Harwen Zhang - settings icon; see http://harwen.net/
 
+Note: some images were resized for technical reasons. The original versions can be found at the above addresses.
+
 I would like to give special thanks to Ernie Wright for kindly explaining how to properly render the stars in the Yale catalog.
