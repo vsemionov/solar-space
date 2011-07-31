@@ -36,7 +36,7 @@ typedef enum{false,true} bool;
 
 #define TEAM_NAME "vsemionov"
 #define APP_NAME  "Solar Space"
-#define APP_VERSION  "1.2"
+#define APP_VERSION  "1.2b1"
 #define APP_DESCRIPTION "A three-dimensional, animated screen saver for Windows, showing a view of the Solar System"
 
 #define WEBSITE_URL "http://www.vsemionov.org/solar-space/"

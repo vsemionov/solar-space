@@ -27,7 +27,7 @@
 
 #define MyAppName "Solar Space"
 ; the version is also specified below for VersionInfoVersion
-#define MyAppVersion "1.2"
+#define MyAppVersion "1.2b1"
 #define MyAppPublisher "Victor Semionov"
 #define MyAppPublisherShort "vsemionov"
 #define MyPublisherURL "http://www.vsemionov.org/"
@@ -55,7 +55,7 @@ OutputBaseFilename={#MyAppName} Setup {#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
 
-VersionInfoVersion=1.2.0.0
+VersionInfoVersion=1.2.0.752
 VersionInfoCopyright=Copyright (C) {#MyCopyrightPeriod} {#MyCopyrightHolder}
 SetupIconFile=Setup.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
