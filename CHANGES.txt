@@ -17,6 +17,7 @@ graphics:
  - clock colon state is updated more correctly, on every frame
  - updated FreeType to version 2.3.5
 data:
+ - the Moon is always facing Earth with the true near side
  - (planned) updated object facts/information
  - asteroid models are not orientated randomly
  - rings rotation is specified with the orbit period field

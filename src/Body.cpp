@@ -661,32 +661,41 @@ bool CBody::LoadPhys()
 	}
 	if (tex_names[2][1][0]!=0)
 		strcpy(tex_names[2][0],tex_names[0][0]);
-	if (orbit_rot_start==0.0f)
-		orbit_rot_start=(float)(rand()%(360*64))/64.0f;
-	if (own_rot_start==0.0f)
-		own_rot_start=(float)(rand()%(360*64))/64.0f;
+
 	if (orb_incl_dir_angle==0.0f)
 		orb_incl_dir_angle=(float)(rand()%(360*64))/64.0f;
 	if (own_incl_dir_angle==0.0f)
 		own_incl_dir_angle=(float)(rand()%(360*64))/64.0f;
+
 	orb_incl[0]=radius*(float)cos(orb_incl_dir_angle*M_PI/180);
 	orb_incl[1]=radius*(float)sin(orb_incl_dir_angle*M_PI/180);
 	orb_incl[2]=0.0f;
 	own_incl[0]=radius*(float)cos(own_incl_dir_angle*M_PI/180);
 	own_incl[1]=radius*(float)sin(own_incl_dir_angle*M_PI/180);
 	own_incl[2]=0.0f;
+
 	if (!orbit_period)
 		orbit_period=(float)sqrt(distance*distance*distance);
-	if (clouds_rot_start==0.0f)
-		clouds_rot_start=(float)(rand()%(360*64))/64.0f;
-	clouds_rot_start/=360.0f;
+
 	distance*=(type!=rings?distmult:radmult);
 	radius*=radmult;
 	orbit_period*=orbtimemult;
 	own_period*=owntimemult;
+	clouds_period*=owntimemult;
+
 	if (!own_period)
 		own_period=orbit_period;
-	clouds_period*=owntimemult;
+
+	if (orbit_rot_start==0.0f)
+		orbit_rot_start=(float)(rand()%(360*64))/64.0f;
+	if (own_rot_start==0.0f)
+		own_rot_start=(float)(rand()%(360*64))/64.0f;
+	else if (own_period==orbit_period)
+		own_rot_start+=orbit_rot_start;
+	if (clouds_rot_start==0.0f)
+		clouds_rot_start=(float)(rand()%(360*64))/64.0f;
+	clouds_rot_start/=360.0f;
+
 	if (info_name[0])
 	{
 		if (!LoadInfo())
@@ -694,6 +703,7 @@ bool CBody::LoadPhys()
 			CLog::Log(LOG_ERROR,"Failed to load body info - ignoring.");
 		}
 	}
+
 	return true;
 }
 
