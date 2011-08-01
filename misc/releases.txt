@@ -1,0 +1,6 @@
+1.2b1:
+1bb32df9300d9e46c8d1147c519ce715 *Solar Space Setup 1.2b1.exe
+ee02ee434186bdf87803a0b6d4eb7621 *solar-space-1.2b1.zip
+
+1.01:
+eec7fb54c1a5a923b2dee725ab7e71aa *InstallSolarSpace.exe
